@@ -1,0 +1,28 @@
+on:
+  push:
+name: test
+env:
+  NV: 14.x  # node version
+jobs:
+  test:
+    name: Run unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+      - name: Install Elm
+        uses: jorelali/setup-elm@v3
+        with:
+          elm-version: 0.19.1
+      - name: Set up Node.js ${{ env.NV }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NV }}
+      - name: Install node dependencies
+        run: |
+          npm install -g elm-test
+          npm install -g elm-format
+      - name: Run the tests
+        run: make test
+
+  
