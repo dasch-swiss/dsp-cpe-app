@@ -16,9 +16,12 @@ main =
         , subscriptions = subscriptions
         }
 
+initialModel : String
+initialModel = "Normal"
+
 init: () -> (Model, Cmd msg)
 init _ =
-    ("Normal", Cmd.none)
+    (initialModel, Cmd.none)
 
 view: Model -> Html msg
 view model =
