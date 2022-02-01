@@ -23,7 +23,7 @@ docker-run: docker-build ## run docker image locall
 
 .PHONY: build
 build: ## build elm app
-	@elm make src/Main.elm --output dist/elm.js --optimize
+	@elm make src/PhotoGroove.elm --output dist/app.js --optimize
 	@cp index.html dist/index.html
 	@cp -R assets dist/assets
 
