@@ -5,4 +5,3 @@ repl-temp-*
 .vscode/
 dist/
 *.code-workspace
-node_modules
