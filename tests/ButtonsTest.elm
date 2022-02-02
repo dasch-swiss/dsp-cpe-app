@@ -1,12 +1,10 @@
 module ButtonsTest exposing (..)
 
-import Expect exposing (Expectation)
-import Fuzz exposing (Fuzzer, int, list, string)
+import Expect
 import Test exposing (..)
 import Test.Html.Query as Query
 import Buttons.PrimaryButton
-import Http exposing (Expect)
-import Test.Html.Selector exposing (attribute, tag, text)
+import Test.Html.Selector exposing (tag)
 
 buttonCreated : Test
 buttonCreated =

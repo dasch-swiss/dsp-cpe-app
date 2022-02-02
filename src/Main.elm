@@ -1,7 +1,7 @@
 module Main exposing (..)
 
 import Browser
-import Html exposing (Html, text, div)
+import Html exposing (Html, div)
 import Html.Attributes exposing (class)
 import Buttons.PrimaryButton as PrimaryButton
 
@@ -23,11 +23,11 @@ init _ =
 view: Model -> Html msg
 view _ =
     div [class "buttons"]
-        [ div [] [ PrimaryButton.view "ExtraSmall" ]
-        , div [] [ PrimaryButton.view "Small" ]
-        , div [] [ PrimaryButton.view "Normal" ]
-        , div [] [ PrimaryButton.view "Large" ]
-        , div [] [ PrimaryButton.view "ExtraLarge" ]
+        [ div [] [ PrimaryButton.view ( { size = PrimaryButton.ExtraSmall } ) ]
+        , div [] [ PrimaryButton.view ( { size = PrimaryButton.Small } ) ]
+        , div [] [ PrimaryButton.view ( { size = PrimaryButton.Normal } ) ]
+        , div [] [ PrimaryButton.view ( { size = PrimaryButton.Large } ) ]
+        , div [] [ PrimaryButton.view ( { size = PrimaryButton.ExtraLarge } ) ]
         ]
 
 update: msg -> Model -> (Model, Cmd msg)
