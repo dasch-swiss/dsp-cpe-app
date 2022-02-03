@@ -4,7 +4,7 @@ import Expect
 import Test exposing (..)
 import Test.Html.Query as Query
 import Buttons.PrimaryButton
-import Test.Html.Selector exposing (tag)
+import Test.Html.Selector exposing (tag, text)
 
 buttonCreated : Test
 buttonCreated =
@@ -13,5 +13,5 @@ buttonCreated =
             Buttons.PrimaryButton.initialModel
                 |> Buttons.PrimaryButton.view
                 |> Query.fromHtml
-                |> Query.findAll [ tag "button"]
+                |> Query.findAll [ text "Button text"]
                 |> Query.count (Expect.equal 1)
