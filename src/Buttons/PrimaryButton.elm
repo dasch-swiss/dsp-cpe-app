@@ -46,7 +46,7 @@ view model =
                     "px-2.5 py-1.5 text-xs"
 
                 Small ->
-                    "px-3 py-2 text-sm"
+                    "px-3 py-2 text-sm leading-4"
 
                 Normal ->
                     "px-4 py-2 text-sm"
@@ -57,14 +57,12 @@ view model =
                 ExtraLarge ->
                     "px-6 py-3 text-base"
     in
-    div []
-        [ button
-            [ type_ "button"
-            , class size
-            , class "inline-flex items-center border border-transparent font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            ]
-            [ text "Button text" ]
+    button
+        [ type_ "button"
+        , class size
+        , class "inline-flex items-center border border-transparent font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         ]
+        [ text "Button text" ]
 
 
 update : msg -> Model -> ( Model, Cmd msg )

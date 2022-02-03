@@ -1,11 +1,14 @@
 module Main exposing (..)
 
 import Browser
+import Buttons.PrimaryButton as PrimaryButton
 import Html exposing (Html, div)
 import Html.Attributes exposing (class)
-import Buttons.PrimaryButton as PrimaryButton
 
-type alias Model = String
+
+type alias Model =
+    String
+
 
 main : Program () Model msg
 main =
@@ -16,25 +19,29 @@ main =
         , subscriptions = subscriptions
         }
 
-init: () -> (Model, Cmd msg)
-init _ =
-    ("", Cmd.none)
 
-view: Model -> Html msg
+init : () -> ( Model, Cmd msg )
+init _ =
+    ( "", Cmd.none )
+
+
+view : Model -> Html msg
 view _ =
-    div [class "buttons"]
+    div [ class "buttons" ]
         [ div []
-            [ PrimaryButton.view ( { size = PrimaryButton.ExtraSmall } )
-            , PrimaryButton.view ( { size = PrimaryButton.Small } )
-            , PrimaryButton.view ( { size = PrimaryButton.Normal } )
-            , PrimaryButton.view ( { size = PrimaryButton.Large } )
-            , PrimaryButton.view ( { size = PrimaryButton.ExtraLarge } )
+            [ PrimaryButton.view { size = PrimaryButton.ExtraSmall }
+            , PrimaryButton.view { size = PrimaryButton.Small }
+            , PrimaryButton.view { size = PrimaryButton.Normal }
+            , PrimaryButton.view { size = PrimaryButton.Large }
+            , PrimaryButton.view { size = PrimaryButton.ExtraLarge }
             ]
         ]
 
-update: msg -> Model -> (Model, Cmd msg)
+
+update : msg -> Model -> ( Model, Cmd msg )
 update _ model =
-    (model, Cmd.none)
+    ( model, Cmd.none )
+
 
 subscriptions : Model -> Sub msg
 subscriptions _ =
