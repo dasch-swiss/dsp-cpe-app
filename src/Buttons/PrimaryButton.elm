@@ -1,8 +1,12 @@
 module Buttons.PrimaryButton exposing (..)
 
 import Browser
-import Html exposing (Html, button, div, text)
-import Html.Attributes exposing (class, type_)
+import Css
+import Css.Global
+import Html.Styled as Html
+import Html.Styled.Attributes as Attr
+import Tailwind.Utilities as Tw
+import VirtualDom
 
 
 type Size
@@ -12,9 +16,10 @@ type Size
     | Large
     | ExtraLarge
 
-
 type alias Model =
-    { size : Size }
+    { size : Size
+    , text : String
+    }
 
 
 main : Program () Model msg
@@ -29,7 +34,9 @@ main =
 
 initialModel : Model
 initialModel =
-    { size = Normal }
+    { size = Normal
+    , text = "Primary Button"
+    }
 
 
 init : () -> ( Model, Cmd msg )
@@ -37,32 +44,72 @@ init _ =
     ( initialModel, Cmd.none )
 
 
-view : Model -> Html msg
+baseButton : List Css.Style
+baseButton =
+    [ Tw.inline_flex
+    , Tw.items_center
+    , Tw.border
+    , Tw.border_transparent
+    , Tw.font_medium
+    , Tw.rounded
+    , Tw.shadow_sm
+    , Tw.text_white
+    , Tw.bg_indigo_600
+    , Css.focus
+        [ Tw.outline_none
+        , Tw.ring_2
+        , Tw.ring_offset_2
+        , Tw.ring_indigo_500
+        ]
+    , Css.hover
+        [ Tw.bg_indigo_700 ]
+    ]
+
+
+view : Model -> VirtualDom.Node msg
 view model =
     let
-        size =
+        btnStyle =
             case model.size of
                 ExtraSmall ->
-                    "px-2.5 py-1.5 text-xs"
+                    [ Tw.px_2_dot_5
+                    , Tw.py_1_dot_5
+                    , Tw.text_xs
+                    ]
 
                 Small ->
-                    "px-3 py-2 text-sm leading-4"
+                    [ Tw.px_3
+                    , Tw.py_2
+                    , Tw.text_sm
+                    , Tw.leading_4
+                    ]
 
                 Normal ->
-                    "px-4 py-2 text-sm"
+                    [ Tw.px_4
+                    , Tw.py_2
+                    , Tw.text_sm
+                    ]
 
                 Large ->
-                    "px-4 py-2 text-base"
+                    [ Tw.px_4
+                    , Tw.py_2
+                    , Tw.text_base
+                    ]
 
                 ExtraLarge ->
-                    "px-6 py-3 text-base"
+                    [ Tw.px_6
+                    , Tw.py_3
+                    , Tw.text_base
+                    ]
     in
-    button
-        [ type_ "button"
-        , class size
-        , class "inline-flex items-center border border-transparent font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        ]
-        [ text "Button text" ]
+    Html.toUnstyled <|
+        Html.button
+            [ Attr.type_ "button"
+            , Attr.css (btnStyle ++ baseButton)
+            ]
+            [ Html.text model.text
+            , Css.Global.global Tw.globalStyles
+            ]
 
 
 update : msg -> Model -> ( Model, Cmd msg )

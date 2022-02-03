@@ -13,5 +13,5 @@ buttonCreated =
             Buttons.PrimaryButton.initialModel
                 |> Buttons.PrimaryButton.view
                 |> Query.fromHtml
-                |> Query.findAll [ text "Button text"]
+                |> Query.findAll [ text "Primary Button"]
                 |> Query.count (Expect.equal 1)

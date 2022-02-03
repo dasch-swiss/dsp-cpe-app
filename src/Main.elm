@@ -29,11 +29,11 @@ view : Model -> Html msg
 view _ =
     div [ class "buttons" ]
         [ div []
-            [ PrimaryButton.view { size = PrimaryButton.ExtraSmall }
-            , PrimaryButton.view { size = PrimaryButton.Small }
-            , PrimaryButton.view { size = PrimaryButton.Normal }
-            , PrimaryButton.view { size = PrimaryButton.Large }
-            , PrimaryButton.view { size = PrimaryButton.ExtraLarge }
+            [ PrimaryButton.view { size = PrimaryButton.ExtraSmall, text = "Extra Small" }
+            , PrimaryButton.view { size = PrimaryButton.Small, text = "Small" }
+            , PrimaryButton.view { size = PrimaryButton.Normal, text = "Normal" }
+            , PrimaryButton.view { size = PrimaryButton.Large, text = "Large" }
+            , PrimaryButton.view { size = PrimaryButton.ExtraLarge, text = "Extra Large" }
             ]
         ]
 
