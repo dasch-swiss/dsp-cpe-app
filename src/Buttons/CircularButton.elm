@@ -3,11 +3,13 @@ module Buttons.CircularButton exposing (..)
 import Browser
 import Css
 import Css.Global
+import Heroicons.Solid
 import Html.Styled as Html
 import Html.Styled.Attributes as Attr
+import Svg
+import Svg.Attributes as SvgAttr
 import Tailwind.Utilities as Tw
 import VirtualDom
-import Heroicons.Solid
 
 
 type Size
@@ -49,7 +51,6 @@ baseButton : List Css.Style
 baseButton =
     [ Tw.inline_flex
     , Tw.items_center
-    , Tw.p_1
     , Tw.border
     , Tw.border_transparent
     , Tw.rounded_full
@@ -102,7 +103,7 @@ view model =
             [ Attr.type_ "button"
             , Attr.css (btnSize ++ baseButton)
             ]
-            [ Heroicons.Solid.plusSm [ ]
+            [ Html.span [Attr.css icnSize ] [Html.fromUnstyled <| Heroicons.Solid.plus [ ]]
             , Css.Global.global Tw.globalStyles
             ]
 
