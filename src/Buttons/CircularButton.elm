@@ -21,7 +21,7 @@ type Size
 
 type alias Model =
     { size : Size
-    , text : String
+    , icon : String
     }
 
 
@@ -38,7 +38,7 @@ main =
 initialModel : Model
 initialModel =
     { size = Normal
-    , text = "Primary Button"
+    , icon = "plus"
     }
 
 
