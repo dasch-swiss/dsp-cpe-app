@@ -7,14 +7,7 @@ import Html.Styled as Html
 import Html.Styled.Attributes as Attr
 import Tailwind.Utilities as Tw
 import VirtualDom
-
-
-type Size
-    = ExtraSmall
-    | Small
-    | Normal
-    | Large
-    | ExtraLarge
+import Buttons.Shared exposing (Size(..))
 
 type alias Model =
     { size : Size

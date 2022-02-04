@@ -1,0 +1,8 @@
+.tailwind-ui-modules .buttons .preview .header {
+    margin-left: 0.5%;
+    font-size: 20px;
+}
+
+.tailwind-ui-modules .buttons .preview button {
+    margin: 0% 0.5%;
+}
