@@ -1,7 +1,7 @@
 module Main exposing (..)
 
 import Browser
-import Buttons.PrimaryButton as PrimaryButton
+import TailwindPlayground exposing (view)
 import Html exposing (Html, div)
 import Html.Attributes exposing (class)
 
@@ -26,15 +26,10 @@ init _ =
 
 
 view : Model -> Html msg
-view _ =
-    div [ class "buttons" ]
+view model =
+    div [ class "tailwind-ui-modules" ]
         [ div []
-            [ PrimaryButton.view { size = PrimaryButton.ExtraSmall, text = "Extra Small" }
-            , PrimaryButton.view { size = PrimaryButton.Small, text = "Small" }
-            , PrimaryButton.view { size = PrimaryButton.Normal, text = "Normal" }
-            , PrimaryButton.view { size = PrimaryButton.Large, text = "Large" }
-            , PrimaryButton.view { size = PrimaryButton.ExtraLarge, text = "Extra Large" }
-            ]
+            [ TailwindPlayground.view model ]
         ]
 
 
