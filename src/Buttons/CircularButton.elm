@@ -1,23 +1,15 @@
 module Buttons.CircularButton exposing (..)
 
-import Browser
 import Css
 import Css.Global
 import Heroicons.Solid
-import Html.Styled as Html
+-- import Html as Html
+import Html.Styled as HtmlStyled
 import Html.Styled.Attributes as Attr
-import Svg
-import Svg.Attributes as SvgAttr
 import Tailwind.Utilities as Tw
 import VirtualDom
+import Buttons.Types as Btn exposing ( Size )
 
-
-type Size
-    = ExtraSmall
-    | Small
-    | Normal
-    | Large
-    | ExtraLarge
 
 type alias Model =
     { size : Size
@@ -25,19 +17,9 @@ type alias Model =
     }
 
 
-main : Program () Model msg
-main =
-    Browser.element
-        { init = init
-        , view = view
-        , update = update
-        , subscriptions = subscriptions
-        }
-
-
 initialModel : Model
 initialModel =
-    { size = Normal
+    { size = Btn.Small
     , icon = "plus"
     }
 
@@ -69,27 +51,27 @@ baseButton =
     ]
 
 
-view : Model -> VirtualDom.Node msg
-view model =
+view : Size -> String -> VirtualDom.Node msg
+view size icon =
     let
         btnSize =
-            case model.size of
-                ExtraSmall ->
+            case size of
+                Btn.ExtraSmall ->
                     [ Tw.p_1 ]
 
-                Small ->
+                Btn.Small ->
                     [ Tw.p_1_dot_5 ]
 
-                Normal ->
+                Btn.Normal ->
                     [ Tw.p_2 ]
 
-                Large ->
+                Btn.Large ->
                     [ Tw.p_2 ]
 
-                ExtraLarge ->
+                Btn.ExtraLarge ->
                     [ Tw.p_3 ]
         icnSize =
-            if model.size == ExtraSmall || model.size == Small || model.size == Normal then
+            if size == Btn.ExtraSmall || size == Btn.Small || size == Btn.Normal then
                 [ Tw.h_5
                 , Tw.w_5
                 ]
@@ -98,21 +80,12 @@ view model =
                 , Tw.w_6
                 ]
     in
-    Html.toUnstyled <|
-        Html.button
+    HtmlStyled.toUnstyled <|
+        HtmlStyled.button
             [ Attr.type_ "button"
             , Attr.css (btnSize ++ baseButton)
             ]
-            [ Html.span [Attr.css icnSize ] [Html.fromUnstyled <| Heroicons.Solid.plus [ ]]
+            [ HtmlStyled.span [Attr.css icnSize ] [HtmlStyled.fromUnstyled <| Heroicons.Solid.plus [ ]]
             , Css.Global.global Tw.globalStyles
             ]
 
-
-update : msg -> Model -> ( Model, Cmd msg )
-update _ model =
-    ( model, Cmd.none )
-
-
-subscriptions : Model -> Sub msg
-subscriptions _ =
-    Sub.none
