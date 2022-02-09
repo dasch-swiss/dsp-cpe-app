@@ -59,6 +59,7 @@ view _ =
 type Msg = DisplayWhichButtonClicked 
 
 --update : msg -> Model -> ( Model, Cmd msg )
+update : a -> b -> (b, Cmd msg)
 update _ model =
     ( model, Cmd.none )
 
