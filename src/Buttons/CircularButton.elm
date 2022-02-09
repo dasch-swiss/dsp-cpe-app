@@ -4,7 +4,7 @@ import Browser
 import Css
 import Css.Global
 import Heroicons.Solid
-import Html.Styled as Html
+import Html.Styled as HtmlStyled
 import Html.Styled.Attributes as Attr
 import Tailwind.Utilities as Tw
 import VirtualDom
@@ -89,12 +89,12 @@ view model =
                 , Tw.w_6
                 ]
     in
-    Html.toUnstyled <|
-        Html.button
+    HtmlStyled.toUnstyled <|
+        HtmlStyled.button
             [ Attr.type_ "button"
             , Attr.css (btnSize ++ baseButton)
             ]
-            [ Html.span [Attr.css icnSize ] [Html.fromUnstyled <| Heroicons.Solid.plus [ ]]
+            [ HtmlStyled.span [Attr.css icnSize ] [HtmlStyled.fromUnstyled <| Heroicons.Solid.plus [ ]]
             , Css.Global.global Tw.globalStyles
             ]
 
