@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.0.2](https://www.github.com/dasch-swiss/dsp-cpe-app/compare/v0.0.1...v0.0.2) (2022-02-02)
+## [0.0.2](https://www.github.com/dasch-swiss/dsp-cpe-app/compare/0.0.1...v0.0.2) (2022-02-02)
 
 ### Enhancements
 
