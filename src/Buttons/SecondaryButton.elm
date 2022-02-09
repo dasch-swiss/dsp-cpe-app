@@ -1,9 +1,9 @@
-module Buttons.PrimaryButton exposing (..)
+module Buttons.SecondaryButton exposing (..)
 import Css
 import Tailwind.Utilities as Tw
 
-primaryButton : List Css.Style
-primaryButton =
+secondaryButton : List Css.Style
+secondaryButton =
     [ Tw.inline_flex
     , Tw.items_center
     , Tw.border
@@ -11,8 +11,8 @@ primaryButton =
     , Tw.font_medium
     , Tw.rounded
     , Tw.shadow_sm
-    , Tw.text_white
-    , Tw.bg_indigo_600
+    , Tw.text_indigo_700
+    , Tw.bg_indigo_100
     , Css.focus
         [ Tw.outline_none
         , Tw.ring_2
@@ -20,5 +20,5 @@ primaryButton =
         , Tw.ring_indigo_500
         ]
     , Css.hover
-        [ Tw.bg_indigo_700 ]
+        [ Tw.bg_indigo_200 ]
     ]

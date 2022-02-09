@@ -1,12 +1,11 @@
 module TailwindPlayground exposing (..)
 
 import Browser
-import Buttons.PrimaryButton as PrimaryButton
+import Buttons.Button exposing (..)
 import Buttons.CircularButton as CircularButton
-import Buttons.Shared
+import Buttons.PrimaryButton as PrimaryButton
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
-
 
 type alias Model =
     String
@@ -30,27 +29,54 @@ init _ =
 view : Model -> Html msg
 view _ =
     div [ class "buttons" ]
-        [ div [ class "preview primary-button" ]
-            [ h3 [ class "header" ] [ text "Primary Buttons" ]
-            , PrimaryButton.view { size = Buttons.Shared.ExtraSmall, text = "Extra Small" }
-            , PrimaryButton.view { size = Buttons.Shared.Small, text = "Small" }
-            , PrimaryButton.view { size = Buttons.Shared.Normal, text = "Normal" }
-            , PrimaryButton.view { size = Buttons.Shared.Large, text = "Large" }
-            , PrimaryButton.view { size = Buttons.Shared.ExtraLarge, text = "Extra Large" }
+        -- div [ class "preview primary-button" ]
+        --     [ h3 [ class "header" ] [ text "Primary Buttons" ]
+        --     , PrimaryButton.view { size = ExtraSmall, text = "Extra Small" }
+        --     , PrimaryButton.view { size = Small, text = "Small" }
+        --     , PrimaryButton.view { size = Normal, text = "Normal" }
+        --     , PrimaryButton.view { size = Large, text = "Large" }
+        --     , PrimaryButton.view { size = ExtraLarge, text = "Extra Large" }
+        --     ]
+        -- , div [ class "preview circular-button" ]
+        --     [ h3 [ class "header" ] [ text "Circular Buttons" ]
+        --     , CircularButton.view { size = ExtraSmall, icon = "annotation" }
+        --     , CircularButton.view { size = Small, icon = "arrow-right" }
+        --     , CircularButton.view { size = Normal, icon = "plus" }
+        --     , CircularButton.view { size = Large, icon = "check" }
+        --     , CircularButton.view { size = ExtraLarge, icon = "emojy-happy" }
+        --     ]
+        --     [ p [ class "header" ] [ text "Primary Buttons" ]
+        --     , cpeButton (Primary, ExtraSmall, "Extra small")
+        --     , cpeButton (Primary, Small, "Small")
+        --     , cpeButton (Primary, Normal, "Normal")
+        --     , cpeButton (Primary, Large, "Large")
+        --     , cpeButton (Primary, ExtraLarge, "Extra large")
+        --     ]
+
+        [ div [ class "preview secondary-button" ]
+            [ h3 [ class "header" ] [ text "Secondary Buttons" ]
+            , cpeButton (Secondary, ExtraSmall, "Extra small")
+            , cpeButton (Secondary, Small, "Small")
+            , cpeButton (Secondary, Normal, "Normal")
+            , cpeButton (Secondary, Large, "Large")
+            , cpeButton (Secondary, ExtraLarge, "Extra large")
             ]
-        , div [ class "preview circular-button" ]
-            [ h3 [ class "header" ] [ text "Circular Buttons" ]
-            , CircularButton.view { size = Buttons.Shared.ExtraSmall, icon = "annotation" }
-            , CircularButton.view { size = Buttons.Shared.Small, icon = "arrow-right" }
-            , CircularButton.view { size = Buttons.Shared.Normal, icon = "plus" }
-            , CircularButton.view { size = Buttons.Shared.Large, icon = "check" }
-            , CircularButton.view { size = Buttons.Shared.ExtraLarge, icon = "emojy-happy" }
-            ]
+        , div [ class "preview white-button" ]
+            [ h3 [ class "header" ] [ text "White Buttons" ]
+                , cpeButton (White, ExtraSmall, "Extra small")
+                , cpeButton (White, Small, "Small")
+                , cpeButton (White, Normal, "Normal")
+                , cpeButton (White, Large, "Large")
+                , cpeButton (White, ExtraLarge, "Extra large")
+            ] 
+
         -- insert other buttons here
-        ]
+    ]
 
+type Msg = DisplayWhichButtonClicked 
 
-update : msg -> Model -> ( Model, Cmd msg )
+--update : msg -> Model -> ( Model, Cmd msg )
+update : a -> b -> (b, Cmd msg)
 update _ model =
     ( model, Cmd.none )
 
