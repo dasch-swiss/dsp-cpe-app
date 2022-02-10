@@ -8,7 +8,6 @@ import Html.Styled.Attributes as Attr
 import Heroicons.Solid
 import Tailwind.Utilities as Tw
 import VirtualDom
-import Svg.Attributes exposing (..)
 type Size
     = Small
     | Normal
