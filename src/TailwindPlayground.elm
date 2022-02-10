@@ -1,9 +1,9 @@
 module TailwindPlayground exposing (..)
 import Browser
 import Buttons.Button exposing (..)
-import Html exposing (Html, div, p, text)
+import Html exposing (Html, h3, div, p, text)
 import Html.Attributes exposing (class)
-
+import Buttons.TrailingIconButton as TrailingIconButton
 
 type alias Model =
     String
@@ -51,7 +51,14 @@ view _ =
             , cpeButton (White, Normal, "Normal")
             , cpeButton (White, Large, "Large")
             , cpeButton (White, ExtraLarge, "Extra large")
-        ] 
+        ]
+        ,  div [ class "preview leading-button" ]
+            [ h3 [ class "header" ] [ text "Circular Buttons" ]
+            ,  TrailingIconButton.view {size = TrailingIconButton.Small, text = "Small", icon = TrailingIconButton.Annotation}
+            , TrailingIconButton.view {size = TrailingIconButton.Normal, text = "Normal", icon = TrailingIconButton.EmojiHappy}
+            , TrailingIconButton.view {size = TrailingIconButton.Large, text = "Large", icon = TrailingIconButton.Plus}
+            , TrailingIconButton.view {size = TrailingIconButton.ExtraLarge, text = "Extra Large", icon = TrailingIconButton.Check}
+            ] 
 
         -- insert other buttons here
         ]
