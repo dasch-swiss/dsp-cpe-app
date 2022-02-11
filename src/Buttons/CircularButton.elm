@@ -33,8 +33,8 @@ init _ =
     ( initialModel, Cmd.none )
 
 
-baseButton : List Css.Style
-baseButton =
+circularButtonStyle : List Css.Style
+circularButtonStyle =
     [ Tw.inline_flex
     , Tw.items_center
     , Tw.border
@@ -89,7 +89,8 @@ view ( size, icon ) =
     HtmlStyled.toUnstyled <|
         HtmlStyled.button
             [ Attr.type_ "button"
-            , Attr.css (btnSize ++ baseButton)
+            , Attr.class "circular-button"
+            , Attr.css (btnSize ++ circularButtonStyle)
             ]
             [ HtmlStyled.span [ Attr.css icnSize ] [ HtmlStyled.fromUnstyled <| icon ]
             , Css.Global.global Tw.globalStyles
