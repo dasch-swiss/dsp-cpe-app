@@ -1,44 +1,36 @@
 module Buttons.CircularButton exposing (..)
 
 import Browser
+import Buttons.Shared exposing (Size(..))
 import Css
 import Css.Global
 import Heroicons.Solid
 import Html exposing (Html)
 import Html.Styled as HtmlStyled
 import Html.Styled.Attributes as Attr
+import Svg.Attributes exposing (..)
 import Tailwind.Utilities as Tw
 import VirtualDom
-import Buttons.Button exposing (Size(..))
-import Svg exposing (Attribute, defs, g, rect, svg)
-import Svg.Attributes exposing (..)
-
--- type alias Model =
---     { size : Size
---     , icon : Html
---     }
 
 
--- main : Program () Model msg
--- main =
---     Browser.element
---         { init = init
---         , view = view
---         , update = update
---         , subscriptions = subscriptions
---         }
+main : Program () ( Size, Html msg ) msg
+main =
+    Browser.element
+        { init = init
+        , view = view
+        , update = update
+        , subscriptions = subscriptions
+        }
 
 
--- initialModel : Model msg
--- initialModel =
---     { size = Normal
---     , icon = Heroicons.Solid.plus []
---     }
+initialModel : ( Size, Html msg )
+initialModel =
+    ( Normal, Heroicons.Solid.plus [] )
 
 
--- init : () -> ( Model msg, Cmd msg )
--- init _ =
---     ( initialModel, Cmd.none )
+init : () -> ( ( Size, Html msg ), Cmd msg )
+init _ =
+    ( initialModel, Cmd.none )
 
 
 baseButton : List Css.Style
@@ -63,8 +55,8 @@ baseButton =
     ]
 
 
-view : (Size, Html msg) -> VirtualDom.Node msg
-view (size, icon) =
+view : ( Size, Html msg ) -> VirtualDom.Node msg
+view ( size, icon ) =
     let
         btnSize =
             case size of
@@ -74,14 +66,12 @@ view (size, icon) =
                 Small ->
                     [ Tw.p_1_dot_5 ]
 
-                Normal ->
-                    [ Tw.p_2 ]
-
-                Large ->
-                    [ Tw.p_2 ]
-
                 ExtraLarge ->
                     [ Tw.p_3 ]
+
+                -- Normal and Large
+                _ ->
+                    [ Tw.p_2 ]
 
         icnSize =
             if size == ExtraSmall || size == Small || size == Normal then
@@ -93,8 +83,8 @@ view (size, icon) =
                 [ Tw.h_6
                 , Tw.w_6
                 ]
-                
 
+        -- icnEle = if (Just icon == Maybe.Nothing) then Heroicons.Solid.plus [] else icon
     in
     HtmlStyled.toUnstyled <|
         HtmlStyled.button
@@ -106,11 +96,11 @@ view (size, icon) =
             ]
 
 
--- update : msg -> Model -> ( Model, Cmd msg )
--- update _ model =
---     ( model, Cmd.none )
+update : msg -> ( Size, Html msg ) -> ( ( Size, Html msg ), Cmd msg )
+update _ ( size, text ) =
+    ( ( size, text ), Cmd.none )
 
 
--- subscriptions : Model -> Sub msg
--- subscriptions _ =
---     Sub.none
+subscriptions : ( Size, Html msg ) -> Sub msg
+subscriptions _ =
+    Sub.none

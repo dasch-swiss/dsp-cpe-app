@@ -1,12 +1,11 @@
 module TailwindPlayground exposing (..)
 
 import Browser
-import Buttons.Button exposing (..)
-import Buttons.CircularButton as CircularButton
-import Buttons.PrimaryButton as PrimaryButton
+import Buttons.Button as Button
+import Buttons.Shared exposing (Size(..))
+import Heroicons.Solid
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
-import Heroicons.Solid
 
 
 type alias Model =
@@ -31,59 +30,48 @@ init _ =
 view : Model -> Html msg
 view _ =
     div [ class "buttons" ]
-        -- div [ class "preview primary-button" ]
-        --     [ h3 [ class "header" ] [ text "Primary Buttons" ]
-        --     , PrimaryButton.view { size = ExtraSmall, text = "Extra Small" }
-        --     , PrimaryButton.view { size = Small, text = "Small" }
-        --     , PrimaryButton.view { size = Normal, text = "Normal" }
-        --     , PrimaryButton.view { size = Large, text = "Large" }
-        --     , PrimaryButton.view { size = ExtraLarge, text = "Extra Large" }
-        --     ]
-        [ div [ class "preview circular-button" ]
-            [ h3 [ class "header" ] [ text "Circular Buttons" ]
-            , CircularButton.view (ExtraSmall, Heroicons.Solid.arrowRight [])
-            , CircularButton.view (Small, Heroicons.Solid.annotation [])
-            , CircularButton.view (Normal, Heroicons.Solid.plus [])
-            , CircularButton.view (Large, Heroicons.Solid.check [])
-            , CircularButton.view (ExtraLarge, Heroicons.Solid.emojiHappy [])
-            -- , CircularButton.view { size = Small, icon = "arrow-right" }
-            -- , CircularButton.view { size = Normal, icon = "plus" }
-            -- , CircularButton.view { size = Large, icon = "check" }
-            -- , CircularButton.view { size = ExtraLarge, icon = "emojy-happy" }
-            ]
-        , div [ class "preview circular-button" ]
+        [ div [ class "preview primary-button" ]
             [ h3 [ class "header" ] [ text "Primary Buttons" ]
-            , cpeButton (Primary, ExtraSmall, "Extra small")
-            , cpeButton (Primary, Small, "Small")
-            , cpeButton (Primary, Normal, "Normal")
-            , cpeButton (Primary, Large, "Large")
-            , cpeButton (Primary, ExtraLarge, "Extra large")
+            , Button.primary ( ExtraSmall, "Extra small" )
+            , Button.primary ( Small, "Extra small" )
+            , Button.primary ( Normal, "Extra small" )
+            , Button.primary ( Large, "Extra small" )
+            , Button.primary ( ExtraLarge, "Extra small" )
             ]
-
         , div [ class "preview secondary-button" ]
             [ h3 [ class "header" ] [ text "Secondary Buttons" ]
-            , cpeButton (Secondary, ExtraSmall, "Extra small")
-            , cpeButton (Secondary, Small, "Small")
-            , cpeButton (Secondary, Normal, "Normal")
-            , cpeButton (Secondary, Large, "Large")
-            , cpeButton (Secondary, ExtraLarge, "Extra large")
+            , Button.secondary ( ExtraSmall, "Extra small" )
+            , Button.secondary ( Small, "Small" )
+            , Button.secondary ( Normal, "Normal" )
+            , Button.secondary ( Large, "Large" )
+            , Button.secondary ( ExtraLarge, "Extra large" )
             ]
         , div [ class "preview white-button" ]
             [ h3 [ class "header" ] [ text "White Buttons" ]
-                , cpeButton (White, ExtraSmall, "Extra small")
-                , cpeButton (White, Small, "Small")
-                , cpeButton (White, Normal, "Normal")
-                , cpeButton (White, Large, "Large")
-                , cpeButton (White, ExtraLarge, "Extra large")
-            ] 
+            , Button.white ( ExtraSmall, "Extra small" )
+            , Button.white ( Small, "Small" )
+            , Button.white ( Normal, "Normal" )
+            , Button.white ( Large, "Large" )
+            , Button.white ( ExtraLarge, "Extra large" )
+            ]
+        , div [ class "preview circular-button" ]
+            [ h3 [ class "header" ] [ text "Circular Buttons" ]
+            , Button.circular ( ExtraSmall, Heroicons.Solid.arrowRight [] )
+            , Button.circular ( Small, Heroicons.Solid.annotation [] )
+            , Button.circular ( Normal, Heroicons.Solid.plus [] )
+            , Button.circular ( Large, Heroicons.Solid.check [] )
+            , Button.circular ( ExtraLarge, Heroicons.Solid.emojiHappy [] )
+            ]
 
         -- insert other buttons here
-    ]
+        ]
 
-type Msg = DisplayWhichButtonClicked 
 
---update : msg -> Model -> ( Model, Cmd msg )
-update : a -> b -> (b, Cmd msg)
+type Msg
+    = DisplayWhichButtonClicked
+
+
+update : a -> b -> ( b, Cmd msg )
 update _ model =
     ( model, Cmd.none )
 
