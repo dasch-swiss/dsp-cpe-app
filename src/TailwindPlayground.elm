@@ -8,6 +8,7 @@ import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Avatars.Avatar exposing (circular)
 import Avatars.CircularAvatar as CircularAvatar
+import Buttons.LeadingIconButton as LeadingIconButton
 type alias Model =
     String
 
@@ -64,6 +65,13 @@ view _ =
                 , Button.circular ( Large, Heroicons.Solid.check [] )
                 , Button.circular ( ExtraLarge, Heroicons.Solid.emojiHappy [] )
                 ]
+             , div [ class "preview leading-button" ]
+                [ h3 [ class "header" ] [ text "Leading Icon Buttons" ]
+                ,  Button.leadingIcon(LeadingIconButton.Small, "Small", LeadingIconButton.Annotation)
+                , Button.leadingIcon(LeadingIconButton.Normal, "Normal", LeadingIconButton.EmojiHappy)
+                , Button.leadingIcon(LeadingIconButton.Large, "Large", LeadingIconButton.Plus)
+                , Button.leadingIcon(LeadingIconButton.ExtraLarge, "Extra Large", LeadingIconButton.Check)
+                ]
 
                 -- insert other buttons here
             ]
@@ -88,7 +96,6 @@ view _ =
                     ]
             ]
     ]
-
 
 type Msg
     = DisplayWhichButtonClicked
