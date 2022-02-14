@@ -5,7 +5,6 @@ import TailwindPlayground exposing (view)
 import Html exposing (Html, div)
 import Html.Attributes exposing (class)
 
-
 type alias Model =
     String
 
