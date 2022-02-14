@@ -9,6 +9,7 @@ import Html.Attributes exposing (class)
 import Avatars.Avatar exposing (circular)
 import Avatars.CircularAvatar as CircularAvatar
 import Buttons.LeadingIconButton as LeadingIconButton
+import Buttons.TrailingIconButton as TrailingIconButton
 type alias Model =
     String
 
@@ -73,11 +74,11 @@ view _ =
                 , Button.leadingIcon(LeadingIconButton.ExtraLarge, "Extra Large", LeadingIconButton.Check)
                 ]
              ,  div [ class "preview leading-button" ]
-                [ h3 [ class "header" ] [ text "Circular Buttons" ]
-                ,  TrailingIconButton.view {size = TrailingIconButton.Small, text = "Small", icon = TrailingIconButton.Annotation}
-                , TrailingIconButton.view {size = TrailingIconButton.Normal, text = "Normal", icon = TrailingIconButton.EmojiHappy}
-                , TrailingIconButton.view {size = TrailingIconButton.Large, text = "Large", icon = TrailingIconButton.Plus}
-                , TrailingIconButton.view {size = TrailingIconButton.ExtraLarge, text = "Extra Large", icon = TrailingIconButton.Check}
+                [ h3 [ class "header" ] [ text "Trailing Icon Buttons" ]
+                ,  Button.trailingIcon(TrailingIconButton.Small, "Small", TrailingIconButton.Annotation)
+                , Button.trailingIcon(TrailingIconButton.Normal, "Normal", TrailingIconButton.EmojiHappy)
+                , Button.trailingIcon(TrailingIconButton.Large, "Large", TrailingIconButton.Plus)
+                , Button.trailingIcon(TrailingIconButton.ExtraLarge, "Extra Large", TrailingIconButton.Check)
                 ] 
 
                 -- insert other buttons here
