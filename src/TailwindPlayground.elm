@@ -3,8 +3,8 @@ import Browser
 import Buttons.Button exposing (..)
 import Html exposing (Html, h3, div, p, text)
 import Html.Attributes exposing (class)
+import Avatars.Avatar exposing (circular)
 import Avatars.CircularAvatar as CircularAvatar
-
 type alias Model =
     String
 
@@ -59,21 +59,21 @@ view _ =
         , div [class "avatars"]
             [ div [ class "preview circular-avatar"]
                 [ h3 [ class "header"][ text "Circular Avatar"]
-                    , CircularAvatar.view { size = CircularAvatar.ExtraSmall
-                        , img = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        , alt = "Extra small"}
-                    , CircularAvatar.view { size = CircularAvatar.Small
-                        , img = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        , alt = "Small"}
-                    , CircularAvatar.view { size = CircularAvatar.Normal
-                        , img = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        , alt = "Normal"}
-                    , CircularAvatar.view { size = CircularAvatar.Large
-                        , img = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        , alt = "Large"}
-                    , CircularAvatar.view { size = CircularAvatar.ExtraLarge
-                        , img = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        , alt = "Extra large"}
+                    , Avatars.Avatar.circular (CircularAvatar.ExtraSmall
+                    , "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        , "Extra small")
+                    , Avatars.Avatar.circular (CircularAvatar.Small
+                    , "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        , "Small")
+                    , Avatars.Avatar.circular (CircularAvatar.Normal
+                    , "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        , "Normal")
+                    , Avatars.Avatar.circular (CircularAvatar.Large
+                    , "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        , "Large")
+                    , Avatars.Avatar.circular (CircularAvatar.ExtraLarge
+                    , "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        , "Extra large")
                 ]
         ]
     ]
