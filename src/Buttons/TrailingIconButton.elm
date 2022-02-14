@@ -107,22 +107,30 @@ view model =
             case model.size of
                
                 Small ->
-                    [ Tw.h_4
+                    [ Tw.ml_2
+                    , Tw.neg_mr_0_dot_5
+                    , Tw.h_4
                     , Tw.w_4
                     ]
 
                 Normal ->
-                    [ Tw.h_5
+                    [ Tw.ml_2
+                    , Tw.neg_mr_1
+                    , Tw.h_5
                     , Tw.w_5
                     ]
 
                 Large ->
-                    [ Tw.h_5
+                    [ Tw.ml_3
+                    , Tw.neg_mr_1
+                    , Tw.h_5
                     , Tw.w_5
                     ]
 
                 ExtraLarge ->
-                    [ Tw.h_5
+                    [ Tw.ml_3
+                    , Tw.neg_mr_1
+                    , Tw.h_5
                     , Tw.w_5
                     ]
         iconMethod =
