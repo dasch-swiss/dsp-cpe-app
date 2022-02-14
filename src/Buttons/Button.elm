@@ -1,118 +1,33 @@
 module Buttons.Button exposing (..)
 
-import Browser
-import Css
-import Css.Global
-import Html.Styled as Html
-import Html.Styled.Attributes as Attr
-import Tailwind.Utilities as Tw
-import VirtualDom
-import Html.Events
-import Buttons.PrimaryButton exposing (primaryButton)
-import Buttons.SecondaryButton exposing (secondaryButton)
-import Buttons.WhiteButton exposing (whiteButton)
+import Buttons.CircularButton as CircularButton
+import Buttons.PrimaryButton as PrimaryButton
+import Buttons.SecondaryButton as SecondaryButton
+import Buttons.LeadingIconButton as LeadingIconButton
+import Buttons.Shared exposing (Size(..))
+import Buttons.WhiteButton as WhiteButton
+import Html exposing (Html)
 
 
-main : Program () (Variant, Size, String) msg
-main =
-    Browser.element
-        { init = init
-        , view = cpeButton
-        , update = update
-        , subscriptions = subscriptions
-        }
+primary : ( Size, String ) -> Html msg
+primary ( size, text ) =
+    PrimaryButton.view ( size, text )
 
 
-initialModel : (Variant, Size, String)
-initialModel = (Primary, Normal, "")
+secondary : ( Size, String ) -> Html msg
+secondary ( size, text ) =
+    SecondaryButton.view ( size, text )
 
 
-init : () -> ( (Variant, Size, String), Cmd msg )
-init _ =
-    ( initialModel, Cmd.none )
+white : ( Size, String ) -> Html msg
+white ( size, text ) =
+    WhiteButton.view ( size, text )
 
 
-getVariant: Variant ->  List Css.Style
-getVariant variant =
-    case variant of
-        Primary ->
-            primaryButton
+circular : ( Size, Html msg ) -> Html msg
+circular ( size, icon ) =
+    CircularButton.view ( size, icon )
 
-        Secondary ->
-            secondaryButton
-
-        White ->
-            whiteButton
-
-type Size
-    = ExtraSmall
-    | Small
-    | Normal
-    | Large
-    | ExtraLarge
-
-type Variant
-    = Primary
-    | Secondary
-    | White
-
-type ButtonType
-    = Button
-    | Submit
-    | Reset
-
-renderSize : Size -> List Css.Style
-renderSize size =
-            case size of
-                ExtraSmall ->
-                    [ Tw.px_2_dot_5
-                    , Tw.py_1_dot_5
-                    , Tw.text_xs
-                    ]
-
-                Small ->
-                    [ Tw.px_3
-                    , Tw.py_2
-                    , Tw.text_sm
-                    , Tw.leading_4
-                    ]
-
-                Normal ->
-                    [ Tw.px_4
-                    , Tw.py_2
-                    , Tw.text_sm
-                    ]
-
-                Large ->
-                    [ Tw.px_4
-                    , Tw.py_2
-                    , Tw.text_base
-                    ]
-
-                ExtraLarge ->
-                    [ Tw.px_6
-                    , Tw.py_3
-                    , Tw.text_base
-                    ]
-
-{- View named Button -}
-cpeButton : (Variant, Size, String)-> VirtualDom.Node msg
-cpeButton (variant, size, text) =
-    Html.toUnstyled <|
-        Html.button
-            [ Attr.type_ "button"
-            , Attr.css (renderSize size ++ getVariant variant)
-            ]
-            [ Html.text text
-            , Css.Global.global Tw.globalStyles
-            ]
-
-
-update : msg -> (Variant, Size, String) -> ( (Variant, Size, String), Cmd msg )
-update _ (var, size, text) =
-    ( (var, size, text), Cmd.none )
-
-
-subscriptions : (Variant, Size, String) -> Sub msg
-subscriptions _ =
-    Sub.none
+leadingIcon : (LeadingIconButton.Size, String, LeadingIconButton.Icon) -> Html msg
+leadingIcon (size, text, icon) =
+    LeadingIconButton.view ({size = size, text = text, icon = icon})
