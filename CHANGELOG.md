@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.1.0](https://www.github.com/dasch-swiss/dsp-cpe-app/compare/v0.0.2...v0.1.0) (2022-02-15)
+
+
+### Documentation
+
+* fix link in changelog ([#11](https://www.github.com/dasch-swiss/dsp-cpe-app/issues/11)) ([d00e6b9](https://www.github.com/dasch-swiss/dsp-cpe-app/commit/d00e6b9b5c99b927306497a07474bf2fea8505c7))
+
+
+### Enhancements
+
+* **avatar:** Circular Avatar (DEV-445) ([#14](https://www.github.com/dasch-swiss/dsp-cpe-app/issues/14)) ([adade5e](https://www.github.com/dasch-swiss/dsp-cpe-app/commit/adade5e5ac8c02585b3f0f53f90c7c6adca085bf))
+* **button:** circular button incl. icons (DEV-444, DEV-483) ([#6](https://www.github.com/dasch-swiss/dsp-cpe-app/issues/6)) ([8f0fe24](https://www.github.com/dasch-swiss/dsp-cpe-app/commit/8f0fe24b74b64447ba0090c9fd9bb84afe8a65d9))
+* **button:** Leading Icon Button (DEV-442) ([#12](https://www.github.com/dasch-swiss/dsp-cpe-app/issues/12)) ([d0dd5ae](https://www.github.com/dasch-swiss/dsp-cpe-app/commit/d0dd5ae49c51b05605f2f03963a060cf49e45222))
+* **button:** Trailing Icon Button (DEV-443) ([#13](https://www.github.com/dasch-swiss/dsp-cpe-app/issues/13)) ([2a5986c](https://www.github.com/dasch-swiss/dsp-cpe-app/commit/2a5986c96db3468213d7cebb2d10561f94aa311b))
+
+
+### Maintenance
+
+* **main:** release 0.1.0 ([#15](https://www.github.com/dasch-swiss/dsp-cpe-app/issues/15)) ([7017218](https://www.github.com/dasch-swiss/dsp-cpe-app/commit/7017218b10d4acd2224b004676235343c06ea6d1))
+
 ## [0.1.0](https://github.com/dasch-swiss/dsp-cpe-app/compare/v0.0.2...v0.1.0) (2022-02-15)
 
 
