@@ -7,6 +7,7 @@ import Buttons.LeadingIconButton as LeadingIconButton
 import Buttons.TrailingIconButton as TrailingIconButton
 import Buttons.Shared exposing (Size(..))
 import Buttons.WhiteButton as WhiteButton
+import Icon
 import Html exposing (Html)
 
 
@@ -25,14 +26,14 @@ white ( size, text ) =
     WhiteButton.view ( size, text )
 
 
-circular : ( Size, Html msg ) -> Html msg
+circular : ( Size, Icon.Icon ) -> Html msg
 circular ( size, icon ) =
-    CircularButton.view ( size, icon )
+    CircularButton.view ({size = size, icon = icon})
 
-leadingIcon : (LeadingIconButton.Size, String, LeadingIconButton.Icon) -> Html msg
+leadingIcon : (LeadingIconButton.Size, String, Icon.Icon) -> Html msg
 leadingIcon (size, text, icon) =
     LeadingIconButton.view ({size = size, text = text, icon = icon})
 
-trailingIcon: (TrailingIconButton.Size, String, TrailingIconButton.Icon) -> Html msg
+trailingIcon: (TrailingIconButton.Size, String, Icon.Icon) -> Html msg
 trailingIcon (size, text, icon) =
     TrailingIconButton.view ({size = size, text = text, icon = icon})

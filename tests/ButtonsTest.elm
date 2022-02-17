@@ -7,7 +7,7 @@ import Buttons.Button as Button
 import Buttons.Shared exposing (Size(..))
 import Html exposing (Html)
 import Test.Html.Selector
-import Heroicons.Solid
+import Icon
 
 
 primary : Html msg
@@ -44,7 +44,7 @@ whiteCreated =
                 |> Query.count (Expect.equal 1)
 
 circular : Html msg
-circular  = Button.circular (Large, Heroicons.Solid.academicCap [])
+circular  = Button.circular (Large, Icon.Academiccap)
 circularCreated : Test
 circularCreated =
     test "One 'Large' sized circular button should be created via the initialModel." <|

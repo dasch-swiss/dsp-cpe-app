@@ -4,9 +4,9 @@ import Css
 import Css.Global
 import Html.Styled as Styled
 import Html.Styled.Attributes as Attr
-import Heroicons.Solid
 import Tailwind.Utilities as Tw
 import VirtualDom
+import Icon
 type Size
     = Small
     | Normal
@@ -21,14 +21,9 @@ type ButtonType
 type alias Model =
     { size : Size
     , text : String
-    , icon : Icon
+    , icon : Icon.Icon
     }
 
-type Icon
-    = EmojiHappy
-    | Annotation
-    | Plus
-    | Check
 
 main : Program () Model msg
 main =
@@ -44,7 +39,7 @@ initialModel : Model
 initialModel =
     { size = Normal
     , text = "Default"
-    , icon = EmojiHappy
+    , icon = Icon.Emojihappy
     }
 
 
@@ -134,15 +129,7 @@ view model =
                     , Tw.w_5
                     ]
         iconMethod =
-            case model.icon of
-                EmojiHappy ->
-                    Heroicons.Solid.emojiHappy []
-                Annotation ->
-                    Heroicons.Solid.annotation []
-                Plus ->
-                    Heroicons.Solid.plus []
-                Check ->
-                    Heroicons.Solid.check []
+            Icon.getHtml(model.icon)
     in
     Styled.toUnstyled <|
         Styled.button
