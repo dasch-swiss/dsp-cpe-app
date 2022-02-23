@@ -24,7 +24,11 @@ docker-run: docker-build ## run docker image locall
 .PHONY: build
 build: ## build elm app
 	@elm make src/Main.elm --output dist/app.js --optimize
+	@elm make src/TailwindPlayground.elm --output dist/playground.js --optimize
+	@elm make src/Beol.elm --output dist/beol.js --optimize
 	@cp index.html dist/index.html
+	@cp playground.html dist/playground.html
+	@cp beol.html dist/beol.html
 	@cp -R assets dist/assets
 
 .PHONY: test
