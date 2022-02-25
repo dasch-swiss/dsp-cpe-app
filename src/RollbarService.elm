@@ -39,19 +39,13 @@ initialModel =
     }
 
 
-
 -- UPDATE --
 
 
 type Msg
     = SetText String
     | NoOp
-    | Send
-    | SendCritical
-    | SendDebug
-    | SendError
-    | SendInfo
-    | SendWarning
+    | Send Level
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -63,23 +57,8 @@ update msg model =
         SetText text ->
             ( { model | report = text }, Cmd.none )
 
-        Send ->
-            ( model, info model.report )
-        
-        SendCritical ->
-            ( model, critical model.report )
-
-        SendDebug ->
-            ( model, debug model.report )
-
-        SendError ->
-            ( model, error model.report )
-
-        SendInfo ->
-            ( model, info model.report )
-
-        SendWarning ->
-            ( model, warning model.report )
+        Send lvl->
+            ( model, item lvl model.report )
 
 
 type Level
@@ -90,34 +69,19 @@ type Level
     | Warning
 
 
-
--- item : (Level -> String) -> Cmd Msg
--- item (lvl, report) =
---     case lvl of
---         Critical ->
---             Task.attempt (\_ -> NoOp) (rollbar.critical report Dict.empty)
---         Debug_ ->
---             Task.attempt (\_ -> NoOp) (rollbar.debug report Dict.empty)
---         Error ->
---             Task.attempt (\_ -> NoOp) (rollbar.error report Dict.empty)
---         Info ->
---             Task.attempt (\_ -> NoOp) (rollbar.info report Dict.empty)
---         Warning ->
---             Task.attempt (\_ -> NoOp) (rollbar.warning report Dict.empty)
--- let itemLevel =
---     case lvl of
---         Critical ->
---             rollbar.critical
---         Debug ->
---             rollbar.debug
---         Error ->
---             rollbar.error
---         Info ->
---             rollbar.info
---         Warning ->
---             rollbar.warning
--- in
---     Task.attempt (\_ -> NoOp) (itemLevel report Dict.empty)
+item : Level -> String -> Cmd Msg
+item lvl report =
+    case lvl of
+        Critical ->
+            Task.attempt (\_ -> NoOp) (rollbar.critical report Dict.empty)
+        Debug_ ->
+            Task.attempt (\_ -> NoOp) (rollbar.debug report Dict.empty)
+        Error ->
+            Task.attempt (\_ -> NoOp) (rollbar.error report Dict.empty)
+        Info ->
+            Task.attempt (\_ -> NoOp) (rollbar.info report Dict.empty)
+        Warning ->
+            Task.attempt (\_ -> NoOp) (rollbar.warning report Dict.empty)
 
 
 critical : String -> Cmd Msg
@@ -150,7 +114,6 @@ json =
     Json.Encode.object [ ( "environment", Json.Encode.string "DSP-CPE" ) ]
 
 
-
 -- VIEW --
 
 
@@ -159,15 +122,13 @@ view model =
     div []
         [ div []
             [ input [ onInput SetText, value model.report ] []
-            -- , div [] [ button [ onClick Send ] [ text "Send to rollbar" ] ]
-            , div [] [ button [ onClick SendCritical ] [ text "Send critical to rollbar" ] ]
-            , div [] [ button [ onClick SendDebug ] [ text "Send debug to rollbar" ] ]
-            , div [] [ button [ onClick SendError ] [ text "Send error to rollbar" ] ]
-            , div [] [ button [ onClick SendInfo ] [ text "Send info to rollbar" ] ]
-            , div [] [ button [ onClick SendWarning ] [ text "Send warning to rollbar" ] ]
+            , div [] [ button [ onClick (Send Critical) ] [ text "Send critical to rollbar" ] ]
+            , div [] [ button [ onClick (Send Debug_) ] [ text "Send debug to rollbar" ] ]
+            , div [] [ button [ onClick (Send Error) ] [ text "Send error to rollbar" ] ]
+            , div [] [ button [ onClick (Send Info) ] [ text "Send info to rollbar" ] ]
+            , div [] [ button [ onClick (Send Warning) ] [ text "Send warning to rollbar" ] ]
             ]
         ]
-
 
 
 -- INIT --
