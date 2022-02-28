@@ -2,7 +2,8 @@ module TailwindPlayground exposing (..)
 
 import Browser
 import Buttons.Button as Button
-import Buttons.Shared exposing (Size(..))
+import Buttons.Button exposing (primaryButton, secondaryButton, whiteButton)
+import Buttons.Shared exposing (ButtonSize(..))
 import Heroicons.Solid
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
@@ -29,6 +30,7 @@ init _ =
     ( "", Cmd.none )
 
 
+
 view : Model -> Html msg
 view _ =
 
@@ -36,27 +38,27 @@ view _ =
         div [ class "buttons" ]
             [ div [ class "preview primary-button" ]
                 [ h3 [ class "header" ] [ text "Primary Buttons" ]
-                , Button.primary ( ExtraSmall, "Extra small" )
-                , Button.primary ( Small, "Extra small" )
-                , Button.primary ( Normal, "Extra small" )
-                , Button.primary ( Large, "Extra small" )
-                , Button.primary ( ExtraLarge, "Extra small" )
+                , primaryButton [] "Extra small" ExtraSmall
+                , primaryButton [] "Small" Small
+                , primaryButton [] "Normal" Normal
+                , primaryButton [] "Large" Large
+                , primaryButton [] "Extra large" ExtraLarge
                 ]
             , div [ class "preview secondary-button" ]
                 [ h3 [ class "header" ] [ text "Secondary Buttons" ]
-                , Button.secondary ( ExtraSmall, "Extra small" )
-                , Button.secondary ( Small, "Small" )
-                , Button.secondary ( Normal, "Normal" )
-                , Button.secondary ( Large, "Large" )
-                , Button.secondary ( ExtraLarge, "Extra large" )
+                , secondaryButton [] "Extra small" ExtraSmall
+                , secondaryButton [] "Small" Small
+                , secondaryButton [] "Normal" Normal
+                , secondaryButton [] "Large" Large
+                , secondaryButton [] "Extra large" ExtraLarge
                 ]
             , div [ class "preview white-button" ]
                 [ h3 [ class "header" ] [ text "White Buttons" ]
-                , Button.white ( ExtraSmall, "Extra small" )
-                , Button.white ( Small, "Small" )
-                , Button.white ( Normal, "Normal" )
-                , Button.white ( Large, "Large" )
-                , Button.white ( ExtraLarge, "Extra large" )
+                , whiteButton [] "Extra small" ExtraSmall
+                , whiteButton [] "Small" Small
+                , whiteButton [] "Normal" Normal
+                , whiteButton [] "Large" Large
+                , whiteButton [] "Extra large" ExtraLarge
                 ]
             , div [ class "preview circular-button" ]
                 [ h3 [ class "header" ] [ text "Circular Buttons" ]
@@ -75,7 +77,7 @@ view _ =
                 ]
              ,  div [ class "preview leading-button" ]
                 [ h3 [ class "header" ] [ text "Trailing Icon Buttons" ]
-                ,  Button.trailingIcon(TrailingIconButton.Small, "Small", TrailingIconButton.Annotation)
+                , Button.trailingIcon(TrailingIconButton.Small, "Small", TrailingIconButton.Annotation)
                 , Button.trailingIcon(TrailingIconButton.Normal, "Normal", TrailingIconButton.EmojiHappy)
                 , Button.trailingIcon(TrailingIconButton.Large, "Large", TrailingIconButton.Plus)
                 , Button.trailingIcon(TrailingIconButton.ExtraLarge, "Extra Large", TrailingIconButton.Check)
@@ -86,19 +88,19 @@ view _ =
             , div [class "avatars"]
                 [ div [ class "preview circular-avatar"]
                     [ h3 [ class "header"][ text "Circular Avatar"]
-                        , Avatars.Avatar.circular (CircularAvatar.ExtraSmall
+                        , circular (CircularAvatar.ExtraSmall
                         , "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                             , "Extra small")
-                        , Avatars.Avatar.circular (CircularAvatar.Small
+                        , circular (CircularAvatar.Small
                         , "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                             , "Small")
-                        , Avatars.Avatar.circular (CircularAvatar.Normal
+                        , circular (CircularAvatar.Normal
                         , "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                             , "Normal")
-                        , Avatars.Avatar.circular (CircularAvatar.Large
+                        , circular (CircularAvatar.Large
                         , "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                             , "Large")
-                        , Avatars.Avatar.circular (CircularAvatar.ExtraLarge
+                        , circular (CircularAvatar.ExtraLarge
                         , "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                             , "Extra large")
                     ]
