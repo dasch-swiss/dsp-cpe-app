@@ -9,10 +9,11 @@ import Buttons.Shared exposing (ButtonSize(..))
 import Html exposing (Html)
 import Test.Html.Selector
 import Heroicons.Solid
+import Buttons.Button exposing (whiteButton)
 
 
 primary : Html msg
-primary  = primaryButton [] "Pimary Button" ExtraSmall
+primary  = primaryButton [] "Primary Button" ExtraSmall
 primaryCreated : Test
 primaryCreated =
     test "One 'Normal' sized primary button should be created via the initialModel." <|
@@ -34,7 +35,7 @@ secondaryCreated =
                 |> Query.count (Expect.equal 1)
 
 white : Html msg
-white  = secondaryButton[] "Secondary Button" ExtraSmall
+white  = whiteButton[] "White Button" ExtraSmall
 whiteCreated : Test
 whiteCreated =
     test "One 'ExtraLarge' sized white button should be created via the initialModel." <|
