@@ -1,11 +1,13 @@
 module Buttons.Counter exposing (..)
 import Browser
-import Html exposing (Html, div, text)
-import Html.Events exposing (onClick)
-import Buttons.TrailingIconButton as TrailingIconButton
-import Buttons.Button as Button
-import Html.Attributes
+import Html exposing (Html, div, text, h3)
+import Html.Attributes exposing (class)
+import Html.Styled.Events exposing (onClick)
+import Html.Styled.Attributes exposing (disabled, id)
+import Buttons.Button exposing (primaryButton, secondaryButton)
+import Buttons.Shared exposing (ButtonSize(..))
 
+main : Program () Model Msg
 main =
   Browser.sandbox { init = init, update = update, view = view }
 
@@ -31,11 +33,19 @@ update msg model =
     Decrement ->
       model - 1
 
-
 view : Model -> Html Msg
 view model =
-  div []
-    [ div[onClick Decrement, Html.Attributes.style "display" "inline-block"][Button.trailingIcon(TrailingIconButton.Normal, "Downvote", TrailingIconButton.Plus)]
-    , div [] [ text (String.fromInt model) ]
-    , div[onClick Increment, Html.Attributes.style "display" "inline-block"][Button.trailingIcon(TrailingIconButton.Normal, "Upvote", TrailingIconButton.Plus)]
+    div [] [
+      div [] [ h3 [ class "header" ] [ text "onClick implementation" ]
+      , secondaryButton [onClick Increment] "Click me to increase" ExtraLarge 
+      , div [] [ text (String.fromInt model) ]
+      , secondaryButton [onClick Decrement] "Click me to decrease" ExtraLarge
+      ]
+    , div []
+      [ h3 [ class "header" ] [ text "passing events, attributes" ]
+      , div [] [ primaryButton [disabled True, onClick Increment] "I am disabled and can not increase" ExtraLarge ]
+      , div [] [ primaryButton [disabled False, onClick Increment] "I am enabled and can increase" ExtraLarge ]
+      , div [] [ primaryButton [id "decrement_button", onClick Decrement] "I decrease, like my id says" ExtraLarge ]
+      ]
     ]
+   
