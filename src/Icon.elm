@@ -3,238 +3,238 @@ import Heroicons.Solid
 import Html exposing (Html)
 
 type Icon
-    = Academiccap
-    | Adjustments
-    | Annotation
-    | Archive
-    | Arrowcircledown
-    | Arrowcircleleft
-    | Arrowcircleright
-    | Arrowcircleup
-    | Arrowdown
-    | Arrowleft
-    | Arrownarrowdown
-    | Arrownarrowleft
-    | Arrownarrowright
-    | Arrownarrowup
-    | Arrowright
-    | Arrowup
-    | Arrowsexpand
-    | Atsymbol
-    | Backspace
-    | Badgecheck
-    | Ban
-    | Beaker
-    | Bell
-    | Bookopen
-    | Bookmarkalt
-    | Bookmark
-    | Briefcase
-    | Cake
-    | Calculator
-    | Calendar
-    | Camera
-    | Cash
-    | Chartbar
-    | Chartpie
-    | Chartsquarebar
-    | Chatalt2
-    | Chatalt
-    | Chat
-    | Checkcircle
-    | Check
-    | Chevrondoubledown
-    | Chevrondoubleleft
-    | Chevrondoubleright
-    | Chevrondoubleup
-    | Chevrondown
-    | Chevronleft
-    | Chevronright
-    | Chevronup
-    | Chip
-    | Clipboardcheck
-    | Clipboardcopy
-    | Clipboardlist
-    | Clipboard
-    | Clock
-    | Clouddownload
-    | Cloudupload
-    | Cloud
-    | Code
-    | Cog
-    | Collection
-    | Colorswatch
-    | Creditcard
-    | Cubetransparent
-    | Cube
-    | Currencybangladeshi
-    | Currencydollar
-    | Currencyeuro
-    | Currencypound
-    | Currencyrupee
-    | Currencyyen
-    | Cursorclick
-    | Database
-    | Desktopcomputer
-    | Devicemobile
-    | Devicetablet
-    | Documentadd
-    | Documentdownload
-    | Documentduplicate
-    | Documentremove
-    | Documentreport
-    | Documentsearch
-    | Documenttext
-    | Document
-    | Dotscirclehorizontal
-    | Dotshorizontal
-    | Dotsvertical
-    | Download
-    | Duplicate
-    | Emojihappy
-    | Emojisad
-    | Exclamationcircle
-    | Exclamation
-    | Externallink
-    | Eyeoff
-    | Eye
-    | Fastforward
-    | Film
-    | Filter
-    | Fingerprint
-    | Fire
-    | Flag
-    | Folderadd
-    | Folderdownload
-    | Folderopen
-    | Folderremove
-    | Folder
-    | Gift
-    | Globealt
-    | Globe
-    | Hand
-    | Hashtag
-    | Heart
-    | Home
-    | Identification
-    | Inboxin
-    | Inbox
-    | Informationcircle
-    | Key
-    | Library
-    | Lightbulb
-    | Lightningbolt
-    | Link
-    | Locationmarker
-    | Lockclosed
-    | Lockopen
-    | Login
-    | Logout
-    | Mailopen
-    | Mail
-    | Map
-    | Menualt1
-    | Menualt2
-    | Menualt3
-    | Menualt4
-    | Menu
-    | Microphone
-    | Minuscircle
-    | Minussm
-    | Minus
-    | Moon
-    | Musicnote
-    | Newspaper
-    | Officebuilding
-    | Paperairplane
-    | Paperclip
-    | Pause
-    | Pencilalt
-    | Pencil
-    | Phoneincoming
-    | Phonemissedcall
-    | Phoneoutgoing
-    | Phone
-    | Photograph
-    | Play
-    | Pluscircle
-    | Plussm
-    | Plus
-    | Presentationchartbar
-    | Presentationchartline
-    | Printer
-    | Puzzle
-    | Qrcode
-    | Questionmarkcircle
-    | Receiptrefund
-    | Receipttax
-    | Refresh
-    | Reply
-    | Rewind
-    | Rss
-    | Saveas
-    | Save
-    | Scale
-    | Scissors
-    | Searchcircle
-    | Search
-    | Selector
-    | Server
-    | Share
-    | Shieldcheck
-    | Shieldexclamation
-    | Shoppingbag
-    | Shoppingcart
-    | Sortascending
-    | Sortdescending
-    | Sparkles
-    | Speakerphone
-    | Star
-    | Statusoffline
-    | Statusonline
-    | Stop
-    | Sun
-    | Support
-    | Switchhorizontal
-    | Switchvertical
-    | Table
-    | Tag
-    | Template
-    | Terminal
-    | Thumbdown
-    | Thumbup
-    | Ticket
-    | Translate
-    | Trash
-    | Trendingdown
-    | Trendingup
-    | Truck
-    | Upload
-    | Useradd
-    | Usercircle
-    | Usergroup
-    | Userremove
-    | User
-    | Users
-    | Variable
-    | Videocamera
-    | Viewboards
-    | Viewgridadd
-    | Viewgrid
-    | Viewlist
-    | Volumeoff
-    | Volumeup
-    | Wifi
-    | Xcircle
-    | X
-    | Zoomin
-    | Zoomout
+    = AcademicCap 
+    | Adjustments 
+    | Annotation 
+    | Archive 
+    | ArrowCircleDown 
+    | ArrowCircleLeft 
+    | ArrowCircleRight 
+    | ArrowCircleUp 
+    | ArrowDown 
+    | ArrowLeft 
+    | ArrowNarrowDown 
+    | ArrowNarrowLeft 
+    | ArrowNarrowRight 
+    | ArrowNarrowUp 
+    | ArrowRight 
+    | ArrowUp 
+    | ArrowsExpand 
+    | AtSymbol 
+    | Backspace 
+    | BadgeCheck 
+    | Ban 
+    | Beaker 
+    | Bell 
+    | BookOpen 
+    | BookmarkAlt 
+    | Bookmark 
+    | Briefcase 
+    | Cake 
+    | Calculator 
+    | Calendar 
+    | Camera 
+    | Cash 
+    | ChartBar 
+    | ChartPie 
+    | ChartSquareBar 
+    | ChatAlt2 
+    | ChatAlt 
+    | Chat 
+    | CheckCircle 
+    | Check 
+    | ChevronDoubleDown 
+    | ChevronDoubleLeft 
+    | ChevronDoubleRight 
+    | ChevronDoubleUp 
+    | ChevronDown 
+    | ChevronLeft 
+    | ChevronRight 
+    | ChevronUp 
+    | Chip 
+    | ClipboardCheck 
+    | ClipboardCopy 
+    | ClipboardList 
+    | Clipboard 
+    | Clock 
+    | CloudDownload 
+    | CloudUpload 
+    | Cloud 
+    | Code 
+    | Cog 
+    | Collection 
+    | ColorSwatch 
+    | CreditCard 
+    | CubeTransparent 
+    | Cube 
+    | CurrencyBangladeshi 
+    | CurrencyDollar 
+    | CurrencyEuro 
+    | CurrencyPound 
+    | CurrencyRupee 
+    | CurrencyYen 
+    | CursorClick 
+    | Database 
+    | DesktopComputer 
+    | DeviceMobile 
+    | DeviceTablet 
+    | DocumentAdd 
+    | DocumentDownload 
+    | DocumentDuplicate 
+    | DocumentRemove 
+    | DocumentReport 
+    | DocumentSearch 
+    | DocumentText 
+    | Document 
+    | DotsCircleHorizontal 
+    | DotsHorizontal 
+    | DotsVertical 
+    | Download 
+    | Duplicate 
+    | EmojiHappy 
+    | EmojiSad 
+    | ExclamationCircle 
+    | Exclamation 
+    | ExternalLink 
+    | EyeOff 
+    | Eye 
+    | FastForward 
+    | Film 
+    | Filter 
+    | FingerPrint 
+    | Fire 
+    | Flag 
+    | FolderAdd 
+    | FolderDownload 
+    | FolderOpen 
+    | FolderRemove 
+    | Folder 
+    | Gift 
+    | GlobeAlt 
+    | Globe 
+    | Hand 
+    | Hashtag 
+    | Heart 
+    | Home 
+    | Identification 
+    | InboxIn 
+    | Inbox 
+    | InformationCircle 
+    | Key 
+    | Library 
+    | LightBulb 
+    | LightningBolt 
+    | Link 
+    | LocationMarker 
+    | LockClosed 
+    | LockOpen 
+    | Login 
+    | Logout 
+    | MailOpen 
+    | Mail 
+    | Map 
+    | MenuAlt1 
+    | MenuAlt2 
+    | MenuAlt3 
+    | MenuAlt4 
+    | Menu 
+    | Microphone 
+    | MinusCircle 
+    | MinusSm 
+    | Minus 
+    | Moon 
+    | MusicNote 
+    | Newspaper 
+    | OfficeBuilding 
+    | PaperAirplane 
+    | PaperClip 
+    | Pause 
+    | PencilAlt 
+    | Pencil 
+    | PhoneIncoming 
+    | PhoneMissedCall 
+    | PhoneOutgoing 
+    | Phone 
+    | Photograph 
+    | Play 
+    | PlusCircle 
+    | PlusSm 
+    | Plus 
+    | PresentationChartBar 
+    | PresentationChartLine 
+    | Printer 
+    | Puzzle 
+    | Qrcode 
+    | QuestionMarkCircle 
+    | ReceiptRefund 
+    | ReceiptTax 
+    | Refresh 
+    | Reply 
+    | Rewind 
+    | Rss 
+    | SaveAs 
+    | Save 
+    | Scale 
+    | Scissors 
+    | SearchCircle 
+    | Search 
+    | Selector 
+    | Server 
+    | Share 
+    | ShieldCheck 
+    | ShieldExclamation 
+    | ShoppingBag 
+    | ShoppingCart 
+    | SortAscending 
+    | SortDescending 
+    | Sparkles 
+    | Speakerphone 
+    | Star 
+    | StatusOffline 
+    | StatusOnline 
+    | Stop 
+    | Sun 
+    | Support 
+    | SwitchHorizontal 
+    | SwitchVertical 
+    | Table 
+    | Tag 
+    | Template 
+    | Terminal 
+    | ThumbDown 
+    | ThumbUp 
+    | Ticket 
+    | Translate 
+    | Trash 
+    | TrendingDown 
+    | TrendingUp 
+    | Truck 
+    | Upload 
+    | UserAdd 
+    | UserCircle 
+    | UserGroup 
+    | UserRemove 
+    | User 
+    | Users 
+    | Variable 
+    | VideoCamera 
+    | ViewBoards 
+    | ViewGridAdd 
+    | ViewGrid 
+    | ViewList 
+    | VolumeOff 
+    | VolumeUp 
+    | Wifi 
+    | XCircle 
+    | X 
+    | ZoomIn 
+    | ZoomOut 
 
 
 getHtml: Icon -> Html msg
 getHtml icon =
     case icon of
-        Academiccap ->
+        AcademicCap ->
             Heroicons.Solid.academicCap []
         Adjustments ->
             Heroicons.Solid.adjustments []
@@ -242,37 +242,37 @@ getHtml icon =
             Heroicons.Solid.annotation []
         Archive ->
             Heroicons.Solid.archive []
-        Arrowcircledown ->
+        ArrowCircleDown ->
             Heroicons.Solid.arrowCircleDown []
-        Arrowcircleleft ->
+        ArrowCircleLeft ->
             Heroicons.Solid.arrowCircleLeft []
-        Arrowcircleright ->
+        ArrowCircleRight ->
             Heroicons.Solid.arrowCircleRight []
-        Arrowcircleup ->
+        ArrowCircleUp ->
             Heroicons.Solid.arrowCircleUp []
-        Arrowdown ->
+        ArrowDown ->
             Heroicons.Solid.arrowDown []
-        Arrowleft ->
+        ArrowLeft ->
             Heroicons.Solid.arrowLeft []
-        Arrownarrowdown ->
+        ArrowNarrowDown ->
             Heroicons.Solid.arrowNarrowDown []
-        Arrownarrowleft ->
+        ArrowNarrowLeft ->
             Heroicons.Solid.arrowNarrowLeft []
-        Arrownarrowright ->
+        ArrowNarrowRight ->
             Heroicons.Solid.arrowNarrowRight []
-        Arrownarrowup ->
+        ArrowNarrowUp ->
             Heroicons.Solid.arrowNarrowUp []
-        Arrowright ->
+        ArrowRight ->
             Heroicons.Solid.arrowRight []
-        Arrowup ->
+        ArrowUp ->
             Heroicons.Solid.arrowUp []
-        Arrowsexpand ->
+        ArrowsExpand ->
             Heroicons.Solid.arrowsExpand []
-        Atsymbol ->
+        AtSymbol ->
             Heroicons.Solid.atSymbol []
         Backspace ->
             Heroicons.Solid.backspace []
-        Badgecheck ->
+        BadgeCheck ->
             Heroicons.Solid.badgeCheck []
         Ban ->
             Heroicons.Solid.ban []
@@ -280,9 +280,9 @@ getHtml icon =
             Heroicons.Solid.beaker []
         Bell ->
             Heroicons.Solid.bell []
-        Bookopen ->
+        BookOpen ->
             Heroicons.Solid.bookOpen []
-        Bookmarkalt ->
+        BookmarkAlt ->
             Heroicons.Solid.bookmarkAlt []
         Bookmark ->
             Heroicons.Solid.bookmark []
@@ -298,53 +298,53 @@ getHtml icon =
             Heroicons.Solid.camera []
         Cash ->
             Heroicons.Solid.cash []
-        Chartbar ->
+        ChartBar ->
             Heroicons.Solid.chartBar []
-        Chartpie ->
+        ChartPie ->
             Heroicons.Solid.chartPie []
-        Chartsquarebar ->
+        ChartSquareBar ->
             Heroicons.Solid.chartSquareBar []
-        Chatalt2 ->
+        ChatAlt2 ->
             Heroicons.Solid.chatAlt2 []
-        Chatalt ->
+        ChatAlt ->
             Heroicons.Solid.chatAlt []
         Chat ->
             Heroicons.Solid.chat []
-        Checkcircle ->
+        CheckCircle ->
             Heroicons.Solid.checkCircle []
         Check ->
             Heroicons.Solid.check []
-        Chevrondoubledown ->
+        ChevronDoubleDown ->
             Heroicons.Solid.chevronDoubleDown []
-        Chevrondoubleleft ->
+        ChevronDoubleLeft ->
             Heroicons.Solid.chevronDoubleLeft []
-        Chevrondoubleright ->
+        ChevronDoubleRight ->
             Heroicons.Solid.chevronDoubleRight []
-        Chevrondoubleup ->
+        ChevronDoubleUp ->
             Heroicons.Solid.chevronDoubleUp []
-        Chevrondown ->
+        ChevronDown ->
             Heroicons.Solid.chevronDown []
-        Chevronleft ->
+        ChevronLeft ->
             Heroicons.Solid.chevronLeft []
-        Chevronright ->
+        ChevronRight ->
             Heroicons.Solid.chevronRight []
-        Chevronup ->
+        ChevronUp ->
             Heroicons.Solid.chevronUp []
         Chip ->
             Heroicons.Solid.chip []
-        Clipboardcheck ->
+        ClipboardCheck ->
             Heroicons.Solid.clipboardCheck []
-        Clipboardcopy ->
+        ClipboardCopy ->
             Heroicons.Solid.clipboardCopy []
-        Clipboardlist ->
+        ClipboardList ->
             Heroicons.Solid.clipboardList []
         Clipboard ->
             Heroicons.Solid.clipboard []
         Clock ->
             Heroicons.Solid.clock []
-        Clouddownload ->
+        CloudDownload ->
             Heroicons.Solid.cloudDownload []
-        Cloudupload ->
+        CloudUpload ->
             Heroicons.Solid.cloudUpload []
         Cloud ->
             Heroicons.Solid.cloud []
@@ -354,101 +354,101 @@ getHtml icon =
             Heroicons.Solid.cog []
         Collection ->
             Heroicons.Solid.collection []
-        Colorswatch ->
+        ColorSwatch ->
             Heroicons.Solid.colorSwatch []
-        Creditcard ->
+        CreditCard ->
             Heroicons.Solid.creditCard []
-        Cubetransparent ->
+        CubeTransparent ->
             Heroicons.Solid.cubeTransparent []
         Cube ->
             Heroicons.Solid.cube []
-        Currencybangladeshi ->
+        CurrencyBangladeshi ->
             Heroicons.Solid.currencyBangladeshi []
-        Currencydollar ->
+        CurrencyDollar ->
             Heroicons.Solid.currencyDollar []
-        Currencyeuro ->
+        CurrencyEuro ->
             Heroicons.Solid.currencyEuro []
-        Currencypound ->
+        CurrencyPound ->
             Heroicons.Solid.currencyPound []
-        Currencyrupee ->
+        CurrencyRupee ->
             Heroicons.Solid.currencyRupee []
-        Currencyyen ->
+        CurrencyYen ->
             Heroicons.Solid.currencyYen []
-        Cursorclick ->
+        CursorClick ->
             Heroicons.Solid.cursorClick []
         Database ->
             Heroicons.Solid.database []
-        Desktopcomputer ->
+        DesktopComputer ->
             Heroicons.Solid.desktopComputer []
-        Devicemobile ->
+        DeviceMobile ->
             Heroicons.Solid.deviceMobile []
-        Devicetablet ->
+        DeviceTablet ->
             Heroicons.Solid.deviceTablet []
-        Documentadd ->
+        DocumentAdd ->
             Heroicons.Solid.documentAdd []
-        Documentdownload ->
+        DocumentDownload ->
             Heroicons.Solid.documentDownload []
-        Documentduplicate ->
+        DocumentDuplicate ->
             Heroicons.Solid.documentDuplicate []
-        Documentremove ->
+        DocumentRemove ->
             Heroicons.Solid.documentRemove []
-        Documentreport ->
+        DocumentReport ->
             Heroicons.Solid.documentReport []
-        Documentsearch ->
+        DocumentSearch ->
             Heroicons.Solid.documentSearch []
-        Documenttext ->
+        DocumentText ->
             Heroicons.Solid.documentText []
         Document ->
             Heroicons.Solid.document []
-        Dotscirclehorizontal ->
+        DotsCircleHorizontal ->
             Heroicons.Solid.dotsCircleHorizontal []
-        Dotshorizontal ->
+        DotsHorizontal ->
             Heroicons.Solid.dotsHorizontal []
-        Dotsvertical ->
+        DotsVertical ->
             Heroicons.Solid.dotsVertical []
         Download ->
             Heroicons.Solid.download []
         Duplicate ->
             Heroicons.Solid.duplicate []
-        Emojihappy ->
+        EmojiHappy ->
             Heroicons.Solid.emojiHappy []
-        Emojisad ->
+        EmojiSad ->
             Heroicons.Solid.emojiSad []
-        Exclamationcircle ->
+        ExclamationCircle ->
             Heroicons.Solid.exclamationCircle []
         Exclamation ->
             Heroicons.Solid.exclamation []
-        Externallink ->
+        ExternalLink ->
             Heroicons.Solid.externalLink []
-        Eyeoff ->
+        EyeOff ->
             Heroicons.Solid.eyeOff []
         Eye ->
             Heroicons.Solid.eye []
-        Fastforward ->
+        FastForward ->
             Heroicons.Solid.fastForward []
         Film ->
             Heroicons.Solid.film []
         Filter ->
             Heroicons.Solid.filter []
-        Fingerprint ->
+        FingerPrint ->
             Heroicons.Solid.fingerPrint []
         Fire ->
             Heroicons.Solid.fire []
         Flag ->
             Heroicons.Solid.flag []
-        Folderadd ->
+        FolderAdd ->
             Heroicons.Solid.folderAdd []
-        Folderdownload ->
+        FolderDownload ->
             Heroicons.Solid.folderDownload []
-        Folderopen ->
+        FolderOpen ->
             Heroicons.Solid.folderOpen []
-        Folderremove ->
+        FolderRemove ->
             Heroicons.Solid.folderRemove []
         Folder ->
             Heroicons.Solid.folder []
         Gift ->
             Heroicons.Solid.gift []
-        Globealt ->
+        GlobeAlt ->
             Heroicons.Solid.globeAlt []
         Globe ->
             Heroicons.Solid.globe []
@@ -462,79 +462,79 @@ getHtml icon =
             Heroicons.Solid.home []
         Identification ->
             Heroicons.Solid.identification []
-        Inboxin ->
+        InboxIn ->
             Heroicons.Solid.inboxIn []
         Inbox ->
             Heroicons.Solid.inbox []
-        Informationcircle ->
+        InformationCircle ->
             Heroicons.Solid.informationCircle []
         Key ->
             Heroicons.Solid.key []
         Library ->
             Heroicons.Solid.library []
-        Lightbulb ->
+        LightBulb ->
             Heroicons.Solid.lightBulb []
-        Lightningbolt ->
+        LightningBolt ->
             Heroicons.Solid.lightningBolt []
         Link ->
             Heroicons.Solid.link []
-        Locationmarker ->
+        LocationMarker ->
             Heroicons.Solid.locationMarker []
-        Lockclosed ->
+        LockClosed ->
             Heroicons.Solid.lockClosed []
-        Lockopen ->
+        LockOpen ->
             Heroicons.Solid.lockOpen []
         Login ->
             Heroicons.Solid.login []
         Logout ->
             Heroicons.Solid.logout []
-        Mailopen ->
+        MailOpen ->
             Heroicons.Solid.mailOpen []
         Mail ->
             Heroicons.Solid.mail []
         Map ->
             Heroicons.Solid.map []
-        Menualt1 ->
+        MenuAlt1 ->
             Heroicons.Solid.menuAlt1 []
-        Menualt2 ->
+        MenuAlt2 ->
             Heroicons.Solid.menuAlt2 []
-        Menualt3 ->
+        MenuAlt3 ->
             Heroicons.Solid.menuAlt3 []
-        Menualt4 ->
+        MenuAlt4 ->
             Heroicons.Solid.menuAlt4 []
         Menu ->
             Heroicons.Solid.menu []
         Microphone ->
             Heroicons.Solid.microphone []
-        Minuscircle ->
+        MinusCircle ->
             Heroicons.Solid.minusCircle []
-        Minussm ->
+        MinusSm ->
             Heroicons.Solid.minusSm []
         Minus ->
             Heroicons.Solid.minus []
         Moon ->
             Heroicons.Solid.moon []
-        Musicnote ->
+        MusicNote ->
             Heroicons.Solid.musicNote []
         Newspaper ->
             Heroicons.Solid.newspaper []
-        Officebuilding ->
+        OfficeBuilding ->
             Heroicons.Solid.officeBuilding []
-        Paperairplane ->
+        PaperAirplane ->
             Heroicons.Solid.paperAirplane []
-        Paperclip ->
+        PaperClip ->
             Heroicons.Solid.paperClip []
         Pause ->
             Heroicons.Solid.pause []
-        Pencilalt ->
+        PencilAlt ->
             Heroicons.Solid.pencilAlt []
         Pencil ->
             Heroicons.Solid.pencil []
-        Phoneincoming ->
+        PhoneIncoming ->
             Heroicons.Solid.phoneIncoming []
-        Phonemissedcall ->
+        PhoneMissedCall ->
             Heroicons.Solid.phoneMissedCall []
-        Phoneoutgoing ->
+        PhoneOutgoing ->
             Heroicons.Solid.phoneOutgoing []
         Phone ->
             Heroicons.Solid.phone []
@@ -542,15 +542,15 @@ getHtml icon =
             Heroicons.Solid.photograph []
         Play ->
             Heroicons.Solid.play []
-        Pluscircle ->
+        PlusCircle ->
             Heroicons.Solid.plusCircle []
-        Plussm ->
+        PlusSm ->
             Heroicons.Solid.plusSm []
         Plus ->
             Heroicons.Solid.plus []
-        Presentationchartbar ->
+        PresentationChartBar ->
             Heroicons.Solid.presentationChartBar []
-        Presentationchartline ->
+        PresentationChartLine ->
             Heroicons.Solid.presentationChartLine []
         Printer ->
             Heroicons.Solid.printer []
@@ -558,11 +558,11 @@ getHtml icon =
             Heroicons.Solid.puzzle []
         Qrcode ->
             Heroicons.Solid.qrcode []
-        Questionmarkcircle ->
+        QuestionMarkCircle ->
             Heroicons.Solid.questionMarkCircle []
-        Receiptrefund ->
+        ReceiptRefund ->
             Heroicons.Solid.receiptRefund []
-        Receipttax ->
+        ReceiptTax ->
             Heroicons.Solid.receiptTax []
         Refresh ->
             Heroicons.Solid.refresh []
@@ -572,7 +572,7 @@ getHtml icon =
             Heroicons.Solid.rewind []
         Rss ->
             Heroicons.Solid.rss []
-        Saveas ->
+        SaveAs ->
             Heroicons.Solid.saveAs []
         Save ->
             Heroicons.Solid.save []
@@ -580,7 +580,7 @@ getHtml icon =
             Heroicons.Solid.scale []
         Scissors ->
             Heroicons.Solid.scissors []
-        Searchcircle ->
+        SearchCircle ->
             Heroicons.Solid.searchCircle []
         Search ->
             Heroicons.Solid.search []
@@ -590,17 +590,17 @@ getHtml icon =
             Heroicons.Solid.server []
         Share ->
             Heroicons.Solid.share []
-        Shieldcheck ->
+        ShieldCheck ->
             Heroicons.Solid.shieldCheck []
-        Shieldexclamation ->
+        ShieldExclamation ->
             Heroicons.Solid.shieldExclamation []
-        Shoppingbag ->
+        ShoppingBag ->
             Heroicons.Solid.shoppingBag []
-        Shoppingcart ->
+        ShoppingCart ->
             Heroicons.Solid.shoppingCart []
-        Sortascending ->
+        SortAscending ->
             Heroicons.Solid.sortAscending []
-        Sortdescending ->
+        SortDescending ->
             Heroicons.Solid.sortDescending []
         Sparkles ->
             Heroicons.Solid.sparkles []
@@ -608,9 +608,9 @@ getHtml icon =
             Heroicons.Solid.speakerphone []
         Star ->
             Heroicons.Solid.star []
-        Statusoffline ->
+        StatusOffline ->
             Heroicons.Solid.statusOffline []
-        Statusonline ->
+        StatusOnline ->
             Heroicons.Solid.statusOnline []
         Stop ->
             Heroicons.Solid.stop []
@@ -618,9 +618,9 @@ getHtml icon =
             Heroicons.Solid.sun []
         Support ->
             Heroicons.Solid.support []
-        Switchhorizontal ->
+        SwitchHorizontal ->
             Heroicons.Solid.switchHorizontal []
-        Switchvertical ->
+        SwitchVertical ->
             Heroicons.Solid.switchVertical []
         Table ->
             Heroicons.Solid.table []
@@ -630,9 +630,9 @@ getHtml icon =
             Heroicons.Solid.template []
         Terminal ->
             Heroicons.Solid.terminal []
-        Thumbdown ->
+        ThumbDown ->
             Heroicons.Solid.thumbDown []
-        Thumbup ->
+        ThumbUp ->
             Heroicons.Solid.thumbUp []
         Ticket ->
             Heroicons.Solid.ticket []
@@ -640,21 +640,21 @@ getHtml icon =
             Heroicons.Solid.translate []
         Trash ->
             Heroicons.Solid.trash []
-        Trendingdown ->
+        TrendingDown ->
             Heroicons.Solid.trendingDown []
-        Trendingup ->
+        TrendingUp ->
             Heroicons.Solid.trendingUp []
         Truck ->
             Heroicons.Solid.truck []
         Upload ->
             Heroicons.Solid.upload []
-        Useradd ->
+        UserAdd ->
             Heroicons.Solid.userAdd []
-        Usercircle ->
+        UserCircle ->
             Heroicons.Solid.userCircle []
-        Usergroup ->
+        UserGroup ->
             Heroicons.Solid.userGroup []
-        Userremove ->
+        UserRemove ->
             Heroicons.Solid.userRemove []
         User ->
             Heroicons.Solid.user []
@@ -662,27 +662,28 @@ getHtml icon =
             Heroicons.Solid.users []
         Variable ->
             Heroicons.Solid.variable []
-        Videocamera ->
+        VideoCamera ->
             Heroicons.Solid.videoCamera []
-        Viewboards ->
+        ViewBoards ->
             Heroicons.Solid.viewBoards []
-        Viewgridadd ->
+        ViewGridAdd ->
             Heroicons.Solid.viewGridAdd []
-        Viewgrid ->
+        ViewGrid ->
             Heroicons.Solid.viewGrid []
-        Viewlist ->
+        ViewList ->
             Heroicons.Solid.viewList []
-        Volumeoff ->
+        VolumeOff ->
             Heroicons.Solid.volumeOff []
-        Volumeup ->
+        VolumeUp ->
             Heroicons.Solid.volumeUp []
         Wifi ->
             Heroicons.Solid.wifi []
-        Xcircle ->
+        XCircle ->
             Heroicons.Solid.xCircle []
         X ->
             Heroicons.Solid.x []
-        Zoomin ->
+        ZoomIn ->
             Heroicons.Solid.zoomIn []
-        Zoomout ->
+        ZoomOut ->
             Heroicons.Solid.zoomOut []
+
