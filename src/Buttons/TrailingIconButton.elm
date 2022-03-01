@@ -1,22 +1,27 @@
 module Buttons.TrailingIconButton exposing (..)
+
 import Browser
 import Css
 import Css.Global
+import Heroicons.Solid
 import Html.Styled as Styled
 import Html.Styled.Attributes as Attr
-import Heroicons.Solid
 import Tailwind.Utilities as Tw
 import VirtualDom
+
+
 type Size
     = Small
     | Normal
     | Large
     | ExtraLarge
 
+
 type ButtonType
     = Button
     | Submit
     | Reset
+
 
 type alias Model =
     { size : Size
@@ -24,11 +29,13 @@ type alias Model =
     , icon : Icon
     }
 
+
 type Icon
     = EmojiHappy
     | Annotation
     | Plus
     | Check
+
 
 main : Program () Model msg
 main =
@@ -52,6 +59,7 @@ init : () -> ( Model, Cmd msg )
 init _ =
     ( initialModel, Cmd.none )
 
+
 baseButton : List Css.Style
 baseButton =
     [ Tw.inline_flex
@@ -73,12 +81,12 @@ baseButton =
         [ Tw.bg_indigo_700 ]
     ]
 
+
 view : Model -> VirtualDom.Node msg
 view model =
     let
         btnStyle =
             case model.size of
-               
                 Small ->
                     [ Tw.px_3
                     , Tw.py_2
@@ -103,9 +111,9 @@ view model =
                     , Tw.py_3
                     , Tw.text_base
                     ]
+
         svgStyle =
             case model.size of
-               
                 Small ->
                     [ Tw.ml_2
                     , Tw.neg_mr_0_dot_5
@@ -133,14 +141,18 @@ view model =
                     , Tw.h_5
                     , Tw.w_5
                     ]
+
         iconMethod =
             case model.icon of
                 EmojiHappy ->
                     Heroicons.Solid.emojiHappy []
+
                 Annotation ->
                     Heroicons.Solid.annotation []
+
                 Plus ->
                     Heroicons.Solid.plus []
+
                 Check ->
                     Heroicons.Solid.check []
     in
@@ -150,9 +162,11 @@ view model =
             , Attr.css (btnStyle ++ baseButton)
             ]
             [ Styled.text model.text
-            , Styled.span [Attr.css svgStyle ] [Styled.fromUnstyled <| iconMethod]
+            , Styled.span [ Attr.css svgStyle ] [ Styled.fromUnstyled <| iconMethod ]
             , Css.Global.global Tw.globalStyles
             ]
+
+
 update : msg -> Model -> ( Model, Cmd msg )
 update _ model =
     ( model, Cmd.none )

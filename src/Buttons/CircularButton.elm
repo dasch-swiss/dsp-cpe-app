@@ -1,6 +1,7 @@
 module Buttons.CircularButton exposing (..)
 
 import Browser
+import Buttons.Shared exposing (ButtonSize(..))
 import Css
 import Css.Global
 import Heroicons.Solid
@@ -10,7 +11,6 @@ import Html.Styled.Attributes as Attr
 import Svg.Attributes exposing (..)
 import Tailwind.Utilities as Tw
 import VirtualDom
-import Buttons.Shared exposing (ButtonSize(..))
 
 
 main : Program () ( ButtonSize, Html msg ) msg

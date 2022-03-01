@@ -1,9 +1,10 @@
 module Main exposing (..)
 
 import Browser
-import TailwindPlayground exposing (view)
 import Html exposing (Html, div)
 import Html.Attributes exposing (class)
+import TailwindPlayground exposing (view)
+
 
 type alias Model =
     String

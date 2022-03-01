@@ -12,4 +12,3 @@ secondaryButtonStyle =
     , Css.hover
         [ Tw.bg_indigo_200 ]
     ]
-
