@@ -39,7 +39,7 @@ initialModel : Model
 initialModel =
     { size = Normal
     , text = "Default"
-    , icon = Icon.Emojihappy
+    , icon = Icon.EmojiHappy
     }
 
 

@@ -44,7 +44,7 @@ whiteCreated =
                 |> Query.count (Expect.equal 1)
 
 circular : Html msg
-circular  = Button.circular (Large, Icon.Academiccap)
+circular  = Button.circular (Large, Icon.AcademicCap)
 circularCreated : Test
 circularCreated =
     test "One 'Large' sized circular button should be created via the initialModel." <|

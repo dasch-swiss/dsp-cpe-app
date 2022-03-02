@@ -61,23 +61,23 @@ view _ =
                 ]
             , div [ class "preview circular-button" ]
                 [ h3 [ class "header" ] [ text "Circular Buttons" ]
-                , Button.circular ( ExtraSmall, Icon.Arrowright )
+                , Button.circular ( ExtraSmall, Icon.ArrowRight )
                 , Button.circular ( Small, Icon.Annotation )
                 , Button.circular ( Normal, Icon.Plus )
                 , Button.circular ( Large, Icon.Check )
-                , Button.circular ( ExtraLarge, Icon.Emojihappy )
+                , Button.circular ( ExtraLarge, Icon.EmojiHappy )
                 ]
              , div [ class "preview leading-button" ]
                 [ h3 [ class "header" ] [ text "Leading Icon Buttons" ]
                 ,  Button.leadingIcon(LeadingIconButton.Small, "Small", Icon.Annotation)
-                , Button.leadingIcon(LeadingIconButton.Normal, "Normal", Icon.Emojihappy)
+                , Button.leadingIcon(LeadingIconButton.Normal, "Normal", Icon.EmojiHappy)
                 , Button.leadingIcon(LeadingIconButton.Large, "Large", Icon.Plus)
                 , Button.leadingIcon(LeadingIconButton.ExtraLarge, "Extra Large", Icon.Check)
                 ]
              ,  div [ class "preview leading-button" ]
                 [ h3 [ class "header" ] [ text "Trailing Icon Buttons" ]
                 ,  Button.trailingIcon(TrailingIconButton.Small, "Small", Icon.Annotation)
-                , Button.trailingIcon(TrailingIconButton.Normal, "Normal", Icon.Emojihappy)
+                , Button.trailingIcon(TrailingIconButton.Normal, "Normal", Icon.EmojiHappy)
                 , Button.trailingIcon(TrailingIconButton.Large, "Large", Icon.Plus)
                 , Button.trailingIcon(TrailingIconButton.ExtraLarge, "Extra Large", Icon.Check)
                 ] 

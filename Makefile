@@ -42,6 +42,6 @@ help: ## this help
 
 .PHONY: heroicons
 heroicons: ## run the script to update the heroicons library
-	python get-heroicons-list.py
+	get-heroicons-list.sh
 
 .DEFAULT_GOAL := help
