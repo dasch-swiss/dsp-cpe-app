@@ -1,34 +1,42 @@
 module Projects.ListProjects exposing (..)
 
-import Html exposing (Html, a, text, div)
-import Html.Attributes exposing (href)
+import Html exposing (Html, div)
+import Buttons.Button exposing (primaryButton)
+import Buttons.Shared exposing (ButtonSize(..))
+import Browser.Navigation as Nav
+import Html.Styled.Events exposing (onClick)
 
 
 type alias Model =
-    { foo : String }
+    { navKey : Nav.Key }
 
 
 type Msg
-    = NoOp
+    = ClickedPlayground
+    | ClickedBeol
 
 
-init : ( Model, Cmd Msg )
-init =
-    ( { foo = "bar" }, Cmd.none )
+init : Nav.Key -> ( Model, Cmd Msg )
+init navKey =
+    ( { navKey = navKey }, Cmd.none )
 
 
 view : Model -> Html Msg
-view model =
+view _ =
     div []
-    [ a [ href "/project/playground" ] [ text "Playground" ]
-    , a [ href "/project/beol" ] [ text "BEOL" ]
+    [ primaryButton [ onClick ClickedPlayground ] "Playground" Normal
+    , primaryButton [ onClick ClickedBeol ] "Beol" Normal
     ]
     
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
-update _ model =
-    ( model, Cmd.none )
+update : Msg -> Model -> ( Model, Cmd msg )
+update msg model =
+    case msg of
+        ClickedPlayground ->
+            ( model, Nav.pushUrl model.navKey "project/playground")
+        ClickedBeol ->
+            ( model, Nav.pushUrl model.navKey "project/beol" )
 
 
 subscriptions : Model -> Sub msg

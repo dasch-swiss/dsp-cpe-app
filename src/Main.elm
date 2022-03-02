@@ -56,7 +56,7 @@ initCurrentPage ( model, existingCmds ) =
                 Route.Projects ->
                     let
                         ( pageModel, pageCmds ) =
-                            ListProjects.init
+                            ListProjects.init model.navKey
                     in
                     ( ListPage pageModel, Cmd.map ListPageMsg pageCmds )
 
