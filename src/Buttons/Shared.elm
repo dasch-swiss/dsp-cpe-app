@@ -4,7 +4,7 @@ import Css
 import Tailwind.Utilities as Tw
 
 
-type Size
+type ButtonSize
     = ExtraSmall
     | Small
     | Normal
@@ -35,7 +35,7 @@ baseButton =
     ]
 
 
-renderBtnSize : Size -> List Css.Style
+renderBtnSize : ButtonSize -> List Css.Style
 renderBtnSize size =
     case size of
         ExtraSmall ->

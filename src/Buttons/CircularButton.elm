@@ -1,7 +1,7 @@
 module Buttons.CircularButton exposing (..)
 
 import Browser
-import Buttons.Shared exposing (Size(..))
+import Buttons.Shared exposing (ButtonSize(..))
 import Css
 import Css.Global
 import Heroicons.Solid
@@ -13,7 +13,7 @@ import Tailwind.Utilities as Tw
 import VirtualDom
 
 
-main : Program () ( Size, Html msg ) msg
+main : Program () ( ButtonSize, Html msg ) msg
 main =
     Browser.element
         { init = init
@@ -23,12 +23,12 @@ main =
         }
 
 
-initialModel : ( Size, Html msg )
+initialModel : ( ButtonSize, Html msg )
 initialModel =
     ( Normal, Heroicons.Solid.plus [] )
 
 
-init : () -> ( ( Size, Html msg ), Cmd msg )
+init : () -> ( ( ButtonSize, Html msg ), Cmd msg )
 init _ =
     ( initialModel, Cmd.none )
 
@@ -55,7 +55,7 @@ circularButtonStyle =
     ]
 
 
-view : ( Size, Html msg ) -> VirtualDom.Node msg
+view : ( ButtonSize, Html msg ) -> VirtualDom.Node msg
 view ( size, icon ) =
     let
         btnSize =
@@ -97,11 +97,11 @@ view ( size, icon ) =
             ]
 
 
-update : msg -> ( Size, Html msg ) -> ( ( Size, Html msg ), Cmd msg )
+update : msg -> ( ButtonSize, Html msg ) -> ( ( ButtonSize, Html msg ), Cmd msg )
 update _ ( size, text ) =
     ( ( size, text ), Cmd.none )
 
 
-subscriptions : ( Size, Html msg ) -> Sub msg
+subscriptions : ( ButtonSize, Html msg ) -> Sub msg
 subscriptions _ =
     Sub.none
