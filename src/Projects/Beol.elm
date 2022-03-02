@@ -1,11 +1,11 @@
-module Projects.ListProjects exposing (..)
+module Projects.Beol exposing (..)
 
-import Html exposing (Html, a, text, div)
+import Html exposing (Html, a, text)
 import Html.Attributes exposing (href)
 
 
 type alias Model =
-    { foo : String }
+    { text : String }
 
 
 type Msg
@@ -14,16 +14,12 @@ type Msg
 
 init : ( Model, Cmd Msg )
 init =
-    ( { foo = "bar" }, Cmd.none )
+    ( { text = "BEOL" }, Cmd.none )
 
 
 view : Model -> Html Msg
 view model =
-    div []
-    [ a [ href "/project/playground" ] [ text "Playground" ]
-    , a [ href "/project/beol" ] [ text "BEOL" ]
-    ]
-    
+    text model.text
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )

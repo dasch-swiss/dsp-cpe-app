@@ -5219,6 +5219,12 @@ var $elm$core$Task$perform = F2(
 	});
 var $elm$browser$Browser$application = _Browser_application;
 var $author$project$Main$NotFoundPage = {$: 'NotFoundPage'};
+var $author$project$Main$BeolPage = function (a) {
+	return {$: 'BeolPage', a: a};
+};
+var $author$project$Main$BeolPageMsg = function (a) {
+	return {$: 'BeolPageMsg', a: a};
+};
 var $author$project$Main$ListPage = function (a) {
 	return {$: 'ListPage', a: a};
 };
@@ -5233,11 +5239,14 @@ var $author$project$Main$PlaygroundPageMsg = function (a) {
 };
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
+var $author$project$Projects$Beol$init = _Utils_Tuple2(
+	{text: 'BEOL'},
+	$elm$core$Platform$Cmd$none);
 var $author$project$Projects$ListProjects$init = _Utils_Tuple2(
 	{foo: 'bar'},
 	$elm$core$Platform$Cmd$none);
 var $author$project$Projects$TailwindPlayground$init = _Utils_Tuple2(
-	{foo: 'bar'},
+	{text: 'playground'},
 	$elm$core$Platform$Cmd$none);
 var $elm$core$Platform$Cmd$map = _Platform_map;
 var $author$project$Main$initCurrentPage = function (_v0) {
@@ -5255,13 +5264,20 @@ var $author$project$Main$initCurrentPage = function (_v0) {
 				return _Utils_Tuple2(
 					$author$project$Main$ListPage(pageModel),
 					A2($elm$core$Platform$Cmd$map, $author$project$Main$ListPageMsg, pageCmds));
-			default:
+			case 'Playground':
 				var _v4 = $author$project$Projects$TailwindPlayground$init;
 				var pageModel = _v4.a;
 				var pageCmds = _v4.b;
 				return _Utils_Tuple2(
 					$author$project$Main$PlaygroundPage(pageModel),
 					A2($elm$core$Platform$Cmd$map, $author$project$Main$PlaygroundPageMsg, pageCmds));
+			default:
+				var _v5 = $author$project$Projects$Beol$init;
+				var pageModel = _v5.a;
+				var pageCmds = _v5.b;
+				return _Utils_Tuple2(
+					$author$project$Main$BeolPage(pageModel),
+					A2($elm$core$Platform$Cmd$map, $author$project$Main$BeolPageMsg, pageCmds));
 		}
 	}();
 	var currentPage = _v1.a;
@@ -5275,6 +5291,7 @@ var $author$project$Main$initCurrentPage = function (_v0) {
 				[existingCmds, mappedPageCmds])));
 };
 var $author$project$Route$NotFound = {$: 'NotFound'};
+var $author$project$Route$Beol = {$: 'Beol'};
 var $author$project$Route$Playground = {$: 'Playground'};
 var $author$project$Route$Projects = {$: 'Projects'};
 var $elm$url$Url$Parser$Parser = function (a) {
@@ -5401,7 +5418,14 @@ var $author$project$Route$matchRoute = $elm$url$Url$Parser$oneOf(
 			A2(
 				$elm$url$Url$Parser$slash,
 				$elm$url$Url$Parser$s('project'),
-				$elm$url$Url$Parser$s('playground')))
+				$elm$url$Url$Parser$s('playground'))),
+			A2(
+			$elm$url$Url$Parser$map,
+			$author$project$Route$Beol,
+			A2(
+				$elm$url$Url$Parser$slash,
+				$elm$url$Url$Parser$s('project'),
+				$elm$url$Url$Parser$s('beol')))
 		]));
 var $elm$url$Url$Parser$getFirstMatch = function (states) {
 	getFirstMatch:
@@ -6170,7 +6194,11 @@ var $author$project$Main$notFoundView = A2(
 		[
 			$elm$html$Html$text('Page not found')
 		]));
+var $author$project$Projects$Beol$view = function (model) {
+	return $elm$html$Html$text(model.text);
+};
 var $elm$html$Html$a = _VirtualDom_node('a');
+var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -6187,14 +6215,30 @@ var $elm$html$Html$Attributes$href = function (url) {
 };
 var $author$project$Projects$ListProjects$view = function (model) {
 	return A2(
-		$elm$html$Html$a,
+		$elm$html$Html$div,
+		_List_Nil,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$href('/project/playground')
-			]),
-		_List_fromArray(
-			[
-				$elm$html$Html$text('Playground')
+				A2(
+				$elm$html$Html$a,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$href('/project/playground')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text('Playground')
+					])),
+				A2(
+				$elm$html$Html$a,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$href('/project/beol')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text('BEOL')
+					]))
 			]));
 };
 var $author$project$Buttons$LeadingIconButton$Annotation = {$: 'Annotation'};
@@ -9251,7 +9295,6 @@ var $author$project$Buttons$Button$circular = function (_v0) {
 		_Utils_Tuple2(size, icon));
 };
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
-var $elm$html$Html$div = _VirtualDom_node('div');
 var $jasonliang_dev$elm_heroicons$Heroicons$Solid$emojiHappy = function (attrs) {
 	return A2(
 		$elm$svg$Svg$svg,
@@ -10004,12 +10047,18 @@ var $author$project$Main$currentView = function (model) {
 				$elm$html$Html$map,
 				$author$project$Main$ListPageMsg,
 				$author$project$Projects$ListProjects$view(pageModel));
-		default:
+		case 'PlaygroundPage':
 			var pageModel = _v0.a;
 			return A2(
 				$elm$html$Html$map,
 				$author$project$Main$PlaygroundPageMsg,
 				$author$project$Projects$TailwindPlayground$view(pageModel));
+		default:
+			var pageModel = _v0.a;
+			return A2(
+				$elm$html$Html$map,
+				$author$project$Main$BeolPageMsg,
+				$author$project$Projects$Beol$view(pageModel));
 	}
 };
 var $author$project$Main$view = function (model) {

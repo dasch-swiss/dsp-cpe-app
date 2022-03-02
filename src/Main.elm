@@ -6,6 +6,7 @@ import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Projects.ListProjects as ListProjects exposing (..)
 import Projects.TailwindPlayground as Playground exposing (view)
+import Projects.Beol as Beol exposing (view)
 import Route exposing (Route)
 import Url exposing (Url)
 
@@ -21,11 +22,13 @@ type Page
     = NotFoundPage
     | ListPage ListProjects.Model
     | PlaygroundPage Playground.Model
+    | BeolPage Beol.Model
 
 
 type Msg
     = ListPageMsg ListProjects.Msg
     | PlaygroundPageMsg Playground.Msg
+    | BeolPageMsg Beol.Msg
     | LinkClicked UrlRequest
     | UrlChanged Url
 
@@ -63,6 +66,13 @@ initCurrentPage ( model, existingCmds ) =
                             Playground.init
                     in
                     ( PlaygroundPage pageModel, Cmd.map PlaygroundPageMsg pageCmds )
+
+                Route.Beol ->
+                    let
+                        ( pageModel, pageCmds ) =
+                            Beol.init
+                    in
+                    ( BeolPage pageModel, Cmd.map BeolPageMsg pageCmds )
     in
     ( { model | page = currentPage }
     , Cmd.batch [ existingCmds, mappedPageCmds ]
@@ -89,6 +99,10 @@ currentView model =
         PlaygroundPage pageModel ->
             Playground.view pageModel
                 |> Html.map PlaygroundPageMsg
+
+        BeolPage pageModel ->
+            Beol.view pageModel
+                |> Html.map BeolPageMsg
 
 
 notFoundView : Html msg

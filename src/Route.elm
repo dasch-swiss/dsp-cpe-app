@@ -7,6 +7,7 @@ type Route
     = NotFound
     | Projects
     | Playground
+    | Beol
 
 parseUrl : Url -> Route
 parseUrl url =
@@ -19,7 +20,8 @@ parseUrl url =
 matchRoute : Parser (Route -> a) a
 matchRoute =
     oneOf
-    [ map Projects top
-    , map Projects (s "projects")
-    , map Playground (s "project" </> s "playground")
+    [ map Projects top -- /
+    , map Projects (s "projects") -- /projects
+    , map Playground (s "project" </> s "playground") -- /project/playground
+    , map Beol (s "project" </> s "beol") -- /projects/beol
     ]

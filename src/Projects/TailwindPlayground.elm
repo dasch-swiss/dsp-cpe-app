@@ -12,7 +12,7 @@ import Buttons.LeadingIconButton as LeadingIconButton
 import Buttons.TrailingIconButton as TrailingIconButton
 
 type alias Model =
-    { foo : String }
+    { text : String }
 
 type Msg
     = NoOp
@@ -29,7 +29,7 @@ type Msg
 
 init : ( Model, Cmd Msg )
 init =
-    ( { foo = "bar" }, Cmd.none )
+    ( { text = "playground" }, Cmd.none )
 
 
 view : Model -> Html Msg
