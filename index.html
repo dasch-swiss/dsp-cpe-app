@@ -9494,6 +9494,7 @@ var $author$project$Buttons$Button$leadingIcon = function (_v0) {
 	return $author$project$Buttons$LeadingIconButton$view(
 		{icon: icon, size: size, text: text});
 };
+var $author$project$Buttons$BasicButtons$BasicButton$Primary = {$: 'Primary'};
 var $author$project$Buttons$Shared$baseButton = _List_fromArray(
 	[
 		$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$inline_flex,
@@ -9506,17 +9507,85 @@ var $author$project$Buttons$Shared$baseButton = _List_fromArray(
 		_List_fromArray(
 			[$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$outline_none, $matheus23$elm_default_tailwind_modules$Tailwind$Utilities$ring_2, $matheus23$elm_default_tailwind_modules$Tailwind$Utilities$ring_offset_2, $matheus23$elm_default_tailwind_modules$Tailwind$Utilities$ring_indigo_500]))
 	]);
-var $author$project$Buttons$PrimaryButton$primaryButtonStyle = _Utils_ap(
+var $author$project$Buttons$BasicButtons$PrimaryButton$primaryButtonStyle = _List_fromArray(
+	[
+		$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$text_white,
+		$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$bg_indigo_600,
+		$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$border_transparent,
+		$rtfeldman$elm_css$Css$hover(
+		_List_fromArray(
+			[$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$bg_indigo_700]))
+	]);
+var $matheus23$elm_default_tailwind_modules$Tailwind$Utilities$bg_indigo_100 = $rtfeldman$elm_css$Css$batch(
 	_List_fromArray(
 		[
-			$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$text_white,
-			$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$bg_indigo_600,
-			$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$border_transparent,
-			$rtfeldman$elm_css$Css$hover(
-			_List_fromArray(
-				[$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$bg_indigo_700]))
-		]),
-	$author$project$Buttons$Shared$baseButton);
+			A2($rtfeldman$elm_css$Css$property, '--tw-bg-opacity', '1'),
+			A2($rtfeldman$elm_css$Css$property, 'background-color', 'rgba(224, 231, 255, var(--tw-bg-opacity))')
+		]));
+var $matheus23$elm_default_tailwind_modules$Tailwind$Utilities$bg_indigo_200 = $rtfeldman$elm_css$Css$batch(
+	_List_fromArray(
+		[
+			A2($rtfeldman$elm_css$Css$property, '--tw-bg-opacity', '1'),
+			A2($rtfeldman$elm_css$Css$property, 'background-color', 'rgba(199, 210, 254, var(--tw-bg-opacity))')
+		]));
+var $matheus23$elm_default_tailwind_modules$Tailwind$Utilities$text_indigo_700 = $rtfeldman$elm_css$Css$batch(
+	_List_fromArray(
+		[
+			A2($rtfeldman$elm_css$Css$property, '--tw-text-opacity', '1'),
+			A2($rtfeldman$elm_css$Css$property, 'color', 'rgba(67, 56, 202, var(--tw-text-opacity))')
+		]));
+var $author$project$Buttons$BasicButtons$SecondaryButton$secondaryButtonStyle = _List_fromArray(
+	[
+		$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$text_indigo_700,
+		$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$bg_indigo_100,
+		$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$border_transparent,
+		$rtfeldman$elm_css$Css$hover(
+		_List_fromArray(
+			[$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$bg_indigo_200]))
+	]);
+var $matheus23$elm_default_tailwind_modules$Tailwind$Utilities$bg_gray_50 = $rtfeldman$elm_css$Css$batch(
+	_List_fromArray(
+		[
+			A2($rtfeldman$elm_css$Css$property, '--tw-bg-opacity', '1'),
+			A2($rtfeldman$elm_css$Css$property, 'background-color', 'rgba(249, 250, 251, var(--tw-bg-opacity))')
+		]));
+var $matheus23$elm_default_tailwind_modules$Tailwind$Utilities$bg_white = $rtfeldman$elm_css$Css$batch(
+	_List_fromArray(
+		[
+			A2($rtfeldman$elm_css$Css$property, '--tw-bg-opacity', '1'),
+			A2($rtfeldman$elm_css$Css$property, 'background-color', 'rgba(255, 255, 255, var(--tw-bg-opacity))')
+		]));
+var $matheus23$elm_default_tailwind_modules$Tailwind$Utilities$border_gray_300 = $rtfeldman$elm_css$Css$batch(
+	_List_fromArray(
+		[
+			A2($rtfeldman$elm_css$Css$property, '--tw-border-opacity', '1'),
+			A2($rtfeldman$elm_css$Css$property, 'border-color', 'rgba(209, 213, 219, var(--tw-border-opacity))')
+		]));
+var $matheus23$elm_default_tailwind_modules$Tailwind$Utilities$text_gray_700 = $rtfeldman$elm_css$Css$batch(
+	_List_fromArray(
+		[
+			A2($rtfeldman$elm_css$Css$property, '--tw-text-opacity', '1'),
+			A2($rtfeldman$elm_css$Css$property, 'color', 'rgba(55, 65, 81, var(--tw-text-opacity))')
+		]));
+var $author$project$Buttons$BasicButtons$WhiteButton$whiteButtonStyle = _List_fromArray(
+	[
+		$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$text_gray_700,
+		$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$bg_white,
+		$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$border_gray_300,
+		$rtfeldman$elm_css$Css$hover(
+		_List_fromArray(
+			[$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$bg_gray_50]))
+	]);
+var $author$project$Buttons$BasicButtons$BasicButton$getVariant = function (variant) {
+	switch (variant.$) {
+		case 'Primary':
+			return $author$project$Buttons$BasicButtons$PrimaryButton$primaryButtonStyle;
+		case 'Secondary':
+			return $author$project$Buttons$BasicButtons$SecondaryButton$secondaryButtonStyle;
+		default:
+			return $author$project$Buttons$BasicButtons$WhiteButton$whiteButtonStyle;
+	}
+};
 var $matheus23$elm_default_tailwind_modules$Tailwind$Utilities$px_2_dot_5 = $rtfeldman$elm_css$Css$batch(
 	_List_fromArray(
 		[
@@ -9554,87 +9623,42 @@ var $author$project$Buttons$Shared$renderBtnSize = function (size) {
 				[$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$px_6, $matheus23$elm_default_tailwind_modules$Tailwind$Utilities$py_3, $matheus23$elm_default_tailwind_modules$Tailwind$Utilities$text_base]);
 	}
 };
-var $author$project$Buttons$PrimaryButton$view = function (_v0) {
-	var size = _v0.a;
-	var text = _v0.b;
+var $author$project$Buttons$BasicButtons$BasicButton$view = function (b) {
 	return $rtfeldman$elm_css$Html$Styled$toUnstyled(
 		A2(
 			$rtfeldman$elm_css$Html$Styled$button,
+			_Utils_ap(
+				b.attrs,
+				_List_fromArray(
+					[
+						$rtfeldman$elm_css$Html$Styled$Attributes$type_('button'),
+						$rtfeldman$elm_css$Html$Styled$Attributes$css(
+						_Utils_ap(
+							$author$project$Buttons$Shared$renderBtnSize(b.size),
+							_Utils_ap(
+								$author$project$Buttons$BasicButtons$BasicButton$getVariant(b.variant),
+								$author$project$Buttons$Shared$baseButton)))
+					])),
 			_List_fromArray(
 				[
-					$rtfeldman$elm_css$Html$Styled$Attributes$type_('button'),
-					$rtfeldman$elm_css$Html$Styled$Attributes$css(
-					_Utils_ap(
-						$author$project$Buttons$Shared$renderBtnSize(size),
-						$author$project$Buttons$PrimaryButton$primaryButtonStyle))
-				]),
-			_List_fromArray(
-				[
-					$rtfeldman$elm_css$Html$Styled$text(text),
+					$rtfeldman$elm_css$Html$Styled$text(b.text),
 					$rtfeldman$elm_css$Css$Global$global($matheus23$elm_default_tailwind_modules$Tailwind$Utilities$globalStyles)
 				])));
 };
-var $author$project$Buttons$Button$primary = function (_v0) {
-	var size = _v0.a;
-	var text = _v0.b;
-	return $author$project$Buttons$PrimaryButton$view(
-		_Utils_Tuple2(size, text));
-};
-var $matheus23$elm_default_tailwind_modules$Tailwind$Utilities$bg_indigo_100 = $rtfeldman$elm_css$Css$batch(
-	_List_fromArray(
-		[
-			A2($rtfeldman$elm_css$Css$property, '--tw-bg-opacity', '1'),
-			A2($rtfeldman$elm_css$Css$property, 'background-color', 'rgba(224, 231, 255, var(--tw-bg-opacity))')
-		]));
-var $matheus23$elm_default_tailwind_modules$Tailwind$Utilities$bg_indigo_200 = $rtfeldman$elm_css$Css$batch(
-	_List_fromArray(
-		[
-			A2($rtfeldman$elm_css$Css$property, '--tw-bg-opacity', '1'),
-			A2($rtfeldman$elm_css$Css$property, 'background-color', 'rgba(199, 210, 254, var(--tw-bg-opacity))')
-		]));
-var $matheus23$elm_default_tailwind_modules$Tailwind$Utilities$text_indigo_700 = $rtfeldman$elm_css$Css$batch(
-	_List_fromArray(
-		[
-			A2($rtfeldman$elm_css$Css$property, '--tw-text-opacity', '1'),
-			A2($rtfeldman$elm_css$Css$property, 'color', 'rgba(67, 56, 202, var(--tw-text-opacity))')
-		]));
-var $author$project$Buttons$SecondaryButton$secondaryButtonStyle = _Utils_ap(
-	_List_fromArray(
-		[
-			$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$text_indigo_700,
-			$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$bg_indigo_100,
-			$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$border_transparent,
-			$rtfeldman$elm_css$Css$hover(
-			_List_fromArray(
-				[$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$bg_indigo_200]))
-		]),
-	$author$project$Buttons$Shared$baseButton);
-var $author$project$Buttons$SecondaryButton$view = function (_v0) {
-	var size = _v0.a;
-	var text = _v0.b;
-	return $rtfeldman$elm_css$Html$Styled$toUnstyled(
-		A2(
-			$rtfeldman$elm_css$Html$Styled$button,
-			_List_fromArray(
-				[
-					$rtfeldman$elm_css$Html$Styled$Attributes$type_('button'),
-					$rtfeldman$elm_css$Html$Styled$Attributes$css(
-					_Utils_ap(
-						$author$project$Buttons$Shared$renderBtnSize(size),
-						$author$project$Buttons$SecondaryButton$secondaryButtonStyle))
-				]),
-			_List_fromArray(
-				[
-					$rtfeldman$elm_css$Html$Styled$text(text),
-					$rtfeldman$elm_css$Css$Global$global($matheus23$elm_default_tailwind_modules$Tailwind$Utilities$globalStyles)
-				])));
-};
-var $author$project$Buttons$Button$secondary = function (_v0) {
-	var size = _v0.a;
-	var text = _v0.b;
-	return $author$project$Buttons$SecondaryButton$view(
-		_Utils_Tuple2(size, text));
-};
+var $author$project$Buttons$BasicButtons$BasicButton$basicButton = F4(
+	function (attributes, text, size, variant) {
+		return $author$project$Buttons$BasicButtons$BasicButton$view(
+			{attrs: attributes, size: size, text: text, variant: variant});
+	});
+var $author$project$Buttons$Button$primaryButton = F3(
+	function (attrs, txt, size) {
+		return A4($author$project$Buttons$BasicButtons$BasicButton$basicButton, attrs, txt, size, $author$project$Buttons$BasicButtons$BasicButton$Primary);
+	});
+var $author$project$Buttons$BasicButtons$BasicButton$Secondary = {$: 'Secondary'};
+var $author$project$Buttons$Button$secondaryButton = F3(
+	function (attrs, txt, size) {
+		return A4($author$project$Buttons$BasicButtons$BasicButton$basicButton, attrs, txt, size, $author$project$Buttons$BasicButtons$BasicButton$Secondary);
+	});
 var $author$project$Buttons$TrailingIconButton$baseButton = _List_fromArray(
 	[
 		$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$inline_flex,
@@ -9737,67 +9761,11 @@ var $author$project$Buttons$Button$trailingIcon = function (_v0) {
 	return $author$project$Buttons$TrailingIconButton$view(
 		{icon: icon, size: size, text: text});
 };
-var $matheus23$elm_default_tailwind_modules$Tailwind$Utilities$bg_gray_50 = $rtfeldman$elm_css$Css$batch(
-	_List_fromArray(
-		[
-			A2($rtfeldman$elm_css$Css$property, '--tw-bg-opacity', '1'),
-			A2($rtfeldman$elm_css$Css$property, 'background-color', 'rgba(249, 250, 251, var(--tw-bg-opacity))')
-		]));
-var $matheus23$elm_default_tailwind_modules$Tailwind$Utilities$bg_white = $rtfeldman$elm_css$Css$batch(
-	_List_fromArray(
-		[
-			A2($rtfeldman$elm_css$Css$property, '--tw-bg-opacity', '1'),
-			A2($rtfeldman$elm_css$Css$property, 'background-color', 'rgba(255, 255, 255, var(--tw-bg-opacity))')
-		]));
-var $matheus23$elm_default_tailwind_modules$Tailwind$Utilities$border_gray_300 = $rtfeldman$elm_css$Css$batch(
-	_List_fromArray(
-		[
-			A2($rtfeldman$elm_css$Css$property, '--tw-border-opacity', '1'),
-			A2($rtfeldman$elm_css$Css$property, 'border-color', 'rgba(209, 213, 219, var(--tw-border-opacity))')
-		]));
-var $matheus23$elm_default_tailwind_modules$Tailwind$Utilities$text_gray_700 = $rtfeldman$elm_css$Css$batch(
-	_List_fromArray(
-		[
-			A2($rtfeldman$elm_css$Css$property, '--tw-text-opacity', '1'),
-			A2($rtfeldman$elm_css$Css$property, 'color', 'rgba(55, 65, 81, var(--tw-text-opacity))')
-		]));
-var $author$project$Buttons$WhiteButton$whiteButtonStyle = _Utils_ap(
-	_List_fromArray(
-		[
-			$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$text_gray_700,
-			$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$bg_white,
-			$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$border_gray_300,
-			$rtfeldman$elm_css$Css$hover(
-			_List_fromArray(
-				[$matheus23$elm_default_tailwind_modules$Tailwind$Utilities$bg_gray_50]))
-		]),
-	$author$project$Buttons$Shared$baseButton);
-var $author$project$Buttons$WhiteButton$view = function (_v0) {
-	var size = _v0.a;
-	var text = _v0.b;
-	return $rtfeldman$elm_css$Html$Styled$toUnstyled(
-		A2(
-			$rtfeldman$elm_css$Html$Styled$button,
-			_List_fromArray(
-				[
-					$rtfeldman$elm_css$Html$Styled$Attributes$type_('button'),
-					$rtfeldman$elm_css$Html$Styled$Attributes$css(
-					_Utils_ap(
-						$author$project$Buttons$Shared$renderBtnSize(size),
-						$author$project$Buttons$WhiteButton$whiteButtonStyle))
-				]),
-			_List_fromArray(
-				[
-					$rtfeldman$elm_css$Html$Styled$text(text),
-					$rtfeldman$elm_css$Css$Global$global($matheus23$elm_default_tailwind_modules$Tailwind$Utilities$globalStyles)
-				])));
-};
-var $author$project$Buttons$Button$white = function (_v0) {
-	var size = _v0.a;
-	var text = _v0.b;
-	return $author$project$Buttons$WhiteButton$view(
-		_Utils_Tuple2(size, text));
-};
+var $author$project$Buttons$BasicButtons$BasicButton$White = {$: 'White'};
+var $author$project$Buttons$Button$whiteButton = F3(
+	function (attrs, txt, size) {
+		return A4($author$project$Buttons$BasicButtons$BasicButton$basicButton, attrs, txt, size, $author$project$Buttons$BasicButtons$BasicButton$White);
+	});
 var $author$project$Projects$TailwindPlayground$view = function (_v0) {
 	return A2(
 		$elm$html$Html$div,
@@ -9833,16 +9801,11 @@ var $author$project$Projects$TailwindPlayground$view = function (_v0) {
 									[
 										$elm$html$Html$text('Primary Buttons')
 									])),
-								$author$project$Buttons$Button$primary(
-								_Utils_Tuple2($author$project$Buttons$Shared$ExtraSmall, 'Extra small')),
-								$author$project$Buttons$Button$primary(
-								_Utils_Tuple2($author$project$Buttons$Shared$Small, 'Extra small')),
-								$author$project$Buttons$Button$primary(
-								_Utils_Tuple2($author$project$Buttons$Shared$Normal, 'Extra small')),
-								$author$project$Buttons$Button$primary(
-								_Utils_Tuple2($author$project$Buttons$Shared$Large, 'Extra small')),
-								$author$project$Buttons$Button$primary(
-								_Utils_Tuple2($author$project$Buttons$Shared$ExtraLarge, 'Extra small'))
+								A3($author$project$Buttons$Button$primaryButton, _List_Nil, 'Extra small', $author$project$Buttons$Shared$ExtraSmall),
+								A3($author$project$Buttons$Button$primaryButton, _List_Nil, 'Small', $author$project$Buttons$Shared$Small),
+								A3($author$project$Buttons$Button$primaryButton, _List_Nil, 'Normal', $author$project$Buttons$Shared$Normal),
+								A3($author$project$Buttons$Button$primaryButton, _List_Nil, 'Large', $author$project$Buttons$Shared$Large),
+								A3($author$project$Buttons$Button$primaryButton, _List_Nil, 'Extra large', $author$project$Buttons$Shared$ExtraLarge)
 							])),
 						A2(
 						$elm$html$Html$div,
@@ -9862,16 +9825,11 @@ var $author$project$Projects$TailwindPlayground$view = function (_v0) {
 									[
 										$elm$html$Html$text('Secondary Buttons')
 									])),
-								$author$project$Buttons$Button$secondary(
-								_Utils_Tuple2($author$project$Buttons$Shared$ExtraSmall, 'Extra small')),
-								$author$project$Buttons$Button$secondary(
-								_Utils_Tuple2($author$project$Buttons$Shared$Small, 'Small')),
-								$author$project$Buttons$Button$secondary(
-								_Utils_Tuple2($author$project$Buttons$Shared$Normal, 'Normal')),
-								$author$project$Buttons$Button$secondary(
-								_Utils_Tuple2($author$project$Buttons$Shared$Large, 'Large')),
-								$author$project$Buttons$Button$secondary(
-								_Utils_Tuple2($author$project$Buttons$Shared$ExtraLarge, 'Extra large'))
+								A3($author$project$Buttons$Button$secondaryButton, _List_Nil, 'Extra small', $author$project$Buttons$Shared$ExtraSmall),
+								A3($author$project$Buttons$Button$secondaryButton, _List_Nil, 'Small', $author$project$Buttons$Shared$Small),
+								A3($author$project$Buttons$Button$secondaryButton, _List_Nil, 'Normal', $author$project$Buttons$Shared$Normal),
+								A3($author$project$Buttons$Button$secondaryButton, _List_Nil, 'Large', $author$project$Buttons$Shared$Large),
+								A3($author$project$Buttons$Button$secondaryButton, _List_Nil, 'Extra large', $author$project$Buttons$Shared$ExtraLarge)
 							])),
 						A2(
 						$elm$html$Html$div,
@@ -9891,16 +9849,11 @@ var $author$project$Projects$TailwindPlayground$view = function (_v0) {
 									[
 										$elm$html$Html$text('White Buttons')
 									])),
-								$author$project$Buttons$Button$white(
-								_Utils_Tuple2($author$project$Buttons$Shared$ExtraSmall, 'Extra small')),
-								$author$project$Buttons$Button$white(
-								_Utils_Tuple2($author$project$Buttons$Shared$Small, 'Small')),
-								$author$project$Buttons$Button$white(
-								_Utils_Tuple2($author$project$Buttons$Shared$Normal, 'Normal')),
-								$author$project$Buttons$Button$white(
-								_Utils_Tuple2($author$project$Buttons$Shared$Large, 'Large')),
-								$author$project$Buttons$Button$white(
-								_Utils_Tuple2($author$project$Buttons$Shared$ExtraLarge, 'Extra large'))
+								A3($author$project$Buttons$Button$whiteButton, _List_Nil, 'Extra small', $author$project$Buttons$Shared$ExtraSmall),
+								A3($author$project$Buttons$Button$whiteButton, _List_Nil, 'Small', $author$project$Buttons$Shared$Small),
+								A3($author$project$Buttons$Button$whiteButton, _List_Nil, 'Normal', $author$project$Buttons$Shared$Normal),
+								A3($author$project$Buttons$Button$whiteButton, _List_Nil, 'Large', $author$project$Buttons$Shared$Large),
+								A3($author$project$Buttons$Button$whiteButton, _List_Nil, 'Extra large', $author$project$Buttons$Shared$ExtraLarge)
 							])),
 						A2(
 						$elm$html$Html$div,
