@@ -19,7 +19,7 @@ init =
 
 view : Model -> Html Msg
 view model =
-    a [ href "/playground" ] [ text "Playground" ]
+    a [ href "/project/playground" ] [ text "Playground" ]
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )

@@ -5,7 +5,7 @@ import Browser.Navigation as Nav
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Projects.ListProjects as ListProjects exposing (..)
-import Projects.TailwindPlayground exposing (view)
+import Projects.TailwindPlayground as Playground exposing (view)
 import Route exposing (Route)
 import Url exposing (Url)
 
@@ -20,10 +20,12 @@ type alias Model =
 type Page
     = NotFoundPage
     | ListPage ListProjects.Model
+    | PlaygroundPage Playground.Model
 
 
 type Msg
     = ListPageMsg ListProjects.Msg
+    | PlaygroundPageMsg Playground.Msg
     | LinkClicked UrlRequest
     | UrlChanged Url
 
@@ -54,6 +56,13 @@ initCurrentPage ( model, existingCmds ) =
                             ListProjects.init
                     in
                     ( ListPage pageModel, Cmd.map ListPageMsg pageCmds )
+
+                Route.Playground ->
+                    let
+                        ( pageModel, pageCmds ) =
+                            Playground.init
+                    in
+                    ( PlaygroundPage pageModel, Cmd.map PlaygroundPageMsg pageCmds )
     in
     ( { model | page = currentPage }
     , Cmd.batch [ existingCmds, mappedPageCmds ]
@@ -76,6 +85,10 @@ currentView model =
         ListPage pageModel ->
             ListProjects.view pageModel
                 |> Html.map ListPageMsg
+
+        PlaygroundPage pageModel ->
+            Playground.view pageModel
+                |> Html.map PlaygroundPageMsg
 
 
 notFoundView : Html msg

@@ -10,26 +10,29 @@ import Avatars.Avatar exposing (circular)
 import Avatars.CircularAvatar as CircularAvatar
 import Buttons.LeadingIconButton as LeadingIconButton
 import Buttons.TrailingIconButton as TrailingIconButton
+
 type alias Model =
-    String
+    { foo : String }
+
+type Msg
+    = NoOp
+
+-- main : Program () Model Msg
+-- main =
+--     Browser.element
+--         { init = init
+--         , view = view
+--         , update = update
+--         , subscriptions = subscriptions
+--         }
 
 
-main : Program () Model msg
-main =
-    Browser.element
-        { init = init
-        , view = view
-        , update = update
-        , subscriptions = subscriptions
-        }
+init : ( Model, Cmd Msg )
+init =
+    ( { foo = "bar" }, Cmd.none )
 
 
-init : () -> ( Model, Cmd msg )
-init _ =
-    ( "", Cmd.none )
-
-
-view : Model -> Html msg
+view : Model -> Html Msg
 view _ =
 
     div [class "playground"][
@@ -105,12 +108,7 @@ view _ =
             ]
     ]
 
-
-type Msg
-    = DisplayWhichButtonClicked
-
-
-update : a -> b -> ( b, Cmd msg )
+update : Msg -> Model -> ( Model, Cmd Msg )
 update _ model =
     ( model, Cmd.none )
 

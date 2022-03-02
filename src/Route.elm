@@ -6,6 +6,7 @@ import Url.Parser exposing (..)
 type Route
     = NotFound
     | Projects
+    | Playground
 
 parseUrl : Url -> Route
 parseUrl url =
@@ -20,4 +21,5 @@ matchRoute =
     oneOf
     [ map Projects top
     , map Projects (s "projects")
+    , map Playground (s "project" </> s "playground")
     ]
