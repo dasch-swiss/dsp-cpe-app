@@ -3,21 +3,26 @@ module Buttons.LeadingIconButton exposing (..)
 import Browser
 import Css
 import Css.Global
+import Heroicons.Solid
 import Html.Styled as Styled
 import Html.Styled.Attributes as Attr
 import Icon
 import Tailwind.Utilities as Tw
 import VirtualDom
+
+
 type Size
     = Small
     | Normal
     | Large
     | ExtraLarge
 
+
 type ButtonType
     = Button
     | Submit
     | Reset
+
 
 type alias Model =
     { size : Size
@@ -47,6 +52,7 @@ init : () -> ( Model, Cmd msg )
 init _ =
     ( initialModel, Cmd.none )
 
+
 baseButton : List Css.Style
 baseButton =
     [ Tw.inline_flex
@@ -68,12 +74,12 @@ baseButton =
         [ Tw.bg_indigo_700 ]
     ]
 
+
 view : Model -> VirtualDom.Node msg
 view model =
     let
         btnStyle =
             case model.size of
-               
                 Small ->
                     [ Tw.px_3
                     , Tw.py_2
@@ -98,48 +104,52 @@ view model =
                     , Tw.py_3
                     , Tw.text_base
                     ]
+
         svgStyle =
             case model.size of
-               
                 Small ->
-                    [ Tw.neg_ml_1 
+                    [ Tw.neg_ml_1
                     , Tw.mr_2
                     , Tw.h_4
                     , Tw.w_4
                     ]
 
                 Normal ->
-                    [ Tw.neg_ml_1 
+                    [ Tw.neg_ml_1
                     , Tw.mr_2
                     , Tw.h_5
                     , Tw.w_5
                     ]
 
                 Large ->
-                    [ Tw.neg_ml_1 
+                    [ Tw.neg_ml_1
                     , Tw.mr_3
                     , Tw.h_5
                     , Tw.w_5
                     ]
 
                 ExtraLarge ->
-                    [ Tw.neg_ml_1 
+                    [ Tw.neg_ml_1
                     , Tw.mr_3
                     , Tw.h_5
                     , Tw.w_5
                     ]
+
         iconMethod =
             Icon.getHtml(model.icon)
+
     in
     Styled.toUnstyled <|
         Styled.button
             [ Attr.type_ "button"
             , Attr.css (btnStyle ++ baseButton)
             ]
-            [ Styled.span [Attr.css svgStyle ] [Styled.fromUnstyled <| iconMethod]
+            [ Styled.span [ Attr.css svgStyle ] [ Styled.fromUnstyled <| iconMethod ]
             , Styled.text model.text
             , Css.Global.global Tw.globalStyles
             ]
+
+
 update : msg -> Model -> ( Model, Cmd msg )
 update _ model =
     ( model, Cmd.none )

@@ -1,7 +1,7 @@
 module Buttons.CircularButton exposing (..)
 
 import Browser
-import Buttons.Shared exposing (Size(..))
+import Buttons.Shared exposing (ButtonSize(..))
 import Css
 import Css.Global
 import Html.Styled as HtmlStyled
@@ -10,7 +10,6 @@ import Icon
 import Svg.Attributes exposing (..)
 import Tailwind.Utilities as Tw
 import VirtualDom
-
 
 main : Program () Model msg
 main =
@@ -33,6 +32,7 @@ initialModel =
 
 
 init : () -> ( Model, Cmd msg )
+
 init _ =
     ( initialModel, Cmd.none )
 
@@ -98,12 +98,9 @@ view model =
             , Css.Global.global Tw.globalStyles
             ]
 
-
 update : msg -> Model -> ( Model, Cmd msg )
 update _ model =
     ( model, Cmd.none )
 
-
-subscriptions : Model -> Sub msg
 subscriptions _ =
     Sub.none

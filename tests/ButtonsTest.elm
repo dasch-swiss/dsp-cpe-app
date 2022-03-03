@@ -4,14 +4,18 @@ import Expect
 import Test exposing (..)
 import Test.Html.Query as Query
 import Buttons.Button as Button
-import Buttons.Shared exposing (Size(..))
+import Buttons.Button exposing (primaryButton, secondaryButton)
+import Buttons.Shared exposing (ButtonSize(..))
 import Html exposing (Html)
 import Test.Html.Selector
 import Icon
+import Heroicons.Solid
+import Buttons.Button exposing (whiteButton)
+
 
 
 primary : Html msg
-primary  = Button.primary (Normal, "Primary Button")
+primary  = primaryButton [] "Primary Button" ExtraSmall
 primaryCreated : Test
 primaryCreated =
     test "One 'Normal' sized primary button should be created via the initialModel." <|
@@ -22,7 +26,7 @@ primaryCreated =
                 |> Query.count (Expect.equal 1)
 
 secondary : Html msg
-secondary  = Button.secondary (ExtraSmall, "Secondary Button")
+secondary  = secondaryButton [] "Secondary Button" ExtraSmall
 secondaryCreated : Test
 secondaryCreated =
     test "One 'ExtraSmall' sized secondary button should be created via the initialModel." <|
@@ -33,7 +37,7 @@ secondaryCreated =
                 |> Query.count (Expect.equal 1)
 
 white : Html msg
-white  = Button.white (ExtraLarge, "White Button")
+white  = whiteButton[] "White Button" ExtraSmall
 whiteCreated : Test
 whiteCreated =
     test "One 'ExtraLarge' sized white button should be created via the initialModel." <|

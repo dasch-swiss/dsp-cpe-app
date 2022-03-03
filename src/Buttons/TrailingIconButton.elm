@@ -1,22 +1,28 @@
 module Buttons.TrailingIconButton exposing (..)
+
 import Browser
 import Css
 import Css.Global
+import Heroicons.Solid
 import Html.Styled as Styled
 import Html.Styled.Attributes as Attr
 import Tailwind.Utilities as Tw
 import VirtualDom
 import Icon
+
+
 type Size
     = Small
     | Normal
     | Large
     | ExtraLarge
 
+
 type ButtonType
     = Button
     | Submit
     | Reset
+
 
 type alias Model =
     { size : Size
@@ -47,6 +53,7 @@ init : () -> ( Model, Cmd msg )
 init _ =
     ( initialModel, Cmd.none )
 
+
 baseButton : List Css.Style
 baseButton =
     [ Tw.inline_flex
@@ -68,12 +75,12 @@ baseButton =
         [ Tw.bg_indigo_700 ]
     ]
 
+
 view : Model -> VirtualDom.Node msg
 view model =
     let
         btnStyle =
             case model.size of
-               
                 Small ->
                     [ Tw.px_3
                     , Tw.py_2
@@ -98,9 +105,9 @@ view model =
                     , Tw.py_3
                     , Tw.text_base
                     ]
+
         svgStyle =
             case model.size of
-               
                 Small ->
                     [ Tw.ml_2
                     , Tw.neg_mr_0_dot_5
@@ -128,6 +135,7 @@ view model =
                     , Tw.h_5
                     , Tw.w_5
                     ]
+
         iconMethod =
             Icon.getHtml(model.icon)
     in
@@ -137,9 +145,11 @@ view model =
             , Attr.css (btnStyle ++ baseButton)
             ]
             [ Styled.text model.text
-            , Styled.span [Attr.css svgStyle ] [Styled.fromUnstyled <| iconMethod]
+            , Styled.span [ Attr.css svgStyle ] [ Styled.fromUnstyled <| iconMethod ]
             , Css.Global.global Tw.globalStyles
             ]
+
+
 update : msg -> Model -> ( Model, Cmd msg )
 update _ model =
     ( model, Cmd.none )
