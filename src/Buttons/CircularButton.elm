@@ -21,7 +21,7 @@ main =
         }
 
 type alias Model =
-    { size : Size
+    { size : ButtonSize
     , icon : Icon.Icon
     }
 initialModel : Model

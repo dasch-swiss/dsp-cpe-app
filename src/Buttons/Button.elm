@@ -21,9 +21,10 @@ primaryButton attrs txt size =
 
 
 
-circular : ( Size, Icon.Icon ) -> Html msg
+circular : ( ButtonSize, Icon.Icon ) -> Html msg
 -- convenience function: returns a basicButton with the Variant "Secondary"
-
+circular (size, icon) =
+    CircularButton.view({size = size, icon = icon})
 
 secondaryButton : List (Attribute msg) -> String -> ButtonSize -> Node msg
 secondaryButton attrs txt size =
