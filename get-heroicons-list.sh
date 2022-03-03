@@ -20,4 +20,4 @@ for icon in $icons
 do
     OUTPUT+="        $(tr '[:lower:]' '[:upper:]' <<< ${icon:0:1})${icon:1} ->\n            Heroicons.Solid.$icon []\n"
 done
-echo -e "$OUTPUT" > "src/Icon.elm"
+echo "$OUTPUT" > "src/Icon.elm"
