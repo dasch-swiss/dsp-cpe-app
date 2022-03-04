@@ -1,6 +1,5 @@
 module Projects.TailwindPlayground exposing (..)
 
-import Browser
 import Buttons.Button as Button exposing (primaryButton, secondaryButton, whiteButton)
 import Buttons.Shared exposing (ButtonSize(..))
 import Heroicons.Solid
@@ -16,16 +15,6 @@ type alias Model =
 
 type Msg
     = NoOp
-
--- main : Program () Model Msg
--- main =
---     Browser.element
---         { init = init
---         , view = view
---         , update = update
---         , subscriptions = subscriptions
---         }
-
 
 init : ( Model, Cmd Msg )
 init =

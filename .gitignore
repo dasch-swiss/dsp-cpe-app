@@ -5,3 +5,4 @@ repl-temp-*
 .vscode/
 dist/
 *.code-workspace
+app.js
