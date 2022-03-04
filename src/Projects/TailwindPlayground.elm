@@ -1,20 +1,23 @@
 module Projects.TailwindPlayground exposing (..)
 
-import Buttons.Button as Button exposing (primaryButton, secondaryButton, whiteButton)
-import Buttons.Shared exposing (ButtonSize(..))
-import Heroicons.Solid
-import Html exposing (Html, div, h3, text)
-import Html.Attributes exposing (class)
 import Avatars.Avatar exposing (circular)
 import Avatars.CircularAvatar as CircularAvatar
+import Buttons.Button as Button exposing (primaryButton, secondaryButton, whiteButton)
 import Buttons.LeadingIconButton as LeadingIconButton
+import Buttons.Shared exposing (ButtonSize(..))
 import Buttons.TrailingIconButton as TrailingIconButton
+import Html exposing (Html, div, h3, text)
+import Html.Attributes exposing (class)
+import Icon as Icon
+
 
 type alias Model =
     { text : String }
 
+
 type Msg
     = NoOp
+
 
 init : ( Model, Cmd Msg )
 init =
@@ -23,7 +26,6 @@ init =
 
 view : Model -> Html Msg
 view _ =
-
     div [ class "playground" ]
         [ div [ class "buttons" ]
             [ div [ class "preview primary-button" ]
@@ -52,25 +54,25 @@ view _ =
                 ]
             , div [ class "preview circular-button" ]
                 [ h3 [ class "header" ] [ text "Circular Buttons" ]
-                , Button.circular ( ExtraSmall, Heroicons.Solid.arrowRight [] )
-                , Button.circular ( Small, Heroicons.Solid.annotation [] )
-                , Button.circular ( Normal, Heroicons.Solid.plus [] )
-                , Button.circular ( Large, Heroicons.Solid.check [] )
-                , Button.circular ( ExtraLarge, Heroicons.Solid.emojiHappy [] )
+                , Button.circular ( ExtraSmall, Icon.ArrowRight )
+                , Button.circular ( Small, Icon.Annotation )
+                , Button.circular ( Normal, Icon.Plus )
+                , Button.circular ( Large, Icon.Check )
+                , Button.circular ( ExtraLarge, Icon.EmojiHappy )
                 ]
             , div [ class "preview leading-button" ]
                 [ h3 [ class "header" ] [ text "Leading Icon Buttons" ]
-                , Button.leadingIcon ( LeadingIconButton.Small, "Small", LeadingIconButton.Annotation )
-                , Button.leadingIcon ( LeadingIconButton.Normal, "Normal", LeadingIconButton.EmojiHappy )
-                , Button.leadingIcon ( LeadingIconButton.Large, "Large", LeadingIconButton.Plus )
-                , Button.leadingIcon ( LeadingIconButton.ExtraLarge, "Extra Large", LeadingIconButton.Check )
+                , Button.leadingIcon ( LeadingIconButton.Small, "Small", Icon.Annotation )
+                , Button.leadingIcon ( LeadingIconButton.Normal, "Normal", Icon.EmojiHappy )
+                , Button.leadingIcon ( LeadingIconButton.Large, "Large", Icon.Plus )
+                , Button.leadingIcon ( LeadingIconButton.ExtraLarge, "Extra Large", Icon.Check )
                 ]
             , div [ class "preview leading-button" ]
                 [ h3 [ class "header" ] [ text "Trailing Icon Buttons" ]
-                , Button.trailingIcon ( TrailingIconButton.Small, "Small", TrailingIconButton.Annotation )
-                , Button.trailingIcon ( TrailingIconButton.Normal, "Normal", TrailingIconButton.EmojiHappy )
-                , Button.trailingIcon ( TrailingIconButton.Large, "Large", TrailingIconButton.Plus )
-                , Button.trailingIcon ( TrailingIconButton.ExtraLarge, "Extra Large", TrailingIconButton.Check )
+                , Button.trailingIcon ( TrailingIconButton.Small, "Small", Icon.Annotation )
+                , Button.trailingIcon ( TrailingIconButton.Normal, "Normal", Icon.EmojiHappy )
+                , Button.trailingIcon ( TrailingIconButton.Large, "Large", Icon.Plus )
+                , Button.trailingIcon ( TrailingIconButton.ExtraLarge, "Extra Large", Icon.Check )
                 ]
 
             -- insert other buttons here
@@ -106,6 +108,7 @@ view _ =
                 ]
             ]
         ]
+
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update _ model =

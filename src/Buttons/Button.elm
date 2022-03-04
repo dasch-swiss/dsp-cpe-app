@@ -5,6 +5,7 @@ import Buttons.CircularButton as CircularButton
 import Buttons.LeadingIconButton as LeadingIconButton
 import Buttons.Shared exposing (ButtonSize(..))
 import Buttons.TrailingIconButton as TrailingIconButton
+import Icon
 import Html exposing (Html)
 import Html.Styled exposing (Attribute)
 import VirtualDom exposing (Node)
@@ -20,8 +21,10 @@ primaryButton attrs txt size =
 
 
 
+circular : ( ButtonSize, Icon.Icon ) -> Html msg
 -- convenience function: returns a basicButton with the Variant "Secondary"
-
+circular (size, icon) =
+    CircularButton.view({size = size, icon = icon})
 
 secondaryButton : List (Attribute msg) -> String -> ButtonSize -> Node msg
 secondaryButton attrs txt size =
@@ -37,16 +40,10 @@ whiteButton attrs txt size =
     basicButton attrs txt size White
 
 
-circular : ( ButtonSize, Html msg ) -> Html msg
-circular ( size, icon ) =
-    CircularButton.view ( size, icon )
+leadingIcon : (LeadingIconButton.Size, String, Icon.Icon) -> Html msg
+leadingIcon (size, text, icon) =
+    LeadingIconButton.view ({size = size, text = text, icon = icon})
 
-
-leadingIcon : ( LeadingIconButton.Size, String, LeadingIconButton.Icon ) -> Html msg
-leadingIcon ( size, text, icon ) =
-    LeadingIconButton.view { size = size, text = text, icon = icon }
-
-
-trailingIcon : ( TrailingIconButton.Size, String, TrailingIconButton.Icon ) -> Html msg
-trailingIcon ( size, text, icon ) =
-    TrailingIconButton.view { size = size, text = text, icon = icon }
+trailingIcon: (TrailingIconButton.Size, String, Icon.Icon) -> Html msg
+trailingIcon (size, text, icon) =
+    TrailingIconButton.view ({size = size, text = text, icon = icon})
