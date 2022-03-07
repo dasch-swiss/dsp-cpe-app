@@ -22,7 +22,7 @@ view model =
     text model.text
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Msg -> Model -> ( Model, Cmd msg )
 update _ model =
     ( model, Cmd.none )
 

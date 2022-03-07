@@ -121,6 +121,24 @@ update msg model =
             ( { model | page = ListPage updatedPageModel }
             , Cmd.map ListPageMsg updatedCmd
             )
+        
+        ( PlaygroundPageMsg subMsg, PlaygroundPage pageModel ) ->
+            let
+                ( updatedPageModel, updatedCmd ) =
+                    Playground.update subMsg pageModel
+            in
+            ( { model | page = PlaygroundPage updatedPageModel }
+            , Cmd.map PlaygroundPageMsg updatedCmd
+            )
+
+        ( BeolPageMsg subMsg, BeolPage pageModel ) ->
+            let
+                ( updatedPageModel, updatedCmd ) =
+                    Beol.update subMsg pageModel
+            in
+            ( { model | page = BeolPage updatedPageModel }
+            , Cmd.map BeolPageMsg updatedCmd
+            )
 
         ( LinkClicked urlRequest, _ ) ->
             case urlRequest of

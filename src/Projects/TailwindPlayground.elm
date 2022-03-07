@@ -110,8 +110,8 @@ view _ =
         ]
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
-update _ model =
+update : Msg -> Model -> ( Model, Cmd msg )
+update msg model =
     ( model, Cmd.none )
 
 
