@@ -1,13 +1,15 @@
 # dsp-cpe-app
 DSP CPE (Configurable Presentation Environment) App
 
-## running the app
-To run the project, make sure you have Elm installed first and then run:
+## Running the app
+To run the project, make sure you have Elm and elm-go installed globally on your machine.
 
-`make build`
+To install Elm follow this guide: [https://guide.elm-lang.org/install/elm.html](https://guide.elm-lang.org/install/elm.html)
 
-`elm reactor`
+To install elm-go, run `npm i -g elm-go`
 
-Then visit [http://localhost:8000/dist/index.html](http://localhost:8000/dist/index.html) to view the project.
+`make build-dev`
 
-It's helpful to keep one terminal tab open with `elm reactor` running and then another tab to re-run the `make build` command. That way you don't need to constantly kill the application every time you want to recompile the generated Javascript.
+Then visit [http://localhost:8000](http://localhost:8000) to view the project.
+
+Elm-go provides live-reloading so any changes to `.elm` files you save will be reflected immediately in the browser. Changes made to other files, specifically `html` and `css` files require a manual page refresh to see the changes.

@@ -1,37 +1,30 @@
-module TailwindPlayground exposing (..)
+module Projects.TailwindPlayground exposing (..)
 
 import Avatars.Avatar exposing (circular)
 import Avatars.CircularAvatar as CircularAvatar
-import Browser
 import Buttons.Button as Button exposing (primaryButton, secondaryButton, whiteButton)
 import Buttons.LeadingIconButton as LeadingIconButton
 import Buttons.Shared exposing (ButtonSize(..))
 import Buttons.TrailingIconButton as TrailingIconButton
-import Icon as Icon
-import Heroicons.Solid
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
+import Icon as Icon
+
 
 type alias Model =
-    String
+    { text : String }
 
 
-main : Program () Model msg
-main =
-    Browser.element
-        { init = init
-        , view = view
-        , update = update
-        , subscriptions = subscriptions
-        }
+type Msg
+    = NoOp
 
 
-init : () -> ( Model, Cmd msg )
-init _ =
-    ( "", Cmd.none )
+init : ( Model, Cmd Msg )
+init =
+    ( { text = "playground" }, Cmd.none )
 
 
-view : Model -> Html msg
+view : Model -> Html Msg
 view _ =
     div [ class "playground" ]
         [ div [ class "buttons" ]
@@ -69,19 +62,18 @@ view _ =
                 ]
             , div [ class "preview leading-button" ]
                 [ h3 [ class "header" ] [ text "Leading Icon Buttons" ]
-                ,  Button.leadingIcon(LeadingIconButton.Small, "Small", Icon.Annotation)
-                , Button.leadingIcon(LeadingIconButton.Normal, "Normal", Icon.EmojiHappy)
-                , Button.leadingIcon(LeadingIconButton.Large, "Large", Icon.Plus)
-                , Button.leadingIcon(LeadingIconButton.ExtraLarge, "Extra Large", Icon.Check)
-
+                , Button.leadingIcon ( LeadingIconButton.Small, "Small", Icon.Annotation )
+                , Button.leadingIcon ( LeadingIconButton.Normal, "Normal", Icon.EmojiHappy )
+                , Button.leadingIcon ( LeadingIconButton.Large, "Large", Icon.Plus )
+                , Button.leadingIcon ( LeadingIconButton.ExtraLarge, "Extra Large", Icon.Check )
                 ]
             , div [ class "preview leading-button" ]
                 [ h3 [ class "header" ] [ text "Trailing Icon Buttons" ]
-                ,  Button.trailingIcon(TrailingIconButton.Small, "Small", Icon.Annotation)
-                , Button.trailingIcon(TrailingIconButton.Normal, "Normal", Icon.EmojiHappy)
-                , Button.trailingIcon(TrailingIconButton.Large, "Large", Icon.Plus)
-                , Button.trailingIcon(TrailingIconButton.ExtraLarge, "Extra Large", Icon.Check)
-                ] 
+                , Button.trailingIcon ( TrailingIconButton.Small, "Small", Icon.Annotation )
+                , Button.trailingIcon ( TrailingIconButton.Normal, "Normal", Icon.EmojiHappy )
+                , Button.trailingIcon ( TrailingIconButton.Large, "Large", Icon.Plus )
+                , Button.trailingIcon ( TrailingIconButton.ExtraLarge, "Extra Large", Icon.Check )
+                ]
 
             -- insert other buttons here
             ]
@@ -118,12 +110,8 @@ view _ =
         ]
 
 
-type Msg
-    = DisplayWhichButtonClicked
-
-
-update : a -> b -> ( b, Cmd msg )
-update _ model =
+update : Msg -> Model -> ( Model, Cmd msg )
+update msg model =
     ( model, Cmd.none )
 
 

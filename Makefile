@@ -27,6 +27,10 @@ build: ## build elm app
 	@cp index.html dist/index.html
 	@cp -R assets dist/assets
 
+.PHONY: build-dev
+build-dev: ## build elm app in dev mode
+	@elm-go src/Main.elm --pushstate -- --output="app.js" --debug
+
 .PHONY: test
 test: ## run all tests
 	@elm-test

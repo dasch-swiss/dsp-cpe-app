@@ -1,8 +1,24 @@
-.tailwind-ui-modules .buttons .preview .header {
+.projects .header,
+.projects .buttons {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.projects .buttons {
+    margin-top: 2%;
+}
+
+.projects .buttons button {
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+}
+
+.playground .buttons .preview .header {
     margin-left: 0.5%;
     font-size: 20px;
 }
 
-.tailwind-ui-modules .buttons .preview button {
+.playground .buttons .preview button {
     margin: 0% 0.5%;
 }
