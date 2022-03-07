@@ -1,9 +1,10 @@
 module Projects.ListProjects exposing (..)
 
-import Html exposing (Html, div)
+import Browser.Navigation as Nav
 import Buttons.Button exposing (primaryButton)
 import Buttons.Shared exposing (ButtonSize(..))
-import Browser.Navigation as Nav
+import Html exposing (Html, div, h2, text)
+import Html.Attributes exposing (class)
 import Html.Styled.Events exposing (onClick)
 
 
@@ -23,18 +24,22 @@ init navKey =
 
 view : Model -> Html Msg
 view _ =
-    div []
-    [ primaryButton [ onClick ClickedPlayground ] "Playground" Normal
-    , primaryButton [ onClick ClickedBeol ] "Beol" Normal
-    ]
-    
+    div [ class "projects" ]
+        [ div [ class "header" ]
+            [ h2 [] [ text "DSP CPE APP" ] ]
+        , div [ class "buttons" ]
+            [ primaryButton [ onClick ClickedPlayground ] "Playground" Normal
+            , primaryButton [ onClick ClickedBeol ] "Beol" Normal
+            ]
+        ]
 
 
 update : Msg -> Model -> ( Model, Cmd msg )
 update msg model =
     case msg of
         ClickedPlayground ->
-            ( model, Nav.pushUrl model.navKey "project/playground")
+            ( model, Nav.pushUrl model.navKey "project/playground" )
+
         ClickedBeol ->
             ( model, Nav.pushUrl model.navKey "project/beol" )
 

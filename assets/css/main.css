@@ -1,3 +1,19 @@
+.projects .header,
+.projects .buttons {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.projects .buttons {
+    margin-top: 2%;
+}
+
+.projects .buttons button {
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+}
+
 .playground .buttons .preview .header {
     margin-left: 0.5%;
     font-size: 20px;
