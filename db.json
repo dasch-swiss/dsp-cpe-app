@@ -1,0 +1,28 @@
+{
+    "projects": [
+        {
+            "id": 1,
+            "title": "BEOL",
+            "description": "The BEOL project",
+            "projectUrl": "/beol"
+        },
+        {
+            "id": 2,
+            "title": "MLS",
+            "description": "The MLS project",
+            "projectUrl": "/mls"
+        },
+        {
+            "id": 3,
+            "title": "Test Project",
+            "description": "A test project",
+            "projectUrl": "/testproject"
+        },
+        {
+            "id": 4,
+            "title": "Playground",
+            "description": "TailwindUI Playground",
+            "projectUrl": "/playground"
+        }
+    ]
+}

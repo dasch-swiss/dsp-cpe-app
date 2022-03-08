@@ -1,14 +1,20 @@
 # dsp-cpe-app
 DSP CPE (Configurable Presentation Environment) App
 
+## Dependencies
+To run the project, you will need the following:
+
+Elm: [https://guide.elm-lang.org/install/elm.html](https://guide.elm-lang.org/install/elm.html)
+
+elm-go: `npm intsall -g elm-go`
+
+json-server: `npm install -g json-server`
+
 ## Running the app
-To run the project, make sure you have Elm and elm-go installed globally on your machine.
 
-To install Elm follow this guide: [https://guide.elm-lang.org/install/elm.html](https://guide.elm-lang.org/install/elm.html)
+Then run: `json-server --watch db.json -p 2022` to start the local dev server. 
 
-To install elm-go, run `npm i -g elm-go`
-
-`make build-dev`
+Then run `make build-dev` to start the app.
 
 Then visit [http://localhost:8000](http://localhost:8000) to view the project.
 
