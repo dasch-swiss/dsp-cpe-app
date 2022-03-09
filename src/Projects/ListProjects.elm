@@ -3,6 +3,7 @@ module Projects.ListProjects exposing (..)
 import Browser.Navigation as Nav
 import Buttons.Button exposing (primaryButton)
 import Buttons.Shared exposing (ButtonSize(..))
+import Error exposing (buildErrorMessage)
 import Html exposing (Html, a, button, div, h2, h3, table, td, text, th, tr)
 import Html.Attributes exposing (class, href)
 import Html.Events exposing (onClick)
@@ -101,26 +102,6 @@ viewFetchError errorMessage =
         [ h3 [] [ text errorHeading ]
         , text ("Error: " ++ errorMessage)
         ]
-
-
-buildErrorMessage : Http.Error -> String
-buildErrorMessage httpError =
-    case httpError of
-        Http.BadUrl message ->
-            message
-
-        Http.Timeout ->
-            "Server is taking too long to respond. Please try again later."
-
-        Http.NetworkError ->
-            "Unable to reach server."
-
-        Http.BadStatus statusCode ->
-            "Request failed with status code: " ++ String.fromInt statusCode
-
-        Http.BadBody message ->
-            message
-
 
 subscriptions : Model -> Sub msg
 subscriptions _ =

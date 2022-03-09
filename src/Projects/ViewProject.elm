@@ -1,6 +1,7 @@
 module Projects.ViewProject exposing (..)
 
 import Browser.Navigation as Nav
+import Error exposing (buildErrorMessage)
 import Html exposing (Html, div, text, h3)
 import Http
 import Projects.Project exposing (Project, ProjectId, projectDecoder, idToString)
@@ -75,22 +76,3 @@ viewFetchError errorMessage =
         [ h3 [] [ text errorHeading ]
         , text ("Error: " ++ errorMessage)
         ]
-
-
-buildErrorMessage : Http.Error -> String
-buildErrorMessage httpError =
-    case httpError of
-        Http.BadUrl message ->
-            message
-
-        Http.Timeout ->
-            "Server is taking too long to respond. Please try again later."
-
-        Http.NetworkError ->
-            "Unable to reach server."
-
-        Http.BadStatus statusCode ->
-            "Request failed with status code: " ++ String.fromInt statusCode
-
-        Http.BadBody message ->
-            message
