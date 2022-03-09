@@ -7,6 +7,7 @@ import Html.Attributes exposing (class)
 import Projects.ListProjects as ListProjects exposing (..)
 import Projects.TailwindPlayground as Playground exposing (view)
 import Projects.Beol as Beol exposing (view)
+import Projects.ViewProject as ViewProject exposing (view)
 import Route exposing (Route)
 import Url exposing (Url)
 
@@ -23,12 +24,14 @@ type Page
     | ListPage ListProjects.Model
     | PlaygroundPage Playground.Model
     | BeolPage Beol.Model
+    | ViewProjectPage ViewProject.Model
 
 
 type Msg
     = ListPageMsg ListProjects.Msg
     | PlaygroundPageMsg Playground.Msg
     | BeolPageMsg Beol.Msg
+    | ViewProjectPageMsg ViewProject.Msg
     | LinkClicked UrlRequest
     | UrlChanged Url
 
@@ -73,6 +76,13 @@ initCurrentPage ( model, existingCmds ) =
                             Beol.init
                     in
                     ( BeolPage pageModel, Cmd.map BeolPageMsg pageCmds )
+
+                Route.Project projectId ->
+                    let
+                        ( pageModel, pageCmds ) =
+                            ViewProject.init projectId model.navKey
+                    in
+                    ( ViewProjectPage pageModel, Cmd.map ViewProjectPageMsg pageCmds )
     in
     ( { model | page = currentPage }
     , Cmd.batch [ existingCmds, mappedPageCmds ]
@@ -103,6 +113,10 @@ currentView model =
         BeolPage pageModel ->
             Beol.view pageModel
                 |> Html.map BeolPageMsg
+
+        ViewProjectPage pageModel ->
+            ViewProject.view pageModel
+                |> Html.map ViewProjectPageMsg
 
 
 notFoundView : Html msg
@@ -138,6 +152,15 @@ update msg model =
             in
             ( { model | page = BeolPage updatedPageModel }
             , Cmd.map BeolPageMsg updatedCmd
+            )
+
+        ( ViewProjectPageMsg subMsg, ViewProjectPage pageModel ) ->
+            let
+                ( updatedPageModel, updatedCmd ) =
+                    ViewProject.update subMsg pageModel
+            in
+            ( { model | page = ViewProjectPage updatedPageModel }
+            , Cmd.map ViewProjectPageMsg updatedCmd
             )
 
         ( LinkClicked urlRequest, _ ) ->

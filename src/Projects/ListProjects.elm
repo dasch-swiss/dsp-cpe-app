@@ -49,7 +49,7 @@ update msg model =
             ( { model | projects = response }, Cmd.none )
 
         ClickedProject url ->
-            ( model, Nav.pushUrl model.navKey ("project" ++ url) )
+            ( model, Nav.pushUrl model.navKey url )
 
 
 view : Model -> Html Msg
@@ -85,8 +85,11 @@ viewProjects posts =
 
 viewProject : Project -> Html Msg
 viewProject project =
-    primaryButton [ Html.Styled.Events.onClick (ClickedProject project.projectUrl) ] project.title Normal
-
+    let
+        projectPath =
+            "/project/" ++ Project.idToString project.id
+    in
+    primaryButton [ Html.Styled.Events.onClick (ClickedProject projectPath) ] project.title Normal
 
 viewFetchError : String -> Html Msg
 viewFetchError errorMessage =
