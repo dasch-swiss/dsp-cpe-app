@@ -1,9 +1,7 @@
 module Projects.Project exposing (..)
 
-import Html exposing (Html, div, text)
 import Json.Decode as Decode exposing (Decoder, int, list, string)
 import Json.Decode.Pipeline exposing (required)
-import Html exposing (a)
 import Url.Parser exposing (Parser, custom)
 
 type alias Project =
@@ -41,12 +39,3 @@ idParser =
     custom "PROJECTID" <|
         \projectId ->
             Maybe.map ProjectId (String.toInt projectId)
-
--- viewProject : Project -> Html msg
--- viewProject project =
---     div []
---         [ text (idToString project.id)
---         , text project.title
---         , text project.description
---         , text project.projectUrl
---         ]

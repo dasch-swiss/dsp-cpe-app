@@ -4,14 +4,12 @@ import Browser.Navigation as Nav
 import Buttons.Button exposing (primaryButton)
 import Buttons.Shared exposing (ButtonSize(..))
 import Error exposing (buildErrorMessage)
-import Html exposing (Html, a, button, div, h2, h3, table, td, text, th, tr)
-import Html.Attributes exposing (class, href)
-import Html.Events exposing (onClick)
-import Html.Styled.Events exposing (onClick)
+import Html exposing (Html, div, h2, h3, text)
+import Html.Attributes exposing (class)
+import Html.Styled.Events
 import Http
-import Json.Decode as Decode
-import Projects.Project as Project exposing (Project, ProjectId, projectDecoder)
-import RemoteData exposing (RemoteData, WebData)
+import Projects.Project as Project exposing (Project)
+import RemoteData exposing (WebData)
 
 
 type alias Model =

@@ -5,7 +5,7 @@ import Error exposing (buildErrorMessage)
 import Html exposing (Html, div, text, h3)
 import Http
 import Projects.Project exposing (Project, ProjectId, projectDecoder, idToString)
-import RemoteData exposing (RemoteData, WebData)
+import RemoteData exposing (WebData)
 
 type alias Model =
     { navKey : Nav.Key

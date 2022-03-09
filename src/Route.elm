@@ -8,7 +8,6 @@ type Route
     = NotFound
     | Projects
     | Playground
-    | Beol
     | Project ProjectId
 
 parseUrl : Url -> Route

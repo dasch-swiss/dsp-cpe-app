@@ -2,11 +2,9 @@ module Main exposing (..)
 
 import Browser exposing (Document, UrlRequest)
 import Browser.Navigation as Nav
-import Html exposing (Html, div, h3, text)
-import Html.Attributes exposing (class)
+import Html exposing (Html, h3, text)
 import Projects.ListProjects as ListProjects exposing (..)
 import Projects.TailwindPlayground as Playground exposing (view)
-import Projects.Beol as Beol exposing (view)
 import Projects.ViewProject as ViewProject exposing (view)
 import Route exposing (Route)
 import Url exposing (Url)
@@ -22,16 +20,14 @@ type alias Model =
 type Page
     = NotFoundPage
     | ListPage ListProjects.Model
-    | PlaygroundPage Playground.Model
-    | BeolPage Beol.Model
     | ViewProjectPage ViewProject.Model
+    | PlaygroundPage Playground.Model
 
 
 type Msg
     = ListPageMsg ListProjects.Msg
-    | PlaygroundPageMsg Playground.Msg
-    | BeolPageMsg Beol.Msg
     | ViewProjectPageMsg ViewProject.Msg
+    | PlaygroundPageMsg Playground.Msg
     | LinkClicked UrlRequest
     | UrlChanged Url
 
@@ -63,26 +59,19 @@ initCurrentPage ( model, existingCmds ) =
                     in
                     ( ListPage pageModel, Cmd.map ListPageMsg pageCmds )
 
-                Route.Playground ->
-                    let
-                        ( pageModel, pageCmds ) =
-                            Playground.init
-                    in
-                    ( PlaygroundPage pageModel, Cmd.map PlaygroundPageMsg pageCmds )
-
-                Route.Beol ->
-                    let
-                        ( pageModel, pageCmds ) =
-                            Beol.init
-                    in
-                    ( BeolPage pageModel, Cmd.map BeolPageMsg pageCmds )
-
                 Route.Project projectId ->
                     let
                         ( pageModel, pageCmds ) =
                             ViewProject.init projectId model.navKey
                     in
                     ( ViewProjectPage pageModel, Cmd.map ViewProjectPageMsg pageCmds )
+
+                Route.Playground ->
+                    let
+                        ( pageModel, pageCmds ) =
+                            Playground.init
+                    in
+                    ( PlaygroundPage pageModel, Cmd.map PlaygroundPageMsg pageCmds )
     in
     ( { model | page = currentPage }
     , Cmd.batch [ existingCmds, mappedPageCmds ]
@@ -106,17 +95,13 @@ currentView model =
             ListProjects.view pageModel
                 |> Html.map ListPageMsg
 
-        PlaygroundPage pageModel ->
-            Playground.view pageModel
-                |> Html.map PlaygroundPageMsg
-
-        BeolPage pageModel ->
-            Beol.view pageModel
-                |> Html.map BeolPageMsg
-
         ViewProjectPage pageModel ->
             ViewProject.view pageModel
                 |> Html.map ViewProjectPageMsg
+
+        PlaygroundPage pageModel ->
+            Playground.view pageModel
+                |> Html.map PlaygroundPageMsg
 
 
 notFoundView : Html msg
@@ -135,24 +120,6 @@ update msg model =
             ( { model | page = ListPage updatedPageModel }
             , Cmd.map ListPageMsg updatedCmd
             )
-        
-        ( PlaygroundPageMsg subMsg, PlaygroundPage pageModel ) ->
-            let
-                ( updatedPageModel, updatedCmd ) =
-                    Playground.update subMsg pageModel
-            in
-            ( { model | page = PlaygroundPage updatedPageModel }
-            , Cmd.map PlaygroundPageMsg updatedCmd
-            )
-
-        ( BeolPageMsg subMsg, BeolPage pageModel ) ->
-            let
-                ( updatedPageModel, updatedCmd ) =
-                    Beol.update subMsg pageModel
-            in
-            ( { model | page = BeolPage updatedPageModel }
-            , Cmd.map BeolPageMsg updatedCmd
-            )
 
         ( ViewProjectPageMsg subMsg, ViewProjectPage pageModel ) ->
             let
@@ -161,6 +128,15 @@ update msg model =
             in
             ( { model | page = ViewProjectPage updatedPageModel }
             , Cmd.map ViewProjectPageMsg updatedCmd
+            )
+
+        ( PlaygroundPageMsg subMsg, PlaygroundPage pageModel ) ->
+            let
+                ( updatedPageModel, updatedCmd ) =
+                    Playground.update subMsg pageModel
+            in
+            ( { model | page = PlaygroundPage updatedPageModel }
+            , Cmd.map PlaygroundPageMsg updatedCmd
             )
 
         ( LinkClicked urlRequest, _ ) ->
