@@ -11,11 +11,15 @@ type alias Project =
     , projectUrl : String
     }
 
+-- custom type to ensure a project id is provided and not some other int
+-- ProjectId is an opaque type
 type ProjectId =
     ProjectId Int
 
+-- decoder to translate JSON into elm values
 projectsDecoder : Decoder (List Project)
 projectsDecoder =
+    -- create a decoder that knows how to translate a JSON array into a list of the type Project
     list projectDecoder
 
 projectDecoder : Decoder Project
@@ -26,14 +30,18 @@ projectDecoder =
         |> required "description" string
         |> required "projectUrl" string
 
+-- custom decoder for the project id because it is not an int or string
 idDecoder : Decoder ProjectId
 idDecoder =
     Decode.map ProjectId int
 
+-- convert ProjectId to string to use in html
 idToString : ProjectId -> String
 idToString (ProjectId id) =
     String.fromInt id
 
+-- convert string to the type PostId
+-- used when parsing a url
 idParser : Parser (ProjectId -> a) a
 idParser =
     custom "PROJECTID" <|

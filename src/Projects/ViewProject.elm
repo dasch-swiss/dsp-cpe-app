@@ -8,8 +8,8 @@ import Projects.Project exposing (Project, ProjectId, projectDecoder, idToString
 import RemoteData exposing (WebData)
 
 type alias Model =
-    { navKey : Nav.Key
-    , project : WebData Project
+    { project : WebData Project
+    , navKey : Nav.Key
     }
 
 type Msg

@@ -7,8 +7,8 @@ import Projects.Project exposing (ProjectId, idParser)
 type Route
     = NotFound
     | Projects
-    | Playground
     | Project ProjectId
+    | Playground
 
 parseUrl : Url -> Route
 parseUrl url =
@@ -23,6 +23,6 @@ matchRoute =
     oneOf
     [ map Projects top -- /
     , map Projects (s "projects") -- /projects
-    , map Playground (s "project" </> s "playground") -- /project/playground
     , map Project (s "project" </> idParser) --/project/1
+    , map Playground (s "playground") -- /project/playground
     ]

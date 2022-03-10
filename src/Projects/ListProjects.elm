@@ -1,4 +1,4 @@
-module Projects.ListProjects exposing (..)
+module Projects.ListProjects exposing (Model, Msg, init, update, view)
 
 import Browser.Navigation as Nav
 import Buttons.Button exposing (primaryButton)
@@ -58,7 +58,12 @@ view model =
             [ h2 [] [ text "DSP CPE APP" ]
             ]
         , div [ class "buttons" ]
-            [ viewProjects model.projects]
+            [ primaryButton [ Html.Styled.Events.onClick (ClickedProject "/playground") ] "playground" Normal ]
+        , div [ class "header" ]
+            [ h2 [] [ text "Projects" ]
+            ]
+        , div [ class "buttons" ]
+            [ viewProjects model.projects ]
         ]
 
 
@@ -73,8 +78,7 @@ viewProjects posts =
 
         RemoteData.Success actualProjects ->
             div []
-                [ h3 [] [ text "Projects" ]
-                , div []
+                [ div []
                     (List.map viewProject actualProjects)
                 ]
 
