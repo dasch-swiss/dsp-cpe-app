@@ -3,6 +3,7 @@ module Projects.ViewProject exposing (..)
 import Browser.Navigation as Nav
 import Error exposing (buildErrorMessage)
 import Html exposing (Html, div, text, h3)
+import Html.Attributes exposing (class)
 import Http
 import Projects.Project exposing (Project, ProjectId, projectDecoder, idToString)
 import RemoteData exposing (WebData)
@@ -58,9 +59,14 @@ viewProject project =
             h3 [] [ text "Loading Project..." ]
 
         RemoteData.Success currentProject ->
-            div []
-                [ text ("Project Name: " ++ currentProject.title)
-                , text ("Description: " ++ currentProject.description)
+            div [ class "project" ]
+                [ div [ class "header"] [ text currentProject.title]
+                , div [ class "info" ]
+                    [ div [ class "label" ]
+                        [ text "Description:" ]
+                    , div [ class "content" ]
+                        [ text currentProject.description ]
+                    ]
                 ]
 
         RemoteData.Failure httpError ->

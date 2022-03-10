@@ -8,6 +8,18 @@
     margin-right: 0.5%;
 }
 
+.project .header {
+    font-size: 42px;
+}
+
+.project .info {
+    padding-top: 5%;
+}
+
+.project .info .label {
+    font-size: 18px;
+}
+
 .playground .buttons .preview .header {
     margin-left: 0.5%;
     font-size: 20px;
