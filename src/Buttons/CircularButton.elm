@@ -1,7 +1,6 @@
 module Buttons.CircularButton exposing (..)
 
 import Browser
-import Buttons.Shared exposing (ButtonSize(..))
 import Css
 import Css.Global
 import Html.Styled as HtmlStyled
@@ -11,6 +10,12 @@ import Svg.Attributes exposing (..)
 import Tailwind.Utilities as Tw
 import VirtualDom
 
+type CircularButtonSize
+    = CircularExtraSmall
+    | CircularSmall
+    | CircularNormal
+    | CircularLarge
+    | CircularExtraLarge
 main : Program () Model msg
 main =
     Browser.element
@@ -21,12 +26,12 @@ main =
         }
 
 type alias Model =
-    { size : ButtonSize
+    { size : CircularButtonSize
     , icon : Icon.Icon
     }
 initialModel : Model
 initialModel =
-    { size = Normal
+    { size = CircularNormal
     , icon = Icon.Plus
     }
 
@@ -64,13 +69,13 @@ view model =
     let
         btnSize =
             case model.size of
-                ExtraSmall ->
+                CircularExtraSmall ->
                     [ Tw.p_1 ]
 
-                Small ->
+                CircularSmall ->
                     [ Tw.p_1_dot_5 ]
 
-                ExtraLarge ->
+                CircularExtraLarge ->
                     [ Tw.p_3 ]
 
                 -- Normal and Large
@@ -78,7 +83,7 @@ view model =
                     [ Tw.p_2 ]
 
         icnSize =
-            if model.size == ExtraSmall || model.size == Small || model.size == Normal then
+            if model.size == CircularExtraSmall || model.size == CircularSmall || model.size == CircularNormal then
                 [ Tw.h_5
                 , Tw.w_5
                 ]

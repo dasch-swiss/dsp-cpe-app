@@ -1,32 +1,28 @@
 module Buttons.Button exposing (..)
 
 import Buttons.BasicButtons.BasicButton exposing (Variant(..), basicButton)
-import Buttons.CircularButton as CircularButton
+import Buttons.CircularButton as CircularButton exposing (CircularButtonSize)
+import Buttons.BasicButtons.BasicButton exposing (BasicButtonSize)
 import Buttons.LeadingIconButton as LeadingIconButton
-import Buttons.Shared exposing (ButtonSize(..))
 import Buttons.TrailingIconButton as TrailingIconButton
 import Icon
 import Html exposing (Html)
 import Html.Styled exposing (Attribute)
 import VirtualDom exposing (Node)
 
-
-
 -- convenience function: returns a basicButton with the Variant "Primary"
-
-
-primaryButton : List (Attribute msg) -> String -> ButtonSize -> Node msg
+primaryButton : List (Attribute msg) -> String -> BasicButtonSize -> Node msg
 primaryButton attrs txt size =
     basicButton attrs txt size Primary
 
 
 
-circular : ( ButtonSize, Icon.Icon ) -> Html msg
+circular : ( CircularButtonSize, Icon.Icon ) -> Html msg
 -- convenience function: returns a basicButton with the Variant "Secondary"
 circular (size, icon) =
     CircularButton.view({size = size, icon = icon})
 
-secondaryButton : List (Attribute msg) -> String -> ButtonSize -> Node msg
+secondaryButton : List (Attribute msg) -> String -> BasicButtonSize -> Node msg
 secondaryButton attrs txt size =
     basicButton attrs txt size Secondary
 
@@ -35,7 +31,7 @@ secondaryButton attrs txt size =
 -- convenience function: returns a basicButton with the Variant "White"
 
 
-whiteButton : List (Attribute msg) -> String -> ButtonSize -> Node msg
+whiteButton : List (Attribute msg) -> String -> BasicButtonSize -> Node msg
 whiteButton attrs txt size =
     basicButton attrs txt size White
 

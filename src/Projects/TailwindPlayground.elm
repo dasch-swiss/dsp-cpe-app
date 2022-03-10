@@ -4,7 +4,8 @@ import Avatars.Avatar exposing (circular)
 import Avatars.CircularAvatar as CircularAvatar
 import Buttons.Button as Button exposing (primaryButton, secondaryButton, whiteButton)
 import Buttons.LeadingIconButton as LeadingIconButton
-import Buttons.Shared exposing (ButtonSize(..))
+import Buttons.BasicButtons.BasicButton exposing (BasicButtonSize(..))
+import Buttons.CircularButton exposing (CircularButtonSize(..))
 import Buttons.TrailingIconButton as TrailingIconButton
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
@@ -54,11 +55,11 @@ view _ =
                 ]
             , div [ class "preview circular-button" ]
                 [ h3 [ class "header" ] [ text "Circular Buttons" ]
-                , Button.circular ( ExtraSmall, Icon.ArrowRight )
-                , Button.circular ( Small, Icon.Annotation )
-                , Button.circular ( Normal, Icon.Plus )
-                , Button.circular ( Large, Icon.Check )
-                , Button.circular ( ExtraLarge, Icon.EmojiHappy )
+                , Button.circular ( CircularExtraSmall, Icon.ArrowRight )
+                , Button.circular ( CircularSmall, Icon.Annotation )
+                , Button.circular ( CircularNormal, Icon.Plus )
+                , Button.circular ( CircularLarge, Icon.Check )
+                , Button.circular ( CircularExtraLarge, Icon.EmojiHappy )
                 ]
             , div [ class "preview leading-button" ]
                 [ h3 [ class "header" ] [ text "Leading Icon Buttons" ]

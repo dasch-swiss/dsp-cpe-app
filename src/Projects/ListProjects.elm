@@ -2,7 +2,7 @@ module Projects.ListProjects exposing (..)
 
 import Browser.Navigation as Nav
 import Buttons.Button exposing (primaryButton)
-import Buttons.Shared exposing (ButtonSize(..))
+import Buttons.BasicButtons.BasicButton exposing (BasicButtonSize(..))
 import Html exposing (Html, div, h2, text)
 import Html.Attributes exposing (class)
 import Html.Styled.Events exposing (onClick)

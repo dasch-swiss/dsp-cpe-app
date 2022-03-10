@@ -5,12 +5,12 @@ import Test exposing (..)
 import Test.Html.Query as Query
 import Buttons.Button as Button
 import Buttons.Button exposing (primaryButton, secondaryButton)
-import Buttons.Shared exposing (ButtonSize(..))
 import Html exposing (Html)
 import Test.Html.Selector
 import Icon
-import Heroicons.Solid
 import Buttons.Button exposing (whiteButton)
+import Buttons.BasicButtons.BasicButton exposing (BasicButtonSize(..))
+import Buttons.CircularButton exposing (CircularButtonSize(..))
 
 
 
@@ -48,7 +48,7 @@ whiteCreated =
                 |> Query.count (Expect.equal 1)
 
 circular : Html msg
-circular  = Button.circular (Large, Icon.AcademicCap)
+circular  = Button.circular (CircularLarge, Icon.AcademicCap)
 circularCreated : Test
 circularCreated =
     test "One 'Large' sized circular button should be created via the initialModel." <|

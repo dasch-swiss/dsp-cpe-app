@@ -2,7 +2,7 @@ module Buttons.Counter exposing (..)
 
 import Browser
 import Buttons.Button exposing (primaryButton, secondaryButton)
-import Buttons.Shared exposing (ButtonSize(..))
+import Buttons.BasicButtons.BasicButton exposing (BasicButtonSize(..))
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Html.Styled.Attributes exposing (disabled, id)
