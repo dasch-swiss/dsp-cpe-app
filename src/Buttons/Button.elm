@@ -15,31 +15,27 @@ primaryButton : List (Attribute msg) -> String -> BasicButtonSize -> Node msg
 primaryButton attrs txt size =
     basicButton attrs txt size Primary
 
-
-
-circular : ( CircularButtonSize, Icon.Icon ) -> Html msg
 -- convenience function: returns a basicButton with the Variant "Secondary"
-circular (size, icon) =
-    CircularButton.view({size = size, icon = icon})
-
 secondaryButton : List (Attribute msg) -> String -> BasicButtonSize -> Node msg
 secondaryButton attrs txt size =
     basicButton attrs txt size Secondary
 
-
-
 -- convenience function: returns a basicButton with the Variant "White"
-
-
 whiteButton : List (Attribute msg) -> String -> BasicButtonSize -> Node msg
 whiteButton attrs txt size =
     basicButton attrs txt size White
 
+-- convenience function: returns a basicButton with the Variant "Circular"
+circular : ( CircularButtonSize, Icon.Icon ) -> Html msg
+circular (size, icon) =
+    CircularButton.view({size = size, icon = icon})
 
+-- convenience function: returns a basicButton with the Variant "LeadingIcon"
 leadingIcon : (LeadingIconButton.Size, String, Icon.Icon) -> Html msg
 leadingIcon (size, text, icon) =
     LeadingIconButton.view ({size = size, text = text, icon = icon})
 
+-- convenience function: returns a basicButton with the Variant "TrailingIcon"
 trailingIcon: (TrailingIconButton.Size, String, Icon.Icon) -> Html msg
 trailingIcon (size, text, icon) =
     TrailingIconButton.view ({size = size, text = text, icon = icon})

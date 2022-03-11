@@ -16,6 +16,7 @@ type CircularButtonSize
     | CircularNormal
     | CircularLarge
     | CircularExtraLarge
+
 main : Program () Model msg
 main =
     Browser.element
@@ -29,18 +30,16 @@ type alias Model =
     { size : CircularButtonSize
     , icon : Icon.Icon
     }
+
 initialModel : Model
 initialModel =
     { size = CircularNormal
     , icon = Icon.Plus
     }
 
-
 init : () -> ( Model, Cmd msg )
-
 init _ =
     ( initialModel, Cmd.none )
-
 
 circularButtonStyle : List Css.Style
 circularButtonStyle =
@@ -62,7 +61,6 @@ circularButtonStyle =
         [ Tw.bg_indigo_700
         ]
     ]
-
 
 view : Model -> VirtualDom.Node msg
 view model =

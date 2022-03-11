@@ -17,6 +17,7 @@ type BasicButtonSize
     | Normal
     | Large
     | ExtraLarge
+
 type ButtonType
     = Button
     | Submit
@@ -92,10 +93,7 @@ type alias BasicButtonModel msg =
     }
 
 
-
 -- convenience function: Constructs the Buttonmodel and passes it into view; returns the view
-
-
 basicButton : List (Attribute msg) -> String -> BasicButtonSize -> Variant -> Node msg
 basicButton attributes text size variant =
     view { attrs = attributes, text = text, size = size, variant = variant }
