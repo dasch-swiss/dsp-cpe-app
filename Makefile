@@ -31,6 +31,10 @@ build: ## build elm app
 build-dev: ## build elm app in dev mode
 	@elm-go src/Main.elm --pushstate -- --output="app.js" --debug
 
+.PHONY: start-dev-server
+start-dev-server: ## start local dev server hosting db.json
+	@json-server --watch db.json -p 2022
+
 .PHONY: test
 test: ## run all tests
 	@elm-test
