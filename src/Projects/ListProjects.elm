@@ -92,7 +92,7 @@ viewProject project =
         projectPath =
             "/project/" ++ Project.idToString project.id
     in
-    primaryButton [ Html.Styled.Events.onClick (ClickedProject projectPath) ] project.title Normal
+    primaryButton [ Html.Styled.Events.onClick (ClickedProject projectPath) ] project.title BasicNormal
 
 viewFetchError : String -> Html Msg
 viewFetchError errorMessage =
