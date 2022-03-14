@@ -19,13 +19,13 @@ main =
 
 
 type alias Model =
-    { size: Size
+    { size: CircularAvatarSize
     , img: String
     , alt: String
     }
 
 initialModel : Model
-initialModel = {size=Normal, img="", alt=""}
+initialModel = {size=CircularAvatarNormal, img="", alt=""}
 
 
 init : () -> ( Model, Cmd msg )
@@ -33,38 +33,38 @@ init _ =
     ( initialModel, Cmd.none )
 
 
-type Size
-    = ExtraSmall
-    | Small
-    | Normal
-    | Large
-    | ExtraLarge
+type CircularAvatarSize
+    = CircularAvatarExtraSmall
+    | CircularAvatarSmall
+    | CircularAvatarNormal
+    | CircularAvatarLarge
+    | CircularAvatarExtraLarge
 
 
-renderSize : Size -> List Css.Style
+renderSize : CircularAvatarSize -> List Css.Style
 renderSize size =
             case size of
-                ExtraSmall ->
+                CircularAvatarExtraSmall ->
                     [ Tw.h_6
                     , Tw.w_6
                     ]
 
-                Small ->
+                CircularAvatarSmall ->
                     [ Tw.h_8
                     , Tw.w_8
                     ]
 
-                Normal ->
+                CircularAvatarNormal ->
                     [ Tw.h_10
                     , Tw.w_10
                     ]
 
-                Large ->
+                CircularAvatarLarge ->
                     [ Tw.h_12
                     , Tw.w_12
                     ]
 
-                ExtraLarge ->
+                CircularAvatarExtraLarge ->
                     [ Tw.h_14
                     , Tw.w_14
                     ]

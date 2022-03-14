@@ -28,8 +28,8 @@ view _ =
         [ div [ class "header" ]
             [ h2 [] [ text "DSP CPE APP" ] ]
         , div [ class "buttons" ]
-            [ primaryButton [ onClick ClickedPlayground ] "Playground" Normal
-            , primaryButton [ onClick ClickedBeol ] "Beol" Normal
+            [ primaryButton [ onClick ClickedPlayground ] "Playground" BasicNormal
+            , primaryButton [ onClick ClickedBeol ] "Beol" BasicNormal
             ]
         ]
 

@@ -3,7 +3,6 @@ module Buttons.LeadingIconButton exposing (..)
 import Browser
 import Css
 import Css.Global
-import Heroicons.Solid
 import Html.Styled as Styled
 import Html.Styled.Attributes as Attr
 import Icon
@@ -11,21 +10,15 @@ import Tailwind.Utilities as Tw
 import VirtualDom
 
 
-type Size
-    = Small
-    | Normal
-    | Large
-    | ExtraLarge
-
-
-type ButtonType
-    = Button
-    | Submit
-    | Reset
+type LeadingSize
+    = LeadingSmall
+    | LeadingNormal
+    | LeadingLarge
+    | LeadingExtraLarge
 
 
 type alias Model =
-    { size : Size
+    { size : LeadingSize
     , text : String
     , icon : Icon.Icon
     }
@@ -42,7 +35,7 @@ main =
 
 initialModel : Model
 initialModel =
-    { size = Normal
+    { size = LeadingNormal
     , text = "Default"
     , icon = Icon.EmojiHappy
     }
@@ -80,26 +73,26 @@ view model =
     let
         btnStyle =
             case model.size of
-                Small ->
+                LeadingSmall ->
                     [ Tw.px_3
                     , Tw.py_2
                     , Tw.text_sm
                     , Tw.leading_4
                     ]
 
-                Normal ->
+                LeadingNormal ->
                     [ Tw.px_4
                     , Tw.py_2
                     , Tw.text_sm
                     ]
 
-                Large ->
+                LeadingLarge ->
                     [ Tw.px_4
                     , Tw.py_2
                     , Tw.text_base
                     ]
 
-                ExtraLarge ->
+                LeadingExtraLarge ->
                     [ Tw.px_6
                     , Tw.py_3
                     , Tw.text_base
@@ -107,28 +100,28 @@ view model =
 
         svgStyle =
             case model.size of
-                Small ->
+                LeadingSmall ->
                     [ Tw.neg_ml_1
                     , Tw.mr_2
                     , Tw.h_4
                     , Tw.w_4
                     ]
 
-                Normal ->
+                LeadingNormal ->
                     [ Tw.neg_ml_1
                     , Tw.mr_2
                     , Tw.h_5
                     , Tw.w_5
                     ]
 
-                Large ->
+                LeadingLarge ->
                     [ Tw.neg_ml_1
                     , Tw.mr_3
                     , Tw.h_5
                     , Tw.w_5
                     ]
 
-                ExtraLarge ->
+                LeadingExtraLarge ->
                     [ Tw.neg_ml_1
                     , Tw.mr_3
                     , Tw.h_5

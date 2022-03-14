@@ -3,8 +3,8 @@ module Buttons.Button exposing (..)
 import Buttons.BasicButtons.BasicButton exposing (Variant(..), basicButton)
 import Buttons.CircularButton as CircularButton exposing (CircularButtonSize)
 import Buttons.BasicButtons.BasicButton exposing (BasicButtonSize)
-import Buttons.LeadingIconButton as LeadingIconButton
-import Buttons.TrailingIconButton as TrailingIconButton
+import Buttons.LeadingIconButton as LeadingIconButton exposing (LeadingSize(..))
+import Buttons.TrailingIconButton as TrailingIconButton exposing (TrailingSize(..))
 import Icon
 import Html exposing (Html)
 import Html.Styled exposing (Attribute)
@@ -31,11 +31,11 @@ circular (size, icon) =
     CircularButton.view({size = size, icon = icon})
 
 -- convenience function: returns a basicButton with the Variant "LeadingIcon"
-leadingIcon : (LeadingIconButton.Size, String, Icon.Icon) -> Html msg
+leadingIcon : (LeadingSize, String, Icon.Icon) -> Html msg
 leadingIcon (size, text, icon) =
     LeadingIconButton.view ({size = size, text = text, icon = icon})
 
 -- convenience function: returns a basicButton with the Variant "TrailingIcon"
-trailingIcon: (TrailingIconButton.Size, String, Icon.Icon) -> Html msg
+trailingIcon: (TrailingSize, String, Icon.Icon) -> Html msg
 trailingIcon (size, text, icon) =
     TrailingIconButton.view ({size = size, text = text, icon = icon})

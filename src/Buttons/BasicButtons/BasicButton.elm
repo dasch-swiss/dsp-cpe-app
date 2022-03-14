@@ -12,16 +12,11 @@ import Tailwind.Utilities as Tw
 import VirtualDom exposing (Node)
 
 type BasicButtonSize
-    = ExtraSmall
-    | Small
-    | Normal
-    | Large
-    | ExtraLarge
-
-type ButtonType
-    = Button
-    | Submit
-    | Reset
+    = BasicExtraSmall
+    | BasicSmall
+    | BasicNormal
+    | BasicLarge
+    | BasicExtraLarge
 
 
 baseButton : List Css.Style
@@ -44,32 +39,32 @@ baseButton =
 renderBtnSize : BasicButtonSize -> List Css.Style
 renderBtnSize size =
     case size of
-        ExtraSmall ->
+        BasicExtraSmall ->
             [ Tw.px_2_dot_5
             , Tw.py_1_dot_5
             , Tw.text_xs
             ]
 
-        Small ->
+        BasicSmall ->
             [ Tw.px_3
             , Tw.py_2
             , Tw.text_sm
             , Tw.leading_4
             ]
 
-        Normal ->
+        BasicNormal ->
             [ Tw.px_4
             , Tw.py_2
             , Tw.text_sm
             ]
 
-        Large ->
+        BasicLarge ->
             [ Tw.px_4
             , Tw.py_2
             , Tw.text_base
             ]
 
-        ExtraLarge ->
+        BasicExtraLarge ->
             [ Tw.px_6
             , Tw.py_3
             , Tw.text_base
@@ -107,7 +102,7 @@ type Variant
 
 initialModel : BasicButtonModel msg
 initialModel =
-    { attrs = [], text = "", size = Normal, variant = Primary }
+    { attrs = [], text = "", size = BasicNormal, variant = Primary }
 
 
 init : () -> ( BasicButtonModel msg, Cmd msg )
