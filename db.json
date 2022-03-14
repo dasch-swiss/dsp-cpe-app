@@ -1,0 +1,22 @@
+{
+    "projects": [
+        {
+            "id": 1,
+            "title": "BEOL",
+            "description": "The BEOL project",
+            "projectUrl": "/1"
+        },
+        {
+            "id": 2,
+            "title": "MLS",
+            "description": "The MLS project",
+            "projectUrl": "/2"
+        },
+        {
+            "id": 3,
+            "title": "Test Project",
+            "description": "A test project",
+            "projectUrl": "/3"
+        }
+    ]
+}
