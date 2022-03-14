@@ -2,39 +2,39 @@ module Main exposing (..)
 
 import Browser exposing (Document, UrlRequest)
 import Browser.Navigation as Nav
-import Html exposing (Html, div, h3, text)
-import Html.Attributes exposing (class)
+import Html exposing (Html, h3, text)
 import Projects.ListProjects as ListProjects exposing (..)
 import Projects.TailwindPlayground as Playground exposing (view)
-import Projects.Beol as Beol exposing (view)
+import Projects.ViewProject as ViewProject exposing (view)
 import Route exposing (Route)
 import Url exposing (Url)
 
 
 type alias Model =
-    { route : Route
-    , page : Page
-    , navKey : Nav.Key
+    { route : Route -- current route
+    , page : Page -- current page
+    , navKey : Nav.Key -- provided by elm at runtime, needed for navigation
     }
 
 
 type Page
     = NotFoundPage
-    | ListPage ListProjects.Model
+    | ListProjectsPage ListProjects.Model
+    | ViewProjectPage ViewProject.Model
     | PlaygroundPage Playground.Model
-    | BeolPage Beol.Model
 
-
+-- each page in the app has it's own Msg type
+-- Main doesn't handle any page specific messages, it simply forwards them to the correct page module
 type Msg
-    = ListPageMsg ListProjects.Msg
+    = ListProjectsPageMsg ListProjects.Msg
+    | ViewProjectPageMsg ViewProject.Msg
     | PlaygroundPageMsg Playground.Msg
-    | BeolPageMsg Beol.Msg
     | LinkClicked UrlRequest
     | UrlChanged Url
 
-
+-- init main model and current page
 init : () -> Url -> Nav.Key -> ( Model, Cmd Msg )
-init flags url navKey =
+init _ url navKey =
     let
         model =
             { route = Route.parseUrl url
@@ -44,7 +44,7 @@ init flags url navKey =
     in
     initCurrentPage ( model, Cmd.none )
 
-
+-- init the current page based upon the current route
 initCurrentPage : ( Model, Cmd Msg ) -> ( Model, Cmd Msg )
 initCurrentPage ( model, existingCmds ) =
     let
@@ -58,7 +58,14 @@ initCurrentPage ( model, existingCmds ) =
                         ( pageModel, pageCmds ) =
                             ListProjects.init model.navKey
                     in
-                    ( ListPage pageModel, Cmd.map ListPageMsg pageCmds )
+                    ( ListProjectsPage pageModel, Cmd.map ListProjectsPageMsg pageCmds )
+
+                Route.Project projectId ->
+                    let
+                        ( pageModel, pageCmds ) =
+                            ViewProject.init projectId model.navKey
+                    in
+                    ( ViewProjectPage pageModel, Cmd.map ViewProjectPageMsg pageCmds )
 
                 Route.Playground ->
                     let
@@ -66,16 +73,9 @@ initCurrentPage ( model, existingCmds ) =
                             Playground.init
                     in
                     ( PlaygroundPage pageModel, Cmd.map PlaygroundPageMsg pageCmds )
-
-                Route.Beol ->
-                    let
-                        ( pageModel, pageCmds ) =
-                            Beol.init
-                    in
-                    ( BeolPage pageModel, Cmd.map BeolPageMsg pageCmds )
     in
     ( { model | page = currentPage }
-    , Cmd.batch [ existingCmds, mappedPageCmds ]
+    , Cmd.batch [ existingCmds, mappedPageCmds ] -- take a list of commands and batch them together so that we can hand them all to the runtime at the same time. The runtime then executes them in an arbitrary order.
     )
 
 
@@ -85,43 +85,53 @@ view model =
     , body = [ currentView model ]
     }
 
-
+-- change view depending on the current page stored in the model
 currentView : Model -> Html Msg
 currentView model =
     case model.page of
         NotFoundPage ->
             notFoundView
 
-        ListPage pageModel ->
+        ListProjectsPage pageModel ->
             ListProjects.view pageModel
-                |> Html.map ListPageMsg
+                |> Html.map ListProjectsPageMsg
+
+        ViewProjectPage pageModel ->
+            ViewProject.view pageModel
+                |> Html.map ViewProjectPageMsg
 
         PlaygroundPage pageModel ->
             Playground.view pageModel
                 |> Html.map PlaygroundPageMsg
-
-        BeolPage pageModel ->
-            Beol.view pageModel
-                |> Html.map BeolPageMsg
 
 
 notFoundView : Html msg
 notFoundView =
     h3 [] [ text "Page not found" ]
 
-
+-- call the current pages update method with the forwarded Msg
+-- also handles Msg from Main, namely LinkClicked and UrlChanged
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case ( msg, model.page ) of
-        ( ListPageMsg subMsg, ListPage pageModel ) ->
+        ( ListProjectsPageMsg subMsg, ListProjectsPage pageModel ) ->
             let
                 ( updatedPageModel, updatedCmd ) =
                     ListProjects.update subMsg pageModel
             in
-            ( { model | page = ListPage updatedPageModel }
-            , Cmd.map ListPageMsg updatedCmd
+            ( { model | page = ListProjectsPage updatedPageModel }
+            , Cmd.map ListProjectsPageMsg updatedCmd
             )
-        
+
+        ( ViewProjectPageMsg subMsg, ViewProjectPage pageModel ) ->
+            let
+                ( updatedPageModel, updatedCmd ) =
+                    ViewProject.update subMsg pageModel
+            in
+            ( { model | page = ViewProjectPage updatedPageModel }
+            , Cmd.map ViewProjectPageMsg updatedCmd
+            )
+
         ( PlaygroundPageMsg subMsg, PlaygroundPage pageModel ) ->
             let
                 ( updatedPageModel, updatedCmd ) =
@@ -129,15 +139,6 @@ update msg model =
             in
             ( { model | page = PlaygroundPage updatedPageModel }
             , Cmd.map PlaygroundPageMsg updatedCmd
-            )
-
-        ( BeolPageMsg subMsg, BeolPage pageModel ) ->
-            let
-                ( updatedPageModel, updatedCmd ) =
-                    Beol.update subMsg pageModel
-            in
-            ( { model | page = BeolPage updatedPageModel }
-            , Cmd.map BeolPageMsg updatedCmd
             )
 
         ( LinkClicked urlRequest, _ ) ->
