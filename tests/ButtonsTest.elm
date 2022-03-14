@@ -5,17 +5,17 @@ import Test exposing (..)
 import Test.Html.Query as Query
 import Buttons.Button as Button
 import Buttons.Button exposing (primaryButton, secondaryButton)
-import Buttons.Shared exposing (ButtonSize(..))
 import Html exposing (Html)
 import Test.Html.Selector
 import Icon
-import Heroicons.Solid
 import Buttons.Button exposing (whiteButton)
+import Buttons.BasicButtons.BasicButton exposing (BasicButtonSize(..))
+import Buttons.CircularButton exposing (CircularButtonSize(..))
 
 
 
 primary : Html msg
-primary  = primaryButton [] "Primary Button" ExtraSmall
+primary  = primaryButton [] "Primary Button" BasicExtraSmall
 primaryCreated : Test
 primaryCreated =
     test "One 'Normal' sized primary button should be created via the initialModel." <|
@@ -26,7 +26,7 @@ primaryCreated =
                 |> Query.count (Expect.equal 1)
 
 secondary : Html msg
-secondary  = secondaryButton [] "Secondary Button" ExtraSmall
+secondary  = secondaryButton [] "Secondary Button" BasicExtraSmall
 secondaryCreated : Test
 secondaryCreated =
     test "One 'ExtraSmall' sized secondary button should be created via the initialModel." <|
@@ -37,7 +37,7 @@ secondaryCreated =
                 |> Query.count (Expect.equal 1)
 
 white : Html msg
-white  = whiteButton[] "White Button" ExtraSmall
+white  = whiteButton[] "White Button" BasicExtraSmall
 whiteCreated : Test
 whiteCreated =
     test "One 'ExtraLarge' sized white button should be created via the initialModel." <|
@@ -48,7 +48,7 @@ whiteCreated =
                 |> Query.count (Expect.equal 1)
 
 circular : Html msg
-circular  = Button.circular (Large, Icon.AcademicCap)
+circular  = Button.circular (CircularLarge, Icon.AcademicCap)
 circularCreated : Test
 circularCreated =
     test "One 'Large' sized circular button should be created via the initialModel." <|

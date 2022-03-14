@@ -1,49 +1,41 @@
 module Buttons.Button exposing (..)
 
 import Buttons.BasicButtons.BasicButton exposing (Variant(..), basicButton)
-import Buttons.CircularButton as CircularButton
-import Buttons.LeadingIconButton as LeadingIconButton
-import Buttons.Shared exposing (ButtonSize(..))
-import Buttons.TrailingIconButton as TrailingIconButton
+import Buttons.CircularButton as CircularButton exposing (CircularButtonSize)
+import Buttons.BasicButtons.BasicButton exposing (BasicButtonSize)
+import Buttons.LeadingIconButton as LeadingIconButton exposing (LeadingSize(..))
+import Buttons.TrailingIconButton as TrailingIconButton exposing (TrailingSize(..))
 import Icon
 import Html exposing (Html)
 import Html.Styled exposing (Attribute)
 import VirtualDom exposing (Node)
 
-
-
 -- convenience function: returns a basicButton with the Variant "Primary"
-
-
-primaryButton : List (Attribute msg) -> String -> ButtonSize -> Node msg
+primaryButton : List (Attribute msg) -> String -> BasicButtonSize -> Node msg
 primaryButton attrs txt size =
     basicButton attrs txt size Primary
 
-
-
-circular : ( ButtonSize, Icon.Icon ) -> Html msg
 -- convenience function: returns a basicButton with the Variant "Secondary"
-circular (size, icon) =
-    CircularButton.view({size = size, icon = icon})
-
-secondaryButton : List (Attribute msg) -> String -> ButtonSize -> Node msg
+secondaryButton : List (Attribute msg) -> String -> BasicButtonSize -> Node msg
 secondaryButton attrs txt size =
     basicButton attrs txt size Secondary
 
-
-
 -- convenience function: returns a basicButton with the Variant "White"
-
-
-whiteButton : List (Attribute msg) -> String -> ButtonSize -> Node msg
+whiteButton : List (Attribute msg) -> String -> BasicButtonSize -> Node msg
 whiteButton attrs txt size =
     basicButton attrs txt size White
 
+-- convenience function: returns a basicButton with the Variant "Circular"
+circular : ( CircularButtonSize, Icon.Icon ) -> Html msg
+circular (size, icon) =
+    CircularButton.view({size = size, icon = icon})
 
-leadingIcon : (LeadingIconButton.Size, String, Icon.Icon) -> Html msg
+-- convenience function: returns a basicButton with the Variant "LeadingIcon"
+leadingIcon : (LeadingSize, String, Icon.Icon) -> Html msg
 leadingIcon (size, text, icon) =
     LeadingIconButton.view ({size = size, text = text, icon = icon})
 
-trailingIcon: (TrailingIconButton.Size, String, Icon.Icon) -> Html msg
+-- convenience function: returns a basicButton with the Variant "TrailingIcon"
+trailingIcon: (TrailingSize, String, Icon.Icon) -> Html msg
 trailingIcon (size, text, icon) =
     TrailingIconButton.view ({size = size, text = text, icon = icon})

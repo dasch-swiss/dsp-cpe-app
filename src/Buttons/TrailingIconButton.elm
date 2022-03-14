@@ -3,7 +3,6 @@ module Buttons.TrailingIconButton exposing (..)
 import Browser
 import Css
 import Css.Global
-import Heroicons.Solid
 import Html.Styled as Styled
 import Html.Styled.Attributes as Attr
 import Tailwind.Utilities as Tw
@@ -11,21 +10,15 @@ import VirtualDom
 import Icon
 
 
-type Size
-    = Small
-    | Normal
-    | Large
-    | ExtraLarge
-
-
-type ButtonType
-    = Button
-    | Submit
-    | Reset
+type TrailingSize
+    = TrailingSmall
+    | TrailingNormal
+    | TrailingLarge
+    | TrailingExtraLarge
 
 
 type alias Model =
-    { size : Size
+    { size : TrailingSize
     , text : String
     , icon : Icon.Icon
     }
@@ -43,7 +36,7 @@ main =
 
 initialModel : Model
 initialModel =
-    { size = Normal
+    { size = TrailingNormal
     , text = "Default"
     , icon = Icon.EmojiHappy
     }
@@ -81,26 +74,26 @@ view model =
     let
         btnStyle =
             case model.size of
-                Small ->
+                TrailingSmall ->
                     [ Tw.px_3
                     , Tw.py_2
                     , Tw.text_sm
                     , Tw.leading_4
                     ]
 
-                Normal ->
+                TrailingNormal ->
                     [ Tw.px_4
                     , Tw.py_2
                     , Tw.text_sm
                     ]
 
-                Large ->
+                TrailingLarge ->
                     [ Tw.px_4
                     , Tw.py_2
                     , Tw.text_base
                     ]
 
-                ExtraLarge ->
+                TrailingExtraLarge ->
                     [ Tw.px_6
                     , Tw.py_3
                     , Tw.text_base
@@ -108,28 +101,28 @@ view model =
 
         svgStyle =
             case model.size of
-                Small ->
+                TrailingSmall ->
                     [ Tw.ml_2
                     , Tw.neg_mr_0_dot_5
                     , Tw.h_4
                     , Tw.w_4
                     ]
 
-                Normal ->
+                TrailingNormal ->
                     [ Tw.ml_2
                     , Tw.neg_mr_1
                     , Tw.h_5
                     , Tw.w_5
                     ]
 
-                Large ->
+                TrailingLarge ->
                     [ Tw.ml_3
                     , Tw.neg_mr_1
                     , Tw.h_5
                     , Tw.w_5
                     ]
 
-                ExtraLarge ->
+                TrailingExtraLarge ->
                     [ Tw.ml_3
                     , Tw.neg_mr_1
                     , Tw.h_5

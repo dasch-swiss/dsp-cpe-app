@@ -1,11 +1,12 @@
 module Projects.TailwindPlayground exposing (..)
 
 import Avatars.Avatar exposing (circular)
-import Avatars.CircularAvatar as CircularAvatar
+import Avatars.CircularAvatar exposing (CircularAvatarSize(..))
 import Buttons.Button as Button exposing (primaryButton, secondaryButton, whiteButton)
-import Buttons.LeadingIconButton as LeadingIconButton
-import Buttons.Shared exposing (ButtonSize(..))
-import Buttons.TrailingIconButton as TrailingIconButton
+import Buttons.LeadingIconButton exposing (LeadingSize(..))
+import Buttons.BasicButtons.BasicButton exposing (BasicButtonSize(..))
+import Buttons.CircularButton exposing (CircularButtonSize(..))
+import Buttons.TrailingIconButton exposing (TrailingSize(..))
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Icon as Icon
@@ -30,49 +31,49 @@ view _ =
         [ div [ class "buttons" ]
             [ div [ class "preview primary-button" ]
                 [ h3 [ class "header" ] [ text "Primary Buttons" ]
-                , primaryButton [] "Extra small" ExtraSmall
-                , primaryButton [] "Small" Small
-                , primaryButton [] "Normal" Normal
-                , primaryButton [] "Large" Large
-                , primaryButton [] "Extra large" ExtraLarge
+                , primaryButton [] "Extra small" BasicExtraSmall
+                , primaryButton [] "Small" BasicSmall
+                , primaryButton [] "Normal" BasicNormal
+                , primaryButton [] "Large" BasicLarge
+                , primaryButton [] "Extra large" BasicExtraLarge
                 ]
             , div [ class "preview secondary-button" ]
                 [ h3 [ class "header" ] [ text "Secondary Buttons" ]
-                , secondaryButton [] "Extra small" ExtraSmall
-                , secondaryButton [] "Small" Small
-                , secondaryButton [] "Normal" Normal
-                , secondaryButton [] "Large" Large
-                , secondaryButton [] "Extra large" ExtraLarge
+                , secondaryButton [] "Extra small" BasicExtraSmall
+                , secondaryButton [] "Small" BasicSmall
+                , secondaryButton [] "Normal" BasicNormal
+                , secondaryButton [] "Large" BasicLarge
+                , secondaryButton [] "Extra large" BasicExtraLarge
                 ]
             , div [ class "preview white-button" ]
                 [ h3 [ class "header" ] [ text "White Buttons" ]
-                , whiteButton [] "Extra small" ExtraSmall
-                , whiteButton [] "Small" Small
-                , whiteButton [] "Normal" Normal
-                , whiteButton [] "Large" Large
-                , whiteButton [] "Extra large" ExtraLarge
+                , whiteButton [] "Extra small" BasicExtraSmall
+                , whiteButton [] "Small" BasicSmall
+                , whiteButton [] "Normal" BasicNormal
+                , whiteButton [] "Large" BasicLarge
+                , whiteButton [] "Extra large" BasicExtraLarge
                 ]
             , div [ class "preview circular-button" ]
                 [ h3 [ class "header" ] [ text "Circular Buttons" ]
-                , Button.circular ( ExtraSmall, Icon.ArrowRight )
-                , Button.circular ( Small, Icon.Annotation )
-                , Button.circular ( Normal, Icon.Plus )
-                , Button.circular ( Large, Icon.Check )
-                , Button.circular ( ExtraLarge, Icon.EmojiHappy )
+                , Button.circular ( CircularExtraSmall, Icon.ArrowRight )
+                , Button.circular ( CircularSmall, Icon.Annotation )
+                , Button.circular ( CircularNormal, Icon.Plus )
+                , Button.circular ( CircularLarge, Icon.Check )
+                , Button.circular ( CircularExtraLarge, Icon.EmojiHappy )
                 ]
             , div [ class "preview leading-button" ]
                 [ h3 [ class "header" ] [ text "Leading Icon Buttons" ]
-                , Button.leadingIcon ( LeadingIconButton.Small, "Small", Icon.Annotation )
-                , Button.leadingIcon ( LeadingIconButton.Normal, "Normal", Icon.EmojiHappy )
-                , Button.leadingIcon ( LeadingIconButton.Large, "Large", Icon.Plus )
-                , Button.leadingIcon ( LeadingIconButton.ExtraLarge, "Extra Large", Icon.Check )
+                , Button.leadingIcon ( LeadingSmall, "Small", Icon.Annotation )
+                , Button.leadingIcon ( LeadingNormal, "Normal", Icon.EmojiHappy )
+                , Button.leadingIcon ( LeadingLarge, "Large", Icon.Plus )
+                , Button.leadingIcon ( LeadingExtraLarge, "Extra Large", Icon.Check )
                 ]
             , div [ class "preview leading-button" ]
                 [ h3 [ class "header" ] [ text "Trailing Icon Buttons" ]
-                , Button.trailingIcon ( TrailingIconButton.Small, "Small", Icon.Annotation )
-                , Button.trailingIcon ( TrailingIconButton.Normal, "Normal", Icon.EmojiHappy )
-                , Button.trailingIcon ( TrailingIconButton.Large, "Large", Icon.Plus )
-                , Button.trailingIcon ( TrailingIconButton.ExtraLarge, "Extra Large", Icon.Check )
+                , Button.trailingIcon ( TrailingSmall, "Small", Icon.Annotation )
+                , Button.trailingIcon ( TrailingNormal, "Normal", Icon.EmojiHappy )
+                , Button.trailingIcon ( TrailingLarge, "Large", Icon.Plus )
+                , Button.trailingIcon ( TrailingExtraLarge, "Extra Large", Icon.Check )
                 ]
 
             -- insert other buttons here
@@ -81,27 +82,27 @@ view _ =
             [ div [ class "preview circular-avatar" ]
                 [ h3 [ class "header" ] [ text "Circular Avatar" ]
                 , circular
-                    ( CircularAvatar.ExtraSmall
+                    ( CircularAvatarExtraSmall
                     , "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                     , "Extra small"
                     )
                 , circular
-                    ( CircularAvatar.Small
+                    ( CircularAvatarSmall
                     , "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                     , "Small"
                     )
                 , circular
-                    ( CircularAvatar.Normal
+                    ( CircularAvatarNormal
                     , "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                     , "Normal"
                     )
                 , circular
-                    ( CircularAvatar.Large
+                    ( CircularAvatarLarge
                     , "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                     , "Large"
                     )
                 , circular
-                    ( CircularAvatar.ExtraLarge
+                    ( CircularAvatarExtraLarge
                     , "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                     , "Extra large"
                     )

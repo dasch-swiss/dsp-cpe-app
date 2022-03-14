@@ -2,7 +2,7 @@ module Projects.ListProjects exposing (Model, Msg, init, update, view)
 
 import Browser.Navigation as Nav
 import Buttons.Button exposing (primaryButton)
-import Buttons.Shared exposing (ButtonSize(..))
+import Buttons.BasicButtons.BasicButton exposing (BasicButtonSize(..))
 import Error exposing (buildErrorMessage)
 import Html exposing (Html, div, h2, h3, text)
 import Html.Attributes exposing (class)
@@ -58,7 +58,7 @@ view model =
             [ h2 [] [ text "DSP CPE APP" ]
             ]
         , div [ class "buttons" ]
-            [ primaryButton [ Html.Styled.Events.onClick (ClickedProject "/playground") ] "playground" Normal ]
+            [ primaryButton [ Html.Styled.Events.onClick (ClickedProject "/playground") ] "playground" BasicNormal ]
         , div [ class "header" ]
             [ h2 [] [ text "Projects" ]
             ]
@@ -92,7 +92,7 @@ viewProject project =
         projectPath =
             "/project/" ++ Project.idToString project.id
     in
-    primaryButton [ Html.Styled.Events.onClick (ClickedProject projectPath) ] project.title Normal
+    primaryButton [ Html.Styled.Events.onClick (ClickedProject projectPath) ] project.title BasicNormal
 
 viewFetchError : String -> Html Msg
 viewFetchError errorMessage =

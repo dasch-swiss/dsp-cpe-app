@@ -2,7 +2,7 @@ module Buttons.Counter exposing (..)
 
 import Browser
 import Buttons.Button exposing (primaryButton, secondaryButton)
-import Buttons.Shared exposing (ButtonSize(..))
+import Buttons.BasicButtons.BasicButton exposing (BasicButtonSize(..))
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Html.Styled.Attributes exposing (disabled, id)
@@ -43,14 +43,14 @@ view model =
     div []
         [ div []
             [ h3 [ class "header" ] [ text "onClick implementation" ]
-            , secondaryButton [ onClick Increment ] "Click me to increase" ExtraLarge
+            , secondaryButton [ onClick Increment ] "Click me to increase" BasicExtraLarge
             , div [] [ text (String.fromInt model) ]
-            , secondaryButton [ onClick Decrement ] "Click me to decrease" ExtraLarge
+            , secondaryButton [ onClick Decrement ] "Click me to decrease" BasicExtraLarge
             ]
         , div []
             [ h3 [ class "header" ] [ text "passing events, attributes" ]
-            , div [] [ primaryButton [ disabled True, onClick Increment ] "I am disabled and can not increase" ExtraLarge ]
-            , div [] [ primaryButton [ disabled False, onClick Increment ] "I am enabled and can increase" ExtraLarge ]
-            , div [] [ primaryButton [ id "decrement_button", onClick Decrement ] "I decrease, like my id says" ExtraLarge ]
+            , div [] [ primaryButton [ disabled True, onClick Increment ] "I am disabled and can not increase" BasicExtraLarge ]
+            , div [] [ primaryButton [ disabled False, onClick Increment ] "I am enabled and can increase" BasicExtraLarge ]
+            , div [] [ primaryButton [ id "decrement_button", onClick Decrement ] "I decrease, like my id says" BasicExtraLarge ]
             ]
         ]
