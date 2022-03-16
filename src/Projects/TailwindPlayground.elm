@@ -10,6 +10,8 @@ import Buttons.TrailingIconButton exposing (TrailingSize(..))
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Icon as Icon
+import NavigationHeader.HeaderModule exposing (cpeHeader)
+import NavigationHeader.Navitem exposing (NavItem)
 
 
 type alias Model =
@@ -108,6 +110,11 @@ view _ =
                     )
                 ]
             ]
+        , div [ class "header" ]
+            [ h3 [] [ text "Header module" ]
+            , div [] []
+            , div [] [ cpeHeader "https://beol.dasch.swiss/assets/images/beol-logo.png" False [ someNavitem, otherNavitem ] True ]
+            ]
         ]
 
 
@@ -119,3 +126,17 @@ update msg model =
 subscriptions : Model -> Sub msg
 subscriptions _ =
     Sub.none
+
+
+
+-- Navigation header data ...
+
+
+someNavitem : NavItem msg
+someNavitem =
+    { attrs = [], text = "Dasch", hRef = "https://www.dasch.swiss", cmd = Cmd.none, isActive = True }
+
+
+otherNavitem : NavItem msg
+otherNavitem =
+    { attrs = [], text = "Beol", hRef = "beol", cmd = Cmd.none, isActive = False }
