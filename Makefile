@@ -45,7 +45,7 @@ start-dev-server: ## start local dev server hosting db.json
 
 .PHONY: start-mock-api
 start-mock-api: docker-build-mock-api ## start local dev server hosting db.json
-	@docker run -d -p 2022:3000 -v $(CURRENT_DIR)/mock-api/db.json:/data/db/db.json $(DOCKER_IMAGE_MOCK_API)
+	@docker run -d -p 2022:3000 --name="CPE-Mock-API" -v $(CURRENT_DIR)/mock-api/db.json:/data/db/db.json $(DOCKER_IMAGE_MOCK_API)
 
 .PHONY: test
 test: ## run all tests
