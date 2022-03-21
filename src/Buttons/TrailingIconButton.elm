@@ -15,7 +15,7 @@ type TrailingSize
     | TrailingNormal
     | TrailingLarge
     | TrailingExtraLarge
-
+    
 
 type alias Model =
     { size : TrailingSize

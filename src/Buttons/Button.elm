@@ -3,6 +3,7 @@ module Buttons.Button exposing (..)
 import Buttons.BasicButtons.BasicButton exposing (Variant(..), basicButton)
 import Buttons.CircularButton as CircularButton exposing (CircularButtonSize)
 import Buttons.BasicButtons.BasicButton exposing (BasicButtonSize)
+import Buttons.DividerButton as DividerButton
 import Buttons.LeadingIconButton as LeadingIconButton exposing (LeadingSize(..))
 import Buttons.TrailingIconButton as TrailingIconButton exposing (TrailingSize(..))
 import Icon
@@ -39,3 +40,7 @@ leadingIcon (size, text, icon) =
 trailingIcon: (TrailingSize, String, Icon.Icon) -> Html msg
 trailingIcon (size, text, icon) =
     TrailingIconButton.view ({size = size, text = text, icon = icon})
+
+divider: List (Attribute msg) -> String -> Icon.Icon -> Html msg
+divider attr text icon =
+    DividerButton.view ({attr = attr, text = text, icon = icon})
