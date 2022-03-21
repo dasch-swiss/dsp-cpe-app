@@ -1,9 +1,9 @@
 module NavigationHeader.SearchBar exposing (..)
 
 import Css
-import Css.CpeColorTheme exposing (activeGray, passiveGray, white)
 import Html.Styled as HtmlStyled exposing (Attribute, Html)
 import Html.Styled.Attributes as Attr exposing (attribute, css, id)
+import NavigationHeader.CssColors exposing (activeGray, passiveGray, white)
 import Tailwind.Breakpoints as Bp
 import Tailwind.Utilities as Tw
 

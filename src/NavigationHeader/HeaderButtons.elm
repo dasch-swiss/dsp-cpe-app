@@ -1,10 +1,10 @@
 module NavigationHeader.HeaderButtons exposing (signInButton, signUpButton)
 
 import Css exposing (backgroundColor, border, borderColor, borderStyle, px, solid)
-import Css.CpeColorTheme exposing (primary, white)
 import Css.Global
 import Html.Styled as HtmlStyled exposing (Attribute, Html)
 import Html.Styled.Attributes as Attr
+import NavigationHeader.CssColors exposing (primary, white)
 import Tailwind.Utilities as Tw
 
 
