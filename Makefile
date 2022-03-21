@@ -17,6 +17,10 @@ docker-build-app: ## build APP image locally
 docker-build-mock-api: ## build mock API image locally
 	docker buildx build --platform linux/amd64 -t $(DOCKER_IMAGE_MOCK_API) -t $(MOCK_API_REPO):latest --load $(CURRENT_DIR)/mock-api/.
 
+.PHONY: docker-build-config
+docker-build-config:
+	docker buildx build --platform linux/amd64 -t $(DOCKER_IMAGE_CONFIG) -t $(CONFIG_REPO):latest --load $(CURRENT_DIR)/mock-api/.
+
 .PHONY: docker-publish-app
 docker-publish-app: ## publish APP Docker image to Docker-Hub
 	docker buildx build --platform linux/amd64 -t $(DOCKER_IMAGE) -t $(DOCKER_REPO):latest --push .
@@ -51,6 +55,10 @@ start-mock-api: docker-build-mock-api ## start docker container hosting db.json
 stop-mock-api: ## stop docker container hosting db.json
 	@docker stop CPE-Mock-API
 	@docker rm CPE-Mock-API
+
+.PHONY: config-dev
+config-dev: docker-build-config
+	@docker run -d -p 3333:3000 --name="Configuration" -v $(CURRENT_DIR)/config/config.dev.json:/data/db/config.dev.json $(DOCKER_IMAGE_CONFIG)
 
 .PHONY: test
 test: ## run all tests
