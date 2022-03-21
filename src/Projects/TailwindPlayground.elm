@@ -7,10 +7,11 @@ import Buttons.LeadingIconButton exposing (LeadingSize(..))
 import Buttons.BasicButtons.BasicButton exposing (BasicButtonSize(..))
 import Buttons.CircularButton exposing (CircularButtonSize(..))
 import Buttons.TrailingIconButton exposing (TrailingSize(..))
+import Dividers.Divider as Divider
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Icon as Icon
-
+import Text.ProjectDescription as ProjectDescription
 
 type alias Model =
     { text : String }
@@ -107,6 +108,17 @@ view _ =
                     , "Extra large"
                     )
                 ]
+            ]
+        , div [class "dividers"]
+            [ div [ class "preview leadingButton"]
+                [ h3 [ class "header"] [text "Leading Button Divider"]
+                , Divider.iconButtonDivider [] Icon.PlusSm "Read more"
+                ] 
+            ]
+        , div [class "text"]
+            [ div [ class "preview project description"]
+                [ h3 [ class "header"] [text "Project description"]
+                ] 
             ]
         ]
 
