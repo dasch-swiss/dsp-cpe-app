@@ -34,14 +34,14 @@ view : (Model msg) -> Html msg
 view model =
     HtmlStyled.toUnstyled <|
         HtmlStyled.div
-            [ Attr.css [Tw.relative]
+            [ Attr.css [ Tw.relative ]
 
             ]
             [ HtmlStyled.div
-            [ Attr.css [Tw.absolute, Tw.inset_0, Tw.flex, Tw.items_center]]
-                [HtmlStyled.div[Attr.css [Tw.w_full, Tw.border_t, Tw.border_gray_300]][]]
-            , HtmlStyled.div[Attr.css [Tw.relative, Tw.flex, Tw.justify_center]]
-                [HtmlStyled.fromUnstyled (divider model.buttonAttrs model.text model.icon)]
+            [ Attr.css [ Tw.absolute, Tw.inset_0, Tw.flex, Tw.items_center ]]
+                [ HtmlStyled.div[ Attr.css [ Tw.w_full, Tw.border_t, Tw.border_gray_300 ]][]]
+            , HtmlStyled.div[ Attr.css [Tw.relative, Tw.flex, Tw.justify_center ]]
+                [ HtmlStyled.fromUnstyled (divider model.buttonAttrs model.text model.icon) ]
             ]
 update : msg -> (Model msg) -> ( (Model msg), Cmd msg )
 update _ model =

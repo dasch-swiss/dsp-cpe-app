@@ -1,19 +1,11 @@
 module Text.ProjectDescription exposing (..)
 import Dividers.Divider as Divider
 import Icon
-import Browser
 import Html.Styled.Events exposing (onClick)
 import Html.Styled.Attributes as Attr
-import Html.Styled as Styled exposing ( textarea, div, text)
+import Html.Styled as Styled exposing ( p, div, text)
 import VirtualDom
-main : Program () Model Msg
-main =
-    Browser.element
-        { init = init
-        , view = view
-        , update = update
-        , subscriptions = subscriptions
-        }
+import Tailwind.Utilities as Tw
 type alias Model =
     { isOpen: Bool
     , text: String
@@ -27,7 +19,12 @@ type Msg
 initialModel : Model
 initialModel =
     { isOpen = False
-    , text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse consequat ac dolor at euismod. Nam vulputate, dolor eget sodales sodales, purus eros interdum dui, a dignissim est est eget orci. Curabitur nec finibus justo. Nam tincidunt tristique ipsum, in aliquet orci pulvinar rutrum. Proin vitae ullamcorper quam. Suspendisse consequat dui nec mattis vehicula. In ligula ex, malesuada et leo quis, gravida tincidunt odio. Suspendisse pellentesque nulla id elit condimentum, at viverra tellus blandit. Integer facilisis posuere posuere. Vestibulum vitae orci in erat vehicula varius. Ut interdum consectetur erat, eget fermentum orci ultrices in. Mauris lacinia dolor convallis, porta sem at, mollis sapien. Sed nec pharetra lectus. Sed mattis ipsum molestie semper finibus."
+    , text = """Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus 
+            est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, 
+            no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+            Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, 
+            vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod 
+            tincidunt ut laoreet dolore magna aliquam erat volutpat."""
     }
 init : () -> ( Model, Cmd Msg )
 init _ =
@@ -38,23 +35,28 @@ view model =
     if model.isOpen then
         Styled.toUnstyled <|
             div [][
-                    textarea [] [text model.text]
-                    , Styled.fromUnstyled <| Divider.iconButtonDivider [onClick Hide] Icon.PlusSm "Read Less"
-                ]
+                div[ Attr.css [Tw.mt_6, Tw.prose, Tw.prose_indigo, Tw.prose_lg, Tw.text_gray_500, Tw.mx_auto]][p [ Attr.style "padding-bottom" "1%"] [ text model.text ] ]
+                , Styled.fromUnstyled <| Divider.iconButtonDivider [onClick Hide] Icon.PlusSm "Read Less"
+            ]
     else
         Styled.toUnstyled <|
             div [][
-                textarea [Attr.rows 6] [text model.text]
+                div[Attr.css [Tw.mt_6, Tw.prose, Tw.prose_indigo, Tw.prose_lg, Tw.text_gray_500, Tw.mx_auto]]
+                    [ p
+                        [ Attr.style "overflow" "hidden"
+                        , Attr.style "text-overflow" "ellipsis"
+                        , Attr.style "display" "-webkit-box"
+                        , Attr.style "-webkit-line-clamp" "6"
+                        , Attr.style "line-clamp" "6"
+                        , Attr.style "-webkit-box-orient" "vertical"
+                        , Attr.style "padding-bottom" "1%" ] [text model.text]]
                 , Styled.fromUnstyled <| Divider.iconButtonDivider [onClick Show] Icon.PlusSm "Read More"
             ]
-{-TODO: Handle cases if text is not long enough to show more etc. Style the textareas-}
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Msg -> Model -> Model
 update msg model =
     case msg of
         Show -> 
-            (({isOpen = True, text = model.text}), Cmd.none)
-        Hide -> (({isOpen = False, text = model.text}), Cmd.none)
+            ({isOpen = True, text = model.text})
+        Hide -> (
+            {isOpen = False, text = model.text})
 
-
-subscriptions _ =
-    Sub.none

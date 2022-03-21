@@ -14,20 +14,24 @@ import Icon as Icon
 import Text.ProjectDescription as ProjectDescription
 
 type alias Model =
-    { text : String }
+    { text : String
+    , projectDescriptionModel: ProjectDescription.Model }
 
 
 type Msg
-    = NoOp
+    = ProjDes ProjectDescription.Msg
 
-
+initialModel : Model
+initialModel =
+    { text="playground"
+    , projectDescriptionModel = ProjectDescription.initialModel }
 init : ( Model, Cmd Msg )
 init =
-    ( { text = "playground" }, Cmd.none )
+    ( initialModel, Cmd.none )
 
 
 view : Model -> Html Msg
-view _ =
+view model =
     div [ class "playground" ]
         [ div [ class "buttons" ]
             [ div [ class "preview primary-button" ]
@@ -109,15 +113,10 @@ view _ =
                     )
                 ]
             ]
-        , div [class "dividers"]
-            [ div [ class "preview leadingButton"]
-                [ h3 [ class "header"] [text "Leading Button Divider"]
-                , Divider.iconButtonDivider [] Icon.PlusSm "Read more"
-                ] 
-            ]
         , div [class "text"]
             [ div [ class "preview project description"]
                 [ h3 [ class "header"] [text "Project description"]
+                , ProjectDescription.view model.projectDescriptionModel |> Html.map ProjDes
                 ] 
             ]
         ]
@@ -125,7 +124,11 @@ view _ =
 
 update : Msg -> Model -> ( Model, Cmd msg )
 update msg model =
-    ( model, Cmd.none )
+    case msg of
+        ProjDes projDesMsg -> 
+            ({ model
+                | projectDescriptionModel = 
+                    ProjectDescription.update projDesMsg model.projectDescriptionModel }, Cmd.none)
 
 
 subscriptions : Model -> Sub msg

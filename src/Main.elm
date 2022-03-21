@@ -30,6 +30,7 @@ type Msg
     | ViewProjectPageMsg ViewProject.Msg
     | PlaygroundPageMsg Playground.Msg
     | LinkClicked UrlRequest
+    
     | UrlChanged Url
 
 -- init main model and current page
