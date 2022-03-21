@@ -23,17 +23,24 @@ type Page
     | ViewProjectPage ViewProject.Model
     | PlaygroundPage Playground.Model
 
+
+
 -- each page in the app has it's own Msg type
 -- Main doesn't handle any page specific messages, it simply forwards them to the correct page module
+
+
 type Msg
     = ListProjectsPageMsg ListProjects.Msg
     | ViewProjectPageMsg ViewProject.Msg
     | PlaygroundPageMsg Playground.Msg
     | LinkClicked UrlRequest
-    
     | UrlChanged Url
 
+
+
 -- init main model and current page
+
+
 init : () -> Url -> Nav.Key -> ( Model, Cmd Msg )
 init _ url navKey =
     let
@@ -45,7 +52,11 @@ init _ url navKey =
     in
     initCurrentPage ( model, Cmd.none )
 
+
+
 -- init the current page based upon the current route
+
+
 initCurrentPage : ( Model, Cmd Msg ) -> ( Model, Cmd Msg )
 initCurrentPage ( model, existingCmds ) =
     let
@@ -76,7 +87,8 @@ initCurrentPage ( model, existingCmds ) =
                     ( PlaygroundPage pageModel, Cmd.map PlaygroundPageMsg pageCmds )
     in
     ( { model | page = currentPage }
-    , Cmd.batch [ existingCmds, mappedPageCmds ] -- take a list of commands and batch them together so that we can hand them all to the runtime at the same time. The runtime then executes them in an arbitrary order.
+    , Cmd.batch [ existingCmds, mappedPageCmds ]
+      -- take a list of commands and batch them together so that we can hand them all to the runtime at the same time. The runtime then executes them in an arbitrary order.
     )
 
 
@@ -86,7 +98,11 @@ view model =
     , body = [ currentView model ]
     }
 
+
+
 -- change view depending on the current page stored in the model
+
+
 currentView : Model -> Html Msg
 currentView model =
     case model.page of
@@ -110,8 +126,12 @@ notFoundView : Html msg
 notFoundView =
     h3 [] [ text "Page not found" ]
 
+
+
 -- call the current pages update method with the forwarded Msg
 -- also handles Msg from Main, namely LinkClicked and UrlChanged
+
+
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case ( msg, model.page ) of

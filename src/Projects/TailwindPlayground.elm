@@ -2,10 +2,10 @@ module Projects.TailwindPlayground exposing (..)
 
 import Avatars.Avatar exposing (circular)
 import Avatars.CircularAvatar exposing (CircularAvatarSize(..))
-import Buttons.Button as Button exposing (primaryButton, secondaryButton, whiteButton)
-import Buttons.LeadingIconButton exposing (LeadingSize(..))
 import Buttons.BasicButtons.BasicButton exposing (BasicButtonSize(..))
+import Buttons.Button as Button exposing (primaryButton, secondaryButton, whiteButton)
 import Buttons.CircularButton exposing (CircularButtonSize(..))
+import Buttons.LeadingIconButton exposing (LeadingSize(..))
 import Buttons.TrailingIconButton exposing (TrailingSize(..))
 import Dividers.Divider as Divider
 import Html exposing (Html, div, h3, text)
@@ -13,18 +13,24 @@ import Html.Attributes exposing (class)
 import Icon as Icon
 import Text.ProjectDescription as ProjectDescription
 
+
 type alias Model =
     { text : String
-    , projectDescriptionModel: ProjectDescription.Model }
+    , projectDescriptionModel : ProjectDescription.Model
+    }
 
 
 type Msg
     = ProjDes ProjectDescription.Msg
 
+
 initialModel : Model
 initialModel =
-    { text="playground"
-    , projectDescriptionModel = ProjectDescription.initialModel }
+    { text = "playground"
+    , projectDescriptionModel = ProjectDescription.initialModel
+    }
+
+
 init : ( Model, Cmd Msg )
 init =
     ( initialModel, Cmd.none )
@@ -113,11 +119,11 @@ view model =
                     )
                 ]
             ]
-        , div [class "text"]
-            [ div [ class "preview project description"]
-                [ h3 [ class "header"] [text "Project description"]
+        , div [ class "text" ]
+            [ div [ class "preview project description" ]
+                [ h3 [ class "header" ] [ text "Project description" ]
                 , ProjectDescription.view model.projectDescriptionModel |> Html.map ProjDes
-                ] 
+                ]
             ]
         ]
 
@@ -125,10 +131,13 @@ view model =
 update : Msg -> Model -> ( Model, Cmd msg )
 update msg model =
     case msg of
-        ProjDes projDesMsg -> 
-            ({ model
-                | projectDescriptionModel = 
-                    ProjectDescription.update projDesMsg model.projectDescriptionModel }, Cmd.none)
+        ProjDes projDesMsg ->
+            ( { model
+                | projectDescriptionModel =
+                    ProjectDescription.update projDesMsg model.projectDescriptionModel
+              }
+            , Cmd.none
+            )
 
 
 subscriptions : Model -> Sub msg

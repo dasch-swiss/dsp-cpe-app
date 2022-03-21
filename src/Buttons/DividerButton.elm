@@ -9,11 +9,13 @@ import Icon
 import Tailwind.Utilities as Tw
 import VirtualDom
 
+
 type alias Model msg =
-    { attr: List (Attribute msg)
+    { attr : List (Attribute msg)
     , text : String
     , icon : Icon.Icon
     }
+
 
 main : Program () (Model msg) msg
 main =
@@ -25,7 +27,7 @@ main =
         }
 
 
-initialModel : (Model msg)
+initialModel : Model msg
 initialModel =
     { attr = []
     , text = "Read More"
@@ -33,7 +35,7 @@ initialModel =
     }
 
 
-init : () -> ((Model msg), Cmd msg )
+init : () -> ( Model msg, Cmd msg )
 init _ =
     ( initialModel, Cmd.none )
 
@@ -63,7 +65,8 @@ baseButton =
         [ Tw.bg_gray_50 ]
     ]
 
-view : (Model msg) -> VirtualDom.Node msg
+
+view : Model msg -> VirtualDom.Node msg
 view model =
     let
         svgStyle =
@@ -71,29 +74,30 @@ view model =
             , Tw.mr_1
             , Tw.h_5
             , Tw.w_5
-            , Tw.text_gray_400 
+            , Tw.text_gray_400
             ]
 
         iconMethod =
-            Icon.getHtml(model.icon)
-
+            Icon.getHtml model.icon
     in
     Styled.toUnstyled <|
         Styled.button
-            (model.attr ++ [ Attr.type_ "button"
-            , Attr.css (baseButton)
-            ])
-            [ Styled.span ([ Attr.css svgStyle ]) [ Styled.fromUnstyled <| iconMethod ]
+            (model.attr
+                ++ [ Attr.type_ "button"
+                   , Attr.css baseButton
+                   ]
+            )
+            [ Styled.span [ Attr.css svgStyle ] [ Styled.fromUnstyled <| iconMethod ]
             , Styled.text model.text
             , Css.Global.global Tw.globalStyles
             ]
 
 
-update : msg -> (Model msg) -> ( (Model msg), Cmd msg )
+update : msg -> Model msg -> ( Model msg, Cmd msg )
 update _ model =
     ( model, Cmd.none )
 
 
-subscriptions : (Model msg) -> Sub msg
+subscriptions : Model msg -> Sub msg
 subscriptions _ =
     Sub.none
