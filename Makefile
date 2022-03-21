@@ -9,16 +9,24 @@ include vars.mk
 #################################
 # Build and publish targets
 #################################
-.PHONY: docker-build
-docker-build: ## build APP image locally
+.PHONY: docker-build-app
+docker-build-app: ## build APP image locally
 	docker buildx build --platform linux/amd64 -t $(DOCKER_IMAGE) -t $(DOCKER_REPO):latest --load .
 
-.PHONY: docker-publish
-docker-publish: ## publish APP Docker image to Docker-Hub
+.PHONY: docker-build-mock-api
+docker-build-mock-api: ## build mock API image locally
+	docker buildx build --platform linux/amd64 -t $(DOCKER_IMAGE_MOCK_API) -t $(MOCK_API_REPO):latest --load $(CURRENT_DIR)/mock-api/.
+
+.PHONY: docker-publish-app
+docker-publish-app: ## publish APP Docker image to Docker-Hub
 	docker buildx build --platform linux/amd64 -t $(DOCKER_IMAGE) -t $(DOCKER_REPO):latest --push .
 
+.PHONY: docker-publish-mock-api
+docker-publish-mock-api: ## build mock API image locally
+	docker buildx build --platform linux/amd64 -t $(DOCKER_IMAGE_MOCK_API) -t $(MOCK_API_REPO):latest --push $(CURRENT_DIR)/mock-api/.
+
 .PHONY: docker-run
-docker-run: docker-build ## run docker image locall
+docker-run: docker-build ## run docker image locally
 	docker run -p 4200:4200 $(DOCKER_IMAGE)
 
 .PHONY: build
@@ -33,7 +41,16 @@ build-dev: ## build elm app in dev mode
 
 .PHONY: start-dev-server
 start-dev-server: ## start local dev server hosting db.json
-	@json-server --watch db.json -p 2022
+	@json-server --watch mock-api/db.json -p 2022
+
+.PHONY: start-mock-api
+start-mock-api: docker-build-mock-api ## start docker container hosting db.json
+	@docker run -d -p 2022:3000 --name="CPE-Mock-API" -v $(CURRENT_DIR)/mock-api/db.json:/data/db/db.json $(DOCKER_IMAGE_MOCK_API)
+
+.PHONY: stop-mock-api
+stop-mock-api: ## stop docker container hosting db.json
+	@docker stop CPE-Mock-API
+	@docker rm CPE-Mock-API
 
 .PHONY: test
 test: ## run all tests
