@@ -12,7 +12,9 @@ json-server (installed globally): `npm install -g json-server`
 
 ## Running the app
 
-Run: `json-server --watch db.json -p 2022` to start the local dev server. 
+Run: `start-dev-server` to start the local dev server.
+
+If you'd rather host the database via docker, you can run `make start-mock-api`.
 
 Then run: `make build-dev` to start the app.
 
