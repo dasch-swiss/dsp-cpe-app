@@ -1,4 +1,5 @@
 DOCKER_REPO := daschswiss/dsp-cpe-app
+MOCK_API_REPO := daschswiss/dsp-cpe-mock-api
 
 ifeq ($(BUILD_TAG),)
 	BUILD_TAG := $(shell git describe --tag --dirty --abbrev=7)
@@ -9,4 +10,8 @@ endif
 
 ifeq ($(DOCKER_IMAGE),)
 	DOCKER_IMAGE := $(DOCKER_REPO):$(BUILD_TAG)
+endif
+
+ifeq ($(DOCKER_IMAGE_MOCK_API),)
+	DOCKER_IMAGE_MOCK_API := $(MOCK_API_REPO):$(BUILD_TAG)
 endif
