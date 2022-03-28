@@ -16,10 +16,6 @@ navBar nb =
     HtmlStyled.div [ Attr.css navBarInner ] (renderNavItems nb)
 
 
-
-{- , HtmlStyled.div [ Attr.css navBarInner ] (renderNavButtons nb) -}
-
-
 renderNavItems : NavBar msg -> List (HtmlStyled.Html msg)
 renderNavItems nb =
     nb
@@ -27,13 +23,6 @@ renderNavItems nb =
 
 
 
-{-
-   renderNavButtons : NavBar msg-> List (HtmlStyled.Html msg)
-   renderNavButtons nb =
-       nb
-       |> List.map (\n -> HtmlStyled.div [] [ navButton n.attrs n.text])
-
--}
 -- styles
 
 

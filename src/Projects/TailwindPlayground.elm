@@ -125,7 +125,7 @@ view model =
             [ h3 [] [ text "Header module" ]
             , div [] []
             , div [] [ cpeHeader "https://beol.dasch.swiss/assets/images/beol-logo.png" False [ someNavitem, otherNavitem ] True ]
-        ]
+            ]
         , div [ class "text" ]
             [ div [ class "preview project description" ]
                 [ h3 [ class "header" ] [ text "Project description" ]
@@ -158,9 +158,9 @@ subscriptions _ =
 
 someNavitem : NavItem msg
 someNavitem =
-    { attrs = [], text = "Dasch", hRef = "https://www.dasch.swiss", cmd = Cmd.none, isActive = True }
+    { attrs = [], text = "Dasch", href = "https://www.dasch.swiss", cmd = Cmd.none, isActive = True }
 
 
 otherNavitem : NavItem msg
 otherNavitem =
-    { attrs = [], text = "Beol", hRef = "beol", cmd = Cmd.none, isActive = False }
+    { attrs = [], text = "Beol", href = "project/1", cmd = Cmd.none, isActive = False }

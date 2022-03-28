@@ -43,12 +43,12 @@ init _ =
 
 someNavitem : NavItem MyRoute
 someNavitem =
-    { attrs = [ onClick RouteOne ], text = "NavItem which does events", hRef = "#", cmd = Cmd.none, isActive = True }
+    { attrs = [ onClick RouteOne ], text = "NavItem which does events", href = "#", cmd = Cmd.none, isActive = True }
 
 
 otherNavitem : NavItem MyRoute
 otherNavitem =
-    { attrs = [ onClick RouteTwo ], text = "other NavItem", hRef = "#", cmd = Cmd.none, isActive = False }
+    { attrs = [ onClick RouteTwo ], text = "other NavItem", href = "#", cmd = Cmd.none, isActive = False }
 
 
 view model =

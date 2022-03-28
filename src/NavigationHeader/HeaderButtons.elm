@@ -10,7 +10,7 @@ import Tailwind.Utilities as Tw
 
 signUpButton : List (Attribute msg) -> String -> Html msg
 signUpButton attrs txt =
-    view attrs txt singUpStyle
+    view attrs txt signUpStyle
 
 
 signInButton : List (Attribute msg) -> String -> Html msg
@@ -31,8 +31,8 @@ view attrs txt style =
         ]
 
 
-singUpStyle : List Css.Style
-singUpStyle =
+signUpStyle : List Css.Style
+signUpStyle =
     [ Tw.px_4
     , Tw.py_2
     , Tw.inline_flex
