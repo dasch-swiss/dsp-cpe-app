@@ -1,6 +1,5 @@
 module Buttons.CircularButton exposing (..)
 
-import Browser
 import Css
 import Css.Global
 import Html.Styled as HtmlStyled
@@ -10,6 +9,7 @@ import Svg.Attributes exposing (..)
 import Tailwind.Utilities as Tw
 import VirtualDom
 
+
 type CircularButtonSize
     = CircularExtraSmall
     | CircularSmall
@@ -17,29 +17,12 @@ type CircularButtonSize
     | CircularLarge
     | CircularExtraLarge
 
-main : Program () Model msg
-main =
-    Browser.element
-        { init = init
-        , view = view
-        , update = update
-        , subscriptions = subscriptions
-        }
 
 type alias Model =
     { size : CircularButtonSize
     , icon : Icon.Icon
     }
 
-initialModel : Model
-initialModel =
-    { size = CircularNormal
-    , icon = Icon.Plus
-    }
-
-init : () -> ( Model, Cmd msg )
-init _ =
-    ( initialModel, Cmd.none )
 
 circularButtonStyle : List Css.Style
 circularButtonStyle =
@@ -61,6 +44,7 @@ circularButtonStyle =
         [ Tw.bg_indigo_700
         ]
     ]
+
 
 view : Model -> VirtualDom.Node msg
 view model =
@@ -97,13 +81,6 @@ view model =
             , Attr.class "circular-button"
             , Attr.css (btnSize ++ circularButtonStyle)
             ]
-            [ HtmlStyled.span [ Attr.css icnSize ] [ HtmlStyled.fromUnstyled <| Icon.getHtml(model.icon) ]
+            [ HtmlStyled.span [ Attr.css icnSize ] [ HtmlStyled.fromUnstyled <| Icon.getHtml model.icon ]
             , Css.Global.global Tw.globalStyles
             ]
-
-update : msg -> Model -> ( Model, Cmd msg )
-update _ model =
-    ( model, Cmd.none )
-
-subscriptions _ =
-    Sub.none

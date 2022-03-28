@@ -1,6 +1,5 @@
 module Buttons.LeadingIconButton exposing (..)
 
-import Browser
 import Css
 import Css.Global
 import Html.Styled as Styled
@@ -22,28 +21,6 @@ type alias Model =
     , text : String
     , icon : Icon.Icon
     }
-
-main : Program () Model msg
-main =
-    Browser.element
-        { init = init
-        , view = view
-        , update = update
-        , subscriptions = subscriptions
-        }
-
-
-initialModel : Model
-initialModel =
-    { size = LeadingNormal
-    , text = "Default"
-    , icon = Icon.EmojiHappy
-    }
-
-
-init : () -> ( Model, Cmd msg )
-init _ =
-    ( initialModel, Cmd.none )
 
 
 baseButton : List Css.Style
@@ -129,8 +106,7 @@ view model =
                     ]
 
         iconMethod =
-            Icon.getHtml(model.icon)
-
+            Icon.getHtml model.icon
     in
     Styled.toUnstyled <|
         Styled.button
@@ -141,13 +117,3 @@ view model =
             , Styled.text model.text
             , Css.Global.global Tw.globalStyles
             ]
-
-
-update : msg -> Model -> ( Model, Cmd msg )
-update _ model =
-    ( model, Cmd.none )
-
-
-subscriptions : Model -> Sub msg
-subscriptions _ =
-    Sub.none

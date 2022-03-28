@@ -1,6 +1,5 @@
 module Buttons.DividerButton exposing (..)
 
-import Browser
 import Css
 import Css.Global
 import Html.Styled as Styled exposing (Attribute)
@@ -15,29 +14,6 @@ type alias Model msg =
     , text : String
     , icon : Icon.Icon
     }
-
-
-main : Program () (Model msg) msg
-main =
-    Browser.element
-        { init = init
-        , view = view
-        , update = update
-        , subscriptions = subscriptions
-        }
-
-
-initialModel : Model msg
-initialModel =
-    { attr = []
-    , text = "Read More"
-    , icon = Icon.PlusSm
-    }
-
-
-init : () -> ( Model msg, Cmd msg )
-init _ =
-    ( initialModel, Cmd.none )
 
 
 baseButton : List Css.Style
@@ -91,13 +67,3 @@ view model =
             , Styled.text model.text
             , Css.Global.global Tw.globalStyles
             ]
-
-
-update : msg -> Model msg -> ( Model msg, Cmd msg )
-update _ model =
-    ( model, Cmd.none )
-
-
-subscriptions : Model msg -> Sub msg
-subscriptions _ =
-    Sub.none
