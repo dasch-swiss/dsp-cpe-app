@@ -8,14 +8,14 @@ import Tailwind.Utilities as Tw
 
 
 nItem : List (Attribute msg) -> String -> String -> Cmd msg -> Bool -> Html msg
-nItem attrs text hRef cmd isActive =
-    navItem { attrs = attrs, text = text, hRef = hRef, cmd = cmd, isActive = isActive }
+nItem attrs text href cmd isActive =
+    navItem { attrs = attrs, text = text, href = href, cmd = cmd, isActive = isActive }
 
 
 type alias NavItem msg =
     { attrs : List (Attribute msg) -- onClick, disable and all other events as well as custom attributes
     , text : String
-    , hRef : String -- set to "#" if you like to run sth via onClick
+    , href : String -- set to "#" if you like to run sth via onClick
     , cmd : Cmd msg
     , isActive : Bool
     }
@@ -40,7 +40,7 @@ navItem n =
     HtmlStyled.nav []
         [ HtmlStyled.a
             (n.attrs
-                ++ [ Attr.href n.hRef
+                ++ [ Attr.href n.href
                    , Attr.css navItemStyle
                    , Attr.css (getStyle n.isActive)
                    ]

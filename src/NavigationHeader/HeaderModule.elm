@@ -1,6 +1,5 @@
 module NavigationHeader.HeaderModule exposing (..)
 
-import Css exposing (hex)
 import Html.Styled as HtmlStyled exposing (Attribute)
 import Html.Styled.Attributes exposing (attribute, css, id, src)
 import NavigationHeader.HeaderButtons exposing (signInButton, signUpButton)
@@ -13,37 +12,31 @@ import VirtualDom exposing (Node)
 
 cpeHeader : String -> Bool -> NavBar msg -> Bool -> Node msg
 cpeHeader logo signedIn bar showSb =
-    HtmlStyled.nav navHeaderBgCt
-        [ -- "bg-white shadow"
-          HtmlStyled.div navHeaderCt
-            [ -- "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"; Nav header container for elements & menu entries
-              HtmlStyled.div headerElementsCt
+    HtmlStyled.nav navHeaderBgCntr
+        [ HtmlStyled.div navHeaderCntr
+            [ -- Nav header container for elements & menu entries
+              HtmlStyled.div headerElementsCntr
                 [ -- "flex justify-between h-16"; Container for all the header elements
-                  HtmlStyled.div flexLeftElementsCt
-                    [ -- "flex"; Flex all left side elements
-                      HtmlStyled.div navBarLogoCt
-                        [ -- "flex-shrink-0 flex items-center"; shrinking icon / logo
-                          HtmlStyled.img [ src logo, css [ Tw.inline_block, Tw.max_h_12 ] ] []
+                  HtmlStyled.div flexLeftElementsCntr
+                    [ -- Flex all left side elements
+                      HtmlStyled.div navBarLogoCntr
+                        [ HtmlStyled.img [ src logo, css [ Tw.inline_block, Tw.max_h_12 ] ] []
                         ]
-                    , HtmlStyled.div mobileMenuButtonCt
-                        [-- "-ml-2 mr-2 flex items-center md:hidden", mobile menue button container
-                         -- Todo: 1) button; 2) button hides on medium screen size && if searchBar === open -> if/else ...
-                        ]
-                    , HtmlStyled.div navBarCt [ navBar bar ] -- NavBar container; unhides on medium screen size  "hidden md:ml-6 md:flex md:space-x-8"
-
-                    -- Todo: unhides also on collapse search bar
+                    , HtmlStyled.div mobileMenuButtonCntr
+                        []
+                    , HtmlStyled.div navBarCntr [ navBar bar ] -- NavBar container; unhides on medium screen size  "hidden md:ml-6 md:flex md:space-x-8"
                     ]
-                , HtmlStyled.div (searchBarCt showSb)
+                , HtmlStyled.div (searchBarCntr showSb)
                     [ searchBar
                     ]
 
                 -- the search bar
-                , HtmlStyled.div flexRightElementsCt
+                , HtmlStyled.div flexRightElementsCntr
                     -- right side elements: search bar, Buttons.
                     (buttonGroup signedIn)
                 ]
             ]
-        , HtmlStyled.div mobileMenuCt [] -- Container for mobile menu. Hidden if screen reaches medium size
+        , HtmlStyled.div mobileMenuCntr [] -- Container for mobile menu. Hidden if screen reaches medium size
         ]
         |> HtmlStyled.toUnstyled
 
@@ -70,13 +63,13 @@ buttonGroup signedIn =
 -- the navBar background container
 
 
-navHeaderBgCt : List (Attribute msg)
-navHeaderBgCt =
-    [ id "nav-header-bg-ct", attribute "data-tw-class" "bg-white shadow", navHeaderBgCtStyle ]
+navHeaderBgCntr : List (Attribute msg)
+navHeaderBgCntr =
+    [ id "nav-header-bg-cntr", attribute "data-tw-class" "bg-white shadow", navHeaderBgCntrStyle ]
 
 
-navHeaderBgCtStyle : Attribute msg
-navHeaderBgCtStyle =
+navHeaderBgCntrStyle : Attribute msg
+navHeaderBgCntrStyle =
     [ Tw.bg_white
     , Tw.shadow
     ]
@@ -87,13 +80,13 @@ navHeaderBgCtStyle =
 -- Container for the navHeader
 
 
-navHeaderCt : List (Attribute msg)
-navHeaderCt =
-    [ id "standard-view-ct", attribute "data-tw-class" "max-w-7xl mx-auto px-4", navHeaderCtStyle ]
+navHeaderCntr : List (Attribute msg)
+navHeaderCntr =
+    [ id "standard-view-cntr", attribute "data-tw-class" "max-w-7xl mx-auto px-4", navHeaderCntrStyle ]
 
 
-navHeaderCtStyle : Attribute msg
-navHeaderCtStyle =
+navHeaderCntrStyle : Attribute msg
+navHeaderCntrStyle =
     [ Tw.max_w_7xl
     , Tw.mx_auto
     , Tw.px_4
@@ -101,17 +94,13 @@ navHeaderCtStyle =
         |> css
 
 
-searchBarCt : Bool -> List (Attribute msg)
-searchBarCt showSb =
+searchBarCntr : Bool -> List (Attribute msg)
+searchBarCntr showSb =
     if showSb then
-        [ id "standard-view-ct", attribute "data-tw-class" "flex-1 flex justify-center px-2 lg:ml-6 lg:justify-end", searchBarStyle ]
+        [ id "standard-view-cntr", attribute "data-tw-class" "flex-1 flex justify-center px-2 lg:ml-6 lg:justify-end", searchBarStyle ]
 
     else
         [ css [ Tw.hidden ] ]
-
-
-
--- hides the search bar
 
 
 searchBarStyle : Attribute msg
@@ -125,17 +114,17 @@ searchBarStyle =
         |> css
 
 
-headerElementsCt : List (Attribute msg)
-headerElementsCt =
-    [ id "header-elements-ct", attribute "data-tw-class" "flex justify-between h-16", headerElementsCtStyle ]
+headerElementsCntr : List (Attribute msg)
+headerElementsCntr =
+    [ id "header-elements-cntr", attribute "data-tw-class" "flex justify-between h-16", headerElementsCntrStyle ]
 
 
 
 -- Container for all header elements
 
 
-headerElementsCtStyle : Attribute msg
-headerElementsCtStyle =
+headerElementsCntrStyle : Attribute msg
+headerElementsCntrStyle =
     [ Tw.flex
     , Tw.justify_between
     , Tw.h_16
@@ -147,18 +136,18 @@ headerElementsCtStyle =
 -- Container for al left elements
 
 
-flexLeftElementsCt : List (Attribute msg)
-flexLeftElementsCt =
-    [ id "flex-left-elements-ct", attribute "data-tw-class" "flex", css [ Tw.flex ] ]
+flexLeftElementsCntr : List (Attribute msg)
+flexLeftElementsCntr =
+    [ id "flex-left-elements-cntr", attribute "data-tw-class" "flex", css [ Tw.flex ] ]
 
 
-mobileMenuButtonCt : List (Attribute msg)
-mobileMenuButtonCt =
-    [ id "mobile-menu-button-ct", attribute "data-tw-class" "-ml-2 mr-2 flex items-center md:hidden", mobileMenuButtonCtStyle ]
+mobileMenuButtonCntr : List (Attribute msg)
+mobileMenuButtonCntr =
+    [ id "mobile-menu-button-cntr", attribute "data-tw-class" "-ml-2 mr-2 flex items-center md:hidden", mobileMenuButtonCntrStyle ]
 
 
-mobileMenuButtonCtStyle : Attribute msg
-mobileMenuButtonCtStyle =
+mobileMenuButtonCntrStyle : Attribute msg
+mobileMenuButtonCntrStyle =
     [ Tw.neg_ml_2
     , Tw.mr_2
     , Tw.flex
@@ -168,24 +157,24 @@ mobileMenuButtonCtStyle =
         |> css
 
 
-navBarLogoCt : List (Attribute msg)
-navBarLogoCt =
-    [ id "navBar-logo-ct"
+navBarLogoCntr : List (Attribute msg)
+navBarLogoCntr =
+    [ id "navBar-logo-cntr"
     , attribute "data-tw-class" "flex-shrink-0 flex items-center"
     , css [ Tw.flex_shrink_0, Tw.items_center, Tw.h_3_dot_5 ]
     ]
 
 
-navBarCt : List (Attribute msg)
-navBarCt =
-    [ id "navbar-nav-ct"
+navBarCntr : List (Attribute msg)
+navBarCntr =
+    [ id "navbar-nav-cntr"
     , attribute "data-tw-class" "hidden md:ml-6 md:flex md:space-x-8"
-    , navBarCtStyle
+    , navBarCntrStyle
     ]
 
 
-navBarCtStyle : Attribute msg
-navBarCtStyle =
+navBarCntrStyle : Attribute msg
+navBarCntrStyle =
     [ Tw.hidden
     , Bp.md [ Tw.ml_6, Tw.flex, Tw.space_x_8 ]
     , Tw.self_center
@@ -194,21 +183,21 @@ navBarCtStyle =
 
 
 
--- Container for al left elements
+-- Container for all right elements
 
 
-flexRightElementsCt : List (Attribute msg)
-flexRightElementsCt =
-    [ id "flex-right-elements-ct", attribute "data-tw-class" "flex items-center space-x-4", css [ Tw.flex, Tw.items_center, Tw.space_x_4 ] ]
+flexRightElementsCntr : List (Attribute msg)
+flexRightElementsCntr =
+    [ id "flex-right-elements-cntr", attribute "data-tw-class" "flex items-center space-x-4", css [ Tw.flex, Tw.items_center, Tw.space_x_4 ] ]
 
 
 
 -- the mobile menue container. Hidden if the screen size reaches medium size
 
 
-mobileMenuCt : List (Attribute msg)
-mobileMenuCt =
-    [ id "mobile-view-ct"
+mobileMenuCntr : List (Attribute msg)
+mobileMenuCntr =
+    [ id "mobile-view-cntr"
     , attribute "data-tw-class" "md:hidden"
     , css
         [ Bp.md
@@ -217,37 +206,3 @@ mobileMenuCt =
             ]
         ]
     ]
-
-
-
--- colors
-
-
-primary : Css.Color
-primary =
-    medium_blue_700
-
-
-medium_blue_700 : Css.Color
-medium_blue_700 =
-    hex "#1D4ED8"
-
-
-medium_blue_500 : Css.Color
-medium_blue_500 =
-    hex "#1D4ED8"
-
-
-white : Css.Color
-white =
-    hex "#FFFFFF"
-
-
-passiveGray : Css.Color
-passiveGray =
-    hex "D1D5DB"
-
-
-activeGray : Css.Color
-activeGray =
-    hex "6B7280"
