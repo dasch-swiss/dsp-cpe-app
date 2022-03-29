@@ -192,7 +192,7 @@ flexRightElementsCntr =
 
 
 
--- the mobile menue container. Hidden if the screen size reaches medium size
+-- the mobile menu container. Hidden if the screen size reaches medium size
 
 
 mobileMenuCntr : List (Attribute msg)
