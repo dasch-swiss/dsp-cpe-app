@@ -3,11 +3,10 @@ module Projects.TailwindPlayground exposing (..)
 import Avatars.Avatar exposing (circular)
 import Avatars.CircularAvatar exposing (CircularAvatarSize(..))
 import Buttons.BasicButtons.BasicButton exposing (BasicButtonSize(..))
-import Buttons.Button as Button exposing (primaryButton, secondaryButton, whiteButton)
+import Buttons.Button exposing (circularButtonUnstyled, leadingIconButtonUnstyled, primaryButtonUnStyled, secondaryButtonUnStyled, trailingIconUnstyled, whiteButtonUnstyled)
 import Buttons.CircularButton exposing (CircularButtonSize(..))
 import Buttons.LeadingIconButton exposing (LeadingSize(..))
 import Buttons.TrailingIconButton exposing (TrailingSize(..))
-import Dividers.Divider as Divider
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Icon as Icon
@@ -42,49 +41,49 @@ view model =
         [ div [ class "buttons" ]
             [ div [ class "preview primary-button" ]
                 [ h3 [ class "header" ] [ text "Primary Buttons" ]
-                , primaryButton [] "Extra small" BasicExtraSmall
-                , primaryButton [] "Small" BasicSmall
-                , primaryButton [] "Normal" BasicNormal
-                , primaryButton [] "Large" BasicLarge
-                , primaryButton [] "Extra large" BasicExtraLarge
+                , primaryButtonUnStyled [] "Extra small" BasicExtraSmall
+                , primaryButtonUnStyled [] "Small" BasicSmall
+                , primaryButtonUnStyled [] "Normal" BasicNormal
+                , primaryButtonUnStyled [] "Large" BasicLarge
+                , primaryButtonUnStyled [] "Extra large" BasicExtraLarge
                 ]
             , div [ class "preview secondary-button" ]
                 [ h3 [ class "header" ] [ text "Secondary Buttons" ]
-                , secondaryButton [] "Extra small" BasicExtraSmall
-                , secondaryButton [] "Small" BasicSmall
-                , secondaryButton [] "Normal" BasicNormal
-                , secondaryButton [] "Large" BasicLarge
-                , secondaryButton [] "Extra large" BasicExtraLarge
+                , secondaryButtonUnStyled [] "Extra small" BasicExtraSmall
+                , secondaryButtonUnStyled [] "Small" BasicSmall
+                , secondaryButtonUnStyled [] "Normal" BasicNormal
+                , secondaryButtonUnStyled [] "Large" BasicLarge
+                , secondaryButtonUnStyled [] "Extra large" BasicExtraLarge
                 ]
             , div [ class "preview white-button" ]
                 [ h3 [ class "header" ] [ text "White Buttons" ]
-                , whiteButton [] "Extra small" BasicExtraSmall
-                , whiteButton [] "Small" BasicSmall
-                , whiteButton [] "Normal" BasicNormal
-                , whiteButton [] "Large" BasicLarge
-                , whiteButton [] "Extra large" BasicExtraLarge
+                , whiteButtonUnstyled [] "Extra small" BasicExtraSmall
+                , whiteButtonUnstyled [] "Small" BasicSmall
+                , whiteButtonUnstyled [] "Normal" BasicNormal
+                , whiteButtonUnstyled [] "Large" BasicLarge
+                , whiteButtonUnstyled [] "Extra large" BasicExtraLarge
                 ]
             , div [ class "preview circular-button" ]
                 [ h3 [ class "header" ] [ text "Circular Buttons" ]
-                , Button.circular ( CircularExtraSmall, Icon.ArrowRight )
-                , Button.circular ( CircularSmall, Icon.Annotation )
-                , Button.circular ( CircularNormal, Icon.Plus )
-                , Button.circular ( CircularLarge, Icon.Check )
-                , Button.circular ( CircularExtraLarge, Icon.EmojiHappy )
+                , circularButtonUnstyled [] Icon.ArrowRight CircularExtraSmall
+                , circularButtonUnstyled [] Icon.Annotation CircularSmall
+                , circularButtonUnstyled [] Icon.Plus CircularNormal
+                , circularButtonUnstyled [] Icon.Check CircularLarge
+                , circularButtonUnstyled [] Icon.EmojiHappy CircularExtraLarge
                 ]
             , div [ class "preview leading-button" ]
                 [ h3 [ class "header" ] [ text "Leading Icon Buttons" ]
-                , Button.leadingIcon ( LeadingSmall, "Small", Icon.Annotation )
-                , Button.leadingIcon ( LeadingNormal, "Normal", Icon.EmojiHappy )
-                , Button.leadingIcon ( LeadingLarge, "Large", Icon.Plus )
-                , Button.leadingIcon ( LeadingExtraLarge, "Extra Large", Icon.Check )
+                , leadingIconButtonUnstyled [] LeadingSmall "Small" Icon.Annotation
+                , leadingIconButtonUnstyled [] LeadingNormal "Normal" Icon.EmojiHappy
+                , leadingIconButtonUnstyled [] LeadingLarge "Large" Icon.Plus
+                , leadingIconButtonUnstyled [] LeadingExtraLarge "Extra Large" Icon.Check
                 ]
             , div [ class "preview leading-button" ]
                 [ h3 [ class "header" ] [ text "Trailing Icon Buttons" ]
-                , Button.trailingIcon ( TrailingSmall, "Small", Icon.Annotation )
-                , Button.trailingIcon ( TrailingNormal, "Normal", Icon.EmojiHappy )
-                , Button.trailingIcon ( TrailingLarge, "Large", Icon.Plus )
-                , Button.trailingIcon ( TrailingExtraLarge, "Extra Large", Icon.Check )
+                , trailingIconUnstyled [] TrailingSmall "Small" Icon.Annotation
+                , trailingIconUnstyled [] TrailingNormal "Normal" Icon.EmojiHappy
+                , trailingIconUnstyled [] TrailingLarge "Large" Icon.Plus
+                , trailingIconUnstyled [] TrailingExtraLarge "Extra Large" Icon.Check
                 ]
 
             -- insert other buttons here
