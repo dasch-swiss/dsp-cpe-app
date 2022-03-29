@@ -5,8 +5,8 @@ import Html exposing (div, text)
 import Html.Attributes exposing (class)
 import Html.Styled.Events exposing (onClick)
 import NavigationHeader.HeaderModule exposing (cpeHeader)
+import NavigationHeader.NavItem exposing (NavItem)
 import NavigationHeader.NavbarModule exposing (..)
-import NavigationHeader.Navitem exposing (NavItem)
 
 
 type alias Model =

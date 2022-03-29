@@ -3,7 +3,7 @@ module NavigationHeader.NavbarModule exposing (..)
 import Css
 import Html.Styled as HtmlStyled
 import Html.Styled.Attributes as Attr
-import NavigationHeader.Navitem exposing (NavItem, navItem)
+import NavigationHeader.NavItem exposing (NavItem, navItem)
 import Tailwind.Utilities as Tw
 
 

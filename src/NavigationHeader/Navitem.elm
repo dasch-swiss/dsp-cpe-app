@@ -1,4 +1,4 @@
-module NavigationHeader.Navitem exposing (..)
+module NavigationHeader.NavItem exposing (..)
 
 import Css
 import Css.Global

@@ -2,20 +2,23 @@ module Projects.ViewProject exposing (..)
 
 import Browser.Navigation as Nav
 import Error exposing (buildErrorMessage)
-import Html exposing (Html, div, text, h3)
+import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Http
-import Projects.Project exposing (Project, ProjectId, projectDecoder, idToString)
+import Projects.Project exposing (Project, ProjectId, idToString, projectDecoder)
 import RemoteData exposing (WebData)
+
 
 type alias Model =
     { project : WebData Project
     , navKey : Nav.Key
     }
 
+
 type Msg
     = FetchProject ProjectId
     | ProjectReceived (WebData Project)
+
 
 initialModel : Nav.Key -> Model
 initialModel navKey =
@@ -23,9 +26,11 @@ initialModel navKey =
     , project = RemoteData.Loading
     }
 
+
 init : ProjectId -> Nav.Key -> ( Model, Cmd Msg )
 init projectId navKey =
     ( initialModel navKey, fetchProject projectId )
+
 
 fetchProject : ProjectId -> Cmd Msg
 fetchProject projectId =
@@ -36,6 +41,7 @@ fetchProject projectId =
                 |> Http.expectJson (RemoteData.fromResult >> ProjectReceived)
         }
 
+
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
@@ -45,9 +51,11 @@ update msg model =
         FetchProject projectId ->
             ( { model | project = RemoteData.Loading }, fetchProject projectId )
 
+
 view : Model -> Html Msg
 view model =
     div [] [ viewProject model.project ]
+
 
 viewProject : WebData Project -> Html Msg
 viewProject project =
@@ -60,7 +68,7 @@ viewProject project =
 
         RemoteData.Success currentProject ->
             div [ class "project" ]
-                [ div [ class "header"] [ text currentProject.title]
+                [ div [ class "header" ] [ text currentProject.title ]
                 , div [ class "info" ]
                     [ div [ class "label" ]
                         [ text "Description:" ]
@@ -71,6 +79,7 @@ viewProject project =
 
         RemoteData.Failure httpError ->
             viewFetchError (buildErrorMessage httpError)
+
 
 viewFetchError : String -> Html Msg
 viewFetchError errorMessage =

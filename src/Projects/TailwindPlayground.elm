@@ -11,7 +11,7 @@ import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Icon as Icon
 import NavigationHeader.HeaderModule exposing (cpeHeader)
-import NavigationHeader.Navitem exposing (NavItem)
+import NavigationHeader.NavItem exposing (NavItem)
 import Text.ProjectDescription as ProjectDescription
 
 

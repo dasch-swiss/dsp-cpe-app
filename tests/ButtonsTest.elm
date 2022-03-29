@@ -1,7 +1,7 @@
 module ButtonsTest exposing (..)
 
 import Buttons.BasicButtons.BasicButton exposing (BasicButtonSize(..))
-import Buttons.Button as Button exposing (primaryButton, secondaryButton, whiteButton)
+import Buttons.Button as Button
 import Buttons.CircularButton exposing (CircularButtonSize(..))
 import Expect
 import Html exposing (Html)
