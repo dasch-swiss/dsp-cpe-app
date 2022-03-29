@@ -1,6 +1,5 @@
 module Buttons.BasicButtons.BasicButton exposing (..)
 
-import Browser
 import Buttons.BasicButtons.PrimaryButton exposing (primaryButtonStyle)
 import Buttons.BasicButtons.SecondaryButton exposing (secondaryButtonStyle)
 import Buttons.BasicButtons.WhiteButton exposing (whiteButtonStyle)
@@ -10,6 +9,7 @@ import Html.Styled as HtmlStyled exposing (Attribute)
 import Html.Styled.Attributes as Attr
 import Tailwind.Utilities as Tw
 import VirtualDom exposing (Node)
+
 
 type BasicButtonSize
     = BasicExtraSmall
@@ -70,15 +70,6 @@ renderBtnSize size =
             , Tw.text_base
             ]
 
-main : Program () (BasicButtonModel msg) msg
-main =
-    Browser.element
-        { init = init
-        , view = view
-        , update = update
-        , subscriptions = subscriptions
-        }
-
 
 type alias BasicButtonModel msg =
     { attrs : List (Attribute msg) -- onClick disable and all other events as well as custom attributes
@@ -88,7 +79,10 @@ type alias BasicButtonModel msg =
     }
 
 
+
 -- convenience function: Constructs the Buttonmodel and passes it into view; returns the view
+
+
 basicButton : List (Attribute msg) -> String -> BasicButtonSize -> Variant -> Node msg
 basicButton attributes text size variant =
     view { attrs = attributes, text = text, size = size, variant = variant }
@@ -98,16 +92,6 @@ type Variant
     = Primary
     | Secondary
     | White
-
-
-initialModel : BasicButtonModel msg
-initialModel =
-    { attrs = [], text = "", size = BasicNormal, variant = Primary }
-
-
-init : () -> ( BasicButtonModel msg, Cmd msg )
-init _ =
-    ( initialModel, Cmd.none )
 
 
 getVariant : Variant -> List Css.Style
@@ -135,13 +119,3 @@ view b =
             [ HtmlStyled.text b.text
             , Css.Global.global Tw.globalStyles
             ]
-
-
-update : a -> b -> ( b, Cmd msg )
-update _ buttonModel =
-    ( buttonModel, Cmd.none )
-
-
-subscriptions : BasicButtonModel msg -> Sub msg
-subscriptions _ =
-    Sub.none
