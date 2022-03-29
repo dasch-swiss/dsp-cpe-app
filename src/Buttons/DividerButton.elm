@@ -6,7 +6,6 @@ import Html.Styled as Styled exposing (Attribute)
 import Html.Styled.Attributes as Attr
 import Icon
 import Tailwind.Utilities as Tw
-import VirtualDom
 
 
 type alias Model msg =
@@ -42,7 +41,7 @@ baseButton =
     ]
 
 
-view : Model msg -> VirtualDom.Node msg
+view : Model msg -> Styled.Html msg
 view model =
     let
         svgStyle =
@@ -56,14 +55,13 @@ view model =
         iconMethod =
             Icon.getHtml model.icon
     in
-    Styled.toUnstyled <|
-        Styled.button
-            (model.attr
-                ++ [ Attr.type_ "button"
-                   , Attr.css baseButton
-                   ]
-            )
-            [ Styled.span [ Attr.css svgStyle ] [ Styled.fromUnstyled <| iconMethod ]
-            , Styled.text model.text
-            , Css.Global.global Tw.globalStyles
-            ]
+    Styled.button
+        (model.attr
+            ++ [ Attr.type_ "button"
+               , Attr.css baseButton
+               ]
+        )
+        [ Styled.span [ Attr.css svgStyle ] [ Styled.fromUnstyled <| iconMethod ]
+        , Styled.text model.text
+        , Css.Global.global Tw.globalStyles
+        ]
