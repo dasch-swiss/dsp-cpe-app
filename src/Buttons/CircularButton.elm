@@ -7,7 +7,6 @@ import Html.Styled.Attributes as Attr
 import Icon
 import Svg.Attributes exposing (..)
 import Tailwind.Utilities as Tw
-import VirtualDom
 
 
 type CircularButtonSize
