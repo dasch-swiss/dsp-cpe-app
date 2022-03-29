@@ -6,7 +6,6 @@ import Html.Styled as Styled
 import Html.Styled.Attributes as Attr
 import Icon
 import Tailwind.Utilities as Tw
-import VirtualDom
 
 
 type LeadingSize
@@ -16,8 +15,9 @@ type LeadingSize
     | LeadingExtraLarge
 
 
-type alias Model =
-    { size : LeadingSize
+type alias Model msg =
+    { attrs : List (Styled.Attribute msg)
+    , size : LeadingSize
     , text : String
     , icon : Icon.Icon
     }
@@ -45,7 +45,7 @@ baseButton =
     ]
 
 
-view : Model -> VirtualDom.Node msg
+view : Model msg -> Styled.Html msg
 view model =
     let
         btnStyle =
@@ -108,12 +108,11 @@ view model =
         iconMethod =
             Icon.getHtml model.icon
     in
-    Styled.toUnstyled <|
-        Styled.button
-            [ Attr.type_ "button"
-            , Attr.css (btnStyle ++ baseButton)
-            ]
-            [ Styled.span [ Attr.css svgStyle ] [ Styled.fromUnstyled <| iconMethod ]
-            , Styled.text model.text
-            , Css.Global.global Tw.globalStyles
-            ]
+    Styled.button
+        ([ Attr.type_ "button", Attr.css (btnStyle ++ baseButton) ]
+            ++ model.attrs
+        )
+        [ Styled.span [ Attr.css svgStyle ] [ Styled.fromUnstyled <| iconMethod ]
+        , Styled.text model.text
+        , Css.Global.global Tw.globalStyles
+        ]
