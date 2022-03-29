@@ -8,7 +8,6 @@ import Css.Global
 import Html.Styled as HtmlStyled exposing (Attribute)
 import Html.Styled.Attributes as Attr
 import Tailwind.Utilities as Tw
-import VirtualDom exposing (Node)
 
 
 type BasicButtonSize
@@ -83,7 +82,7 @@ type alias BasicButtonModel msg =
 -- convenience function: Constructs the Buttonmodel and passes it into view; returns the view
 
 
-basicButton : List (Attribute msg) -> String -> BasicButtonSize -> Variant -> Node msg
+basicButton : List (Attribute msg) -> String -> BasicButtonSize -> Variant -> HtmlStyled.Html msg
 basicButton attributes text size variant =
     view { attrs = attributes, text = text, size = size, variant = variant }
 
@@ -107,15 +106,14 @@ getVariant variant =
             whiteButtonStyle
 
 
-view : BasicButtonModel msg -> Node msg
+view : BasicButtonModel msg -> HtmlStyled.Html msg
 view b =
-    HtmlStyled.toUnstyled <|
-        HtmlStyled.button
-            (b.attrs
-                ++ [ Attr.type_ "button"
-                   , Attr.css (renderBtnSize b.size ++ getVariant b.variant ++ baseButton)
-                   ]
-            )
-            [ HtmlStyled.text b.text
-            , Css.Global.global Tw.globalStyles
-            ]
+    HtmlStyled.button
+        (b.attrs
+            ++ [ Attr.type_ "button"
+               , Attr.css (renderBtnSize b.size ++ getVariant b.variant ++ baseButton)
+               ]
+        )
+        [ HtmlStyled.text b.text
+        , Css.Global.global Tw.globalStyles
+        ]
