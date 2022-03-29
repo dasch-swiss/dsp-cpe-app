@@ -2,7 +2,7 @@ module Buttons.CircularButton exposing (..)
 
 import Css
 import Css.Global
-import Html.Styled as HtmlStyled
+import Html.Styled as HtmlStyled exposing (Attribute)
 import Html.Styled.Attributes as Attr
 import Icon
 import Svg.Attributes exposing (..)
@@ -18,9 +18,10 @@ type CircularButtonSize
     | CircularExtraLarge
 
 
-type alias Model =
+type alias CircularButtonModel msg =
     { size : CircularButtonSize
     , icon : Icon.Icon
+    , attrs : List (Attribute msg)
     }
 
 
@@ -46,11 +47,11 @@ circularButtonStyle =
     ]
 
 
-view : Model -> VirtualDom.Node msg
-view model =
+view : CircularButtonModel msg -> HtmlStyled.Html msg
+view buttonModel =
     let
         btnSize =
-            case model.size of
+            case buttonModel.size of
                 CircularExtraSmall ->
                     [ Tw.p_1 ]
 
@@ -65,7 +66,7 @@ view model =
                     [ Tw.p_2 ]
 
         icnSize =
-            if model.size == CircularExtraSmall || model.size == CircularSmall || model.size == CircularNormal then
+            if buttonModel.size == CircularExtraSmall || buttonModel.size == CircularSmall || buttonModel.size == CircularNormal then
                 [ Tw.h_5
                 , Tw.w_5
                 ]
@@ -75,12 +76,13 @@ view model =
                 , Tw.w_6
                 ]
     in
-    HtmlStyled.toUnstyled <|
-        HtmlStyled.button
-            [ Attr.type_ "button"
-            , Attr.class "circular-button"
-            , Attr.css (btnSize ++ circularButtonStyle)
-            ]
-            [ HtmlStyled.span [ Attr.css icnSize ] [ HtmlStyled.fromUnstyled <| Icon.getHtml model.icon ]
-            , Css.Global.global Tw.globalStyles
-            ]
+    HtmlStyled.button
+        (buttonModel.attrs
+            ++ [ Attr.type_ "button"
+               , Attr.class "circular-button"
+               , Attr.css (btnSize ++ circularButtonStyle)
+               ]
+        )
+        [ HtmlStyled.span [ Attr.css icnSize ] [ HtmlStyled.fromUnstyled <| Icon.getHtml buttonModel.icon ]
+        , Css.Global.global Tw.globalStyles
+        ]
