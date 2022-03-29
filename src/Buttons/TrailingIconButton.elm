@@ -1,13 +1,11 @@
 module Buttons.TrailingIconButton exposing (..)
 
-import Browser
 import Css
 import Css.Global
 import Html.Styled as Styled
 import Html.Styled.Attributes as Attr
 import Icon
 import Tailwind.Utilities as Tw
-import VirtualDom
 
 
 type TrailingSize
@@ -17,8 +15,9 @@ type TrailingSize
     | TrailingExtraLarge
 
 
-type alias Model =
-    { size : TrailingSize
+type alias Model msg =
+    { attrs : List (Styled.Attribute msg)
+    , size : TrailingSize
     , text : String
     , icon : Icon.Icon
     }
@@ -46,7 +45,7 @@ baseButton =
     ]
 
 
-view : Model -> VirtualDom.Node msg
+view : Model msg -> Styled.Html msg
 view model =
     let
         btnStyle =
@@ -109,12 +108,11 @@ view model =
         iconMethod =
             Icon.getHtml model.icon
     in
-    Styled.toUnstyled <|
-        Styled.button
-            [ Attr.type_ "button"
-            , Attr.css (btnStyle ++ baseButton)
-            ]
-            [ Styled.text model.text
-            , Styled.span [ Attr.css svgStyle ] [ Styled.fromUnstyled <| iconMethod ]
-            , Css.Global.global Tw.globalStyles
-            ]
+    Styled.button
+        ([ Attr.type_ "button", Attr.css (btnStyle ++ baseButton) ]
+            ++ model.attrs
+        )
+        [ Styled.text model.text
+        , Styled.span [ Attr.css svgStyle ] [ Styled.fromUnstyled <| iconMethod ]
+        , Css.Global.global Tw.globalStyles
+        ]
