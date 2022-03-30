@@ -24,14 +24,6 @@ bg_white : String
 bg_white =
     "bg-white"
 
-inline_flex : String
-inline_flex =
-    "inline-flex"
-
-items_center : String
-items_center =
-    "items-center"
-
 border : String
 border =
     "border"
@@ -48,17 +40,41 @@ font_medium : String
 font_medium =
     "font-medium"
 
+inline_flex : String
+inline_flex =
+    "inline-flex"
+
+items_center : String
+items_center =
+    "items-center"
+
+h_4 : String
+h_4 =
+    "h-4"
+
+h_5 : String
+h_5 =
+    "h-5"
+
 leading_4 : String
 leading_4 =
     "leading-4"
 
-rounded : String
-rounded =
-    "rounded"
+ml_2 : String
+ml_2 =
+    "ml-2"
 
-shadow_sm : String
-shadow_sm =
-    "shadow-sm"
+ml_3 : String
+ml_3 =
+    "ml-3"
+
+neg_mr_0_dot_5 : String
+neg_mr_0_dot_5 = 
+    "neg-mr-0.5"
+
+neg_mr_1 : String
+neg_mr_1 = 
+    "neg-mr-1"
 
 outline_none : String
 outline_none =
@@ -104,6 +120,14 @@ ring_indigo_500 : String
 ring_indigo_500 =
     "ring-indigo-500"
 
+rounded : String
+rounded =
+    "rounded"
+
+shadow_sm : String
+shadow_sm =
+    "shadow-sm"
+
 text_base : String
 text_base =
     "text-base"
@@ -127,3 +151,11 @@ text_white =
 text_xs : String
 text_xs =
     "text-xs"
+
+w_4 : String
+w_4 =
+    "w-4"
+
+w_5 : String
+w_5 =
+    "w-5"

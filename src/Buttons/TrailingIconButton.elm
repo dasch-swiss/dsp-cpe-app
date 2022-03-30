@@ -3,11 +3,16 @@ module Buttons.TrailingIconButton exposing (..)
 import Browser
 import Css
 import Css.Global
+import CustomCss.DaschTailwind as Dtw
+import Html exposing (Html, button, text, span)
+import Html.Attributes as Attr exposing (type_, class)
 import Html.Styled as Styled
-import Html.Styled.Attributes as Attr
+import Html.Styled.Attributes as StyledAttr
 import Icon
+import String
 import Tailwind.Utilities as Tw
 import VirtualDom
+import Html
 
 
 type TrailingSize
@@ -45,6 +50,25 @@ baseButton =
         [ Tw.bg_indigo_700 ]
     ]
 
+baseButtonClasses : String
+baseButtonClasses =
+    String.join " "
+        [ Dtw.inline_flex
+        , Dtw.items_center
+        , Dtw.border
+        , Dtw.border_transparent
+        , Dtw.font_medium
+        , Dtw.rounded
+        , Dtw.shadow_sm
+        , Dtw.text_white
+        , Dtw.bg_indigo_600
+        , "hover:" ++ Dtw.bg_indigo_700
+        , "focus:" ++ Dtw.outline_none
+        , "focus:" ++ Dtw.ring_2
+        , "focus:" ++ Dtw.ring_offset_2
+        , "focus:" ++ Dtw.ring_indigo_500
+        ]
+
 
 view : Model -> VirtualDom.Node msg
 view model =
@@ -76,6 +100,37 @@ view model =
                     , Tw.text_base
                     ]
 
+        btnStyleClasses =
+            case model.size of
+                TrailingSmall ->
+                    String.join " "
+                        [ Dtw.px_3
+                        , Dtw.py_2
+                        , Dtw.text_sm
+                        , Dtw.leading_4
+                        ]
+
+                TrailingNormal ->
+                    String.join " "
+                        [ Dtw.px_4
+                        , Dtw.py_2
+                        , Dtw.text_sm
+                        ]
+
+                TrailingLarge ->
+                    String.join " "
+                        [ Dtw.px_4
+                        , Dtw.py_2
+                        , Dtw.text_base
+                        ]
+
+                TrailingExtraLarge ->
+                    String.join " "
+                        [ Dtw.px_6
+                        , Dtw.py_3
+                        , Dtw.text_base
+                        ]
+
         svgStyle =
             case model.size of
                 TrailingSmall ->
@@ -106,15 +161,57 @@ view model =
                     , Tw.w_5
                     ]
 
+        svgStyleClasses =
+            case model.size of
+                TrailingSmall ->
+                    String.join " "
+                        [ Dtw.ml_2
+                        , Dtw.neg_mr_0_dot_5
+                        , Dtw.h_4
+                        , Dtw.w_4
+                        ]
+
+                TrailingNormal ->
+                    String.join " "
+                        [ Dtw.ml_2
+                        , Dtw.neg_mr_1
+                        , Dtw.h_5
+                        , Dtw.w_5
+                        ]
+
+                TrailingLarge ->
+                    String.join " "
+                        [ Dtw.ml_3
+                        , Dtw.neg_mr_1
+                        , Dtw.h_5
+                        , Dtw.w_5
+                        ]
+
+                TrailingExtraLarge ->
+                    String.join " "
+                        [ Dtw.ml_3
+                        , Dtw.neg_mr_1
+                        , Dtw.h_5
+                        , Dtw.w_5
+                        ]
+
         iconMethod =
             Icon.getHtml model.icon
     in
-    Styled.toUnstyled <|
-        Styled.button
-            [ Attr.type_ "button"
-            , Attr.css (btnStyle ++ baseButton)
-            ]
-            [ Styled.text model.text
-            , Styled.span [ Attr.css svgStyle ] [ Styled.fromUnstyled <| iconMethod ]
-            , Css.Global.global Tw.globalStyles
-            ]
+    -- Styled.toUnstyled <|
+    --     Styled.button
+    --         [ Attr.type_ "button"
+    --         , Attr.css (btnStyle ++ baseButton)
+    --         ]
+    --         [ Styled.text model.text
+    --         , Styled.span [ Attr.css svgStyle ] [ Styled.fromUnstyled <| iconMethod ]
+    --         , Css.Global.global Tw.globalStyles
+    --         ]
+    Html.button
+        [ type_ "button"
+        , class btnStyleClasses
+        , class baseButtonClasses
+        ]
+        [ text model.text
+        , span [ class svgStyleClasses ] [ iconMethod ]
+        ]
