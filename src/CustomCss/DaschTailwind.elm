@@ -1,16 +1,24 @@
 module CustomCss.DaschTailwind exposing (..)
 
-bg_emerald_500 : String
-bg_emerald_500 =
-    "bg-emerald-500"
+bg_gray_50 : String
+bg_gray_50 = 
+    "bg-gray-50"
 
 bg_indigo_100 : String
 bg_indigo_100 =
     "bg-indigo-100"
 
+bg_indigo_200 : String
+bg_indigo_200 =
+    "bg-indigo-200"
+
 bg_indigo_600 : String
 bg_indigo_600 =
     "bg-indigo-600"
+
+bg_indigo_700 : String
+bg_indigo_700 =
+    "bg-indigo-700"
 
 bg_white : String
 bg_white =

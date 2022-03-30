@@ -21,4 +21,5 @@ whiteButtonClasses =
         [ Dtw.text_gray_700
         , Dtw.bg_white
         , Dtw.border_gray_300
+        , "hover:" ++ Dtw.bg_gray_50
         ]

@@ -7,9 +7,9 @@ import Css
 import Css.Global
 import CustomCss.DaschTailwind as Dtw
 import Html exposing (Html, button, text)
-import Html.Attributes exposing (class)
+import Html.Attributes as Attr exposing (class)
 import Html.Styled as HtmlStyled exposing (Attribute)
-import Html.Styled.Attributes as Attr
+import Html.Styled.Attributes as StyledAttr
 import Tailwind.Utilities as Tw
 import String
 import VirtualDom exposing (Node)
@@ -48,6 +48,10 @@ baseButtonClasses =
         , Dtw.font_medium
         , Dtw.rounded
         , Dtw.shadow_sm
+        , "focus:" ++ Dtw.outline_none
+        , "focus:" ++ Dtw.ring_2
+        , "focus:" ++ Dtw.ring_offset_2
+        , "focus:" ++ Dtw.ring_indigo_500
         ]
 
 renderBtnSize : BasicButtonSize -> List Css.Style
@@ -84,8 +88,8 @@ renderBtnSize size =
             , Tw.text_base
             ]
 
-renderBtnSizeClasses : BasicButtonSize -> String
-renderBtnSizeClasses size =
+getBtnSizeClasses : BasicButtonSize -> String
+getBtnSizeClasses size =
     case size of
         BasicExtraSmall ->
             String.join " "
@@ -179,7 +183,6 @@ view b =
     --         (b.attrs
     --             ++ [ Attr.type_ "button"
     --                , Attr.css (renderBtnSize b.size ++ getVariant b.variant ++ baseButton)
-    --                , Attr.class
     --                ]
     --         )
     --         [ HtmlStyled.text b.text
@@ -187,7 +190,7 @@ view b =
     --         ]
 
     Html.button
-        [ class (renderBtnSizeClasses b.size)
+        [ class (getBtnSizeClasses b.size)
         , class (getVariantClasses b.variant)
         , class baseButtonClasses
         ] [ text b.text ]

@@ -21,4 +21,5 @@ secondaryButtonClasses =
         [ Dtw.text_indigo_700
         , Dtw.bg_indigo_100
         , Dtw.border_transparent
+        , "hover:" ++ Dtw.bg_indigo_200
         ]
