@@ -1,14 +1,17 @@
 module Buttons.BasicButtons.BasicButton exposing (..)
 
-import Buttons.BasicButtons.PrimaryButton exposing (primaryButtonStyle)
-import Buttons.BasicButtons.SecondaryButton exposing (secondaryButtonStyle)
-import Buttons.BasicButtons.WhiteButton exposing (whiteButtonStyle)
+import Buttons.BasicButtons.PrimaryButton exposing (primaryButtonStyle, primaryButtonClasses)
+import Buttons.BasicButtons.SecondaryButton exposing (secondaryButtonStyle, secondaryButtonClasses)
+import Buttons.BasicButtons.WhiteButton exposing (whiteButtonStyle, whiteButtonClasses)
 import Css
 import Css.Global
 import CustomCss.DaschTailwind as Dtw
+import Html exposing (Html, button, text)
+import Html.Attributes exposing (class)
 import Html.Styled as HtmlStyled exposing (Attribute)
 import Html.Styled.Attributes as Attr
 import Tailwind.Utilities as Tw
+import String
 import VirtualDom exposing (Node)
 
 
@@ -36,6 +39,16 @@ baseButton =
         ]
     ]
 
+baseButtonClasses : String
+baseButtonClasses =
+    String.join " "
+        [ Dtw.inline_flex
+        , Dtw.items_center
+        , Dtw.border
+        , Dtw.font_medium
+        , Dtw.rounded
+        , Dtw.shadow_sm
+        ]
 
 renderBtnSize : BasicButtonSize -> List Css.Style
 renderBtnSize size =
@@ -70,6 +83,45 @@ renderBtnSize size =
             , Tw.py_3
             , Tw.text_base
             ]
+
+renderBtnSizeClasses : BasicButtonSize -> String
+renderBtnSizeClasses size =
+    case size of
+        BasicExtraSmall ->
+            String.join " "
+                [ Dtw.px_2_dot_5
+                , Dtw.py_1_dot_5
+                , Dtw.text_xs
+                ]
+
+        BasicSmall ->
+            String.join " "
+                [ Dtw.px_3
+                , Dtw.py_2
+                , Dtw.text_sm
+                , Dtw.leading_4
+                ]
+
+        BasicNormal ->
+            String.join " "
+                [ Dtw.px_4
+                , Dtw.py_2
+                , Dtw.text_sm
+                ]
+
+        BasicLarge ->
+            String.join " "
+                [ Dtw.px_4
+                , Dtw.py_2
+                , Dtw.text_base
+                ]
+
+        BasicExtraLarge ->
+            String.join " "
+                [ Dtw.px_6
+                , Dtw.py_3
+                , Dtw.text_base
+                ]
 
 
 type alias BasicButtonModel msg =
@@ -107,16 +159,35 @@ getVariant variant =
         White ->
             whiteButtonStyle
 
+getVariantClasses : Variant -> String
+getVariantClasses variant =
+    case variant of
+        Primary ->
+            primaryButtonClasses
+
+        Secondary ->
+            secondaryButtonClasses
+
+        White ->
+            whiteButtonClasses
+
 
 view : BasicButtonModel msg -> Node msg
 view b =
-    HtmlStyled.toUnstyled <|
-        HtmlStyled.button
-            (b.attrs
-                ++ [ Attr.type_ "button"
-                   , Attr.css (renderBtnSize b.size ++ getVariant b.variant ++ baseButton)
-                   ]
-            )
-            [ HtmlStyled.text b.text
-            , Css.Global.global Tw.globalStyles
-            ]
+    -- HtmlStyled.toUnstyled <|
+    --     HtmlStyled.button
+    --         (b.attrs
+    --             ++ [ Attr.type_ "button"
+    --                , Attr.css (renderBtnSize b.size ++ getVariant b.variant ++ baseButton)
+    --                , Attr.class
+    --                ]
+    --         )
+    --         [ HtmlStyled.text b.text
+    --         , Css.Global.global Tw.globalStyles
+    --         ]
+
+    Html.button
+        [ class (renderBtnSizeClasses b.size)
+        , class (getVariantClasses b.variant)
+        , class baseButtonClasses
+        ] [ text b.text ]
