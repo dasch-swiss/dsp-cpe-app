@@ -21,5 +21,5 @@ primaryButtonClasses =
         [ Dtw.text_white
         , Dtw.bg_indigo_600
         , Dtw.border_transparent
-        , "hover:" ++ Dtw.bg_indigo_700
+        , Dtw.hover Dtw.bg_indigo_700
         ]

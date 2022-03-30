@@ -62,11 +62,11 @@ baseButtonClasses =
         , Dtw.shadow_sm
         , Dtw.text_white
         , Dtw.bg_indigo_600
-        , "hover:" ++ Dtw.bg_indigo_700
-        , "focus:" ++ Dtw.outline_none
-        , "focus:" ++ Dtw.ring_2
-        , "focus:" ++ Dtw.ring_offset_2
-        , "focus:" ++ Dtw.ring_indigo_500
+        , Dtw.hover Dtw.bg_indigo_700
+        , Dtw.focus Dtw.outline_none
+        , Dtw.focus Dtw.ring_2
+        , Dtw.focus Dtw.ring_offset_2
+        , Dtw.focus Dtw.ring_indigo_500
         ]
 
 

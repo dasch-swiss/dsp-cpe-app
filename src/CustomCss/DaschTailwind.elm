@@ -1,5 +1,17 @@
 module CustomCss.DaschTailwind exposing (..)
 
+-- Helper methods
+
+focus : String -> String
+focus twClass =
+    "focus:" ++ twClass
+
+hover : String -> String
+hover twClass =
+    "hover:" ++ twClass
+
+-- Tailwind classes
+
 bg_gray_50 : String
 bg_gray_50 = 
     "bg-gray-50"

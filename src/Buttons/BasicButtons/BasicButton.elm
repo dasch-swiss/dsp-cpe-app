@@ -48,10 +48,10 @@ baseButtonClasses =
         , Dtw.font_medium
         , Dtw.rounded
         , Dtw.shadow_sm
-        , "focus:" ++ Dtw.outline_none
-        , "focus:" ++ Dtw.ring_2
-        , "focus:" ++ Dtw.ring_offset_2
-        , "focus:" ++ Dtw.ring_indigo_500
+        , Dtw.focus Dtw.outline_none
+        , Dtw.focus Dtw.ring_2
+        , Dtw.focus Dtw.ring_offset_2
+        , Dtw.focus Dtw.ring_indigo_500
         ]
 
 renderBtnSize : BasicButtonSize -> List Css.Style
