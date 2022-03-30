@@ -68,6 +68,10 @@ h_5 : String
 h_5 =
     "h-5"
 
+h_6 : String
+h_6 =
+    "h-6"
+
 leading_4 : String
 leading_4 =
     "leading-4"
@@ -103,6 +107,22 @@ neg_mr_1 =
 outline_none : String
 outline_none =
     "outline-none"
+
+p_1 : String
+p_1 =
+    "p-1"
+
+p_1_dot_5 : String
+p_1_dot_5 =
+    "p-1.5"
+
+p_2 : String
+p_2 =
+    "p-2"
+
+p_3 : String
+p_3 =
+    "p-3"
 
 px_2_dot_5 : String
 px_2_dot_5 =
@@ -148,6 +168,10 @@ rounded : String
 rounded =
     "rounded"
 
+rounded_full : String
+rounded_full =
+    "rounded-full"
+
 shadow_sm : String
 shadow_sm =
     "shadow-sm"
@@ -183,3 +207,7 @@ w_4 =
 w_5 : String
 w_5 =
     "w-5"
+
+w_6 : String
+w_6 =
+    "w-6"
