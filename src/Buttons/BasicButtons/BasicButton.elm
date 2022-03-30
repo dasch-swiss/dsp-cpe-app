@@ -5,6 +5,7 @@ import Buttons.BasicButtons.SecondaryButton exposing (secondaryButtonStyle)
 import Buttons.BasicButtons.WhiteButton exposing (whiteButtonStyle)
 import Css
 import Css.Global
+import CustomCss.DaschTailwind as Dtw
 import Html.Styled as HtmlStyled exposing (Attribute)
 import Html.Styled.Attributes as Attr
 import Tailwind.Utilities as Tw
