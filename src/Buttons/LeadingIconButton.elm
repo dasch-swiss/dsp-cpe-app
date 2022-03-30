@@ -5,7 +5,6 @@ import Html exposing (Html, button, span, text)
 import Html.Attributes exposing (class, type_)
 import Icon
 import String
-import VirtualDom
 
 
 type LeadingSize
@@ -42,7 +41,7 @@ baseButtonClasses =
         ]
 
 
-view : Model -> VirtualDom.Node msg
+view : Model -> Html msg
 view model =
     let
         btnClasses =
