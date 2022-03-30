@@ -80,6 +80,18 @@ ml_3 : String
 ml_3 =
     "ml-3"
 
+mr_2 : String
+mr_2 =
+    "mr-2"
+
+mr_3 : String
+mr_3 =
+    "mr-3"
+
+neg_ml_1 : String
+neg_ml_1 =
+    "neg-ml-1"
+
 neg_mr_0_dot_5 : String
 neg_mr_0_dot_5 = 
     "neg-mr-0.5"
