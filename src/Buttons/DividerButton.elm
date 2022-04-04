@@ -51,17 +51,6 @@ view model =
         iconMethod =
             Icon.getHtml model.icon
     in
-    -- Styled.toUnstyled <|
-    --     Styled.button
-    --         (model.attr
-    --             ++ [ Attr.type_ "button"
-    --                , Attr.css baseButton
-    --                ]
-    --         )
-    --         [ Styled.span [ Attr.css svgStyle ] [ Styled.fromUnstyled <| iconMethod ]
-    --         , Styled.text model.text
-    --         , Css.Global.global Tw.globalStyles
-    --         ]
     button
         ( model.attr ++
             [ type_ "button" 
