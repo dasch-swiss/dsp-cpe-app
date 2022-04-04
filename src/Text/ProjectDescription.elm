@@ -1,12 +1,12 @@
 module Text.ProjectDescription exposing (..)
 
+import CustomCss.DaschTailwind as Dtw
 import Dividers.Divider as Divider
-import Html.Styled as Styled exposing (div, p, text)
-import Html.Styled.Attributes as Attr
-import Html.Styled.Events exposing (onClick)
+import Html exposing (Html, div, p, text)
+import Html.Attributes exposing (class, style)
+import Html.Events exposing (onClick)
 import Icon
-import Tailwind.Utilities as Tw
-import VirtualDom
+import String
 
 
 type alias Model =
@@ -37,32 +37,32 @@ init _ =
     ( initialModel, Cmd.none )
 
 
-view : Model -> VirtualDom.Node Msg
+view : Model -> Html Msg
 view model =
     if model.isOpen then
-        Styled.toUnstyled <|
-            div []
-                [ div [ Attr.css [ Tw.mt_6, Tw.prose, Tw.prose_indigo, Tw.prose_lg, Tw.text_gray_500, Tw.mx_auto ] ] [ p [ Attr.style "padding-bottom" "1%" ] [ text model.text ] ]
-                , Styled.fromUnstyled <| Divider.iconButtonDivider [ onClick Hide ] Icon.PlusSm "Read Less"
-                ]
+        div []
+            [ div
+                [ class ( String.join " " [ Dtw.mt_6, Dtw.prose, Dtw.prose_indigo, Dtw.prose_lg, Dtw.text_gray_500, Dtw.mx_auto ] ) ]
+                [ p [ style "padding-bottom" "1%" ] [ text model.text ] ]
+            , Divider.iconButtonDivider [ onClick Hide ] Icon.PlusSm "Read Less"
+            ]
 
     else
-        Styled.toUnstyled <|
-            div []
-                [ div [ Attr.css [ Tw.mt_6, Tw.prose, Tw.prose_indigo, Tw.prose_lg, Tw.text_gray_500, Tw.mx_auto ] ]
-                    [ p
-                        [ Attr.style "overflow" "hidden"
-                        , Attr.style "text-overflow" "ellipsis"
-                        , Attr.style "display" "-webkit-box"
-                        , Attr.style "-webkit-line-clamp" "6"
-                        , Attr.style "line-clamp" "6"
-                        , Attr.style "-webkit-box-orient" "vertical"
-                        , Attr.style "padding-bottom" "1%"
-                        ]
-                        [ text model.text ]
+        div []
+            [ div [ class ( String.join " " [ Dtw.mt_6, Dtw.prose, Dtw.prose_indigo, Dtw.prose_lg, Dtw.text_gray_500, Dtw.mx_auto ] ) ]
+                [ p
+                    [ style "overflow" "hidden"
+                    , style "text-overflow" "ellipsis"
+                    , style "display" "-webkit-box"
+                    , style "-webkit-line-clamp" "6"
+                    , style "line-clamp" "6"
+                    , style "-webkit-box-orient" "vertical"
+                    , style "padding-bottom" "1%"
                     ]
-                , Styled.fromUnstyled <| Divider.iconButtonDivider [ onClick Show ] Icon.PlusSm "Read More"
+                    [ text model.text ]
                 ]
+            , Divider.iconButtonDivider [ onClick Show ] Icon.PlusSm "Read More"
+            ]
 
 
 update : Msg -> Model -> Model
