@@ -4,9 +4,8 @@ import Buttons.BasicButtons.PrimaryButton exposing (primaryButtonClasses)
 import Buttons.BasicButtons.SecondaryButton exposing (secondaryButtonClasses)
 import Buttons.BasicButtons.WhiteButton exposing (whiteButtonClasses)
 import CustomCss.DaschTailwind as Dtw
-import Html exposing (Html, Attribute, button, text)
+import Html exposing (Attribute, Html, button, text)
 import Html.Attributes exposing (class)
-import String
 
 
 type BasicButtonSize
@@ -16,9 +15,10 @@ type BasicButtonSize
     | BasicLarge
     | BasicExtraLarge
 
+
 baseButtonClasses : String
 baseButtonClasses =
-    String.join " "
+    Dtw.classList
         [ Dtw.inline_flex
         , Dtw.items_center
         , Dtw.border
@@ -31,18 +31,19 @@ baseButtonClasses =
         , Dtw.focus Dtw.ring_indigo_500
         ]
 
+
 getBtnSizeClasses : BasicButtonSize -> String
 getBtnSizeClasses size =
     case size of
         BasicExtraSmall ->
-            String.join " "
+            Dtw.classList
                 [ Dtw.px_2_dot_5
                 , Dtw.py_1_dot_5
                 , Dtw.text_xs
                 ]
 
         BasicSmall ->
-            String.join " "
+            Dtw.classList
                 [ Dtw.px_3
                 , Dtw.py_2
                 , Dtw.text_sm
@@ -50,21 +51,21 @@ getBtnSizeClasses size =
                 ]
 
         BasicNormal ->
-            String.join " "
+            Dtw.classList
                 [ Dtw.px_4
                 , Dtw.py_2
                 , Dtw.text_sm
                 ]
 
         BasicLarge ->
-            String.join " "
+            Dtw.classList
                 [ Dtw.px_4
                 , Dtw.py_2
                 , Dtw.text_base
                 ]
 
         BasicExtraLarge ->
-            String.join " "
+            Dtw.classList
                 [ Dtw.px_6
                 , Dtw.py_3
                 , Dtw.text_base
@@ -93,6 +94,7 @@ type Variant
     | Secondary
     | White
 
+
 getVariantClasses : Variant -> String
 getVariantClasses variant =
     case variant of
@@ -109,10 +111,10 @@ getVariantClasses variant =
 view : BasicButtonModel msg -> Html msg
 view b =
     button
-        ( b.attrs ++ 
-            [ class (getBtnSizeClasses b.size)
-            , class (getVariantClasses b.variant)
-            , class baseButtonClasses
-            ]
+        (b.attrs
+            ++ [ class (getBtnSizeClasses b.size)
+               , class (getVariantClasses b.variant)
+               , class baseButtonClasses
+               ]
         )
         [ text b.text ]

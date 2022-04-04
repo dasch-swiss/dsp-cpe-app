@@ -4,7 +4,6 @@ import CustomCss.DaschTailwind as Dtw
 import Html exposing (Html, button, span, text)
 import Html.Attributes exposing (class, type_)
 import Icon
-import String
 
 
 type LeadingSize
@@ -23,7 +22,7 @@ type alias Model =
 
 baseButtonClasses : String
 baseButtonClasses =
-    String.join " "
+    Dtw.classList
         [ Dtw.inline_flex
         , Dtw.items_center
         , Dtw.border
@@ -47,7 +46,7 @@ view model =
         btnClasses =
             case model.size of
                 LeadingSmall ->
-                    String.join " "
+                    Dtw.classList
                         [ Dtw.px_3
                         , Dtw.py_2
                         , Dtw.text_sm
@@ -55,21 +54,21 @@ view model =
                         ]
 
                 LeadingNormal ->
-                    String.join " "
+                    Dtw.classList
                         [ Dtw.px_4
                         , Dtw.py_2
                         , Dtw.text_sm
                         ]
 
                 LeadingLarge ->
-                    String.join " "
+                    Dtw.classList
                         [ Dtw.px_4
                         , Dtw.py_2
                         , Dtw.text_base
                         ]
 
                 LeadingExtraLarge ->
-                    String.join " "
+                    Dtw.classList
                         [ Dtw.px_6
                         , Dtw.py_3
                         , Dtw.text_base
@@ -78,7 +77,7 @@ view model =
         svgClasses =
             case model.size of
                 LeadingSmall ->
-                    String.join " "
+                    Dtw.classList
                         [ Dtw.neg_ml_1
                         , Dtw.mr_2
                         , Dtw.h_4
@@ -86,7 +85,7 @@ view model =
                         ]
 
                 LeadingNormal ->
-                    String.join " "
+                    Dtw.classList
                         [ Dtw.neg_ml_1
                         , Dtw.mr_2
                         , Dtw.h_5
@@ -94,7 +93,7 @@ view model =
                         ]
 
                 LeadingLarge ->
-                    String.join " "
+                    Dtw.classList
                         [ Dtw.neg_ml_1
                         , Dtw.mr_3
                         , Dtw.h_5
@@ -102,7 +101,7 @@ view model =
                         ]
 
                 LeadingExtraLarge ->
-                    String.join " "
+                    Dtw.classList
                         [ Dtw.neg_ml_1
                         , Dtw.mr_3
                         , Dtw.h_5

@@ -6,7 +6,6 @@ import Html exposing (Html, div, p, text)
 import Html.Attributes exposing (class, style)
 import Html.Events exposing (onClick)
 import Icon
-import String
 
 
 type alias Model =
@@ -42,14 +41,14 @@ view model =
     if model.isOpen then
         div []
             [ div
-                [ class ( String.join " " [ Dtw.mt_6, Dtw.prose, Dtw.prose_indigo, Dtw.prose_lg, Dtw.text_gray_500, Dtw.mx_auto ] ) ]
+                [ class (Dtw.classList [ Dtw.mt_6, Dtw.prose, Dtw.prose_indigo, Dtw.prose_lg, Dtw.text_gray_500, Dtw.mx_auto ]) ]
                 [ p [ style "padding-bottom" "1%" ] [ text model.text ] ]
             , Divider.iconButtonDivider [ onClick Hide ] Icon.PlusSm "Read Less"
             ]
 
     else
         div []
-            [ div [ class ( String.join " " [ Dtw.mt_6, Dtw.prose, Dtw.prose_indigo, Dtw.prose_lg, Dtw.text_gray_500, Dtw.mx_auto ] ) ]
+            [ div [ class (Dtw.classList [ Dtw.mt_6, Dtw.prose, Dtw.prose_indigo, Dtw.prose_lg, Dtw.text_gray_500, Dtw.mx_auto ]) ]
                 [ p
                     [ style "overflow" "hidden"
                     , style "text-overflow" "ellipsis"

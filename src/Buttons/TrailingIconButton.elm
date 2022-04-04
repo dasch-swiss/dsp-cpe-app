@@ -1,10 +1,9 @@
 module Buttons.TrailingIconButton exposing (..)
 
 import CustomCss.DaschTailwind as Dtw
-import Html exposing (Html, button, text, span)
-import Html.Attributes exposing (type_, class)
+import Html exposing (Html, button, span, text)
+import Html.Attributes exposing (class, type_)
 import Icon
-import String
 
 
 type TrailingSize
@@ -20,9 +19,10 @@ type alias Model =
     , icon : Icon.Icon
     }
 
+
 baseButtonClasses : String
 baseButtonClasses =
-    String.join " "
+    Dtw.classList
         [ Dtw.inline_flex
         , Dtw.items_center
         , Dtw.border
@@ -46,7 +46,7 @@ view model =
         btnClasses =
             case model.size of
                 TrailingSmall ->
-                    String.join " "
+                    Dtw.classList
                         [ Dtw.px_3
                         , Dtw.py_2
                         , Dtw.text_sm
@@ -54,21 +54,21 @@ view model =
                         ]
 
                 TrailingNormal ->
-                    String.join " "
+                    Dtw.classList
                         [ Dtw.px_4
                         , Dtw.py_2
                         , Dtw.text_sm
                         ]
 
                 TrailingLarge ->
-                    String.join " "
+                    Dtw.classList
                         [ Dtw.px_4
                         , Dtw.py_2
                         , Dtw.text_base
                         ]
 
                 TrailingExtraLarge ->
-                    String.join " "
+                    Dtw.classList
                         [ Dtw.px_6
                         , Dtw.py_3
                         , Dtw.text_base
@@ -77,7 +77,7 @@ view model =
         svgClasses =
             case model.size of
                 TrailingSmall ->
-                    String.join " "
+                    Dtw.classList
                         [ Dtw.ml_2
                         , Dtw.neg_mr_0_dot_5
                         , Dtw.h_4
@@ -85,7 +85,7 @@ view model =
                         ]
 
                 TrailingNormal ->
-                    String.join " "
+                    Dtw.classList
                         [ Dtw.ml_2
                         , Dtw.neg_mr_1
                         , Dtw.h_5
@@ -93,7 +93,7 @@ view model =
                         ]
 
                 TrailingLarge ->
-                    String.join " "
+                    Dtw.classList
                         [ Dtw.ml_3
                         , Dtw.neg_mr_1
                         , Dtw.h_5
@@ -101,7 +101,7 @@ view model =
                         ]
 
                 TrailingExtraLarge ->
-                    String.join " "
+                    Dtw.classList
                         [ Dtw.ml_3
                         , Dtw.neg_mr_1
                         , Dtw.h_5

@@ -4,7 +4,6 @@ import CustomCss.DaschTailwind as Dtw
 import Html exposing (Html, button, span)
 import Html.Attributes exposing (class, type_)
 import Icon
-import String
 
 
 type CircularButtonSize
@@ -23,7 +22,7 @@ type alias Model =
 
 circularButtonClasses : String
 circularButtonClasses =
-    String.join " "
+    Dtw.classList
         [ Dtw.inline_flex
         , Dtw.items_center
         , Dtw.border
@@ -60,19 +59,19 @@ view model =
 
         icnSize =
             if model.size == CircularExtraSmall || model.size == CircularSmall || model.size == CircularNormal then
-                String.join " "
+                Dtw.classList
                     [ Dtw.h_5
                     , Dtw.w_5
                     ]
 
             else
-                String.join " "
+                Dtw.classList
                     [ Dtw.h_6
                     , Dtw.w_6
                     ]
     in
     button
-        [ type_ "button" 
+        [ type_ "button"
         , class "circular-button"
         , class btnSize
         , class circularButtonClasses

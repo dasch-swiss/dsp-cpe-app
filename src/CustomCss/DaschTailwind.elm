@@ -1,14 +1,25 @@
 module CustomCss.DaschTailwind exposing (..)
 
--- Helper methods
+import String exposing (join)
 
+
+-- Helper functions
+
+-- builds a single string containing all of the given tailwindcss classes
+classList : List String -> String
+classList classes =
+    join " " classes
+
+-- prepends the "focus" pseudo-class to the given tailwindcss class
 focus : String -> String
 focus twClass =
     "focus:" ++ twClass
 
+-- prepends the "hover" pseudo-class to the given tailwindcss class
 hover : String -> String
 hover twClass =
     "hover:" ++ twClass
+
 
 -- Tailwind classes
 

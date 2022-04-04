@@ -1,12 +1,11 @@
 module Buttons.BasicButtons.WhiteButton exposing (..)
 
 import CustomCss.DaschTailwind as Dtw
-import String
 
 
 whiteButtonClasses : String
 whiteButtonClasses =
-    String.join " "
+    Dtw.classList
         [ Dtw.text_gray_700
         , Dtw.bg_white
         , Dtw.border_gray_300

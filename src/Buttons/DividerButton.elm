@@ -1,10 +1,9 @@
 module Buttons.DividerButton exposing (..)
 
 import CustomCss.DaschTailwind as Dtw
-import Html exposing (Html, Attribute, button, span, text)
+import Html exposing (Attribute, Html, button, span, text)
 import Html.Attributes exposing (class, type_)
 import Icon
-import String
 
 
 type alias Model msg =
@@ -13,9 +12,10 @@ type alias Model msg =
     , icon : Icon.Icon
     }
 
+
 baseButtonClasses : String
 baseButtonClasses =
-    String.join " "
+    Dtw.classList
         [ Dtw.inline_flex
         , Dtw.items_center
         , Dtw.border
@@ -36,11 +36,12 @@ baseButtonClasses =
         , Dtw.hover Dtw.bg_gray_50
         ]
 
+
 view : Model msg -> Html msg
 view model =
     let
         svgClasses =
-            String.join " "
+            Dtw.classList
                 [ Dtw.neg_ml_1_dot_5
                 , Dtw.mr_1
                 , Dtw.h_5
@@ -52,10 +53,10 @@ view model =
             Icon.getHtml model.icon
     in
     button
-        ( model.attr ++
-            [ type_ "button" 
-            , class baseButtonClasses
-            ]
+        (model.attr
+            ++ [ type_ "button"
+               , class baseButtonClasses
+               ]
         )
         [ span [ class svgClasses ] [ iconMethod ]
         , text model.text
