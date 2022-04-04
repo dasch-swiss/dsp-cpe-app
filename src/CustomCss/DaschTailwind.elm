@@ -12,6 +12,10 @@ hover twClass =
 
 -- Tailwind classes
 
+absolute : String
+absolute =
+    "absolute"
+
 bg_gray_50 : String
 bg_gray_50 = 
     "bg-gray-50"
@@ -44,21 +48,21 @@ border_gray_300 : String
 border_gray_300 =
     "border-gray-300"
 
+border_t : String
+border_t =
+    "border-t"
+
 border_transparent : String
 border_transparent =
     "border-transparent"
 
+flex : String
+flex =
+    "flex"
+
 font_medium : String
 font_medium =
     "font-medium"
-
-inline_flex : String
-inline_flex =
-    "inline-flex"
-
-items_center : String
-items_center =
-    "items-center"
 
 h_4 : String
 h_4 =
@@ -72,9 +76,29 @@ h_6 : String
 h_6 =
     "h-6"
 
+inline_flex : String
+inline_flex =
+    "inline-flex"
+
+inset_0 : String
+inset_0 =
+    "inset-0"
+
+items_center : String
+items_center =
+    "items-center"
+
+justify_center : String
+justify_center =
+    "justify-center"
+
 leading_4 : String
 leading_4 =
     "leading-4"
+
+leading_5 : String
+leading_5 =
+    "leading-5"
 
 ml_2 : String
 ml_2 =
@@ -84,6 +108,10 @@ ml_3 : String
 ml_3 =
     "ml-3"
 
+mr_1 : String
+mr_1 =
+    "mr-1"
+
 mr_2 : String
 mr_2 =
     "mr-2"
@@ -92,9 +120,21 @@ mr_3 : String
 mr_3 =
     "mr-3"
 
+mt_6 : String
+mt_6 =
+    "mt-6"
+
+mx_auto : String
+mx_auto =
+    "mx-auto"
+
 neg_ml_1 : String
 neg_ml_1 =
     "neg-ml-1"
+
+neg_ml_1_dot_5 : String
+neg_ml_1_dot_5 = 
+    "neg-mr-0.5"
 
 neg_mr_0_dot_5 : String
 neg_mr_0_dot_5 = 
@@ -124,6 +164,18 @@ p_3 : String
 p_3 =
     "p-3"
 
+prose : String
+prose =
+    "prose"
+
+prose_indigo : String
+prose_indigo =
+    "prose_indigo"
+
+prose_lg : String
+prose_lg =
+    "prose_lg"
+
 px_2_dot_5 : String
 px_2_dot_5 =
     "px-2.5"
@@ -152,6 +204,10 @@ py_3 : String
 py_3 =
     "py-3"
 
+relative : String
+relative =
+    "relative"
+
 ring_2 : String
 ring_2 =
     "ring-2"
@@ -179,6 +235,14 @@ shadow_sm =
 text_base : String
 text_base =
     "text-base"
+
+text_gray_500 : String
+text_gray_500 =
+    "text-gray-500"
+
+text_gray_400 : String
+text_gray_400 =
+    "text-gray-400"
 
 text_gray_700 : String
 text_gray_700 =
@@ -211,3 +275,7 @@ w_5 =
 w_6 : String
 w_6 =
     "w-6"
+
+w_full : String
+w_full =
+    "w-full"

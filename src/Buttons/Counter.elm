@@ -4,9 +4,8 @@ import Browser
 import Buttons.Button exposing (primaryButton, secondaryButton)
 import Buttons.BasicButtons.BasicButton exposing (BasicButtonSize(..))
 import Html exposing (Html, div, h3, text)
-import Html.Attributes exposing (class)
-import Html.Styled.Attributes exposing (disabled, id)
-import Html.Styled.Events exposing (onClick)
+import Html.Attributes exposing (class, disabled, id)
+import Html.Events exposing (onClick)
 
 
 main : Program () Model Msg
@@ -41,7 +40,8 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ div []
+        [ 
+        div []
             [ h3 [ class "header" ] [ text "onClick implementation" ]
             , secondaryButton [ onClick Increment ] "Click me to increase" BasicExtraLarge
             , div [] [ text (String.fromInt model) ]

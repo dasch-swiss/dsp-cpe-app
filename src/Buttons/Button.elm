@@ -8,21 +8,20 @@ import Buttons.LeadingIconButton as LeadingIconButton exposing (LeadingSize(..))
 import Buttons.TrailingIconButton as TrailingIconButton exposing (TrailingSize(..))
 import Icon
 import Html exposing (Html)
-import Html.Styled exposing (Attribute)
-import VirtualDom exposing (Node)
+import Html.Styled as StyledAttr
 
 -- convenience function: returns a basicButton with the Variant "Primary"
-primaryButton : List (Attribute msg) -> String -> BasicButtonSize -> Node msg
+primaryButton : List (Html.Attribute msg) -> String -> BasicButtonSize -> Html msg
 primaryButton attrs txt size =
     basicButton attrs txt size Primary
 
 -- convenience function: returns a basicButton with the Variant "Secondary"
-secondaryButton : List (Attribute msg) -> String -> BasicButtonSize -> Node msg
+secondaryButton : List (Html.Attribute msg) -> String -> BasicButtonSize -> Html msg
 secondaryButton attrs txt size =
     basicButton attrs txt size Secondary
 
 -- convenience function: returns a basicButton with the Variant "White"
-whiteButton : List (Attribute msg) -> String -> BasicButtonSize -> Node msg
+whiteButton : List (Html.Attribute msg) -> String -> BasicButtonSize -> Html msg
 whiteButton attrs txt size =
     basicButton attrs txt size White
 
@@ -41,6 +40,6 @@ trailingIcon: (TrailingSize, String, Icon.Icon) -> Html msg
 trailingIcon (size, text, icon) =
     TrailingIconButton.view ({size = size, text = text, icon = icon})
 
-divider: List (Attribute msg) -> String -> Icon.Icon -> Html msg
+divider: List (StyledAttr.Attribute msg) -> String -> Icon.Icon -> Html msg
 divider attr text icon =
     DividerButton.view ({attr = attr, text = text, icon = icon})
