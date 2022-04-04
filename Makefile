@@ -17,10 +17,6 @@ docker-build-app: ## build APP image locally
 docker-build-mock-api: ## build mock API image locally
 	docker buildx build --platform linux/amd64 -t $(DOCKER_IMAGE_MOCK_API) -t $(MOCK_API_REPO):latest --load $(CURRENT_DIR)/mock-api/.
 
-.PHONY: docker-build-config
-docker-build-config:
-	docker buildx build --platform linux/amd64 -t $(DOCKER_IMAGE_CONFIG) -t $(CONFIG_REPO):latest --load $(CURRENT_DIR)/mock-api/.
-
 .PHONY: docker-publish-app
 docker-publish-app: ## publish APP Docker image to Docker-Hub
 	docker buildx build --platform linux/amd64 -t $(DOCKER_IMAGE) -t $(DOCKER_REPO):latest --push .
@@ -35,12 +31,14 @@ docker-run: docker-build ## run docker image locally
 
 .PHONY: build
 build: ## build elm app
+	make config-prod
 	@elm make src/Main.elm --output dist/app.js --optimize
 	@cp index.html dist/index.html
 	@cp -R assets dist/assets
 
 .PHONY: build-dev
 build-dev: ## build elm app in dev mode
+	make config-dev
 	@elm-go src/Main.elm --pushstate -- --output="app.js" --debug
 
 .PHONY: start-dev-server
@@ -55,10 +53,6 @@ start-mock-api: docker-build-mock-api ## start docker container hosting db.json
 stop-mock-api: ## stop docker container hosting db.json
 	@docker stop CPE-Mock-API
 	@docker rm CPE-Mock-API
-
-.PHONY: config-dev
-config-dev: docker-build-config
-	@docker run -d -p 3333:3000 --name="Configuration" -v $(CURRENT_DIR)/config/config.dev.json:/data/db/config.dev.json $(DOCKER_IMAGE_CONFIG)
 
 .PHONY: test
 test: ## run all tests
@@ -78,3 +72,11 @@ heroicons: ## run the script to update the heroicons library
 	./get-heroicons-list.sh
 
 .DEFAULT_GOAL := help
+
+.PHONY: config-dev
+config-dev: ## run the config script with the config.dev.json file
+	./get-config.sh config/config.dev.json
+
+.PHONY: config-prod
+config-prod: ## run the config script with the config.prod.json file
+	./get-config.sh config/config.prod.json
