@@ -1,14 +1,13 @@
 module Buttons.BasicButtons.SecondaryButton exposing (..)
 
-import Css
-import Tailwind.Utilities as Tw
+import CustomCss.DaschTailwind as Dtw
 
 
-secondaryButtonStyle : List Css.Style
-secondaryButtonStyle =
-    [ Tw.text_indigo_700
-    , Tw.bg_indigo_100
-    , Tw.border_transparent
-    , Css.hover
-        [ Tw.bg_indigo_200 ]
-    ]
+secondaryButtonClasses : String
+secondaryButtonClasses =
+    Dtw.classList
+        [ Dtw.text_indigo_700
+        , Dtw.bg_indigo_100
+        , Dtw.border_transparent
+        , Dtw.hover Dtw.bg_indigo_200
+        ]

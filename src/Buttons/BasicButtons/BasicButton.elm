@@ -1,14 +1,11 @@
 module Buttons.BasicButtons.BasicButton exposing (..)
 
-import Buttons.BasicButtons.PrimaryButton exposing (primaryButtonStyle)
-import Buttons.BasicButtons.SecondaryButton exposing (secondaryButtonStyle)
-import Buttons.BasicButtons.WhiteButton exposing (whiteButtonStyle)
-import Css
-import Css.Global
-import Html.Styled as HtmlStyled exposing (Attribute)
-import Html.Styled.Attributes as Attr
-import Tailwind.Utilities as Tw
-import VirtualDom exposing (Node)
+import Buttons.BasicButtons.PrimaryButton exposing (primaryButtonClasses)
+import Buttons.BasicButtons.SecondaryButton exposing (secondaryButtonClasses)
+import Buttons.BasicButtons.WhiteButton exposing (whiteButtonClasses)
+import CustomCss.DaschTailwind as Dtw
+import Html exposing (Attribute, Html, button, text)
+import Html.Attributes exposing (class)
 
 
 type BasicButtonSize
@@ -19,56 +16,60 @@ type BasicButtonSize
     | BasicExtraLarge
 
 
-baseButton : List Css.Style
-baseButton =
-    [ Tw.inline_flex
-    , Tw.items_center
-    , Tw.border
-    , Tw.font_medium
-    , Tw.rounded
-    , Tw.shadow_sm
-    , Css.focus
-        [ Tw.outline_none
-        , Tw.ring_2
-        , Tw.ring_offset_2
-        , Tw.ring_indigo_500
+baseButtonClasses : String
+baseButtonClasses =
+    Dtw.classList
+        [ Dtw.inline_flex
+        , Dtw.items_center
+        , Dtw.border
+        , Dtw.font_medium
+        , Dtw.rounded
+        , Dtw.shadow_sm
+        , Dtw.focus Dtw.outline_none
+        , Dtw.focus Dtw.ring_2
+        , Dtw.focus Dtw.ring_offset_2
+        , Dtw.focus Dtw.ring_indigo_500
         ]
-    ]
 
 
-renderBtnSize : BasicButtonSize -> List Css.Style
-renderBtnSize size =
+getBtnSizeClasses : BasicButtonSize -> String
+getBtnSizeClasses size =
     case size of
         BasicExtraSmall ->
-            [ Tw.px_2_dot_5
-            , Tw.py_1_dot_5
-            , Tw.text_xs
-            ]
+            Dtw.classList
+                [ Dtw.px_2_dot_5
+                , Dtw.py_1_dot_5
+                , Dtw.text_xs
+                ]
 
         BasicSmall ->
-            [ Tw.px_3
-            , Tw.py_2
-            , Tw.text_sm
-            , Tw.leading_4
-            ]
+            Dtw.classList
+                [ Dtw.px_3
+                , Dtw.py_2
+                , Dtw.text_sm
+                , Dtw.leading_4
+                ]
 
         BasicNormal ->
-            [ Tw.px_4
-            , Tw.py_2
-            , Tw.text_sm
-            ]
+            Dtw.classList
+                [ Dtw.px_4
+                , Dtw.py_2
+                , Dtw.text_sm
+                ]
 
         BasicLarge ->
-            [ Tw.px_4
-            , Tw.py_2
-            , Tw.text_base
-            ]
+            Dtw.classList
+                [ Dtw.px_4
+                , Dtw.py_2
+                , Dtw.text_base
+                ]
 
         BasicExtraLarge ->
-            [ Tw.px_6
-            , Tw.py_3
-            , Tw.text_base
-            ]
+            Dtw.classList
+                [ Dtw.px_6
+                , Dtw.py_3
+                , Dtw.text_base
+                ]
 
 
 type alias BasicButtonModel msg =
@@ -83,7 +84,7 @@ type alias BasicButtonModel msg =
 -- convenience function: Constructs the Buttonmodel and passes it into view; returns the view
 
 
-basicButton : List (Attribute msg) -> String -> BasicButtonSize -> Variant -> Node msg
+basicButton : List (Attribute msg) -> String -> BasicButtonSize -> Variant -> Html msg
 basicButton attributes text size variant =
     view { attrs = attributes, text = text, size = size, variant = variant }
 
@@ -94,28 +95,26 @@ type Variant
     | White
 
 
-getVariant : Variant -> List Css.Style
-getVariant variant =
+getVariantClasses : Variant -> String
+getVariantClasses variant =
     case variant of
         Primary ->
-            primaryButtonStyle
+            primaryButtonClasses
 
         Secondary ->
-            secondaryButtonStyle
+            secondaryButtonClasses
 
         White ->
-            whiteButtonStyle
+            whiteButtonClasses
 
 
-view : BasicButtonModel msg -> Node msg
+view : BasicButtonModel msg -> Html msg
 view b =
-    HtmlStyled.toUnstyled <|
-        HtmlStyled.button
-            (b.attrs
-                ++ [ Attr.type_ "button"
-                   , Attr.css (renderBtnSize b.size ++ getVariant b.variant ++ baseButton)
-                   ]
-            )
-            [ HtmlStyled.text b.text
-            , Css.Global.global Tw.globalStyles
-            ]
+    button
+        (b.attrs
+            ++ [ class (getBtnSizeClasses b.size)
+               , class (getVariantClasses b.variant)
+               , class baseButtonClasses
+               ]
+        )
+        [ text b.text ]

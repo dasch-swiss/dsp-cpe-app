@@ -1,8 +1,7 @@
 module Dividers.Divider exposing (..)
 
 import Dividers.IconButtonDivider as IconButtonDivider
-import Html exposing (Html)
-import Html.Styled exposing (Attribute)
+import Html exposing (Html, Attribute)
 import Icon
 
 

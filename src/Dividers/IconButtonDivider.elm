@@ -1,23 +1,11 @@
 module Dividers.IconButtonDivider exposing (..)
 
-import Browser
 import Buttons.Button exposing (divider)
 import Buttons.LeadingIconButton exposing (LeadingSize(..))
-import Html exposing (Html)
-import Html.Styled as HtmlStyled exposing (Attribute)
-import Html.Styled.Attributes as Attr
+import CustomCss.DaschTailwind as Dtw
+import Html exposing (Attribute, Html, div)
+import Html.Attributes exposing (class)
 import Icon
-import Tailwind.Utilities as Tw
-
-
-main : Program () (Model msg) msg
-main =
-    Browser.element
-        { init = init
-        , view = view
-        , update = update
-        , subscriptions = subscriptions
-        }
 
 
 type alias Model msg =
@@ -42,22 +30,16 @@ init _ =
 
 view : Model msg -> Html msg
 view model =
-    HtmlStyled.toUnstyled <|
-        HtmlStyled.div
-            [ Attr.css [ Tw.relative ]
-            ]
-            [ HtmlStyled.div
-                [ Attr.css [ Tw.absolute, Tw.inset_0, Tw.flex, Tw.items_center ] ]
-                [ HtmlStyled.div [ Attr.css [ Tw.w_full, Tw.border_t, Tw.border_gray_300 ] ] [] ]
-            , HtmlStyled.div [ Attr.css [ Tw.relative, Tw.flex, Tw.justify_center ] ]
-                [ HtmlStyled.fromUnstyled (divider model.buttonAttrs model.text model.icon) ]
-            ]
+    div
+        [ class Dtw.relative ]
+        [ div
+            [ class (Dtw.classList [ Dtw.absolute, Dtw.inset_0, Dtw.flex, Dtw.items_center ]) ]
+            [ div [ class (Dtw.classList [ Dtw.w_full, Dtw.border_t, Dtw.border_gray_300 ]) ] [] ]
+        , div [ class (Dtw.classList [ Dtw.relative, Dtw.flex, Dtw.justify_center ]) ]
+            [ divider model.buttonAttrs model.text model.icon ]
+        ]
 
 
 update : msg -> Model msg -> ( Model msg, Cmd msg )
 update _ model =
     ( model, Cmd.none )
-
-
-subscriptions _ =
-    Sub.none
