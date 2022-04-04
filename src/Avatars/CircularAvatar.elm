@@ -1,22 +1,9 @@
 module Avatars.CircularAvatar exposing (..)
 
-import Browser
-import Css
-import Css.Global
-import Html.Styled as HtmlStyled
-import Html.Styled.Attributes as Attr
-import Tailwind.Utilities as Tw
-import VirtualDom
-
-main : Program () Model msg
-main =
-    Browser.element
-        { init = init
-        , view = view
-        , update = update
-        , subscriptions = subscriptions
-        }
-
+import CustomCss.DaschTailwind as Dtw
+import Html exposing (Html, img)
+import Html.Attributes exposing (alt, class, src)
+import String
 
 type alias Model =
     { size: CircularAvatarSize
@@ -41,51 +28,50 @@ type CircularAvatarSize
     | CircularAvatarExtraLarge
 
 
-renderSize : CircularAvatarSize -> List Css.Style
-renderSize size =
+getAvatarSize : CircularAvatarSize -> String
+getAvatarSize size =
             case size of
                 CircularAvatarExtraSmall ->
-                    [ Tw.h_6
-                    , Tw.w_6
-                    ]
+                    String.join " "
+                        [ Dtw.h_6
+                        , Dtw.w_6
+                        ]
 
                 CircularAvatarSmall ->
-                    [ Tw.h_8
-                    , Tw.w_8
-                    ]
+                    String.join " "
+                        [ Dtw.h_8
+                        , Dtw.w_8
+                        ]
 
                 CircularAvatarNormal ->
-                    [ Tw.h_10
-                    , Tw.w_10
-                    ]
+                    String.join " "
+                        [ Dtw.h_10
+                        , Dtw.w_10
+                        ]
 
                 CircularAvatarLarge ->
-                    [ Tw.h_12
-                    , Tw.w_12
-                    ]
+                    String.join " "
+                        [ Dtw.h_12
+                        , Dtw.w_12
+                        ]
 
                 CircularAvatarExtraLarge ->
-                    [ Tw.h_14
-                    , Tw.w_14
-                    ]
+                    String.join " "
+                        [ Dtw.h_14
+                        , Dtw.w_14
+                        ]
 
-view : Model -> VirtualDom.Node msg
+view : Model -> Html msg
 view model =
-    HtmlStyled.toUnstyled <|
-        HtmlStyled.img
-            [  Attr.css (renderSize model.size ++ [Tw.rounded_full])
-            ,  Attr.alt (model.alt)
-            , Attr.src (model.img)
-            ]
-            [ Css.Global.global Tw.globalStyles
-            ]
+    img
+        [ class (getAvatarSize model.size)
+        , class Dtw.rounded_full
+        , alt (model.alt)
+        , src (model.img)
+        ]
+        []
 
 
 update : msg -> Model -> ( Model, Cmd msg )
 update _ model =
     ( model, Cmd.none )
-
-
-subscriptions : Model -> Sub msg
-subscriptions _ =
-    Sub.none

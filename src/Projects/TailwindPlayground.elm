@@ -7,7 +7,6 @@ import Buttons.Button as Button exposing (primaryButton, secondaryButton, whiteB
 import Buttons.CircularButton exposing (CircularButtonSize(..))
 import Buttons.LeadingIconButton exposing (LeadingSize(..))
 import Buttons.TrailingIconButton exposing (TrailingSize(..))
-import Dividers.Divider as Divider
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Icon as Icon

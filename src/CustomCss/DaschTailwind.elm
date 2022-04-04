@@ -76,6 +76,22 @@ h_6 : String
 h_6 =
     "h-6"
 
+h_8 : String
+h_8 =
+    "h-8"
+
+h_10 : String
+h_10 =
+    "h-10"
+
+h_12 : String
+h_12 =
+    "h-12"
+
+h_14 : String
+h_14 =
+    "h-14"
+
 inline_flex : String
 inline_flex =
     "inline-flex"
@@ -275,6 +291,22 @@ w_5 =
 w_6 : String
 w_6 =
     "w-6"
+
+w_8 : String
+w_8 =
+    "w-8"
+
+w_10 : String
+w_10 =
+    "w-10"
+
+w_12 : String
+w_12 =
+    "w-12"
+
+w_14 : String
+w_14 =
+    "w-14"
 
 w_full : String
 w_full =
