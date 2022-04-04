@@ -7,10 +7,11 @@ import Buttons.Button as Button exposing (primaryButton, secondaryButton, whiteB
 import Buttons.CircularButton exposing (CircularButtonSize(..))
 import Buttons.LeadingIconButton exposing (LeadingSize(..))
 import Buttons.TrailingIconButton exposing (TrailingSize(..))
-import Dividers.Divider as Divider
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Icon as Icon
+import NavigationHeader.HeaderModule exposing (cpeHeader)
+import NavigationHeader.Navitem exposing (NavItem)
 import Text.ProjectDescription as ProjectDescription
 
 
@@ -119,6 +120,11 @@ view model =
                     )
                 ]
             ]
+        , div [ class "header" ]
+            [ h3 [] [ text "Header module" ]
+            , div [] []
+            , div [] [ cpeHeader "https://beol.dasch.swiss/assets/images/beol-logo.png" False [ someNavitem, otherNavitem ] True ]
+            ]
         , div [ class "text" ]
             [ div [ class "preview project description" ]
                 [ h3 [ class "header" ] [ text "Project description" ]
@@ -143,3 +149,17 @@ update msg model =
 subscriptions : Model -> Sub msg
 subscriptions _ =
     Sub.none
+
+
+
+-- Navigation header data ...
+
+
+someNavitem : NavItem msg
+someNavitem =
+    { attrs = [], text = "Dasch", href = "https://www.dasch.swiss", cmd = Cmd.none, isActive = True }
+
+
+otherNavitem : NavItem msg
+otherNavitem =
+    { attrs = [], text = "Beol", href = "project/1", cmd = Cmd.none, isActive = False }

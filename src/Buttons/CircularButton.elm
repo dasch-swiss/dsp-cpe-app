@@ -1,14 +1,10 @@
 module Buttons.CircularButton exposing (..)
 
-import Browser
-import Css
-import Css.Global
-import Html.Styled as HtmlStyled
-import Html.Styled.Attributes as Attr
+import CustomCss.DaschTailwind as Dtw
+import Html exposing (Html, button, span)
+import Html.Attributes exposing (class, type_)
 import Icon
-import Svg.Attributes exposing (..)
-import Tailwind.Utilities as Tw
-import VirtualDom
+
 
 type CircularButtonSize
     = CircularExtraSmall
@@ -17,93 +13,67 @@ type CircularButtonSize
     | CircularLarge
     | CircularExtraLarge
 
-main : Program () Model msg
-main =
-    Browser.element
-        { init = init
-        , view = view
-        , update = update
-        , subscriptions = subscriptions
-        }
 
 type alias Model =
     { size : CircularButtonSize
     , icon : Icon.Icon
     }
 
-initialModel : Model
-initialModel =
-    { size = CircularNormal
-    , icon = Icon.Plus
-    }
 
-init : () -> ( Model, Cmd msg )
-init _ =
-    ( initialModel, Cmd.none )
-
-circularButtonStyle : List Css.Style
-circularButtonStyle =
-    [ Tw.inline_flex
-    , Tw.items_center
-    , Tw.border
-    , Tw.border_transparent
-    , Tw.rounded_full
-    , Tw.shadow_sm
-    , Tw.text_white
-    , Tw.bg_indigo_600
-    , Css.focus
-        [ Tw.outline_none
-        , Tw.ring_2
-        , Tw.ring_offset_2
-        , Tw.ring_indigo_500
+circularButtonClasses : String
+circularButtonClasses =
+    Dtw.classList
+        [ Dtw.inline_flex
+        , Dtw.items_center
+        , Dtw.border
+        , Dtw.border_transparent
+        , Dtw.rounded_full
+        , Dtw.shadow_sm
+        , Dtw.text_white
+        , Dtw.bg_indigo_600
+        , Dtw.focus Dtw.outline_none
+        , Dtw.focus Dtw.ring_2
+        , Dtw.focus Dtw.ring_offset_2
+        , Dtw.focus Dtw.ring_indigo_500
+        , Dtw.hover Dtw.bg_indigo_700
         ]
-    , Css.hover
-        [ Tw.bg_indigo_700
-        ]
-    ]
 
-view : Model -> VirtualDom.Node msg
+
+view : Model -> Html msg
 view model =
     let
         btnSize =
             case model.size of
                 CircularExtraSmall ->
-                    [ Tw.p_1 ]
+                    Dtw.p_1
 
                 CircularSmall ->
-                    [ Tw.p_1_dot_5 ]
+                    Dtw.p_1_dot_5
 
                 CircularExtraLarge ->
-                    [ Tw.p_3 ]
+                    Dtw.p_3
 
                 -- Normal and Large
                 _ ->
-                    [ Tw.p_2 ]
+                    Dtw.p_2
 
         icnSize =
             if model.size == CircularExtraSmall || model.size == CircularSmall || model.size == CircularNormal then
-                [ Tw.h_5
-                , Tw.w_5
-                ]
+                Dtw.classList
+                    [ Dtw.h_5
+                    , Dtw.w_5
+                    ]
 
             else
-                [ Tw.h_6
-                , Tw.w_6
-                ]
+                Dtw.classList
+                    [ Dtw.h_6
+                    , Dtw.w_6
+                    ]
     in
-    HtmlStyled.toUnstyled <|
-        HtmlStyled.button
-            [ Attr.type_ "button"
-            , Attr.class "circular-button"
-            , Attr.css (btnSize ++ circularButtonStyle)
-            ]
-            [ HtmlStyled.span [ Attr.css icnSize ] [ HtmlStyled.fromUnstyled <| Icon.getHtml(model.icon) ]
-            , Css.Global.global Tw.globalStyles
-            ]
-
-update : msg -> Model -> ( Model, Cmd msg )
-update _ model =
-    ( model, Cmd.none )
-
-subscriptions _ =
-    Sub.none
+    button
+        [ type_ "button"
+        , class "circular-button"
+        , class btnSize
+        , class circularButtonClasses
+        ]
+        [ span [ class icnSize ] [ Icon.getHtml model.icon ] ]

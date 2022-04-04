@@ -1,14 +1,13 @@
 module Buttons.BasicButtons.WhiteButton exposing (..)
 
-import Css
-import Tailwind.Utilities as Tw
+import CustomCss.DaschTailwind as Dtw
 
 
-whiteButtonStyle : List Css.Style
-whiteButtonStyle =
-    [ Tw.text_gray_700
-    , Tw.bg_white
-    , Tw.border_gray_300
-    , Css.hover
-        [ Tw.bg_gray_50 ]
-    ]
+whiteButtonClasses : String
+whiteButtonClasses =
+    Dtw.classList
+        [ Dtw.text_gray_700
+        , Dtw.bg_white
+        , Dtw.border_gray_300
+        , Dtw.hover Dtw.bg_gray_50
+        ]

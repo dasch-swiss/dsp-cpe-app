@@ -1,14 +1,13 @@
 module Buttons.BasicButtons.PrimaryButton exposing (..)
 
-import Css
-import Tailwind.Utilities as Tw
+import CustomCss.DaschTailwind as Dtw
 
 
-primaryButtonStyle : List Css.Style
-primaryButtonStyle =
-    [ Tw.text_white
-    , Tw.bg_indigo_600
-    , Tw.border_transparent
-    , Css.hover
-        [ Tw.bg_indigo_700 ]
-    ]
+primaryButtonClasses : String
+primaryButtonClasses =
+    Dtw.classList
+        [ Dtw.text_white
+        , Dtw.bg_indigo_600
+        , Dtw.border_transparent
+        , Dtw.hover Dtw.bg_indigo_700
+        ]

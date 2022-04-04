@@ -7,7 +7,7 @@ import Config
 import Error exposing (buildErrorMessage)
 import Html exposing (Html, div, h2, h3, text)
 import Html.Attributes exposing (class)
-import Html.Styled.Events
+import Html.Events exposing (onClick)
 import Http
 import Projects.Project as Project exposing (Project)
 import RemoteData exposing (WebData)
@@ -60,7 +60,7 @@ view model =
             [ h2 [] [ text "DSP CPE APP" ]
             ]
         , div [ class "buttons" ]
-            [ primaryButton [ Html.Styled.Events.onClick (ClickedProject "/playground") ] "playground" BasicNormal ]
+            [ primaryButton [ onClick (ClickedProject "/playground") ] "playground" BasicNormal ]
         , div [ class "header" ]
             [ h2 [] [ text "Projects" ]
             ]
@@ -94,7 +94,7 @@ viewProject project =
         projectPath =
             "/project/" ++ Project.idToString project.id
     in
-    primaryButton [ Html.Styled.Events.onClick (ClickedProject projectPath) ] project.title BasicNormal
+    primaryButton [ onClick (ClickedProject projectPath) ] project.title BasicNormal
 
 
 viewFetchError : String -> Html Msg

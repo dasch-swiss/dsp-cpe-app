@@ -1,13 +1,9 @@
 module Buttons.DividerButton exposing (..)
 
-import Browser
-import Css
-import Css.Global
-import Html.Styled as Styled exposing (Attribute)
-import Html.Styled.Attributes as Attr
+import CustomCss.DaschTailwind as Dtw
+import Html exposing (Attribute, Html, button, span, text)
+import Html.Attributes exposing (class, type_)
 import Icon
-import Tailwind.Utilities as Tw
-import VirtualDom
 
 
 type alias Model msg =
@@ -17,87 +13,51 @@ type alias Model msg =
     }
 
 
-main : Program () (Model msg) msg
-main =
-    Browser.element
-        { init = init
-        , view = view
-        , update = update
-        , subscriptions = subscriptions
-        }
-
-
-initialModel : Model msg
-initialModel =
-    { attr = []
-    , text = "Read More"
-    , icon = Icon.PlusSm
-    }
-
-
-init : () -> ( Model msg, Cmd msg )
-init _ =
-    ( initialModel, Cmd.none )
-
-
-baseButton : List Css.Style
-baseButton =
-    [ Tw.inline_flex
-    , Tw.items_center
-    , Tw.border
-    , Tw.border_gray_300
-    , Tw.font_medium
-    , Tw.rounded_full
-    , Tw.shadow_sm
-    , Tw.text_gray_700
-    , Tw.bg_white
-    , Tw.px_4
-    , Tw.py_1_dot_5
-    , Tw.text_sm
-    , Tw.leading_5
-    , Css.focus
-        [ Tw.outline_none
-        , Tw.ring_2
-        , Tw.ring_offset_2
-        , Tw.ring_indigo_500
+baseButtonClasses : String
+baseButtonClasses =
+    Dtw.classList
+        [ Dtw.inline_flex
+        , Dtw.items_center
+        , Dtw.border
+        , Dtw.border_gray_300
+        , Dtw.font_medium
+        , Dtw.rounded_full
+        , Dtw.shadow_sm
+        , Dtw.text_gray_700
+        , Dtw.bg_white
+        , Dtw.px_4
+        , Dtw.py_1_dot_5
+        , Dtw.text_sm
+        , Dtw.leading_5
+        , Dtw.focus Dtw.outline_none
+        , Dtw.focus Dtw.ring_2
+        , Dtw.focus Dtw.ring_offset_2
+        , Dtw.focus Dtw.ring_indigo_500
+        , Dtw.hover Dtw.bg_gray_50
         ]
-    , Css.hover
-        [ Tw.bg_gray_50 ]
-    ]
 
 
-view : Model msg -> VirtualDom.Node msg
+view : Model msg -> Html msg
 view model =
     let
-        svgStyle =
-            [ Tw.neg_ml_1_dot_5
-            , Tw.mr_1
-            , Tw.h_5
-            , Tw.w_5
-            , Tw.text_gray_400
-            ]
+        svgClasses =
+            Dtw.classList
+                [ Dtw.neg_ml_1_dot_5
+                , Dtw.mr_1
+                , Dtw.h_5
+                , Dtw.w_5
+                , Dtw.text_gray_400
+                ]
 
         iconMethod =
             Icon.getHtml model.icon
     in
-    Styled.toUnstyled <|
-        Styled.button
-            (model.attr
-                ++ [ Attr.type_ "button"
-                   , Attr.css baseButton
-                   ]
-            )
-            [ Styled.span [ Attr.css svgStyle ] [ Styled.fromUnstyled <| iconMethod ]
-            , Styled.text model.text
-            , Css.Global.global Tw.globalStyles
-            ]
-
-
-update : msg -> Model msg -> ( Model msg, Cmd msg )
-update _ model =
-    ( model, Cmd.none )
-
-
-subscriptions : Model msg -> Sub msg
-subscriptions _ =
-    Sub.none
+    button
+        (model.attr
+            ++ [ type_ "button"
+               , class baseButtonClasses
+               ]
+        )
+        [ span [ class svgClasses ] [ iconMethod ]
+        , text model.text
+        ]
