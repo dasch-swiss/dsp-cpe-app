@@ -41,9 +41,7 @@ view model =
     if model.isOpen then
         div []
             [ div
-                [ class (Dtw.classList [ Dtw.mt_6, Dtw.prose, Dtw.prose_indigo, Dtw.prose_lg, Dtw.text_gray_500, Dtw.mx_auto ])
-                , style "max-width" "65ch"
-                ]
+                [ class (Dtw.classList [ Dtw.mt_6, Dtw.prose, Dtw.prose_indigo, Dtw.prose_lg, Dtw.text_gray_500, Dtw.mx_auto, Dtw.max_w_prose ]) ]
                 [ p [ style "padding-bottom" "1%" ] [ text model.text ] ]
             , Divider.iconButtonDivider [ onClick Hide ] Icon.PlusSm "Read Less"
             ]
@@ -51,9 +49,7 @@ view model =
     else
         div []
             [ div
-                [ class (Dtw.classList [ Dtw.mt_6, Dtw.prose, Dtw.prose_indigo, Dtw.prose_lg, Dtw.text_gray_500, Dtw.mx_auto ])
-                , style "max-width" "65ch"
-                ]
+                [ class (Dtw.classList [ Dtw.mt_6, Dtw.prose, Dtw.prose_indigo, Dtw.prose_lg, Dtw.text_gray_500, Dtw.mx_auto, Dtw.max_w_prose ]) ]
                 [ p
                     [ style "overflow" "hidden"
                     , style "text-overflow" "ellipsis"
@@ -61,7 +57,7 @@ view model =
                     , style "-webkit-line-clamp" "6"
                     , style "line-clamp" "6"
                     , style "-webkit-box-orient" "vertical"
-                    , style "padding-bottom" "0.9%"
+                    , style "padding-bottom" "0.5%"
                     ]
                     [ text model.text ]
                 ]

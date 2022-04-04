@@ -127,6 +127,10 @@ leading_5 : String
 leading_5 =
     "leading-5"
 
+max_w_prose : String
+max_w_prose =
+    "max-w-prose"
+
 ml_2 : String
 ml_2 =
     "ml-2"
