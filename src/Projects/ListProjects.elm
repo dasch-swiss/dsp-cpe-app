@@ -1,8 +1,9 @@
 module Projects.ListProjects exposing (Model, Msg, init, update, view)
 
 import Browser.Navigation as Nav
-import Buttons.Button exposing (primaryButton)
 import Buttons.BasicButtons.BasicButton exposing (BasicButtonSize(..))
+import Buttons.Button exposing (primaryButton)
+import Config
 import Error exposing (buildErrorMessage)
 import Html exposing (Html, div, h2, h3, text)
 import Html.Attributes exposing (class)
@@ -32,11 +33,12 @@ init navKey =
 fetchProjects : Cmd Msg
 fetchProjects =
     Http.get
-        { url = "http://localhost:2022/projects/"
+        { url = Config.projectsFileUrl
         , expect =
             Project.projectsDecoder
                 |> Http.expectJson (RemoteData.fromResult >> ProjectsReceived)
         }
+
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -94,6 +96,7 @@ viewProject project =
     in
     primaryButton [ onClick (ClickedProject projectPath) ] project.title BasicNormal
 
+
 viewFetchError : String -> Html Msg
 viewFetchError errorMessage =
     let
@@ -104,6 +107,7 @@ viewFetchError errorMessage =
         [ h3 [] [ text errorHeading ]
         , text ("Error: " ++ errorMessage)
         ]
+
 
 subscriptions : Model -> Sub msg
 subscriptions _ =

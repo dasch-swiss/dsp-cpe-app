@@ -31,12 +31,14 @@ docker-run: docker-build ## run docker image locally
 
 .PHONY: build
 build: ## build elm app
+	make config-prod
 	@elm make src/Main.elm --output dist/app.js --optimize
 	@cp index.html dist/index.html
 	@cp -R assets dist/assets
 
 .PHONY: build-dev
 build-dev: ## build elm app in dev mode
+	make config-dev
 	@elm-go src/Main.elm --pushstate -- --output="app.js" --debug
 
 .PHONY: start-dev-server
@@ -70,3 +72,11 @@ heroicons: ## run the script to update the heroicons library
 	./get-heroicons-list.sh
 
 .DEFAULT_GOAL := help
+
+.PHONY: config-dev
+config-dev: ## run the config script with the config.dev.json file
+	./get-config.sh config/config.dev.json
+
+.PHONY: config-prod
+config-prod: ## run the config script with the config.prod.json file
+	./get-config.sh config/config.prod.json
