@@ -2,8 +2,9 @@ module NavigationHeader.Navitem exposing (..)
 
 import Css
 import Css.Global
-import Html.Styled as HtmlStyled exposing (Attribute, Html)
-import Html.Styled.Attributes as Attr exposing (class)
+import CustomCss.DaschTailwind as Dtw exposing (dtwClass)
+import Html exposing (Attribute, Html, a, nav, text)
+import Html.Attributes as Attr exposing (class)
 import Tailwind.Utilities as Tw
 
 
@@ -26,7 +27,7 @@ toClass str =
     class str
 
 
-getStyle : Bool -> List Css.Style
+getStyle : Bool -> Attribute msg
 getStyle isActive =
     if isActive then
         navItemActive
@@ -35,18 +36,17 @@ getStyle isActive =
         navItemInactive
 
 
-navItem : NavItem msg -> HtmlStyled.Html msg
+navItem : NavItem msg -> Html msg
 navItem n =
-    HtmlStyled.nav []
-        [ HtmlStyled.a
+    nav []
+        [ a
             (n.attrs
                 ++ [ Attr.href n.href
-                   , Attr.css navItemStyle
-                   , Attr.css (getStyle n.isActive)
+                   , navItemStyle
+                   , getStyle n.isActive
                    ]
             )
-            [ HtmlStyled.text n.text
-            , Css.Global.global Tw.globalStyles
+            [ text n.text
             ]
         ]
 
@@ -55,31 +55,34 @@ navItem n =
 -- styles
 
 
-navItemStyle : List Css.Style
+navItemStyle : Attribute msg
 navItemStyle =
-    [ Tw.inline_flex
-    , Tw.items_center
-    , Tw.px_1
-    , Tw.pt_1
-    , Tw.border_b_2
-    , Tw.text_sm
-    , Tw.font_medium
+    [ Dtw.inline_flex
+    , Dtw.items_center
+    , Dtw.px_1
+    , Dtw.pt_1
+    , Dtw.border_b_2
+    , Dtw.text_sm
+    , Dtw.font_medium
     ]
+        |> dtwClass
 
 
-navItemActive : List Css.Style
+navItemActive : Attribute msg
 navItemActive =
-    [ Tw.border_indigo_500
-    , Tw.text_gray_900
+    [ Dtw.border_indigo_500
+    , Dtw.text_gray_900
     ]
+        |> dtwClass
 
 
-navItemInactive : List Css.Style
+navItemInactive : Attribute msg
 navItemInactive =
-    [ Tw.border_transparent
-    , Tw.text_gray_500
-    , Css.hover
-        [ Tw.text_gray_700
-        , Tw.border_gray_300
+    [ Dtw.border_transparent
+    , Dtw.text_gray_500
+    , Dtw.onHover
+        [ Dtw.text_gray_700
+        , Dtw.border_gray_300
         ]
     ]
+        |> dtwClass
