@@ -123,7 +123,7 @@ view model =
         , div [ class "header" ]
             [ h3 [] [ text "Header module" ]
             , div [] []
-            , div [] [ cpeHeader "https://beol.dasch.swiss/assets/images/beol-logo.png" False [ someNavitem, otherNavitem ] True ]
+            , div [] [ cpeHeader "https://beol.dasch.swiss/assets/images/beol-logo.png" True [ someNavitem, otherNavitem ] True ]
             ]
         , div [ class "text" ]
             [ div [ class "preview project description" ]
