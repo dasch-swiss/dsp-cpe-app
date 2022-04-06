@@ -97,6 +97,11 @@ custom_border customColor =
     "border-[" ++ getColor customColor ++ "]"
 
 
+custom_ring : CustomColor -> String
+custom_ring customColor =
+    "ring-[" ++ getColor customColor ++ "]"
+
+
 
 -- Tailwind classes
 
@@ -129,6 +134,11 @@ bg_indigo_600 =
 bg_indigo_700 : String
 bg_indigo_700 =
     "bg-indigo-700"
+
+
+bg_medium_blue_700 : String
+bg_medium_blue_700 =
+    "bg-blue-700"
 
 
 bg_white : String
