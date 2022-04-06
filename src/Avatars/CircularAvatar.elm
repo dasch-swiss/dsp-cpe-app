@@ -1,25 +1,16 @@
 module Avatars.CircularAvatar exposing (..)
 
 import CustomCss.DaschTailwind as Dtw
-import Html exposing (Html, img)
+import Html exposing (Attribute, Html, img)
 import Html.Attributes exposing (alt, class, src)
 
 
-type alias Model =
+type alias Model msg =
     { size : CircularAvatarSize
     , img : String
     , alt : String
+    , attrs : List (Attribute msg)
     }
-
-
-initialModel : Model
-initialModel =
-    { size = CircularAvatarNormal, img = "", alt = "" }
-
-
-init : () -> ( Model, Cmd msg )
-init _ =
-    ( initialModel, Cmd.none )
 
 
 type CircularAvatarSize
@@ -64,7 +55,7 @@ getAvatarSize size =
                 ]
 
 
-view : Model -> Html msg
+view : Model msg -> Html msg
 view model =
     img
         [ class (getAvatarSize model.size)
@@ -73,8 +64,3 @@ view model =
         , src model.img
         ]
         []
-
-
-update : msg -> Model -> ( Model, Cmd msg )
-update _ model =
-    ( model, Cmd.none )

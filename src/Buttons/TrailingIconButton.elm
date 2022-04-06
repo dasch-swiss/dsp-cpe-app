@@ -1,7 +1,7 @@
 module Buttons.TrailingIconButton exposing (..)
 
 import CustomCss.DaschTailwind as Dtw
-import Html exposing (Html, button, span, text)
+import Html exposing (Attribute, Html, button, span, text)
 import Html.Attributes exposing (class, type_)
 import Icon
 
@@ -13,10 +13,11 @@ type TrailingSize
     | TrailingExtraLarge
 
 
-type alias Model =
+type alias Model msg =
     { size : TrailingSize
     , text : String
     , icon : Icon.Icon
+    , attrs : List (Attribute msg)
     }
 
 
@@ -32,15 +33,17 @@ baseButtonClasses =
         , Dtw.shadow_sm
         , Dtw.text_white
         , Dtw.bg_indigo_600
-        , Dtw.hover Dtw.bg_indigo_700
-        , Dtw.focus Dtw.outline_none
-        , Dtw.focus Dtw.ring_2
-        , Dtw.focus Dtw.ring_offset_2
-        , Dtw.focus Dtw.ring_indigo_500
+        , Dtw.onHover [ Dtw.bg_indigo_700 ]
+        , Dtw.onFocus
+            [ Dtw.outline_none
+            , Dtw.ring_2
+            , Dtw.ring_offset_2
+            , Dtw.ring_indigo_500
+            ]
         ]
 
 
-view : Model -> Html msg
+view : Model msg -> Html msg
 view model =
     let
         btnClasses =
