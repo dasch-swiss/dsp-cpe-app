@@ -3,7 +3,7 @@ module NavigationHeader.HeaderPlayground exposing (..)
 import Browser
 import Html exposing (div, text)
 import Html.Attributes exposing (class)
-import Html.Styled.Events exposing (onClick)
+import Html.Events exposing (onClick)
 import NavigationHeader.HeaderModule exposing (cpeHeader)
 import NavigationHeader.NavbarModule exposing (..)
 import NavigationHeader.Navitem exposing (NavItem)
@@ -51,6 +51,7 @@ otherNavitem =
     { attrs = [ onClick RouteTwo ], text = "other NavItem", href = "#", cmd = Cmd.none, isActive = False }
 
 
+view : String -> Html.Html MyRoute
 view model =
     div [ class "playground" ]
         [ div [ class "buttons" ] []
