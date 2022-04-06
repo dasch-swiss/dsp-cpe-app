@@ -1,5 +1,6 @@
 module Buttons.BasicButtons.PrimaryButton exposing (..)
 
+import CustomCss.CssColors exposing (CustomColor(..))
 import CustomCss.DaschTailwind as Dtw
 
 
@@ -7,7 +8,7 @@ primaryButtonClasses : String
 primaryButtonClasses =
     Dtw.classList
         [ Dtw.text_white
-        , Dtw.bg_indigo_600
+        , Dtw.custom_bg Primary
         , Dtw.border_transparent
-        , Dtw.hover Dtw.bg_indigo_700
+        , Dtw.onHover [ Dtw.custom_bg Secondary ]
         ]

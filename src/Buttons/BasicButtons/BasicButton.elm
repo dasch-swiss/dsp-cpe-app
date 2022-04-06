@@ -25,10 +25,12 @@ baseButtonClasses =
         , Dtw.font_medium
         , Dtw.rounded
         , Dtw.shadow_sm
-        , Dtw.focus Dtw.outline_none
-        , Dtw.focus Dtw.ring_2
-        , Dtw.focus Dtw.ring_offset_2
-        , Dtw.focus Dtw.ring_indigo_500
+        , Dtw.onFocus
+            [ Dtw.outline_none
+            , Dtw.ring_2
+            , Dtw.ring_offset_2
+            , Dtw.ring_indigo_500
+            ]
         ]
 
 
