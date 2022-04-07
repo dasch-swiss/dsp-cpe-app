@@ -1,8 +1,8 @@
 module Buttons.Counter exposing (..)
 
 import Browser
-import Buttons.Button exposing (primaryButton, secondaryButton)
 import Buttons.BasicButtons.BasicButton exposing (BasicButtonSize(..))
+import Buttons.Button exposing (primaryButton, secondaryButton)
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class, disabled, id)
 import Html.Events exposing (onClick)
@@ -40,8 +40,7 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ 
-        div []
+        [ div []
             [ h3 [ class "header" ] [ text "onClick implementation" ]
             , secondaryButton [ onClick Increment ] "Click me to increase" BasicExtraLarge
             , div [] [ text (String.fromInt model) ]
