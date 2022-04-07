@@ -74,7 +74,7 @@ xxl twClasses =
 
 
 
--- adds the passed event as prefix to every class string and concadinates all to one class string
+-- adds the passed event as prefix to every class string and concatenates all to one class string
 
 
 toEventClass : List String -> String -> String
