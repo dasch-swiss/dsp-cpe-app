@@ -2,10 +2,10 @@ module NavigationHeader.SearchBar exposing (..)
 
 import Buttons.Button exposing (circularButton)
 import Buttons.CircularButton exposing (CircularButtonSize(..))
-import CustomCss.CssColors exposing (CustomColor(..), activeGray, passiveGray, white)
+import CustomCss.CssColors exposing (CustomColor(..))
 import CustomCss.DaschTailwind as Dtw exposing (dtwClass)
 import Html exposing (Attribute, Html, div, input)
-import Html.Attributes as Attr exposing (attribute, id)
+import Html.Attributes as Attr exposing (id)
 import Icon
 
 

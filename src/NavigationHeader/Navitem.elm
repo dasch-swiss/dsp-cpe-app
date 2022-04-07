@@ -1,11 +1,8 @@
 module NavigationHeader.Navitem exposing (..)
 
-import Css
-import Css.Global
 import CustomCss.DaschTailwind as Dtw exposing (dtwClass)
 import Html exposing (Attribute, Html, a, nav, text)
 import Html.Attributes as Attr exposing (class)
-import Tailwind.Utilities as Tw
 
 
 nItem : List (Attribute msg) -> String -> String -> Cmd msg -> Bool -> Html msg

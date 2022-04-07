@@ -1,9 +1,8 @@
 module NavigationHeader.HeaderButtons exposing (signInButton, signUpButton)
 
-import CustomCss.CssColors exposing (primary, white)
 import CustomCss.DaschTailwind as Dtw
 import Html exposing (Attribute, Html)
-import Html.Attributes as Attr exposing (class)
+import Html.Attributes as Attr
 
 
 signUpButton : List (Attribute msg) -> String -> Html msg

@@ -2,8 +2,6 @@ module NavigationHeader.UserMenuModule exposing (..)
 
 import Avatars.Avatar exposing (circular)
 import Avatars.CircularAvatar exposing (CircularAvatarSize(..))
-import Buttons.Button exposing (circularButton)
-import Buttons.CircularButton exposing (CircularButtonSize(..))
 import CustomCss.DaschTailwind as Dtw exposing (dtwClass)
 import Html exposing (Html, a, div, text)
 import Html.Attributes exposing (href, id)
