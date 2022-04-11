@@ -1,5 +1,6 @@
 module Buttons.CircularButton exposing (..)
 
+import CustomCss.CssColors exposing (CustomColor(..))
 import CustomCss.DaschTailwind as Dtw
 import Html exposing (Attribute, Html, button, span)
 import Html.Attributes exposing (class, type_)
@@ -31,13 +32,13 @@ circularButtonClasses =
         , Dtw.rounded_full
         , Dtw.shadow_sm
         , Dtw.text_white
-        , Dtw.bg_indigo_600
+        , Dtw.custom_bg Primary
         , Dtw.onFocus
             [ Dtw.outline_none
             , Dtw.ring_2
             , Dtw.ring_offset_2
-            , Dtw.ring_indigo_500
-            , Dtw.bg_indigo_700
+            , Dtw.custom_bg Secondary
+            , Dtw.custom_ring Primary
             ]
         ]
 
