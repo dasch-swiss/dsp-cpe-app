@@ -1,6 +1,5 @@
 module Tiles.ImageTileGrid exposing (..)
 
-import Browser.Navigation as Nav
 import CustomCss.DaschTailwind as Dtw
 import Html exposing (Html, div, ul)
 import Html.Attributes exposing (class)
@@ -8,17 +7,8 @@ import Html.Attributes.Aria exposing (role)
 import Tiles.ImageTile as ImageTile
 
 
-type alias Tile =
-    { src : String
-    , alt : String
-    , buttonAlt : String
-    , title : String
-    , subtitle : String
-    }
-
-
 type alias Model =
-    { tiles : List Tile
+    { tiles : List ImageTile.Model
     }
 
 

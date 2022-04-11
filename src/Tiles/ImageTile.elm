@@ -11,6 +11,7 @@ type alias Model =
     , buttonAlt : String
     , title : String
     , subtitle : String
+    , url : String
     }
 
 
@@ -32,7 +33,7 @@ imageTileClasses =
 
 view : Model -> Html msg
 view model =
-    a [ href "project/1" ]
+    a [ href model.url ]
         [ li [ class Dtw.relative ]
             [ div
                 [ class imageTileClasses
