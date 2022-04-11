@@ -1,6 +1,6 @@
 module NavigationHeader.Navitem exposing (..)
 
-import CustomCss.DaschTailwind as Dtw exposing (dtwClass)
+import CustomCss.DaschTailwind as Dtw exposing (classList)
 import Html exposing (Attribute, Html, a, nav, text)
 import Html.Attributes as Attr exposing (class)
 
@@ -27,10 +27,10 @@ toClass str =
 getStyle : Bool -> Attribute msg
 getStyle isActive =
     if isActive then
-        navItemActive
+        class navItemActive
 
     else
-        navItemInactive
+        class navItemInactive
 
 
 navItem : NavItem msg -> Html msg
@@ -39,7 +39,7 @@ navItem n =
         [ a
             (n.attrs
                 ++ [ Attr.href n.href
-                   , navItemStyle
+                   , class navItemStyle
                    , getStyle n.isActive
                    ]
             )
@@ -52,7 +52,7 @@ navItem n =
 -- styles
 
 
-navItemStyle : Attribute msg
+navItemStyle : String
 navItemStyle =
     [ Dtw.inline_flex
     , Dtw.items_center
@@ -62,18 +62,18 @@ navItemStyle =
     , Dtw.text_sm
     , Dtw.font_medium
     ]
-        |> dtwClass
+        |> classList
 
 
-navItemActive : Attribute msg
+navItemActive : String
 navItemActive =
     [ Dtw.border_indigo_500
     , Dtw.text_gray_900
     ]
-        |> dtwClass
+        |> classList
 
 
-navItemInactive : Attribute msg
+navItemInactive : String
 navItemInactive =
     [ Dtw.border_transparent
     , Dtw.text_gray_500
@@ -82,4 +82,4 @@ navItemInactive =
         , Dtw.border_gray_300
         ]
     ]
-        |> dtwClass
+        |> classList

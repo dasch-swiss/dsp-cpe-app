@@ -2,7 +2,7 @@ module NavigationHeader.HeaderButtons exposing (signInButton, signUpButton)
 
 import CustomCss.DaschTailwind as Dtw
 import Html exposing (Attribute, Html)
-import Html.Attributes as Attr
+import Html.Attributes as Attr exposing (class)
 
 
 signUpButton : List (Attribute msg) -> String -> Html msg
@@ -15,19 +15,19 @@ signInButton attrs txt =
     view attrs txt signInStyle
 
 
-view : List (Attribute msg) -> String -> Attribute msg -> Html msg
+view : List (Attribute msg) -> String -> String -> Html msg
 view attrs txt style =
     Html.button
         (attrs
             ++ [ Attr.type_ "button"
-               , style
+               , class style
                ]
         )
         [ Html.text txt
         ]
 
 
-signUpStyle : Attribute msg
+signUpStyle : String
 signUpStyle =
     [ Dtw.px_4
     , Dtw.py_2
@@ -44,14 +44,10 @@ signUpStyle =
         , Dtw.ring_inset
         ]
     ]
-        |> Dtw.dtwClass
+        |> Dtw.classList
 
 
-
---     , Css.color primary
-
-
-signInStyle : Attribute msg
+signInStyle : String
 signInStyle =
     [ Dtw.inline_flex
     , Dtw.items_center
@@ -69,9 +65,4 @@ signInStyle =
         , Dtw.ring_inset
         ]
     ]
-        |> Dtw.dtwClass
-
-
-
--- Css.backgroundColor primary
---    , borderColor primary
+        |> Dtw.classList

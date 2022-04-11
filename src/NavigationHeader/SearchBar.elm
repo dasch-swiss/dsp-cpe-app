@@ -3,9 +3,9 @@ module NavigationHeader.SearchBar exposing (..)
 import Buttons.Button exposing (circularButton)
 import Buttons.CircularButton exposing (CircularButtonSize(..))
 import CustomCss.CssColors exposing (CustomColor(..))
-import CustomCss.DaschTailwind as Dtw exposing (dtwClass)
+import CustomCss.DaschTailwind as Dtw exposing (classList)
 import Html exposing (Attribute, Html, div, input)
-import Html.Attributes as Attr exposing (id)
+import Html.Attributes as Attr exposing (class, id)
 import Icon
 
 
@@ -22,10 +22,10 @@ searchString =
 
 searchBar : Html msg
 searchBar =
-    div [ id "outer-search-ct", outerSearchCtStyle ]
+    div [ id "outer-search-ct", class outerSearchCtStyle ]
         [ circularButton CircularNormal Icon.ChevronRight []
         , div []
-            [ input [ Attr.type_ "Text", Attr.placeholder "Search", searchBarStyle ] []
+            [ input [ Attr.type_ "Text", Attr.placeholder "Search", class searchBarStyle ] []
             ]
         , circularButton CircularNormal Icon.Search []
         ]
@@ -35,16 +35,16 @@ searchBar =
 -- styles
 
 
-outerSearchCtStyle : Attribute msg
+outerSearchCtStyle : String
 outerSearchCtStyle =
     [ Dtw.flex
     , Dtw.justify_between
     , Dtw.items_center
     ]
-        |> dtwClass
+        |> classList
 
 
-outerSearchCtStyle_old : Attribute msg
+outerSearchCtStyle_old : String
 outerSearchCtStyle_old =
     [ Dtw.max_w_lg
     , Dtw.w_full
@@ -52,10 +52,10 @@ outerSearchCtStyle_old =
     , Dtw.items_center
     , Dtw.lg [ Dtw.max_w_xs ]
     ]
-        |> dtwClass
+        |> classList
 
 
-searchBarStyle : Attribute msg
+searchBarStyle : String
 searchBarStyle =
     [ Dtw.block
     , Dtw.w_full
@@ -74,7 +74,7 @@ searchBarStyle =
     , Dtw.sm [ Dtw.text_sm ]
     , Dtw.custom_bg White
     ]
-        |> dtwClass
+        |> classList
 
 
 

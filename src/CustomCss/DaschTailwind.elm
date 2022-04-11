@@ -17,16 +17,6 @@ classList classes =
 
 
 
--- builds an Attribute msg from the given tailwind css classes
-
-
-dtwClass : List String -> Attribute msg
-dtwClass classes =
-    join " " classes
-        |> class
-
-
-
 -- prepends the "focus" pseudo-class to the given tailwindcss class
 
 
