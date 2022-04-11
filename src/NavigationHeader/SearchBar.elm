@@ -1,11 +1,18 @@
 module NavigationHeader.SearchBar exposing (..)
 
-import Css
-import Html.Styled as HtmlStyled exposing (Attribute, Html)
-import Html.Styled.Attributes as Attr exposing (attribute, css, id)
-import NavigationHeader.CssColors exposing (activeGray, passiveGray, white)
-import Tailwind.Breakpoints as Bp
-import Tailwind.Utilities as Tw
+import Buttons.Button exposing (circularButton)
+import Buttons.CircularButton exposing (CircularButtonSize(..))
+import CustomCss.CssColors exposing (CustomColor(..))
+import CustomCss.DaschTailwind as Dtw exposing (classList)
+import Html exposing (Html, div, input)
+import Html.Attributes as Attr exposing (class, id)
+import Icon
+
+
+type alias Model =
+    { searchString : String
+    , showSB : Bool
+    }
 
 
 searchString : String
@@ -15,10 +22,12 @@ searchString =
 
 searchBar : Html msg
 searchBar =
-    HtmlStyled.div outerSearchCt
-        [ HtmlStyled.div []
-            [ HtmlStyled.input [ Attr.type_ "Text", Attr.placeholder "Search", searchBarStyle ] []
+    div [ id "outer-search-ct", class outerSearchCtStyle ]
+        [ circularButton CircularNormal Icon.ChevronRight []
+        , div []
+            [ input [ Attr.type_ "Text", Attr.placeholder "Search", class searchBarStyle ] []
             ]
+        , circularButton CircularNormal Icon.Search []
         ]
 
 
@@ -26,38 +35,43 @@ searchBar =
 -- styles
 
 
-outerSearchCt : List (Attribute msg)
-outerSearchCt =
-    [ id "outer-search-ct", attribute "data-tw-class" "max-w-lg w-full lg:max-w-xs", outerSearchCtStyle ]
-
-
-outerSearchCtStyle : Attribute msg
+outerSearchCtStyle : String
 outerSearchCtStyle =
-    [ Tw.max_w_lg
-    , Tw.w_full
-    , Tw.flex
-    , Tw.items_center
-    , Bp.lg [ Tw.max_w_xs ]
+    [ Dtw.flex
+    , Dtw.justify_between
+    , Dtw.items_center
     ]
-        |> css
+        |> classList
 
 
-searchBarStyle : Attribute msg
+outerSearchCtStyle_old : String
+outerSearchCtStyle_old =
+    [ Dtw.max_w_lg
+    , Dtw.w_full
+    , Dtw.flex
+    , Dtw.items_center
+    , Dtw.lg [ Dtw.max_w_xs ]
+    ]
+        |> classList
+
+
+searchBarStyle : String
 searchBarStyle =
-    --"max-w-lg w-full lg:max-w-xs"
-    [ Tw.block
-    , Tw.w_full
-    , Tw.pl_10
-    , Tw.pr_3
-    , Tw.py_2
-    , Tw.border
-    , Css.borderColor passiveGray
-    , Bp.md [ Tw.rounded ]
-    , Tw.leading_5
-    , Tw.text_gray_300 -- todo: Check
-    , Tw.placeholder_gray_400
-    , Tw.outline_none
-    , Css.focus [ Tw.outline_none, Css.backgroundColor white, Tw.ring_white, Tw.text_gray_900, Css.borderColor activeGray ]
-    , Bp.sm [ Tw.text_sm ]
+    [ Dtw.block
+    , Dtw.w_full
+    , Dtw.max_w_lg
+    , Dtw.pl_10
+    , Dtw.pr_3
+    , Dtw.py_2
+    , Dtw.border
+    , Dtw.leading_5
+    , Dtw.text_gray_300
+    , Dtw.placeholder_gray_400
+    , Dtw.outline_none
+    , Dtw.md [ Dtw.rounded ]
+    , Dtw.lg [ Dtw.max_w_xs ]
+    , Dtw.onFocus [ Dtw.outline_none, Dtw.ring_white, Dtw.text_gray_900 ]
+    , Dtw.sm [ Dtw.text_sm ]
+    , Dtw.custom_bg White
     ]
-        |> css
+        |> classList

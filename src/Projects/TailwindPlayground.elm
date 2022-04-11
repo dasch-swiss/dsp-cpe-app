@@ -69,25 +69,25 @@ view model =
                 ]
             , div [ class "preview circular-button" ]
                 [ h3 [ class "header" ] [ text "Circular Buttons" ]
-                , Button.circular ( CircularExtraSmall, Icon.ArrowRight )
-                , Button.circular ( CircularSmall, Icon.Annotation )
-                , Button.circular ( CircularNormal, Icon.Plus )
-                , Button.circular ( CircularLarge, Icon.Check )
-                , Button.circular ( CircularExtraLarge, Icon.EmojiHappy )
+                , Button.circularButton CircularExtraSmall Icon.ArrowRight []
+                , Button.circularButton CircularSmall Icon.Annotation []
+                , Button.circularButton CircularNormal Icon.Plus []
+                , Button.circularButton CircularLarge Icon.Check []
+                , Button.circularButton CircularExtraLarge Icon.EmojiHappy []
                 ]
             , div [ class "preview leading-button" ]
                 [ h3 [ class "header" ] [ text "Leading Icon Buttons" ]
-                , Button.leadingIcon ( LeadingSmall, "Small", Icon.Annotation )
-                , Button.leadingIcon ( LeadingNormal, "Normal", Icon.EmojiHappy )
-                , Button.leadingIcon ( LeadingLarge, "Large", Icon.Plus )
-                , Button.leadingIcon ( LeadingExtraLarge, "Extra Large", Icon.Check )
+                , Button.leadingIcon LeadingSmall "Small" Icon.Annotation []
+                , Button.leadingIcon LeadingNormal "Normal" Icon.EmojiHappy []
+                , Button.leadingIcon LeadingLarge "Large" Icon.Plus []
+                , Button.leadingIcon LeadingExtraLarge "Extra Large" Icon.Check []
                 ]
             , div [ class "preview leading-button" ]
                 [ h3 [ class "header" ] [ text "Trailing Icon Buttons" ]
-                , Button.trailingIcon ( TrailingSmall, "Small", Icon.Annotation )
-                , Button.trailingIcon ( TrailingNormal, "Normal", Icon.EmojiHappy )
-                , Button.trailingIcon ( TrailingLarge, "Large", Icon.Plus )
-                , Button.trailingIcon ( TrailingExtraLarge, "Extra Large", Icon.Check )
+                , Button.trailingIcon TrailingSmall "Small" Icon.Annotation []
+                , Button.trailingIcon TrailingNormal "Normal" Icon.EmojiHappy []
+                , Button.trailingIcon TrailingLarge "Large" Icon.Plus []
+                , Button.trailingIcon TrailingExtraLarge "Extra Large" Icon.Check []
                 ]
 
             -- insert other buttons here
@@ -96,36 +96,41 @@ view model =
             [ div [ class "preview circular-avatar" ]
                 [ h3 [ class "header" ] [ text "Circular Avatar" ]
                 , circular
-                    ( CircularAvatarExtraSmall
-                    , "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    , "Extra small"
-                    )
+                    CircularAvatarExtraSmall
+                    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    "Extra small"
+                    []
                 , circular
-                    ( CircularAvatarSmall
-                    , "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    , "Small"
-                    )
+                    CircularAvatarSmall
+                    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    "Small"
+                    []
                 , circular
-                    ( CircularAvatarNormal
-                    , "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    , "Normal"
-                    )
+                    CircularAvatarNormal
+                    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    "Normal"
+                    []
                 , circular
-                    ( CircularAvatarLarge
-                    , "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    , "Large"
-                    )
+                    CircularAvatarLarge
+                    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    "Large"
+                    []
                 , circular
-                    ( CircularAvatarExtraLarge
-                    , "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    , "Extra large"
-                    )
+                    CircularAvatarExtraLarge
+                    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    "Extra large"
+                    []
                 ]
             ]
         , div [ class "header" ]
-            [ h3 [] [ text "Header module" ]
+            [ h3 [] [ text "Header module signed in" ]
             , div [] []
-            , div [] [ cpeHeader "https://beol.dasch.swiss/assets/images/beol-logo.png" False [ someNavitem, otherNavitem ] True ]
+            , div [] [ cpeHeader "https://beol.dasch.swiss/assets/images/beol-logo.png" fakeUser [ someNavitem, otherNavitem ] True ]
+            ]
+        , div [ class "header" ]
+            [ h3 [] [ text "Header module signed out" ]
+            , div [] []
+            , div [] [ cpeHeader "https://beol.dasch.swiss/assets/images/beol-logo.png" Nothing [ someNavitem, otherNavitem ] True ]
             ]
         , div [ class "text" ]
             [ div [ class "preview project description" ]
@@ -176,3 +181,11 @@ someNavitem =
 otherNavitem : NavItem msg
 otherNavitem =
     { attrs = [], text = "Beol", href = "project/1", cmd = Cmd.none, isActive = False }
+
+
+fakeUser : Maybe { uId : String, uImg : String }
+fakeUser =
+    Just
+        { uId = "sthId"
+        , uImg = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+        }

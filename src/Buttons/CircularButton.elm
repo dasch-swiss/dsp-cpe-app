@@ -1,7 +1,8 @@
 module Buttons.CircularButton exposing (..)
 
+import CustomCss.CssColors exposing (CustomColor(..))
 import CustomCss.DaschTailwind as Dtw
-import Html exposing (Html, button, span)
+import Html exposing (Attribute, Html, button, span)
 import Html.Attributes exposing (class, type_)
 import Icon
 
@@ -14,9 +15,10 @@ type CircularButtonSize
     | CircularExtraLarge
 
 
-type alias Model =
+type alias Model msg =
     { size : CircularButtonSize
     , icon : Icon.Icon
+    , attrs : List (Attribute msg)
     }
 
 
@@ -30,16 +32,18 @@ circularButtonClasses =
         , Dtw.rounded_full
         , Dtw.shadow_sm
         , Dtw.text_white
-        , Dtw.bg_indigo_600
-        , Dtw.focus Dtw.outline_none
-        , Dtw.focus Dtw.ring_2
-        , Dtw.focus Dtw.ring_offset_2
-        , Dtw.focus Dtw.ring_indigo_500
-        , Dtw.hover Dtw.bg_indigo_700
+        , Dtw.custom_bg Primary
+        , Dtw.onFocus
+            [ Dtw.outline_none
+            , Dtw.ring_2
+            , Dtw.ring_offset_2
+            , Dtw.custom_bg Secondary
+            , Dtw.custom_ring Primary
+            ]
         ]
 
 
-view : Model -> Html msg
+view : Model msg -> Html msg
 view model =
     let
         btnSize =

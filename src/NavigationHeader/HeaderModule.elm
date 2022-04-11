@@ -1,208 +1,145 @@
 module NavigationHeader.HeaderModule exposing (..)
 
-import Html.Styled as HtmlStyled exposing (Attribute)
-import Html.Styled.Attributes exposing (attribute, css, id, src)
-import NavigationHeader.HeaderButtons exposing (signInButton, signUpButton)
+import CustomCss.DaschTailwind as Dtw exposing (classList)
+import Html exposing (div, img, nav)
+import Html.Attributes exposing (class, id, src)
 import NavigationHeader.NavbarModule exposing (NavBar, navBar)
 import NavigationHeader.SearchBar exposing (searchBar)
-import Tailwind.Breakpoints as Bp
-import Tailwind.Utilities as Tw
-import VirtualDom exposing (Node)
+import NavigationHeader.UserMenuModule exposing (User, userMenu)
 
 
-cpeHeader : String -> Bool -> NavBar msg -> Bool -> Node msg
-cpeHeader logo signedIn bar showSb =
-    HtmlStyled.nav navHeaderBgCntr
-        [ HtmlStyled.div navHeaderCntr
+
+--cpeHeader : String -> Bool -> NavBar msg -> Bool -> Html.Html msg
+
+
+cpeHeader : String -> Maybe User -> NavBar msg -> Bool -> Html.Html msg
+cpeHeader logo user bar showSb =
+    nav [ id "nav-header-bg-cntr", class navHeaderBgCntrStyle ]
+        [ div [ id "standard-view-cntr", class navHeaderCntrStyle ]
             [ -- Nav header container for elements & menu entries
-              HtmlStyled.div headerElementsCntr
+              div [ id "header-elements-cntr", class headerElementsCntrStyle ]
                 [ -- "flex justify-between h-16"; Container for all the header elements
-                  HtmlStyled.div flexLeftElementsCntr
+                  div [ id "flex-left-elements-cntr", class Dtw.flex ]
                     [ -- Flex all left side elements
-                      HtmlStyled.div navBarLogoCntr
-                        [ HtmlStyled.img [ src logo, css [ Tw.inline_block, Tw.max_h_12 ] ] []
+                      div [ id "navBar-logo-cntr", class navBarLogoCntrStyle ]
+                        [ img
+                            [ src logo
+                            , class logoStyle
+                            ]
+                            []
                         ]
-                    , HtmlStyled.div mobileMenuButtonCntr
-                        []
-                    , HtmlStyled.div navBarCntr [ navBar bar ] -- NavBar container; unhides on medium screen size  "hidden md:ml-6 md:flex md:space-x-8"
+                    , div [ id "mobile-menu-button-cntr", class mobileMenuButtonCntrStyle ] []
+                    , div [ id "navbar-nav-cntr", class navBarCntrStyle ] [ navBar bar ] -- navBar container; unhides on medium screen size  "hidden md:ml-6 md:flex md:space-x-8"
                     ]
-                , HtmlStyled.div (searchBarCntr showSb)
-                    [ searchBar
-                    ]
+                , div [ id "flex-right-elements-cntr", class flexRightElementsCntrStyle ]
+                    -- right side elements: search bar, buttons.
+                    [ div [ id "search-view-cntr", class (searchBarStyle showSb) ] [ searchBar ]
+                    , div [ id "user-menue-cntr" ] [ userMenu user ]
 
-                -- the search bar
-                , HtmlStyled.div flexRightElementsCntr
-                    -- right side elements: search bar, Buttons.
-                    (buttonGroup signedIn)
+                    -- the search bar
+                    ]
                 ]
+            , div [ id "mobile-view-cntr", class mobileMenuButtonCntrStyle ] [] -- Container for mobile menu. Hidden if screen reaches medium size
             ]
-        , HtmlStyled.div mobileMenuCntr [] -- Container for mobile menu. Hidden if screen reaches medium size
-        ]
-        |> HtmlStyled.toUnstyled
-
-
-type SignedIn
-    = True
-    | False
-
-
-buttonGroup : Bool -> List (HtmlStyled.Html msg)
-buttonGroup signedIn =
-    if signedIn then
-        [ signInButton [] "sign out"
-        ]
-
-    else
-        [ signUpButton [] "sign up"
-        , signInButton [] "sign in"
         ]
 
 
 
--- attributes & classes ...
--- the navBar background container
+-- styles
 
 
-navHeaderBgCntr : List (Attribute msg)
-navHeaderBgCntr =
-    [ id "nav-header-bg-cntr", attribute "data-tw-class" "bg-white shadow", navHeaderBgCntrStyle ]
-
-
-navHeaderBgCntrStyle : Attribute msg
+navHeaderBgCntrStyle : String
 navHeaderBgCntrStyle =
-    [ Tw.bg_white
-    , Tw.shadow
+    [ Dtw.bg_white
+    , Dtw.shadow
     ]
-        |> css
+        |> classList
 
 
-
--- Container for the navHeader
-
-
-navHeaderCntr : List (Attribute msg)
-navHeaderCntr =
-    [ id "standard-view-cntr", attribute "data-tw-class" "max-w-7xl mx-auto px-4", navHeaderCntrStyle ]
-
-
-navHeaderCntrStyle : Attribute msg
+navHeaderCntrStyle : String
 navHeaderCntrStyle =
-    [ Tw.max_w_7xl
-    , Tw.mx_auto
-    , Tw.px_4
+    [ Dtw.max_w_7xl
+    , Dtw.mx_auto
+    , Dtw.px_4
     ]
-        |> css
+        |> classList
 
 
-searchBarCntr : Bool -> List (Attribute msg)
-searchBarCntr showSb =
+headerElementsCntrStyle : String
+headerElementsCntrStyle =
+    [ Dtw.flex
+    , Dtw.justify_between
+    , Dtw.h_16
+    ]
+        |> classList
+
+
+navBarLogoCntrStyle : String
+navBarLogoCntrStyle =
+    [ Dtw.flex_shrink_0, Dtw.items_center, Dtw.h_3_dot_5 ]
+        |> classList
+
+
+logoStyle : String
+logoStyle =
+    [ Dtw.inline_block, Dtw.max_h_12 ]
+        |> classList
+
+
+mobileMenuButtonCntrStyle : String
+mobileMenuButtonCntrStyle =
+    [ Dtw.neg_ml_2
+    , Dtw.mr_2
+    , Dtw.flex
+    , Dtw.items_center
+    , Dtw.md [ Dtw.hidden ] -- hidden if break point reaches screen size medium
+    ]
+        |> classList
+
+
+navBarCntrStyle : String
+navBarCntrStyle =
+    [ Dtw.hidden
+    , Dtw.md [ Dtw.ml_6, Dtw.flex, Dtw.space_x_8 ]
+    , Dtw.self_center
+    ]
+        |> classList
+
+
+flexRightElementsCntrStyle : String
+flexRightElementsCntrStyle =
+    [ Dtw.flex, Dtw.items_center, Dtw.space_x_4, Dtw.md [ Dtw.ml_6, Dtw.justify_end ] ]
+        |> classList
+
+
+searchBarStyle : Bool -> String
+searchBarStyle showSb =
     if showSb then
-        [ id "standard-view-cntr", attribute "data-tw-class" "flex-1 flex justify-center px-2 lg:ml-6 lg:justify-end", searchBarStyle ]
+        [ Dtw.flex_1
+        , Dtw.flex
+        , Dtw.justify_center
+        , Dtw.px_2
+        , Dtw.justify_between
+        ]
+            |> classList
 
     else
-        [ css [ Tw.hidden ] ]
+        Dtw.hidden
 
 
-searchBarStyle : Attribute msg
-searchBarStyle =
-    [ Tw.flex_1
-    , Tw.flex
-    , Tw.justify_center
-    , Tw.px_2
-    , Bp.lg [ Tw.ml_6, Tw.justify_end ]
-    ]
-        |> css
-
-
-headerElementsCntr : List (Attribute msg)
-headerElementsCntr =
-    [ id "header-elements-cntr", attribute "data-tw-class" "flex justify-between h-16", headerElementsCntrStyle ]
-
-
-
--- Container for all header elements
-
-
-headerElementsCntrStyle : Attribute msg
-headerElementsCntrStyle =
-    [ Tw.flex
-    , Tw.justify_between
-    , Tw.h_16
-    ]
-        |> css
-
-
-
--- Container for al left elements
-
-
-flexLeftElementsCntr : List (Attribute msg)
-flexLeftElementsCntr =
-    [ id "flex-left-elements-cntr", attribute "data-tw-class" "flex", css [ Tw.flex ] ]
-
-
-mobileMenuButtonCntr : List (Attribute msg)
-mobileMenuButtonCntr =
-    [ id "mobile-menu-button-cntr", attribute "data-tw-class" "-ml-2 mr-2 flex items-center md:hidden", mobileMenuButtonCntrStyle ]
-
-
-mobileMenuButtonCntrStyle : Attribute msg
-mobileMenuButtonCntrStyle =
-    [ Tw.neg_ml_2
-    , Tw.mr_2
-    , Tw.flex
-    , Tw.items_center
-    , Bp.md [ Tw.hidden ] -- hidden if break point reaches screen size medium
-    ]
-        |> css
-
-
-navBarLogoCntr : List (Attribute msg)
-navBarLogoCntr =
-    [ id "navBar-logo-cntr"
-    , attribute "data-tw-class" "flex-shrink-0 flex items-center"
-    , css [ Tw.flex_shrink_0, Tw.items_center, Tw.h_3_dot_5 ]
-    ]
-
-
-navBarCntr : List (Attribute msg)
-navBarCntr =
-    [ id "navbar-nav-cntr"
-    , attribute "data-tw-class" "hidden md:ml-6 md:flex md:space-x-8"
-    , navBarCntrStyle
-    ]
-
-
-navBarCntrStyle : Attribute msg
-navBarCntrStyle =
-    [ Tw.hidden
-    , Bp.md [ Tw.ml_6, Tw.flex, Tw.space_x_8 ]
-    , Tw.self_center
-    ]
-        |> css
-
-
-
--- Container for all right elements
-
-
-flexRightElementsCntr : List (Attribute msg)
-flexRightElementsCntr =
-    [ id "flex-right-elements-cntr", attribute "data-tw-class" "flex items-center space-x-4", css [ Tw.flex, Tw.items_center, Tw.space_x_4 ] ]
-
-
-
--- the mobile menu container. Hidden if the screen size reaches medium size
-
-
-mobileMenuCntr : List (Attribute msg)
-mobileMenuCntr =
-    [ id "mobile-view-cntr"
-    , attribute "data-tw-class" "md:hidden"
-    , css
-        [ Bp.md
-            [ -- if breakpoint reaches medium size
-              Tw.hidden
-            ]
+mobileMenuCntrStyle : String
+mobileMenuCntrStyle =
+    [ Dtw.md
+        [ -- if breakpoint reaches medium size
+          Dtw.hidden
         ]
     ]
+        |> classList
+
+
+fakeUser : Maybe User
+fakeUser =
+    Just
+        { uId = "sthId"
+        , uImg = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+        }

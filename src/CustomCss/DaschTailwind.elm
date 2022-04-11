@@ -1,6 +1,7 @@
 module CustomCss.DaschTailwind exposing (..)
 
-import String exposing (join)
+import CustomCss.CssColors exposing (CustomColor, getColor)
+import String exposing (concat, join)
 
 
 
@@ -13,13 +14,6 @@ classList classes =
     join " " classes
 
 
-
--- prepends the "focus" pseudo-class to the given tailwindcss class
-
-
-focus : String -> String
-focus twClass =
-    "focus:" ++ twClass
 
 
 
@@ -41,12 +35,79 @@ groupHover twClass =
 
 
 
--- prepends the "hover" pseudo-class to the given tailwindcss class
 
 
-hover : String -> String
-hover twClass =
-    "hover:" ++ twClass
+
+onFocus : List String -> String
+onFocus twClasses =
+    toEventClass twClasses "focus"
+
+
+
+-- prepends the "hover" pseudo-class to the given tailwindcss classes
+
+
+onHover : List String -> String
+onHover twClasses =
+    toEventClass twClasses "hover"
+
+
+
+--- break points
+
+
+sm : List String -> String
+sm twClasses =
+    toEventClass twClasses "sm"
+
+
+md : List String -> String
+md twClasses =
+    toEventClass twClasses "md"
+
+
+lg : List String -> String
+lg twClasses =
+    toEventClass twClasses "lg"
+
+
+xl : List String -> String
+xl twClasses =
+    toEventClass twClasses "xl"
+
+
+xxl : List String -> String
+xxl twClasses =
+    toEventClass twClasses "xxl"
+
+
+
+-- adds the passed event as prefix to every class string and concatenates all to one class string
+
+
+toEventClass : List String -> String -> String
+toEventClass twClasses event =
+    List.map (\c -> event ++ ":" ++ c ++ " ") twClasses
+        |> concat
+
+
+
+-- Custom Tailwind colors with arbitrary values
+
+
+custom_bg : CustomColor -> String
+custom_bg customColor =
+    "bg-[" ++ getColor customColor ++ "]"
+
+
+custom_border : CustomColor -> String
+custom_border customColor =
+    "border-[" ++ getColor customColor ++ "]"
+
+
+custom_ring : CustomColor -> String
+custom_ring customColor =
+    "ring-[" ++ getColor customColor ++ "]"
 
 
 
@@ -85,9 +146,11 @@ absolute =
     "absolute"
 
 
+
 aspect_arbitrary : Int -> Int -> String
 aspect_arbitrary w h =
     "aspect-[" ++ String.fromInt w ++ "/" ++ String.fromInt h ++ "]"
+
 
 
 bg_gray_50 : String
@@ -98,6 +161,7 @@ bg_gray_50 =
 bg_gray_100 : String
 bg_gray_100 =
     "bg-gray-100"
+
 
 
 bg_indigo_100 : String
@@ -120,6 +184,13 @@ bg_indigo_700 =
     "bg-indigo-700"
 
 
+
+bg_medium_blue_700 : String
+bg_medium_blue_700 =
+    "bg-blue-700"
+
+
+
 bg_white : String
 bg_white =
     "bg-white"
@@ -140,6 +211,18 @@ border_gray_300 =
     "border-gray-300"
 
 
+
+border_b_2 : String
+border_b_2 =
+    "border-b-2"
+
+
+border_indigo_500 : String
+border_indigo_500 =
+    "border-indigo-500"
+
+
+
 border_t : String
 border_t =
     "border-t"
@@ -155,9 +238,22 @@ flex =
     "flex"
 
 
+
+flex_1 : String
+flex_1 =
+    "flex-1"
+
+
+flex_shrink_0 : String
+flex_shrink_0 =
+    "flex-shrink-0"
+
+
+
 font_medium : String
 font_medium =
     "font-medium"
+
 
 
 gap_x_4 : String
@@ -204,6 +300,10 @@ group : String
 group =
     "group"
 
+h_3_dot_5 : String
+h_3_dot_5 =
+    "h-3.5"
+
 
 h_4 : String
 h_4 =
@@ -240,6 +340,22 @@ h_14 =
     "h-14"
 
 
+
+h_16 : String
+h_16 =
+    "h-16"
+
+
+hidden : String
+hidden =
+    "hidden"
+
+
+inline_block : String
+inline_block =
+    "inline-block"
+
+
 inline_flex : String
 inline_flex =
     "inline-flex"
@@ -248,6 +364,13 @@ inline_flex =
 inset_0 : String
 inset_0 =
     "inset-0"
+
+
+
+justify_between : String
+justify_between =
+    "justify-between"
+
 
 
 items_center : String
@@ -260,6 +383,13 @@ justify_center =
     "justify-center"
 
 
+
+justify_end : String
+justify_end =
+    "justify-end"
+
+
+
 leading_4 : String
 leading_4 =
     "leading-4"
@@ -270,14 +400,37 @@ leading_5 =
     "leading-5"
 
 
-max_w_prose : String
-max_w_prose =
-    "max-w-prose"
+
+max_h_12 : String
+max_h_12 =
+    "max-h-12"
 
 
 max_w_7xl : String
 max_w_7xl =
     "max-w-7xl"
+
+
+max_w_lg : String
+max_w_lg =
+    "max-w-lg"
+
+
+
+max_w_prose : String
+max_w_prose =
+    "max-w-prose"
+
+
+
+max_w_7xl : String
+max_w_7xl =
+    "max-w-7xl"
+
+max_w_xs : String
+max_w_xs =
+    "max-w-xs"
+
 
 
 ml_2 : String
@@ -288,6 +441,13 @@ ml_2 =
 ml_3 : String
 ml_3 =
     "ml-3"
+
+
+
+ml_6 : String
+ml_6 =
+    "ml-6"
+
 
 
 mr_1 : String
@@ -303,6 +463,7 @@ mr_2 =
 mr_3 : String
 mr_3 =
     "mr-3"
+
 
 
 mt_2 : String
@@ -325,6 +486,13 @@ neg_ml_1 =
     "neg-ml-1"
 
 
+
+neg_ml_2 : String
+neg_ml_2 =
+    "neg-ml-2"
+
+
+
 neg_ml_1_dot_5 : String
 neg_ml_1_dot_5 =
     "neg-mr-0.5"
@@ -338,6 +506,7 @@ neg_mr_0_dot_5 =
 neg_mr_1 : String
 neg_mr_1 =
     "neg-mr-1"
+
 
 
 object_cover : String
@@ -355,9 +524,11 @@ outline_none =
     "outline-none"
 
 
+
 overflow_hidden : String
 overflow_hidden =
     "overflow-hidden"
+
 
 
 p_1 : String
@@ -380,9 +551,25 @@ p_3 =
     "p-3"
 
 
+
 pointer_events_none : String
 pointer_events_none =
     "pointer-events-none"
+
+pl_10 : String
+pl_10 =
+    "pl-10"
+
+
+placeholder_gray_400 : String
+placeholder_gray_400 =
+    "placeholder-gray-400"
+
+
+pr_3 : String
+pr_3 =
+    "pr_3"
+
 
 
 prose : String
@@ -398,6 +585,23 @@ prose_indigo =
 prose_lg : String
 prose_lg =
     "prose_lg"
+
+
+
+pt_1 : String
+pt_1 =
+    "pt-1"
+
+
+px_1 : String
+px_1 =
+    "px-1"
+
+
+px_2 : String
+px_2 =
+    "px-2"
+
 
 
 px_2_dot_5 : String
@@ -420,9 +624,11 @@ px_6 =
     "px-6"
 
 
+
 px_8 : String
 px_8 =
     "px-8"
+
 
 
 py_1_dot_5 : String
@@ -440,9 +646,11 @@ py_3 =
     "py-3"
 
 
+
 py_8 : String
 py_8 =
     "py-8"
+
 
 
 relative : String
@@ -455,9 +663,17 @@ ring_2 =
     "ring-2"
 
 
+
+ring_inset : String
+ring_inset =
+    "ring-inset"
+
+
+
 ring_offset_2 : String
 ring_offset_2 =
     "ring-offset-2"
+
 
 
 ring_offset_gray_100 : String
@@ -465,9 +681,17 @@ ring_offset_gray_100 =
     "ring-offset-gray-100"
 
 
+
 ring_indigo_500 : String
 ring_indigo_500 =
     "ring-indigo-500"
+
+
+
+ring_white : String
+ring_white =
+    "ring-white"
+
 
 
 rounded : String
@@ -480,9 +704,20 @@ rounded_full =
     "rounded-full"
 
 
+
 rounded_lg : String
 rounded_lg =
     "rounded-lg"
+
+self_center : String
+self_center =
+    "self-center"
+
+
+shadow : String
+shadow =
+    "shadow"
+
 
 
 shadow_sm : String
@@ -490,14 +725,32 @@ shadow_sm =
     "shadow-sm"
 
 
+
 sr_only : String
 sr_only =
     "sr-only"
+
+space_x_4 : String
+space_x_4 =
+    "space-x-4"
+
+
+space_x_8 : String
+space_x_8 =
+    "space-x-8"
+
 
 
 text_base : String
 text_base =
     "text-base"
+
+
+
+text_gray_300 : String
+text_gray_300 =
+    "text-gray-300"
+
 
 
 text_gray_500 : String
@@ -540,9 +793,11 @@ text_xs =
     "text-xs"
 
 
+
 truncate : String
 truncate =
     "truncate"
+
 
 
 w_4 : String

@@ -38,6 +38,7 @@ initialModel =
     }
 
 
+
 -- UPDATE --
 
 
@@ -56,7 +57,7 @@ update msg model =
         SetText text ->
             ( { model | report = text }, Cmd.none )
 
-        Send lvl->
+        Send lvl ->
             ( model, item lvl model.report )
 
 
@@ -73,12 +74,16 @@ item lvl report =
     case lvl of
         Critical ->
             Task.attempt (\_ -> NoOp) (rollbar.critical report Dict.empty)
+
         Debug_ ->
             Task.attempt (\_ -> NoOp) (rollbar.debug report Dict.empty)
+
         Error ->
             Task.attempt (\_ -> NoOp) (rollbar.error report Dict.empty)
+
         Info ->
             Task.attempt (\_ -> NoOp) (rollbar.info report Dict.empty)
+
         Warning ->
             Task.attempt (\_ -> NoOp) (rollbar.warning report Dict.empty)
 
@@ -113,6 +118,7 @@ json =
     Json.Encode.object [ ( "environment", Json.Encode.string "DSP-CPE" ) ]
 
 
+
 -- VIEW --
 
 
@@ -128,6 +134,7 @@ view model =
             , div [] [ button [ onClick (Send Warning) ] [ text "Send warning to rollbar" ] ]
             ]
         ]
+
 
 
 -- INIT --

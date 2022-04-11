@@ -29,11 +29,13 @@ baseButtonClasses =
         , Dtw.py_1_dot_5
         , Dtw.text_sm
         , Dtw.leading_5
-        , Dtw.focus Dtw.outline_none
-        , Dtw.focus Dtw.ring_2
-        , Dtw.focus Dtw.ring_offset_2
-        , Dtw.focus Dtw.ring_indigo_500
-        , Dtw.hover Dtw.bg_gray_50
+        , Dtw.onFocus
+            [ Dtw.outline_none
+            , Dtw.ring_2
+            , Dtw.ring_offset_2
+            , Dtw.ring_indigo_500
+            , Dtw.bg_gray_50
+            ]
         ]
 
 
