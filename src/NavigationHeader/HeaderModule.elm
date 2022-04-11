@@ -1,6 +1,7 @@
 module NavigationHeader.HeaderModule exposing (..)
 
-import CustomCss.DaschTailwind as Dtw exposing (dtwClass)
+import CustomCss.DaschTailwind as Dtw exposing (classList)
+import Heroicons.Outline exposing (user)
 import Html exposing (Attribute, Html, div, img, nav)
 import Html.Attributes exposing (class, id, src)
 import NavigationHeader.HeaderButtons exposing (signInButton, signUpButton)
@@ -9,52 +10,38 @@ import NavigationHeader.SearchBar exposing (searchBar)
 import NavigationHeader.UserMenuModule exposing (User, userMenu)
 
 
-cpeHeader : String -> Bool -> NavBar msg -> Bool -> Html.Html msg
-cpeHeader logo signedIn bar showSb =
-    nav [ id "nav-header-bg-cntr", navHeaderBgCntrStyle ]
-        [ div [ id "standard-view-cntr", navHeaderCntrStyle ]
+
+--cpeHeader : String -> Bool -> NavBar msg -> Bool -> Html.Html msg
+
+
+cpeHeader logo user bar showSb =
+    nav [ id "nav-header-bg-cntr", class navHeaderBgCntrStyle ]
+        [ div [ id "standard-view-cntr", class navHeaderCntrStyle ]
             [ -- Nav header container for elements & menu entries
-              div [ id "header-elements-cntr", headerElementsCntrStyle ]
+              div [ id "header-elements-cntr", class headerElementsCntrStyle ]
                 [ -- "flex justify-between h-16"; Container for all the header elements
                   div [ id "flex-left-elements-cntr", class Dtw.flex ]
                     [ -- Flex all left side elements
-                      div [ id "navBar-logo-cntr", dtwClass [ Dtw.flex_shrink_0, Dtw.items_center, Dtw.h_3_dot_5 ] ]
+                      div [ id "navBar-logo-cntr", class navBarLogoCntrStyle ]
                         [ img
                             [ src logo
-                            , dtwClass [ Dtw.inline_block, Dtw.max_h_12 ]
+                            , class logoStyle
                             ]
                             []
                         ]
-                    , div [ id "mobile-menu-button-cntr", mobileMenuButtonCntrStyle ] []
-                    , div [ id "navbar-nav-cntr", navBarCntrStyle ] [ navBar bar ] -- navBar container; unhides on medium screen size  "hidden md:ml-6 md:flex md:space-x-8"
+                    , div [ id "mobile-menu-button-cntr", class mobileMenuButtonCntrStyle ] []
+                    , div [ id "navbar-nav-cntr", class navBarCntrStyle ] [ navBar bar ] -- navBar container; unhides on medium screen size  "hidden md:ml-6 md:flex md:space-x-8"
                     ]
-                , div [ id "flex-right-elements-cntr", flexRightElementsCntrStyle ]
+                , div [ id "flex-right-elements-cntr", class flexRightElementsCntrStyle ]
                     -- right side elements: search bar, buttons.
-                    [ div [ id "search-view-cntr", searchBarStyle showSb ] [ searchBar ]
-                    , div [ id "user-menue-cntr" ] [ userMenu fakeUser ]
+                    [ div [ id "search-view-cntr", class (searchBarStyle showSb) ] [ searchBar ]
+                    , div [ id "user-menue-cntr" ] [ userMenu user ]
 
                     -- the search bar
                     ]
                 ]
-            , div [ id "mobile-view-cntr", mobileMenuButtonCntrStyle ] [] -- Container for mobile menu. Hidden if screen reaches medium size
+            , div [ id "mobile-view-cntr", class mobileMenuButtonCntrStyle ] [] -- Container for mobile menu. Hidden if screen reaches medium size
             ]
-        ]
-
-
-type SignedIn
-    = True
-    | False
-
-
-buttonGroup : Bool -> List (Html msg)
-buttonGroup signedIn =
-    if signedIn then
-        [ signInButton [] "sign out"
-        ]
-
-    else
-        [ signUpButton [] "sign up"
-        , signInButton [] "sign in"
         ]
 
 
@@ -62,33 +49,45 @@ buttonGroup signedIn =
 -- styles
 
 
-navHeaderBgCntrStyle : Attribute msg
+navHeaderBgCntrStyle : String
 navHeaderBgCntrStyle =
     [ Dtw.bg_white
     , Dtw.shadow
     ]
-        |> dtwClass
+        |> classList
 
 
-navHeaderCntrStyle : Attribute msg
+navHeaderCntrStyle : String
 navHeaderCntrStyle =
     [ Dtw.max_w_7xl
     , Dtw.mx_auto
     , Dtw.px_4
     ]
-        |> dtwClass
+        |> classList
 
 
-headerElementsCntrStyle : Attribute msg
+headerElementsCntrStyle : String
 headerElementsCntrStyle =
     [ Dtw.flex
     , Dtw.justify_between
     , Dtw.h_16
     ]
-        |> dtwClass
+        |> classList
 
 
-mobileMenuButtonCntrStyle : Attribute msg
+navBarLogoCntrStyle : String
+navBarLogoCntrStyle =
+    [ Dtw.flex_shrink_0, Dtw.items_center, Dtw.h_3_dot_5 ]
+        |> classList
+
+
+logoStyle : String
+logoStyle =
+    [ Dtw.inline_block, Dtw.max_h_12 ]
+        |> classList
+
+
+mobileMenuButtonCntrStyle : String
 mobileMenuButtonCntrStyle =
     [ Dtw.neg_ml_2
     , Dtw.mr_2
@@ -96,25 +95,25 @@ mobileMenuButtonCntrStyle =
     , Dtw.items_center
     , Dtw.md [ Dtw.hidden ] -- hidden if break point reaches screen size medium
     ]
-        |> dtwClass
+        |> classList
 
 
-navBarCntrStyle : Attribute msg
+navBarCntrStyle : String
 navBarCntrStyle =
     [ Dtw.hidden
     , Dtw.md [ Dtw.ml_6, Dtw.flex, Dtw.space_x_8 ]
     , Dtw.self_center
     ]
-        |> dtwClass
+        |> classList
 
 
-flexRightElementsCntrStyle : Attribute msg
+flexRightElementsCntrStyle : String
 flexRightElementsCntrStyle =
     [ Dtw.flex, Dtw.items_center, Dtw.space_x_4, Dtw.md [ Dtw.ml_6, Dtw.justify_end ] ]
-        |> dtwClass
+        |> classList
 
 
-searchBarStyle : Bool -> Attribute msg
+searchBarStyle : Bool -> String
 searchBarStyle showSb =
     if showSb then
         [ Dtw.flex_1
@@ -123,24 +122,25 @@ searchBarStyle showSb =
         , Dtw.px_2
         , Dtw.justify_between
         ]
-            |> dtwClass
+            |> classList
 
     else
-        class Dtw.hidden
+        Dtw.hidden
 
 
-mobileMenuCntrStyle : Attribute msg
+mobileMenuCntrStyle : String
 mobileMenuCntrStyle =
     [ Dtw.md
         [ -- if breakpoint reaches medium size
           Dtw.hidden
         ]
     ]
-        |> dtwClass
+        |> classList
 
 
-fakeUser : User
+fakeUser : Maybe { uId : String, uImg : String }
 fakeUser =
-    { uId = "sthId"
-    , uImg = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-    }
+    Just
+        { uId = "sthId"
+        , uImg = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+        }

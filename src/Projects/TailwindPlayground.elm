@@ -121,9 +121,14 @@ view model =
                 ]
             ]
         , div [ class "header" ]
-            [ h3 [] [ text "Header module" ]
+            [ h3 [] [ text "Header module signed in" ]
             , div [] []
-            , div [] [ cpeHeader "https://beol.dasch.swiss/assets/images/beol-logo.png" True [ someNavitem, otherNavitem ] True ]
+            , div [] [ cpeHeader "https://beol.dasch.swiss/assets/images/beol-logo.png" fakeUser [ someNavitem, otherNavitem ] True ]
+            ]
+        , div [ class "header" ]
+            [ h3 [] [ text "Header module signed out" ]
+            , div [] []
+            , div [] [ cpeHeader "https://beol.dasch.swiss/assets/images/beol-logo.png" Nothing [ someNavitem, otherNavitem ] True ]
             ]
         , div [ class "text" ]
             [ div [ class "preview project description" ]
@@ -163,3 +168,11 @@ someNavitem =
 otherNavitem : NavItem msg
 otherNavitem =
     { attrs = [], text = "Beol", href = "project/1", cmd = Cmd.none, isActive = False }
+
+
+fakeUser : Maybe { uId : String, uImg : String }
+fakeUser =
+    Just
+        { uId = "sthId"
+        , uImg = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+        }

@@ -55,7 +55,7 @@ view : String -> Html.Html MyRoute
 view model =
     div [ class "playground" ]
         [ div [ class "buttons" ] []
-        , div [] [ cpeHeader "" False [ someNavitem, otherNavitem ] True ]
+        , div [] [ cpeHeader "" Nothing [ someNavitem, otherNavitem ] True ]
         , div [] [ text model ]
         ]
 
