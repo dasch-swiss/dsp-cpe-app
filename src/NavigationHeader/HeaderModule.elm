@@ -1,7 +1,6 @@
 module NavigationHeader.HeaderModule exposing (..)
 
 import CustomCss.DaschTailwind as Dtw exposing (classList)
-import Heroicons.Outline exposing (user)
 import Html exposing (div, img, nav)
 import Html.Attributes exposing (class, id, src)
 import NavigationHeader.NavbarModule exposing (NavBar, navBar)
