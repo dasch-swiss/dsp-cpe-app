@@ -13,7 +13,7 @@ import Icon as Icon
 import NavigationHeader.HeaderModule exposing (cpeHeader)
 import NavigationHeader.Navitem exposing (NavItem)
 import Text.ProjectDescription as ProjectDescription
-import Tiles.ImageTile as ImageTile
+import Tiles.ImageTileGrid as ImageTileGrid
 
 
 type alias Model =
@@ -134,8 +134,8 @@ view model =
             ]
         , div [ class "tiles" ]
             [ div [ class "preview tiles" ]
-                [ h3 [ class "header" ] [ text "Image Tile" ]
-                , ImageTile.view { src = "https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80", alt = "", buttonAlt = "View details for IMG_4985.HEIC", title = "IMG_4985.HEIC", subtitle = "3.9 MB" }
+                [ h3 [ class "header" ] [ text "Image Tile Grid" ]
+                , ImageTileGrid.view { tiles = [ exampleImageTile, exampleImageTile, exampleImageTile, exampleImageTile, exampleImageTile, exampleImageTile ] }
                 ]
             ]
         ]
@@ -160,6 +160,11 @@ subscriptions _ =
 
 
 -- Navigation header data ...
+
+
+exampleImageTile : ImageTileGrid.Tile
+exampleImageTile =
+    { src = "https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80", alt = "", buttonAlt = "View details for IMG_4985.HEIC", title = "IMG_4985.HEIC", subtitle = "3.9 MB" }
 
 
 someNavitem : NavItem msg
