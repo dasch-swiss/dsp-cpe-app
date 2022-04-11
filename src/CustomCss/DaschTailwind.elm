@@ -90,7 +90,6 @@ custom_ring customColor =
     "ring-[" ++ getColor customColor ++ "]"
 
 
-
 -- Tailwind classes
 
 
