@@ -15,7 +15,21 @@ classList classes =
 
 
 
--- prepends the "focus" pseudo-class to the given tailwindcss class
+-- prepends the "focus-within" pseudo-class to the given tailwindcss class
+
+
+onFocusWithin : List String -> String
+onFocusWithin twClasses =
+    toEventClass twClasses "focus-within"
+
+
+
+-- prepends the "group-hover" pseudo-class to the given tailwindcss class
+
+
+onGroupHover : List String -> String
+onGroupHover twClasses =
+    toEventClass twClasses "group-hover:"
 
 
 onFocus : List String -> String
@@ -90,6 +104,7 @@ custom_ring customColor =
     "ring-[" ++ getColor customColor ++ "]"
 
 
+
 -- Tailwind classes
 
 
@@ -98,9 +113,19 @@ absolute =
     "absolute"
 
 
+aspect_arbitrary : Int -> Int -> String
+aspect_arbitrary w h =
+    "aspect-[" ++ String.fromInt w ++ "/" ++ String.fromInt h ++ "]"
+
+
 bg_gray_50 : String
 bg_gray_50 =
     "bg-gray-50"
+
+
+bg_gray_100 : String
+bg_gray_100 =
+    "bg-gray-100"
 
 
 bg_indigo_100 : String
@@ -186,6 +211,51 @@ flex_shrink_0 =
 font_medium : String
 font_medium =
     "font-medium"
+
+
+gap_x_4 : String
+gap_x_4 =
+    "gap-x-4"
+
+
+gap_x_6 : String
+gap_x_6 =
+    "gap-x-6"
+
+
+gap_x_8 : String
+gap_x_8 =
+    "gap-x-8"
+
+
+gap_y_8 : String
+gap_y_8 =
+    "gap-y-8"
+
+
+grid : String
+grid =
+    "grid"
+
+
+grid_cols_2 : String
+grid_cols_2 =
+    "grid-cols-2"
+
+
+grid_cols_3 : String
+grid_cols_3 =
+    "grid-cols-3"
+
+
+grid_cols_4 : String
+grid_cols_4 =
+    "grid-cols-4"
+
+
+group : String
+group =
+    "group"
 
 
 h_3_dot_5 : String
@@ -288,11 +358,6 @@ max_h_12 =
     "max-h-12"
 
 
-max_w_7xl : String
-max_w_7xl =
-    "max-w-7xl"
-
-
 max_w_lg : String
 max_w_lg =
     "max-w-lg"
@@ -306,6 +371,11 @@ max_w_prose =
 max_w_xs : String
 max_w_xs =
     "max-w-xs"
+
+
+max_w_7xl : String
+max_w_7xl =
+    "max-w-7xl"
 
 
 ml_2 : String
@@ -336,6 +406,11 @@ mr_2 =
 mr_3 : String
 mr_3 =
     "mr-3"
+
+
+mt_2 : String
+mt_2 =
+    "mt-2"
 
 
 mt_6 : String
@@ -373,9 +448,24 @@ neg_mr_1 =
     "neg-mr-1"
 
 
+object_cover : String
+object_cover =
+    "object-cover"
+
+
+opacity_75 : String
+opacity_75 =
+    "opacity-75"
+
+
 outline_none : String
 outline_none =
     "outline-none"
+
+
+overflow_hidden : String
+overflow_hidden =
+    "overflow-hidden"
 
 
 p_1 : String
@@ -396,6 +486,11 @@ p_2 =
 p_3 : String
 p_3 =
     "p-3"
+
+
+pointer_events_none : String
+pointer_events_none =
+    "pointer-events-none"
 
 
 pl_10 : String
@@ -463,6 +558,11 @@ px_6 =
     "px-6"
 
 
+px_8 : String
+px_8 =
+    "px-8"
+
+
 py_1_dot_5 : String
 py_1_dot_5 =
     "py-1.5"
@@ -476,6 +576,11 @@ py_2 =
 py_3 : String
 py_3 =
     "py-3"
+
+
+py_8 : String
+py_8 =
+    "py-8"
 
 
 relative : String
@@ -498,6 +603,11 @@ ring_offset_2 =
     "ring-offset-2"
 
 
+ring_offset_gray_100 : String
+ring_offset_gray_100 =
+    "ring-offset-gray-100"
+
+
 ring_indigo_500 : String
 ring_indigo_500 =
     "ring-indigo-500"
@@ -518,6 +628,11 @@ rounded_full =
     "rounded-full"
 
 
+rounded_lg : String
+rounded_lg =
+    "rounded-lg"
+
+
 self_center : String
 self_center =
     "self-center"
@@ -531,6 +646,11 @@ shadow =
 shadow_sm : String
 shadow_sm =
     "shadow-sm"
+
+
+sr_only : String
+sr_only =
+    "sr-only"
 
 
 space_x_4 : String
@@ -591,6 +711,11 @@ text_white =
 text_xs : String
 text_xs =
     "text-xs"
+
+
+truncate : String
+truncate =
+    "truncate"
 
 
 w_4 : String
