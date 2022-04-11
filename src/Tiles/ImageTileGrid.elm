@@ -21,8 +21,8 @@ view model =
                 , Dtw.mx_auto
                 , Dtw.py_8
                 , Dtw.px_4
-                , Dtw.sm Dtw.px_6
-                , Dtw.lg Dtw.px_8
+                , Dtw.sm [ Dtw.px_6 ]
+                , Dtw.lg [ Dtw.px_8 ]
                 ]
             )
         ]
@@ -34,10 +34,9 @@ view model =
                     , Dtw.grid_cols_2
                     , Dtw.gap_x_4
                     , Dtw.gap_y_8
-                    , Dtw.sm Dtw.grid_cols_3
-                    , Dtw.sm Dtw.gap_x_6
-                    , Dtw.lg Dtw.grid_cols_4
-                    , Dtw.xl Dtw.gap_x_8
+                    , Dtw.sm [ Dtw.grid_cols_3, Dtw.gap_x_6 ]
+                    , Dtw.lg [ Dtw.grid_cols_4 ]
+                    , Dtw.xl [ Dtw.gap_x_8 ]
                     ]
                 )
             ]

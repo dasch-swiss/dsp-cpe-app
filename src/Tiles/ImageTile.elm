@@ -24,10 +24,12 @@ imageTileClasses =
         , Dtw.rounded_lg
         , Dtw.bg_gray_100
         , Dtw.overflow_hidden
-        , Dtw.focusWithin Dtw.ring_2
-        , Dtw.focusWithin Dtw.ring_offset_2
-        , Dtw.focusWithin Dtw.ring_indigo_500
-        , Dtw.focusWithin Dtw.ring_offset_gray_100
+        , Dtw.onFocusWithin
+            [ Dtw.ring_2
+            , Dtw.ring_offset_2
+            , Dtw.ring_indigo_500
+            , Dtw.ring_offset_gray_100
+            ]
         ]
 
 
@@ -45,7 +47,7 @@ view model =
                         (Dtw.classList
                             [ Dtw.object_cover
                             , Dtw.pointer_events_none
-                            , Dtw.groupHover Dtw.opacity_75
+                            , Dtw.onGroupHover [ Dtw.opacity_75 ]
                             , Dtw.aspect_arbitrary 10 7
                             ]
                         )
@@ -57,7 +59,7 @@ view model =
                         (Dtw.classList
                             [ Dtw.absolute
                             , Dtw.inset_0
-                            , Dtw.focus Dtw.outline_none
+                            , Dtw.onFocus [ Dtw.outline_none ]
                             ]
                         )
                     ]
