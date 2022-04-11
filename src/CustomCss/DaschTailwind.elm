@@ -85,14 +85,9 @@ absolute =
     "absolute"
 
 
-aspect_h_7 : String
-aspect_h_7 =
-    "aspect-h-7"
-
-
-aspect_w_10 : String
-aspect_w_10 =
-    "aspect-w-10"
+aspect_arbitrary : Int -> Int -> String
+aspect_arbitrary w h =
+    "aspect-[" ++ String.fromInt w ++ "/" ++ String.fromInt h ++ "]"
 
 
 bg_gray_50 : String
@@ -280,6 +275,11 @@ max_w_prose =
     "max-w-prose"
 
 
+max_w_7xl : String
+max_w_7xl =
+    "max-w-7xl"
+
+
 ml_2 : String
 ml_2 =
     "ml-2"
@@ -420,6 +420,11 @@ px_6 =
     "px-6"
 
 
+px_8 : String
+px_8 =
+    "px-8"
+
+
 py_1_dot_5 : String
 py_1_dot_5 =
     "py-1.5"
@@ -433,6 +438,11 @@ py_2 =
 py_3 : String
 py_3 =
     "py-3"
+
+
+py_8 : String
+py_8 =
+    "py-8"
 
 
 relative : String

@@ -21,8 +21,6 @@ imageTileClasses =
         [ Dtw.group
         , Dtw.block
         , Dtw.w_full
-        , Dtw.aspect_w_10
-        , Dtw.aspect_h_7
         , Dtw.rounded_lg
         , Dtw.bg_gray_100
         , Dtw.overflow_hidden
@@ -47,6 +45,7 @@ tile model =
                         [ Dtw.object_cover
                         , Dtw.pointer_events_none
                         , Dtw.groupHover Dtw.opacity_75
+                        , Dtw.aspect_arbitrary 10 7
                         ]
                     )
                 ]
@@ -94,19 +93,32 @@ tile model =
 
 view : Model -> Html msg
 view model =
-    ul
-        [ role "list"
-        , class
+    div
+        [ class
             (Dtw.classList
-                [ Dtw.grid
-                , Dtw.grid_cols_2
-                , Dtw.gap_x_4
-                , Dtw.gap_y_8
-                , Dtw.sm Dtw.grid_cols_3
-                , Dtw.sm Dtw.gap_x_6
-                , Dtw.lg Dtw.grid_cols_4
-                , Dtw.xl Dtw.gap_x_8
+                [ Dtw.max_w_7xl
+                , Dtw.mx_auto
+                , Dtw.py_8
+                , Dtw.px_4
+                , Dtw.sm Dtw.px_6
+                , Dtw.lg Dtw.px_8
                 ]
             )
         ]
-        [ tile model, tile model, tile model, tile model, tile model, tile model, tile model, tile model, tile model ]
+        [ ul
+            [ role "list"
+            , class
+                (Dtw.classList
+                    [ Dtw.grid
+                    , Dtw.grid_cols_2
+                    , Dtw.gap_x_4
+                    , Dtw.gap_y_8
+                    , Dtw.sm Dtw.grid_cols_3
+                    , Dtw.sm Dtw.gap_x_6
+                    , Dtw.lg Dtw.grid_cols_4
+                    , Dtw.xl Dtw.gap_x_8
+                    ]
+                )
+            ]
+            [ tile model, tile model, tile model, tile model, tile model, tile model, tile model, tile model, tile model ]
+        ]
