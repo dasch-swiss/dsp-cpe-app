@@ -4,7 +4,7 @@ import Buttons.Button exposing (circularButton)
 import Buttons.CircularButton exposing (CircularButtonSize(..))
 import CustomCss.CssColors exposing (CustomColor(..))
 import CustomCss.DaschTailwind as Dtw exposing (classList)
-import Html exposing (Attribute, Html, div, input)
+import Html exposing (Html, div, input)
 import Html.Attributes as Attr exposing (class, id)
 import Icon
 
@@ -65,17 +65,13 @@ searchBarStyle =
     , Dtw.py_2
     , Dtw.border
     , Dtw.leading_5
-    , Dtw.text_gray_300 -- todo: Check
+    , Dtw.text_gray_300
     , Dtw.placeholder_gray_400
     , Dtw.outline_none
     , Dtw.md [ Dtw.rounded ]
     , Dtw.lg [ Dtw.max_w_xs ]
-    , Dtw.onFocus [ Dtw.outline_none, Dtw.ring_white, Dtw.text_gray_900 ] --Dtw.backgroundColor white, Css.borderColor activeGray
+    , Dtw.onFocus [ Dtw.outline_none, Dtw.ring_white, Dtw.text_gray_900 ]
     , Dtw.sm [ Dtw.text_sm ]
     , Dtw.custom_bg White
     ]
         |> classList
-
-
-
---    , Css.borderColor passiveGray

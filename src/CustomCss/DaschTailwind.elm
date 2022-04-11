@@ -1,8 +1,6 @@
 module CustomCss.DaschTailwind exposing (..)
 
 import CustomCss.CssColors exposing (CustomColor, getColor)
-import Html exposing (Attribute)
-import Html.Attributes exposing (class)
 import String exposing (concat, join)
 
 

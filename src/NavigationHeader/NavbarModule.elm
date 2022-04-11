@@ -21,11 +21,6 @@ renderNavItems nb =
         |> List.map (\n -> div [] [ navItem n ])
 
 
-
--- styles
--- done: "hidden md:ml-6 md:flex md:space-x-8"
-
-
 navBarInnerStyle : String
 navBarInnerStyle =
     [ Dtw.hidden

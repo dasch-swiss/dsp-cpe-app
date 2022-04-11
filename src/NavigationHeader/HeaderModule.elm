@@ -2,9 +2,8 @@ module NavigationHeader.HeaderModule exposing (..)
 
 import CustomCss.DaschTailwind as Dtw exposing (classList)
 import Heroicons.Outline exposing (user)
-import Html exposing (Attribute, Html, div, img, nav)
+import Html exposing (div, img, nav)
 import Html.Attributes exposing (class, id, src)
-import NavigationHeader.HeaderButtons exposing (signInButton, signUpButton)
 import NavigationHeader.NavbarModule exposing (NavBar, navBar)
 import NavigationHeader.SearchBar exposing (searchBar)
 import NavigationHeader.UserMenuModule exposing (User, userMenu)
@@ -14,6 +13,7 @@ import NavigationHeader.UserMenuModule exposing (User, userMenu)
 --cpeHeader : String -> Bool -> NavBar msg -> Bool -> Html.Html msg
 
 
+cpeHeader : String -> Maybe User -> NavBar msg -> Bool -> Html.Html msg
 cpeHeader logo user bar showSb =
     nav [ id "nav-header-bg-cntr", class navHeaderBgCntrStyle ]
         [ div [ id "standard-view-cntr", class navHeaderCntrStyle ]
@@ -138,7 +138,7 @@ mobileMenuCntrStyle =
         |> classList
 
 
-fakeUser : Maybe { uId : String, uImg : String }
+fakeUser : Maybe User
 fakeUser =
     Just
         { uId = "sthId"

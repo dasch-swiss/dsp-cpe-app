@@ -23,10 +23,6 @@ main =
         }
 
 
-
---init: a -> (String, Cmd ClickEvent msg)
-
-
 type MyRoute
     = RouteOne
     | RouteTwo
@@ -35,10 +31,6 @@ type MyRoute
 init : () -> ( Model, Cmd msg )
 init _ =
     ( "", Cmd.none )
-
-
-
---someNavitem : NavItem msg
 
 
 someNavitem : NavItem MyRoute
