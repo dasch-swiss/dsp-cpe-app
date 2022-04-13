@@ -7,6 +7,7 @@ import Buttons.Button as Button exposing (primaryButton, secondaryButton, whiteB
 import Buttons.CircularButton exposing (CircularButtonSize(..))
 import Buttons.LeadingIconButton exposing (LeadingSize(..))
 import Buttons.TrailingIconButton exposing (TrailingSize(..))
+import Footer.DaschCopyright as DaschCopyright exposing (view)
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Icon as Icon
@@ -44,7 +45,7 @@ view model =
     div [ class "playground" ]
         [ div [ class "buttons" ]
             [ div [ class "preview primary-button" ]
-                [ h3 [ class "header" ] [ text "Primary Buttons" ]
+                [ h3 [ class "label" ] [ text "Primary Buttons" ]
                 , primaryButton [] "Extra small" BasicExtraSmall
                 , primaryButton [] "Small" BasicSmall
                 , primaryButton [] "Normal" BasicNormal
@@ -52,7 +53,7 @@ view model =
                 , primaryButton [] "Extra large" BasicExtraLarge
                 ]
             , div [ class "preview secondary-button" ]
-                [ h3 [ class "header" ] [ text "Secondary Buttons" ]
+                [ h3 [ class "label" ] [ text "Secondary Buttons" ]
                 , secondaryButton [] "Extra small" BasicExtraSmall
                 , secondaryButton [] "Small" BasicSmall
                 , secondaryButton [] "Normal" BasicNormal
@@ -60,7 +61,7 @@ view model =
                 , secondaryButton [] "Extra large" BasicExtraLarge
                 ]
             , div [ class "preview white-button" ]
-                [ h3 [ class "header" ] [ text "White Buttons" ]
+                [ h3 [ class "label" ] [ text "White Buttons" ]
                 , whiteButton [] "Extra small" BasicExtraSmall
                 , whiteButton [] "Small" BasicSmall
                 , whiteButton [] "Normal" BasicNormal
@@ -68,7 +69,7 @@ view model =
                 , whiteButton [] "Extra large" BasicExtraLarge
                 ]
             , div [ class "preview circular-button" ]
-                [ h3 [ class "header" ] [ text "Circular Buttons" ]
+                [ h3 [ class "label" ] [ text "Circular Buttons" ]
                 , Button.circularButton CircularExtraSmall Icon.ArrowRight []
                 , Button.circularButton CircularSmall Icon.Annotation []
                 , Button.circularButton CircularNormal Icon.Plus []
@@ -76,14 +77,14 @@ view model =
                 , Button.circularButton CircularExtraLarge Icon.EmojiHappy []
                 ]
             , div [ class "preview leading-button" ]
-                [ h3 [ class "header" ] [ text "Leading Icon Buttons" ]
+                [ h3 [ class "label" ] [ text "Leading Icon Buttons" ]
                 , Button.leadingIcon LeadingSmall "Small" Icon.Annotation []
                 , Button.leadingIcon LeadingNormal "Normal" Icon.EmojiHappy []
                 , Button.leadingIcon LeadingLarge "Large" Icon.Plus []
                 , Button.leadingIcon LeadingExtraLarge "Extra Large" Icon.Check []
                 ]
             , div [ class "preview leading-button" ]
-                [ h3 [ class "header" ] [ text "Trailing Icon Buttons" ]
+                [ h3 [ class "label" ] [ text "Trailing Icon Buttons" ]
                 , Button.trailingIcon TrailingSmall "Small" Icon.Annotation []
                 , Button.trailingIcon TrailingNormal "Normal" Icon.EmojiHappy []
                 , Button.trailingIcon TrailingLarge "Large" Icon.Plus []
@@ -94,7 +95,7 @@ view model =
             ]
         , div [ class "avatars" ]
             [ div [ class "preview circular-avatar" ]
-                [ h3 [ class "header" ] [ text "Circular Avatar" ]
+                [ h3 [ class "label" ] [ text "Circular Avatar" ]
                 , circular
                     CircularAvatarExtraSmall
                     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
@@ -122,26 +123,32 @@ view model =
                     []
                 ]
             ]
-        , div [ class "header" ]
+        , div [ class "label" ]
             [ h3 [] [ text "Header module signed in" ]
             , div [] []
             , div [] [ cpeHeader "https://beol.dasch.swiss/assets/images/beol-logo.png" fakeUser [ someNavitem, otherNavitem ] True ]
             ]
-        , div [ class "header" ]
+        , div [ class "label" ]
             [ h3 [] [ text "Header module signed out" ]
             , div [] []
             , div [] [ cpeHeader "https://beol.dasch.swiss/assets/images/beol-logo.png" Nothing [ someNavitem, otherNavitem ] True ]
             ]
         , div [ class "text" ]
             [ div [ class "preview project description" ]
-                [ h3 [ class "header" ] [ text "Project description" ]
+                [ h3 [ class "label" ] [ text "Project description" ]
                 , ProjectDescription.view model.projectDescriptionModel |> Html.map ProjDes
                 ]
             ]
         , div [ class "tiles" ]
             [ div [ class "preview tiles" ]
-                [ h3 [ class "header" ] [ text "Image Tile Grid" ]
+                [ h3 [ class "label" ] [ text "Image Tile Grid" ]
                 , ImageTileGrid.view { tiles = [ exampleImageTile, exampleImageTile, exampleImageTile, exampleImageTile, exampleImageTile, exampleImageTile ] }
+                ]
+            ]
+        , div [ class "footer" ]
+            [ div []
+                [ h3 [ class "label" ] [ text "Footer" ]
+                , DaschCopyright.view { text = "© 2022 DaSCH" }
                 ]
             ]
         ]
