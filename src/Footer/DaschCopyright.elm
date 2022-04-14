@@ -1,7 +1,7 @@
 module Footer.DaschCopyright exposing (..)
 
-import Html exposing (Html, text)
-
+import Html exposing (Html, div, text)
+import Html.Attributes exposing (class)
 
 type alias Model =
     { text : String }
@@ -9,4 +9,5 @@ type alias Model =
 
 view : Model -> Html msg
 view model =
-    text model.text
+    div [ class "copyright" ] [ text model.text ]
+    
