@@ -20,11 +20,16 @@
     font-size: 18px;
 }
 
-.playground .buttons .preview .header {
-    margin-left: 0.5%;
-    font-size: 20px;
+.playground {
+    margin-left: 1%;
 }
 
 .playground .buttons .preview button {
     margin: 0% 0.5%;
+}
+
+.playground .label {
+    margin-left: 0.5%;
+    font-size: 20px;
+    padding-top: 2.5%;
 }
