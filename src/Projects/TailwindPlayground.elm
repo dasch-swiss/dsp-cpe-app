@@ -7,8 +7,9 @@ import Buttons.Button as Button exposing (primaryButton, secondaryButton, whiteB
 import Buttons.CircularButton exposing (CircularButtonSize(..))
 import Buttons.LeadingIconButton exposing (LeadingSize(..))
 import Buttons.TrailingIconButton exposing (TrailingSize(..))
-import Footer.DaschCopyright as DaschCopyright exposing (view)
-import Footer.Licensing as Licensing exposing (view)
+import Footer.ContactUs as ContactUs
+import Footer.DaschCopyright as DaschCopyright
+import Footer.Licensing as Licensing
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Icon as Icon
@@ -150,6 +151,7 @@ view model =
             [ div []
                 [ h3 [ class "label" ] [ text "Footer" ]
                 , DaschCopyright.view { text = "© 2022 DaSCH" }
+                , ContactUs.view { text = "Contact us", url = "mailto:info@dasch.swiss" }
                 , Licensing.view { path = "/assets/images/license-cc-beol.jpg" }
                 ]
             ]
