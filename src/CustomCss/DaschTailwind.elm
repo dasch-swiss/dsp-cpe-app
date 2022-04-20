@@ -113,6 +113,11 @@ absolute =
     "absolute"
 
 
+align_middle : String
+align_middle =
+    "align-middle"
+
+
 aspect_arbitrary : Int -> Int -> String
 aspect_arbitrary w h =
     "aspect-[" ++ String.fromInt w ++ "/" ++ String.fromInt h ++ "]"
@@ -201,6 +206,16 @@ flex =
 flex_1 : String
 flex_1 =
     "flex-1"
+
+
+flex_auto : String
+flex_auto =
+    "flex-auto"
+
+
+flex_none : String
+flex_none =
+    "flex-none"
 
 
 flex_shrink_0 : String
@@ -353,6 +368,11 @@ leading_5 =
     "leading-5"
 
 
+leading_6 : String
+leading_6 =
+    "leading-6"
+
+
 max_h_12 : String
 max_h_12 =
     "max-h-12"
@@ -416,6 +436,11 @@ mt_2 =
 mt_6 : String
 mt_6 =
     "mt-6"
+
+
+mx_3 : String
+mx_3 =
+    "mx-3"
 
 
 mx_auto : String
@@ -668,9 +693,19 @@ text_base =
     "text-base"
 
 
+text_blue_700 : String
+text_blue_700 =
+    "text-blue-700"
+
+
 text_gray_300 : String
 text_gray_300 =
     "text-gray-300"
+
+
+text_gray_400 : String
+text_gray_400 =
+    "text-gray-400"
 
 
 text_gray_500 : String
@@ -678,9 +713,9 @@ text_gray_500 =
     "text-gray-500"
 
 
-text_gray_400 : String
-text_gray_400 =
-    "text-gray-400"
+text_gray_600 : String
+text_gray_600 =
+    "text-gray-600"
 
 
 text_gray_700 : String
