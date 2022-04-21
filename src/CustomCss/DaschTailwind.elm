@@ -428,6 +428,11 @@ mr_3 =
     "mr-3"
 
 
+mt_0 : String
+mt_0 =
+    "mt-0"
+
+
 mt_2 : String
 mt_2 =
     "mt-2"
@@ -436,6 +441,11 @@ mt_2 =
 mt_6 : String
 mt_6 =
     "mt-6"
+
+
+mt_8 : String
+mt_8 =
+    "mt-8"
 
 
 mx_3 : String
@@ -481,6 +491,16 @@ object_cover =
 opacity_75 : String
 opacity_75 =
     "opacity-75"
+
+
+order_1 : String
+order_1 =
+    "order-1"
+
+
+order_2 : String
+order_2 =
+    "order-2"
 
 
 outline_none : String
@@ -608,6 +628,11 @@ py_8 =
     "py-8"
 
 
+py_12 : String
+py_12 =
+    "py-12"
+
+
 relative : String
 relative =
     "relative"
@@ -681,6 +706,11 @@ sr_only =
 space_x_4 : String
 space_x_4 =
     "space-x-4"
+
+
+space_x_6 : String
+space_x_6 =
+    "space-x-6"
 
 
 space_x_8 : String
