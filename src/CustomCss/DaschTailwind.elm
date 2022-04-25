@@ -113,6 +113,11 @@ absolute =
     "absolute"
 
 
+align_middle : String
+align_middle =
+    "align-middle"
+
+
 aspect_arbitrary : Int -> Int -> String
 aspect_arbitrary w h =
     "aspect-[" ++ String.fromInt w ++ "/" ++ String.fromInt h ++ "]"
@@ -201,6 +206,16 @@ flex =
 flex_1 : String
 flex_1 =
     "flex-1"
+
+
+flex_auto : String
+flex_auto =
+    "flex-auto"
+
+
+flex_none : String
+flex_none =
+    "flex-none"
 
 
 flex_shrink_0 : String
@@ -353,6 +368,11 @@ leading_5 =
     "leading-5"
 
 
+leading_6 : String
+leading_6 =
+    "leading-6"
+
+
 max_h_12 : String
 max_h_12 =
     "max-h-12"
@@ -408,6 +428,11 @@ mr_3 =
     "mr-3"
 
 
+mt_0 : String
+mt_0 =
+    "mt-0"
+
+
 mt_2 : String
 mt_2 =
     "mt-2"
@@ -416,6 +441,16 @@ mt_2 =
 mt_6 : String
 mt_6 =
     "mt-6"
+
+
+mt_8 : String
+mt_8 =
+    "mt-8"
+
+
+mx_3 : String
+mx_3 =
+    "mx-3"
 
 
 mx_auto : String
@@ -456,6 +491,16 @@ object_cover =
 opacity_75 : String
 opacity_75 =
     "opacity-75"
+
+
+order_1 : String
+order_1 =
+    "order-1"
+
+
+order_2 : String
+order_2 =
+    "order-2"
 
 
 outline_none : String
@@ -583,6 +628,11 @@ py_8 =
     "py-8"
 
 
+py_12 : String
+py_12 =
+    "py-12"
+
+
 relative : String
 relative =
     "relative"
@@ -658,6 +708,11 @@ space_x_4 =
     "space-x-4"
 
 
+space_x_6 : String
+space_x_6 =
+    "space-x-6"
+
+
 space_x_8 : String
 space_x_8 =
     "space-x-8"
@@ -668,9 +723,19 @@ text_base =
     "text-base"
 
 
+text_blue_700 : String
+text_blue_700 =
+    "text-blue-700"
+
+
 text_gray_300 : String
 text_gray_300 =
     "text-gray-300"
+
+
+text_gray_400 : String
+text_gray_400 =
+    "text-gray-400"
 
 
 text_gray_500 : String
@@ -678,9 +743,9 @@ text_gray_500 =
     "text-gray-500"
 
 
-text_gray_400 : String
-text_gray_400 =
-    "text-gray-400"
+text_gray_600 : String
+text_gray_600 =
+    "text-gray-600"
 
 
 text_gray_700 : String
