@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.2.1](https://www.github.com/dasch-swiss/dsp-cpe-app/compare/v0.2.0...v0.2.1) (2022-04-26)
+
+
+### Bug Fixes
+
+* **config:** replace echo with printf ([#44](https://www.github.com/dasch-swiss/dsp-cpe-app/issues/44)) ([0d5b1ff](https://www.github.com/dasch-swiss/dsp-cpe-app/commit/0d5b1ffc026a81473bb54ebc79f82a2ee1b2d9fe))
+
 ## [0.2.0](https://www.github.com/dasch-swiss/dsp-cpe-app/compare/v0.1.0...v0.2.0) (2022-04-25)
 
 
