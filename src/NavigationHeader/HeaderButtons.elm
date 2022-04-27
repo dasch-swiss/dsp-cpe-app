@@ -57,7 +57,7 @@ signInStyle =
     , Dtw.border
     , Dtw.rounded
     , Dtw.shadow_sm
-    , Dtw.bg_medium_blue_700
+    , Dtw.bg_blue_700
     , Dtw.text_white
     , Dtw.onFocus
         [ Dtw.outline_none
