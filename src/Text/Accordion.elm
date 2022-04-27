@@ -5,7 +5,7 @@ import Html exposing (Html, div, p, text)
 import Html.Attributes exposing (class)
 import Html.Events exposing (onClick)
 import Icon
-import Svg exposing (svg)
+import CustomCss.CssColors exposing (CustomColor(..))
 
 
 type AccordionSize
@@ -21,8 +21,7 @@ type alias Model =
 
 
 type Msg
-    = Show
-    | Hide
+    = AccordionClicked
 
 
 initialModel : Model
@@ -46,7 +45,7 @@ init _ =
 view : Model -> Html Msg
 view model =
     let
-        accordionClasses =
+        accordionSize =
             case model.size of
                 HalfWidth ->
                     Dtw.w_6_slash_12
@@ -54,14 +53,53 @@ view model =
                 FullWidth ->
                     Dtw.w_full
 
-        iconColor =
+        accordionHeaderClasses =
             if model.isOpen then
-                Dtw.text_white
+                Dtw.classList
+                    [ Dtw.rounded_lg
+                    , Dtw.border_2
+                    , Dtw.cursor_pointer
+                    , (Dtw.custom_bg Secondary)
+                    , (Dtw.custom_border Secondary)
+                    ]
 
             else
-                Dtw.text_blue_700
+                Dtw.classList
+                    [ Dtw.rounded_lg
+                    , Dtw.border_2
+                    , Dtw.cursor_pointer
+                    , (Dtw.custom_border Primary)
+                    ]
 
-        svgClasses =
+        accordionHeaderTextClasses =
+            if model.isOpen then
+                Dtw.classList [ Dtw.p_2, Dtw.pl_3, (Dtw.custom_text White) ]
+
+            else
+                Dtw.classList [ Dtw.p_2, Dtw.pl_3, (Dtw.custom_text Primary) ]
+
+        accordionContentClasses =
+            if model.isOpen then
+                Dtw.classList [ Dtw.block, Dtw.w_11_slash_12, Dtw.mx_auto ]
+
+            else
+                Dtw.hidden
+
+        icon =
+            if model.isOpen then
+                Icon.getHtml Icon.MinusCircle
+
+            else
+                Icon.getHtml Icon.PlusCircle
+
+        iconColor =
+            if model.isOpen then
+                Dtw.custom_text White
+
+            else
+                Dtw.custom_text Primary
+
+        iconClasses =
             Dtw.classList
                 [ Dtw.ml_2
                 , Dtw.h_4
@@ -70,54 +108,23 @@ view model =
                 , iconColor
                 ]
     in
-    if model.isOpen then
-        div [ class accordionClasses ]
-            [ div
-                [ class
-                    (Dtw.classList
-                        [ Dtw.rounded_lg
-                        , Dtw.border_blue_700
-                        , Dtw.border_2
-                        , Dtw.bg_blue_700
-                        , Dtw.cursor_pointer
-                        ]
-                    )
-                , onClick Hide
-                ]
-                [ div [ class (Dtw.classList [ Dtw.inline_flex ]) ]
-                    [ div [ class svgClasses ] [ Icon.getHtml Icon.MinusCircle ]
-                    , div [ class (Dtw.classList [ Dtw.p_2, Dtw.pl_3, Dtw.text_white ]) ] [ text "Click to hide" ]
-                    ]
-                ]
-            , div [ class (Dtw.classList [ Dtw.w_11_slash_12, Dtw.mx_auto ]) ] [ p [] [ text model.text ] ]
-            ]
-
-    else
-        div [ class accordionClasses ]
-            [ div
-                [ class
-                    (Dtw.classList
-                        [ Dtw.rounded_lg
-                        , Dtw.border_blue_700
-                        , Dtw.border_2
-                        , Dtw.cursor_pointer
-                        ]
-                    )
-                , onClick Show
-                ]
-                [ div [ class (Dtw.classList [ Dtw.inline_flex ]) ]
-                    [ div [ class svgClasses ] [ Icon.getHtml Icon.PlusCircle ]
-                    , div [ class (Dtw.classList [ Dtw.p_2, Dtw.pl_3, Dtw.text_blue_700 ]) ] [ text "Click to show" ]
-                    ]
+    div [ class accordionSize ]
+        [ div
+            [ class accordionHeaderClasses, onClick AccordionClicked ]
+            [ div [ class (Dtw.classList [ Dtw.inline_flex ]) ]
+                [ div [ class iconClasses ] [ icon ]
+                , div [ class accordionHeaderTextClasses ] [ text "Annotations" ]
                 ]
             ]
+        , div [ class accordionContentClasses ] [ p [] [ text model.text ] ]
+        ]
 
 
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        Show ->
-            { isOpen = True, text = model.text, size = model.size }
-
-        Hide ->
-            { isOpen = False, text = model.text, size = model.size }
+        AccordionClicked ->
+            if model.isOpen then
+                { isOpen = False, text = model.text, size = model.size }
+            else
+                { isOpen = True, text = model.text, size = model.size }

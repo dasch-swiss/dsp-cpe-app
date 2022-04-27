@@ -104,6 +104,11 @@ custom_ring customColor =
     "ring-[" ++ getColor customColor ++ "]"
 
 
+custom_text : CustomColor -> String
+custom_text customColor =
+    "text-[" ++ getColor customColor ++ "]"
+
+
 
 -- Tailwind classes
 
@@ -211,6 +216,11 @@ border_transparent =
 cursor_pointer : String
 cursor_pointer =
     "cursor-pointer"
+
+
+ease_in_out : String
+ease_in_out =
+    "ease-in-out"
 
 
 fill_inherit : String
@@ -523,9 +533,19 @@ object_cover =
     "object-cover"
 
 
+opacity_0 : String
+opacity_0 =
+    "opacity-0"
+
+
 opacity_75 : String
 opacity_75 =
     "opacity-75"
+
+
+opacity_100 : String
+opacity_100 =
+    "opacity-100"
 
 
 order_1 : String
@@ -836,6 +856,16 @@ text_white =
 text_xs : String
 text_xs =
     "text-xs"
+
+
+transition : String
+transition =
+    "transition"
+
+
+transition_all : String
+transition_all =
+    "transition-all"
 
 
 truncate : String
