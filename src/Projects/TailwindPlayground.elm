@@ -146,7 +146,7 @@ view model =
                 , ImageTileGrid.view { tiles = [ exampleImageTile, exampleImageTile, exampleImageTile, exampleImageTile, exampleImageTile, exampleImageTile ] }
                 ]
             ]
-        , div []
+        , div [ class "project-focus" ]
             [ FocusHeader.view { title = "Title", subtitle = "subtitle" } ]
         , div [ class "footer" ]
             [ div []
