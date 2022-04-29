@@ -133,6 +133,11 @@ bg_gray_100 =
     "bg-gray-100"
 
 
+bg_gray_500 : String
+bg_gray_500 =
+    "bg-gray-500"
+
+
 bg_indigo_100 : String
 bg_indigo_100 =
     "bg-indigo-100"
@@ -198,6 +203,11 @@ border_transparent =
     "border-transparent"
 
 
+bottom_0 : String
+bottom_0 =
+    "bottom-0"
+
+
 flex : String
 flex =
     "flex"
@@ -223,9 +233,24 @@ flex_shrink_0 =
     "flex-shrink-0"
 
 
+font_extrabold : String
+font_extrabold =
+    "font-extrabold"
+
+
 font_medium : String
 font_medium =
     "font-medium"
+
+
+font_semibold : String
+font_semibold =
+    "font-semibold"
+
+
+gap_8 : String
+gap_8 =
+    "gap_8"
 
 
 gap_x_4 : String
@@ -373,6 +398,16 @@ leading_6 =
     "leading-6"
 
 
+leading_8 : String
+leading_8 =
+    "leading-8"
+
+
+left_3_slash_4 : String
+left_3_slash_4 =
+    "left-3/4"
+
+
 max_h_12 : String
 max_h_12 =
     "max-h-12"
@@ -381,6 +416,11 @@ max_h_12 =
 max_w_lg : String
 max_w_lg =
     "max-w-lg"
+
+
+max_w_none : String
+max_w_none =
+    "max-w-none"
 
 
 max_w_prose : String
@@ -718,6 +758,16 @@ space_x_8 =
     "space-x-8"
 
 
+text_3xl : String
+text_3xl =
+    "text-3xl"
+
+
+text_4xl : String
+text_4xl =
+    "text-4xl"
+
+
 text_base : String
 text_base =
     "text-base"
@@ -758,6 +808,11 @@ text_gray_900 =
     "text-gray-900"
 
 
+text_indigo_600 : String
+text_indigo_600 =
+    "text-indigo-600"
+
+
 text_indigo_700 : String
 text_indigo_700 =
     "text-indigo-700"
@@ -778,9 +833,29 @@ text_xs =
     "text-xs"
 
 
+top_0 : String
+top_0 =
+    "top-0"
+
+
+tracking_tight : String
+tracking_tight =
+    "tracking-tight"
+
+
+tracking_wide : String
+tracking_wide =
+    "tracking-wide"
+
+
 truncate : String
 truncate =
     "truncate"
+
+
+uppercase : String
+uppercase =
+    "uppercase"
 
 
 w_4 : String
@@ -821,3 +896,8 @@ w_14 =
 w_full : String
 w_full =
     "w-full"
+
+
+w_screen : String
+w_screen =
+    "w-screen"
