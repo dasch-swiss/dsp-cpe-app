@@ -275,7 +275,7 @@ font_semibold =
 
 gap_8 : String
 gap_8 =
-    "gap_8"
+    "gap-8"
 
 
 gap_x_4 : String
@@ -623,6 +623,16 @@ p_3 =
     "p-3"
 
 
+pb_0 : String
+pb_0 =
+    "pb-0"
+
+
+pb_96 : String
+pb_96 =
+    "pb-96"
+
+
 pointer_events_none : String
 pointer_events_none =
     "pointer-events-none"
@@ -723,6 +733,11 @@ py_12 =
     "py-12"
 
 
+py_16 : String
+py_16 =
+    "py-16"
+
+
 relative : String
 relative =
     "relative"
@@ -821,6 +836,12 @@ space_x_6 =
 space_x_8 : String
 space_x_8 =
     "space-x-8"
+
+
+
+static : String
+static =
+    "static"
 
 
 text_3xl : String

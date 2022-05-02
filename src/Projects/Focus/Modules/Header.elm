@@ -1,4 +1,4 @@
-module Projects.Focus.Header exposing (..)
+module Projects.Focus.Modules.Header exposing (..)
 
 import CustomCss.DaschTailwind as Dtw
 import Html exposing (Html, div, text, h2, h3)
@@ -13,7 +13,7 @@ type alias Model =
 view : Model -> Html msg
 view model =
     div []
-        [ div [ class (Dtw.classList [ Dtw.hidden, Dtw.bg_gray_500, Dtw.absolute, Dtw.top_0, Dtw.bottom_0, Dtw.left_3_slash_4, Dtw.w_screen, Dtw.lg [ Dtw.block ] ]) ][]
+        [ div [ class (Dtw.classList [ Dtw.hidden, Dtw.bg_gray_50, Dtw.absolute, Dtw.top_0, Dtw.bottom_0, Dtw.left_3_slash_4, Dtw.w_screen, Dtw.lg [ Dtw.block ] ]) ][]
         , div [ class (Dtw.classList [ Dtw.mx_auto, Dtw.text_base, Dtw.max_w_prose, Dtw.lg [ Dtw.grid, Dtw.grid_cols_2, Dtw.gap_8, Dtw.max_w_none ] ]) ]
             [ div []
                 [ h2 [ class (Dtw.classList [ Dtw.text_base, Dtw.text_indigo_600, Dtw.font_semibold, Dtw.tracking_wide, Dtw.uppercase ]) ][ text model.subtitle ]
