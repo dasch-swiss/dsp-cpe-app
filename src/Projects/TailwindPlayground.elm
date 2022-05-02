@@ -18,7 +18,6 @@ import Text.Accordion as Accordion
 import Text.ProjectDescription as ProjectDescription
 import Tiles.ImageTile as ImageTile
 import Tiles.ImageTileGrid as ImageTileGrid
-import Tuple exposing (first)
 
 
 type alias Model =
