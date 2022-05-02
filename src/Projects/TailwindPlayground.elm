@@ -14,6 +14,7 @@ import Icon as Icon
 import NavigationHeader.HeaderModule exposing (cpeHeader)
 import NavigationHeader.Navitem exposing (NavItem)
 import Projects.Focus.Header as FocusHeader
+import Projects.Focus.Content as FocusContent
 import Text.ProjectDescription as ProjectDescription
 import Tiles.ImageTile as ImageTile
 import Tiles.ImageTileGrid as ImageTileGrid
@@ -147,7 +148,9 @@ view model =
                 ]
             ]
         , div [ class "project-focus" ]
-            [ FocusHeader.view { title = "Title", subtitle = "subtitle" } ]
+            [ FocusHeader.view { title = "Title", subtitle = "subtitle" }
+            , FocusContent.view { text = "" }
+            ]
         , div [ class "footer" ]
             [ div []
                 [ h3 [ class "label" ] [ text "Footer" ]

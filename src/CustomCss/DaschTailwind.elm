@@ -123,6 +123,21 @@ aspect_arbitrary w h =
     "aspect-[" ++ String.fromInt w ++ "/" ++ String.fromInt h ++ "]"
 
 
+aspect_none : String
+aspect_none =
+    "aspect-none"
+
+
+aspect_h_7 : String
+aspect_h_7 =
+    "aspect-h-7"
+
+
+aspect_w_12 : String
+aspect_w_12 =
+    "aspect-w-12"
+
+
 bg_gray_50 : String
 bg_gray_50 =
     "bg-gray-50"
@@ -206,6 +221,16 @@ border_transparent =
 bottom_0 : String
 bottom_0 =
     "bottom-0"
+
+
+col_start_1 : String
+col_start_1 =
+    "col-start-1"
+
+
+col_start_2 : String
+col_start_2 =
+    "col-start-2"
 
 
 flex : String
@@ -478,6 +503,16 @@ mt_2 =
     "mt-2"
 
 
+mt_3 : String
+mt_3 =
+    "mt-3"
+
+
+mt_5 : String
+mt_5 =
+    "mt-5"
+
+
 mt_6 : String
 mt_6 =
     "mt-6"
@@ -521,6 +556,21 @@ neg_mr_0_dot_5 =
 neg_mr_1 : String
 neg_mr_1 =
     "neg-mr-1"
+
+
+neg_mr_20 : String
+neg_mr_20 =
+    "neg-mr-20"
+
+
+neg_mt_20 : String
+neg_mt_20 =
+    "-mt-20"
+
+
+object_center : String
+object_center =
+    "object-center"
 
 
 object_cover : String
@@ -678,6 +728,11 @@ relative =
     "relative"
 
 
+right_0 : String
+right_0 =
+    "right-0"
+
+
 ring_2 : String
 ring_2 =
     "ring-2"
@@ -723,6 +778,11 @@ rounded_lg =
     "rounded-lg"
 
 
+row_start_1 : String
+row_start_1 =
+    "row-start-1"
+
+
 self_center : String
 self_center =
     "self-center"
@@ -731,6 +791,11 @@ self_center =
 shadow : String
 shadow =
     "shadow"
+
+
+shadow_lg : String
+shadow_lg =
+    "shadow-lg"
 
 
 shadow_sm : String
@@ -778,6 +843,11 @@ text_blue_700 =
     "text-blue-700"
 
 
+text_gray_200 : String
+text_gray_200 =
+    "text-gray-200"
+
+
 text_gray_300 : String
 text_gray_300 =
     "text-gray-300"
@@ -816,6 +886,11 @@ text_indigo_600 =
 text_indigo_700 : String
 text_indigo_700 =
     "text-indigo-700"
+
+
+text_lg : String
+text_lg =
+    "text-lg"
 
 
 text_sm : String

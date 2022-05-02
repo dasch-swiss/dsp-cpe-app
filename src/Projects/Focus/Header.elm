@@ -3,7 +3,6 @@ module Projects.Focus.Header exposing (..)
 import CustomCss.DaschTailwind as Dtw
 import Html exposing (Html, div, text, h2, h3)
 import Html.Attributes exposing (class)
-import Tailwind.Utilities exposing (text_indigo_600)
 
 
 type alias Model =
