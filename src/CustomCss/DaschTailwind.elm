@@ -104,6 +104,11 @@ custom_ring customColor =
     "ring-[" ++ getColor customColor ++ "]"
 
 
+custom_text : CustomColor -> String
+custom_text customColor =
+    "text-[" ++ getColor customColor ++ "]"
+
+
 
 -- Tailwind classes
 
@@ -173,8 +178,8 @@ bg_indigo_700 =
     "bg-indigo-700"
 
 
-bg_medium_blue_700 : String
-bg_medium_blue_700 =
+bg_blue_700 : String
+bg_blue_700 =
     "bg-blue-700"
 
 
@@ -193,14 +198,24 @@ border =
     "border"
 
 
-border_gray_300 : String
-border_gray_300 =
-    "border-gray-300"
+border_2 : String
+border_2 =
+    "border-2"
 
 
 border_b_2 : String
 border_b_2 =
     "border-b-2"
+
+
+border_blue_700 : String
+border_blue_700 =
+    "border-blue-700"
+
+
+border_gray_300 : String
+border_gray_300 =
+    "border-gray-300"
 
 
 border_indigo_500 : String
@@ -231,6 +246,26 @@ col_start_1 =
 col_start_2 : String
 col_start_2 =
     "col-start-2"
+
+ 
+cursor_pointer : String
+cursor_pointer =
+    "cursor-pointer"
+
+
+ease_in_out : String
+ease_in_out =
+    "ease-in-out"
+
+
+fill_inherit : String
+fill_inherit =
+    "fill-inherit"
+
+
+fill_white : String
+fill_white =
+    "fill-white"
 
 
 flex : String
@@ -388,14 +423,14 @@ inset_0 =
     "inset-0"
 
 
-justify_between : String
-justify_between =
-    "justify-between"
-
-
 items_center : String
 items_center =
     "items-center"
+
+
+justify_between : String
+justify_between =
+    "justify-between"
 
 
 justify_center : String
@@ -431,6 +466,11 @@ leading_8 =
 left_3_slash_4 : String
 left_3_slash_4 =
     "left-3/4"
+
+
+m_4 : String
+m_4 =
+    "m-4"
 
 
 max_h_12 : String
@@ -578,9 +618,19 @@ object_cover =
     "object-cover"
 
 
+opacity_0 : String
+opacity_0 =
+    "opacity-0"
+
+
 opacity_75 : String
 opacity_75 =
     "opacity-75"
+
+
+opacity_100 : String
+opacity_100 =
+    "opacity-100"
 
 
 order_1 : String
@@ -638,6 +688,21 @@ pointer_events_none =
     "pointer-events-none"
 
 
+pl_1 : String
+pl_1 =
+    "pl-1"
+
+
+pl_3 : String
+pl_3 =
+    "pl-3"
+
+
+pl_5 : String
+pl_5 =
+    "pl-5"
+
+
 pl_10 : String
 pl_10 =
     "pl-10"
@@ -646,6 +711,16 @@ pl_10 =
 placeholder_gray_400 : String
 placeholder_gray_400 =
     "placeholder-gray-400"
+
+
+pr_1 : String
+pr_1 =
+    "pr-1"
+
+
+pr_1_dot_5 : String
+pr_1_dot_5 =
+    "pr-1.5"
 
 
 pr_3 : String
@@ -943,6 +1018,16 @@ tracking_wide : String
 tracking_wide =
     "tracking-wide"
 
+    
+transition : String
+transition =
+    "transition"
+
+
+transition_all : String
+transition_all =
+    "transition-all"
+
 
 truncate : String
 truncate =
@@ -969,6 +1054,11 @@ w_6 =
     "w-6"
 
 
+w_6_slash_12 : String
+w_6_slash_12 =
+    "w-6/12"
+
+
 w_8 : String
 w_8 =
     "w-8"
@@ -977,6 +1067,11 @@ w_8 =
 w_10 : String
 w_10 =
     "w-10"
+
+
+w_11_slash_12 : String
+w_11_slash_12 =
+    "w-11/12"
 
 
 w_12 : String
