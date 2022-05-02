@@ -50,7 +50,7 @@ update msg model =
             ( { model | error = Just (buildErrorMessage err) }, Cmd.none )
 
         Fetch ->
-            ( { model | result = Just { numberOfItems = -2 } }, fetchResult model )
+            ( model, fetchResult model )
 
 
 
@@ -62,13 +62,13 @@ view model =
     div []
         [ div [] [ text model.query ]
         , primaryButton [ onClick Fetch ] "Search" BasicLarge
-        , resView model
-        , errorView model.error
+        , viewRes model
+        , viewError model.error
         ]
 
 
-resView : Model -> Html msg
-resView model =
+viewRes : Model -> Html msg
+viewRes model =
     case model.result of
         Nothing ->
             text ""
@@ -77,8 +77,8 @@ resView model =
             div [] [ text ("Found " ++ String.fromInt count.numberOfItems ++ " matching resources") ]
 
 
-errorView : Maybe String -> Html msg
-errorView maybeError =
+viewError : Maybe String -> Html msg
+viewError maybeError =
     case maybeError of
         Just error ->
             div []
