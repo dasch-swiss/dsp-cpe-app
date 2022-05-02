@@ -14,6 +14,7 @@ import Html.Attributes exposing (class)
 import Icon as Icon
 import NavigationHeader.HeaderModule exposing (cpeHeader)
 import NavigationHeader.Navitem exposing (NavItem)
+import Text.Accordion as Accordion
 import Text.ProjectDescription as ProjectDescription
 import Tiles.ImageTile as ImageTile
 import Tiles.ImageTileGrid as ImageTileGrid
@@ -24,12 +25,14 @@ type alias Model =
     { text : String
     , projectDescriptionModel : ProjectDescription.Model
     , countviewerModel : GravsearchCountViewer.Model
+    , accordionModel : Accordion.Model
     }
 
 
 type Msg
     = ProjDes ProjectDescription.Msg
     | CountMsg GravsearchCountViewer.Msg
+    | AccordionMsg Accordion.Msg
 
 
 initialModel : Model
@@ -37,6 +40,7 @@ initialModel =
     { text = "playground"
     , projectDescriptionModel = ProjectDescription.initialModel
     , countviewerModel = exampleGravCount
+    , accordionModel = Accordion.initialModel
     }
 
 
@@ -144,6 +148,12 @@ view model =
                 , ProjectDescription.view model.projectDescriptionModel |> Html.map ProjDes
                 ]
             ]
+        , div [ class "accordion" ]
+            [ div []
+                [ h3 [ class "label" ] [ text "Accordion" ]
+                , Accordion.view model.accordionModel |> Html.map AccordionMsg
+                ]
+            ]
         , div [ class "tiles" ]
             [ div [ class "preview tiles" ]
                 [ h3 [ class "label" ] [ text "Image Tile Grid" ]
@@ -186,6 +196,12 @@ update msg model =
                     newModel
               }
             , Cmd.map CountMsg newCmd
+        AccordionMsg accordionMsg ->
+            ( { model
+                | accordionModel =
+                    Accordion.update accordionMsg model.accordionModel
+              }
+            , Cmd.none
             )
 
 
