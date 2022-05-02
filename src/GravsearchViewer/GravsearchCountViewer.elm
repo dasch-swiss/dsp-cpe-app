@@ -2,14 +2,11 @@ module GravsearchViewer.GravsearchCountViewer exposing (..)
 
 import Buttons.BasicButtons.BasicButton exposing (BasicButtonSize(..))
 import Buttons.Button exposing (primaryButton)
-import Debug
 import Error exposing (buildErrorMessage)
 import Html exposing (Html, div, h3, text)
 import Html.Events exposing (onClick)
 import Http
 import Json.Decode as Decode exposing (field, int, map)
-import Json.Decode.Pipeline exposing (required)
-import Url.Parser exposing (query)
 
 
 type alias Model =
@@ -36,10 +33,6 @@ decoder =
 
 fetchResult : Model -> Cmd Msg
 fetchResult model =
-    let
-        _ =
-            Debug.log "Fetching with: " model
-    in
     Http.post
         { url = "https://api.test.dasch.swiss/v2/searchextended/count"
         , body = Http.stringBody "text/plain" model.query
@@ -49,10 +42,6 @@ fetchResult model =
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    let
-        _ =
-            Debug.log "Updating with: " msg
-    in
     case msg of
         Received (Ok count) ->
             ( { model | result = Just count }, Cmd.none )

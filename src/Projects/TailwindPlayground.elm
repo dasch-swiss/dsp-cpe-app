@@ -196,6 +196,8 @@ update msg model =
                     newModel
               }
             , Cmd.map CountMsg newCmd
+            )
+
         AccordionMsg accordionMsg ->
             ( { model
                 | accordionModel =
