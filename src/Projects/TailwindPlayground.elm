@@ -13,6 +13,7 @@ import Html.Attributes exposing (class)
 import Icon as Icon
 import NavigationHeader.HeaderModule exposing (cpeHeader)
 import NavigationHeader.Navitem exposing (NavItem)
+import Text.Accordion as Accordion
 import Text.ProjectDescription as ProjectDescription
 import Tiles.ImageTile as ImageTile
 import Tiles.ImageTileGrid as ImageTileGrid
@@ -21,17 +22,20 @@ import Tiles.ImageTileGrid as ImageTileGrid
 type alias Model =
     { text : String
     , projectDescriptionModel : ProjectDescription.Model
+    , accordionModel : Accordion.Model
     }
 
 
 type Msg
     = ProjDes ProjectDescription.Msg
+    | AccordionMsg Accordion.Msg
 
 
 initialModel : Model
 initialModel =
     { text = "playground"
     , projectDescriptionModel = ProjectDescription.initialModel
+    , accordionModel = Accordion.initialModel
     }
 
 
@@ -139,6 +143,12 @@ view model =
                 , ProjectDescription.view model.projectDescriptionModel |> Html.map ProjDes
                 ]
             ]
+        , div [ class "accordion" ]
+            [ div []
+                [ h3 [ class "label" ] [ text "Accordion" ]
+                , Accordion.view model.accordionModel |> Html.map AccordionMsg
+                ]
+            ]
         , div [ class "tiles" ]
             [ div [ class "preview tiles" ]
                 [ h3 [ class "label" ] [ text "Image Tile Grid" ]
@@ -151,6 +161,7 @@ view model =
                 , Footer.view { copyrightText = "© 2022 DaSCH", contactUsText = "Contact Us", contactUsUrl = "mailto:info@dasch.swiss", licensingFilePath = "/assets/images/license-cc-beol.jpg" }
                 ]
             ]
+        
         ]
 
 
@@ -161,6 +172,14 @@ update msg model =
             ( { model
                 | projectDescriptionModel =
                     ProjectDescription.update projDesMsg model.projectDescriptionModel
+              }
+            , Cmd.none
+            )
+
+        AccordionMsg accordionMsg ->
+            ( { model
+                | accordionModel =
+                    Accordion.update accordionMsg model.accordionModel
               }
             , Cmd.none
             )
