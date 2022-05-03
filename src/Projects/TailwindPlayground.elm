@@ -8,7 +8,7 @@ import Buttons.CircularButton exposing (CircularButtonSize(..))
 import Buttons.LeadingIconButton exposing (LeadingSize(..))
 import Buttons.TrailingIconButton exposing (TrailingSize(..))
 import Footer.Footer as Footer
-import GravsearchViewer.GravsearchCountViewer as GravsearchCountViewer exposing (Count)
+import GravsearchViewer.GravsearchCountViewer as GravsearchCountViewer
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Icon as Icon
@@ -52,6 +52,7 @@ init =
     ( initialModel, Cmd.none )
 
 
+view : Model -> Html Msg
 view model =
     div [ class "playground" ]
         [ div [ class "buttons" ]
