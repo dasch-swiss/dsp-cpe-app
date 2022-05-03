@@ -26,26 +26,26 @@ getColor customType =
 
 primary : String
 primary =
-    medium_blue_700
+    medium_blue
 
 
 secondary : String
 secondary =
-    passiveGray
+    midnight_blue
 
 
 
 -- colors
 
 
-medium_blue_700 : String
-medium_blue_700 =
+medium_blue : String
+medium_blue =
     "#1D4ED8"
 
 
-medium_blue_500 : String
-medium_blue_500 =
-    "#1D4ED8"
+midnight_blue : String
+midnight_blue =
+    "#130075"
 
 
 white : String

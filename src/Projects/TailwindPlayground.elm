@@ -13,19 +13,33 @@ import Icon as Icon
 import NavigationHeader.Model as H
 import NavigationHeader.Update as HU
 import NavigationHeader.View as Header exposing (..)
+import Footer.Footer as Footer
+import GravsearchViewer.GravsearchCountViewer as GravsearchCountViewer exposing (Count)
+import Html exposing (Html, div, h3, text)
+import Html.Attributes exposing (class)
+import Icon as Icon
+import NavigationHeader.HeaderModule exposing (cpeHeader)
+import NavigationHeader.Navitem exposing (NavItem)
+import Text.Accordion as Accordion
 import Text.ProjectDescription as ProjectDescription
+import Tiles.ImageTile as ImageTile
+import Tiles.ImageTileGrid as ImageTileGrid
 
 
 type alias Model =
     { text : String
     , projectDescriptionModel : ProjectDescription.Model
     , headerModel : H.HeaderModel
+    , countviewerModel : GravsearchCountViewer.Model
+    , accordionModel : Accordion.Model
     }
 
 
 type Msg
     = ProjDes ProjectDescription.Msg
     | HeaderModuleMsg H.Msg
+    | CountMsg GravsearchCountViewer.Msg
+    | AccordionMsg Accordion.Msg
 
 
 initialModel : Model
@@ -33,6 +47,8 @@ initialModel =
     { text = "playground"
     , projectDescriptionModel = ProjectDescription.initialModel
     , headerModel = header
+    , countviewerModel = exampleGravCount
+    , accordionModel = Accordion.initialModel
     }
 
 
@@ -45,7 +61,7 @@ view model =
     div [ class "playground" ]
         [ div [ class "buttons" ]
             [ div [ class "preview primary-button" ]
-                [ h3 [ class "header" ] [ text "Primary Buttons" ]
+                [ h3 [ class "label" ] [ text "Primary Buttons" ]
                 , primaryButton [] "Extra small" BasicExtraSmall
                 , primaryButton [] "Small" BasicSmall
                 , primaryButton [] "Normal" BasicNormal
@@ -53,7 +69,7 @@ view model =
                 , primaryButton [] "Extra large" BasicExtraLarge
                 ]
             , div [ class "preview secondary-button" ]
-                [ h3 [ class "header" ] [ text "Secondary Buttons" ]
+                [ h3 [ class "label" ] [ text "Secondary Buttons" ]
                 , secondaryButton [] "Extra small" BasicExtraSmall
                 , secondaryButton [] "Small" BasicSmall
                 , secondaryButton [] "Normal" BasicNormal
@@ -61,7 +77,7 @@ view model =
                 , secondaryButton [] "Extra large" BasicExtraLarge
                 ]
             , div [ class "preview white-button" ]
-                [ h3 [ class "header" ] [ text "White Buttons" ]
+                [ h3 [ class "label" ] [ text "White Buttons" ]
                 , whiteButton [] "Extra small" BasicExtraSmall
                 , whiteButton [] "Small" BasicSmall
                 , whiteButton [] "Normal" BasicNormal
@@ -69,7 +85,7 @@ view model =
                 , whiteButton [] "Extra large" BasicExtraLarge
                 ]
             , div [ class "preview circular-button" ]
-                [ h3 [ class "header" ] [ text "Circular Buttons" ]
+                [ h3 [ class "label" ] [ text "Circular Buttons" ]
                 , Button.circularButton CircularExtraSmall Icon.ArrowRight []
                 , Button.circularButton CircularSmall Icon.Annotation []
                 , Button.circularButton CircularNormal Icon.Plus []
@@ -77,14 +93,14 @@ view model =
                 , Button.circularButton CircularExtraLarge Icon.EmojiHappy []
                 ]
             , div [ class "preview leading-button" ]
-                [ h3 [ class "header" ] [ text "Leading Icon Buttons" ]
+                [ h3 [ class "label" ] [ text "Leading Icon Buttons" ]
                 , Button.leadingIcon LeadingSmall "Small" Icon.Annotation []
                 , Button.leadingIcon LeadingNormal "Normal" Icon.EmojiHappy []
                 , Button.leadingIcon LeadingLarge "Large" Icon.Plus []
                 , Button.leadingIcon LeadingExtraLarge "Extra Large" Icon.Check []
                 ]
             , div [ class "preview leading-button" ]
-                [ h3 [ class "header" ] [ text "Trailing Icon Buttons" ]
+                [ h3 [ class "label" ] [ text "Trailing Icon Buttons" ]
                 , Button.trailingIcon TrailingSmall "Small" Icon.Annotation []
                 , Button.trailingIcon TrailingNormal "Normal" Icon.EmojiHappy []
                 , Button.trailingIcon TrailingLarge "Large" Icon.Plus []
@@ -95,7 +111,7 @@ view model =
             ]
         , div [ class "avatars" ]
             [ div [ class "preview circular-avatar" ]
-                [ h3 [ class "header" ] [ text "Circular Avatar" ]
+                [ h3 [ class "label" ] [ text "Circular Avatar" ]
                 , circular
                     CircularAvatarExtraSmall
                     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
@@ -134,10 +150,34 @@ view model =
                 , ProjectDescription.view model.projectDescriptionModel |> Html.map ProjDes
                 ]
             ]
+        , div [ class "accordion" ]
+            [ div []
+                [ h3 [ class "label" ] [ text "Accordion" ]
+                , Accordion.view model.accordionModel |> Html.map AccordionMsg
+                ]
+            ]
+        , div [ class "tiles" ]
+            [ div [ class "preview tiles" ]
+                [ h3 [ class "label" ] [ text "Image Tile Grid" ]
+                , ImageTileGrid.view { tiles = [ exampleImageTile, exampleImageTile, exampleImageTile, exampleImageTile, exampleImageTile, exampleImageTile ] }
+                ]
+            ]
+        , div [ class "footer" ]
+            [ div []
+                [ h3 [ class "label" ] [ text "Footer" ]
+                , Footer.view { copyrightText = "© 2022 DaSCH", contactUsText = "Contact Us", contactUsUrl = "mailto:info@dasch.swiss", licensingFilePath = "/assets/images/license-cc-beol.jpg" }
+                ]
+            ]
+        , div [ class "tiles" ]
+            [ div [ class "preview tiles" ]
+                [ h3 [ class "label" ] [ text "Gravsearch" ]
+                , GravsearchCountViewer.view model.countviewerModel |> Html.map CountMsg
+                ]
+            ]
         ]
 
 
-update : Msg -> Model -> ( Model, Cmd msg )
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         ProjDes projDesMsg ->
@@ -152,6 +192,22 @@ update msg model =
             ( { model
                 | headerModel =
                     HU.update headerMsg model.headerModel
+        CountMsg countMsg ->
+            let
+                ( newModel, newCmd ) =
+                    GravsearchCountViewer.update countMsg model.countviewerModel
+            in
+            ( { model
+                | countviewerModel =
+                    newModel
+              }
+            , Cmd.map CountMsg newCmd
+            )
+
+        AccordionMsg accordionMsg ->
+            ( { model
+                | accordionModel =
+                    Accordion.update accordionMsg model.accordionModel
               }
             , Cmd.none
             )

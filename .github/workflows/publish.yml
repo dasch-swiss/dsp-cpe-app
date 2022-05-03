@@ -17,7 +17,8 @@ jobs:
       - name: Build and publish image
         run: |
           echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
-          make docker-publish
+          make docker-publish-app
+          make docker-publish-mock-api
   notification:
     name: Google chat notification about release and published version
     needs: [publish]
