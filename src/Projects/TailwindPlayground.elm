@@ -218,7 +218,7 @@ subscriptions _ =
 
 
 
--- Navigation header data ...
+-- Example data ...
 
 
 header : H.HeaderModel
@@ -228,6 +228,16 @@ header =
     , navBar = [ someNavitem, otherNavitem ]
     , showSearchBar = False
     }
+
+
+exampleImageTile : ImageTile.Model
+exampleImageTile =
+    { src = "https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80", alt = "", buttonAlt = "View details for IMG_4985.HEIC", title = "IMG_4985.HEIC", subtitle = "3.9 MB", url = "project/1" }
+
+
+exampleGravCount : GravsearchCountViewer.Model
+exampleGravCount =
+    { query = "PREFIX knora-api: <http://api.knora.org/ontology/knora-api/v2#>CONSTRUCT {?person knora-api:isMainResource true .} WHERE {?person a knora-api:Resource .}", result = Nothing, error = Nothing }
 
 
 someNavitem : H.NavItem
