@@ -7,37 +7,40 @@ import Buttons.Button as Button exposing (primaryButton, secondaryButton, whiteB
 import Buttons.CircularButton exposing (CircularButtonSize(..))
 import Buttons.LeadingIconButton exposing (LeadingSize(..))
 import Buttons.TrailingIconButton exposing (TrailingSize(..))
-import Html exposing (Html, div, h3, text)
+import Html exposing (div, h3, text)
 import Html.Attributes exposing (class)
 import Icon as Icon
-import NavigationHeader.HeaderModule exposing (cpeHeader)
-import NavigationHeader.Navitem exposing (NavItem)
+import NavigationHeader.Model as H
+import NavigationHeader.Update as HU
+import NavigationHeader.View as Header exposing (..)
 import Text.ProjectDescription as ProjectDescription
 
 
 type alias Model =
     { text : String
     , projectDescriptionModel : ProjectDescription.Model
+    , headerModel : H.HeaderModel
     }
 
 
 type Msg
     = ProjDes ProjectDescription.Msg
+    | HeaderModuleMsg H.Msg
 
 
 initialModel : Model
 initialModel =
     { text = "playground"
     , projectDescriptionModel = ProjectDescription.initialModel
+    , headerModel = header
     }
 
 
-init : ( Model, Cmd Msg )
+init : ( Model, Cmd msg )
 init =
     ( initialModel, Cmd.none )
 
 
-view : Model -> Html Msg
 view model =
     div [ class "playground" ]
         [ div [ class "buttons" ]
@@ -121,18 +124,13 @@ view model =
                 ]
             ]
         , div [ class "header" ]
-            [ h3 [] [ text "Header module signed in" ]
+            [ h3 [] [ text "new header module" ]
             , div [] []
-            , div [] [ cpeHeader "https://beol.dasch.swiss/assets/images/beol-logo.png" fakeUser [ someNavitem, otherNavitem ] True ]
-            ]
-        , div [ class "header" ]
-            [ h3 [] [ text "Header module signed out" ]
-            , div [] []
-            , div [] [ cpeHeader "https://beol.dasch.swiss/assets/images/beol-logo.png" Nothing [ someNavitem, otherNavitem ] True ]
+            , div [] [ Header.view model.headerModel |> Html.map HeaderModuleMsg ]
             ]
         , div [ class "text" ]
             [ div [ class "preview project description" ]
-                [ h3 [ class "header" ] [ text "Project description" ]
+                [ h3 [ class "label" ] [ text "Project description" ]
                 , ProjectDescription.view model.projectDescriptionModel |> Html.map ProjDes
                 ]
             ]
@@ -150,6 +148,14 @@ update msg model =
             , Cmd.none
             )
 
+        HeaderModuleMsg headerMsg ->
+            ( { model
+                | headerModel =
+                    HU.update headerMsg model.headerModel
+              }
+            , Cmd.none
+            )
+
 
 subscriptions : Model -> Sub msg
 subscriptions _ =
@@ -160,19 +166,28 @@ subscriptions _ =
 -- Navigation header data ...
 
 
-someNavitem : NavItem msg
+header : H.HeaderModel
+header =
+    { logo = "https://beol.dasch.swiss/assets/images/beol-logo.png"
+    , user = someUser
+    , navBar = [ someNavitem, otherNavitem ]
+    , showSearchBar = False
+    }
+
+
+someNavitem : H.NavItem
 someNavitem =
     { attrs = [], text = "Dasch", href = "https://www.dasch.swiss", cmd = Cmd.none, isActive = True }
 
 
-otherNavitem : NavItem msg
+otherNavitem : H.NavItem
 otherNavitem =
     { attrs = [], text = "Beol", href = "project/1", cmd = Cmd.none, isActive = False }
 
 
-fakeUser : Maybe { uId : String, uImg : String }
-fakeUser =
+someUser : Maybe { uId : String, uImg : String }
+someUser =
     Just
-        { uId = "sthId"
+        { uId = "someId"
         , uImg = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
         }
