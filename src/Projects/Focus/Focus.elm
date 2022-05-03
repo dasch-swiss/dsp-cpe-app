@@ -10,16 +10,42 @@ import Html.Attributes exposing (class)
 type alias Model =
     { headerTitle : String
     , headerSubtitle : String
-    , contentBody : String
-    , contentDatasetTitle : String
+    , contentModel : Content.Model
     }
 
-view : Model -> Html msg
+type Msg
+    = ContentMsg Content.Msg
+
+
+initialModel : Model
+initialModel =
+    { headerTitle = "Title"
+    , headerSubtitle = "subtitle"
+    , contentModel =
+        { text = ""
+        , isReadMoreOpen = False
+        , datasetTitle = "Test Dataset"
+        }
+    }
+
+
+view : Model -> Html Msg
 view model =
     div
     [ class (Dtw.classList [ Dtw.bg_white, Dtw.overflow_hidden ]) ]
     [ div [ class (Dtw.classList [ Dtw.relative, Dtw.max_w_7xl, Dtw.mx_auto, Dtw.py_16, Dtw.px_4, Dtw.sm [ Dtw.px_6 ], Dtw.lg [ Dtw.px_8 ] ]) ]
         [ Header.view { title = model.headerTitle, subtitle = model.headerSubtitle }
-        , Content.view { text = model.contentBody, datasetTitle = model.contentDatasetTitle, isReadMoreOpen = False }
+        , Content.view model.contentModel |> Html.map ContentMsg
         ]
     ]
+
+update : Msg -> Model -> ( Model, Cmd Msg )
+update msg model =
+    case msg of
+        ContentMsg contentMsg ->
+            ( { model
+                | contentModel =
+                    Content.update contentMsg model.contentModel
+            }
+            , Cmd.none
+            )

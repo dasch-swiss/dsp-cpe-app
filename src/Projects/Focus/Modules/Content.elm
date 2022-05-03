@@ -10,6 +10,7 @@ import Svg.Attributes as SvgAttr exposing (clipRule, d, fill, fillRule, id, patt
 import Html.Attributes exposing (style)
 import Html exposing (button)
 import Html exposing (th)
+import Html.Events exposing (onClick)
 
 
 type alias Model =
@@ -22,14 +23,20 @@ type alias Model =
 type Msg
     = ReadMoreClicked
 
-view : Model -> Html msg
+view : Model -> Html Msg
 view model =
     let
         readMoreText =
             if model.isReadMoreOpen then
-                "Read more"
-            else
                 "Read less"
+            else
+                "Read more"
+
+        contentLineClampStyles =
+            if model.isReadMoreOpen then
+                Dtw.classList [ ]
+            else
+                Dtw.classList [ Dtw.line_clamp_10, Dtw.max_h_96  ] -- add largest tailwind max height class available because Safari doesn't handle line clamps on divs correctly
     in
     div []
         [ div [ class (Dtw.classList [ Dtw.mt_8, Dtw.lg [ Dtw.grid, Dtw.grid_cols_2, Dtw.gap_8 ] ]) ]
@@ -103,7 +110,7 @@ view model =
                 ]
             , div [ class (Dtw.classList [ Dtw.lg [ Dtw.mt_0 ] ]) ]
                 [ div [ class (Dtw.classList [ Dtw.prose, Dtw.prose_indigo, Dtw.text_gray_500, Dtw.mx_auto, Dtw.lg [ Dtw.max_w_none, Dtw.row_start_1, Dtw.col_start_1 ] ]) ]
-                    [ div [ class (Dtw.classList [ Dtw.line_clamp_10, Dtw.max_h_96 ])] -- add largest tailwind max height class available because Safari doesn't handle line clamps on divs correctly
+                    [ div [ class contentLineClampStyles ]
                         [ p []
                             [ text "Sagittis scelerisque nulla cursus in enim consectetur quam. Dictum urna sed consectetur neque tristique pellentesque. Blandit amet, sed aenean erat arcu morbi." ]
                         , p []
@@ -122,10 +129,8 @@ view model =
                         ]
                         
                     ]
-                , div [ class (Dtw.classList [ Dtw.mb_8, Dtw.prose, Dtw.mx_auto, Dtw.lg [ Dtw.max_w_none, Dtw.row_start_1, Dtw.col_start_1 ] ]) ]
-                    [ button [] [text readMoreText]
-
-                    ]
+                , div [ class (Dtw.classList [ Dtw.mb_8, Dtw.prose, Dtw.mx_auto, Dtw.sm [ Dtw.mt_8 ], Dtw.lg [ Dtw.max_w_none, Dtw.row_start_1, Dtw.col_start_1 ] ]) ]
+                    [ button [ onClick ReadMoreClicked ] [text readMoreText] ]
                 , div [ class (Dtw.classList [ Dtw.prose, Dtw.mx_auto, Dtw.lg [ Dtw.max_w_none, Dtw.row_start_1, Dtw.col_start_1 ] ]) ]
                     [ div [ class (Dtw.classList [ Dtw.border, Dtw.custom_border Primary, Dtw.rounded_lg ]) ]
                         [ div [ class (Dtw.classList [ Dtw.p_6 ]) ]
