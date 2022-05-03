@@ -2,16 +2,16 @@ module Projects.Focus.Focus exposing (..)
 
 import CustomCss.DaschTailwind as Dtw
 import Html exposing (Html, div)
-import Projects.Focus.Modules.Header as Header exposing (view)
-import Projects.Focus.Modules.Content as Content exposing (view)
 import Html.Attributes exposing (class)
+import Projects.Focus.Modules.Content as Content
+import Projects.Focus.Modules.Header as Header
 
 
 type alias Model =
-    { headerTitle : String
-    , headerSubtitle : String
+    { headerModel : Header.Model
     , contentModel : Content.Model
     }
+
 
 type Msg
     = ContentMsg Content.Msg
@@ -19,10 +19,19 @@ type Msg
 
 initialModel : Model
 initialModel =
-    { headerTitle = "Title"
-    , headerSubtitle = "subtitle"
+    { headerModel =
+        { title = "Title"
+        , subtitle = "subtitle"
+        }
     , contentModel =
-        { text = ""
+        { contentBody = """Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus 
+                    est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, 
+                    no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, 
+                    vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod 
+                    tincidunt ut laoreet dolore magna aliquam erat volutpat."""
+        , imagePath = "https://images.unsplash.com/photo-1546913199-55e06682967e?ixlib=rb-1.2.1&auto=format&fit=crop&crop=focalpoint&fp-x=.735&fp-y=.55&w=1184&h=1376&q=80"
+        , imageAltText = "Whitney leaning against a railing on a downtown street"
         , isReadMoreOpen = False
         , datasetTitle = "Test Dataset"
         }
@@ -32,12 +41,13 @@ initialModel =
 view : Model -> Html Msg
 view model =
     div
-    [ class (Dtw.classList [ Dtw.bg_white, Dtw.overflow_hidden ]) ]
-    [ div [ class (Dtw.classList [ Dtw.relative, Dtw.max_w_7xl, Dtw.mx_auto, Dtw.py_16, Dtw.px_4, Dtw.sm [ Dtw.px_6 ], Dtw.lg [ Dtw.px_8 ] ]) ]
-        [ Header.view { title = model.headerTitle, subtitle = model.headerSubtitle }
-        , Content.view model.contentModel |> Html.map ContentMsg
+        [ class (Dtw.classList [ Dtw.bg_white, Dtw.overflow_hidden ]) ]
+        [ div [ class (Dtw.classList [ Dtw.relative, Dtw.max_w_7xl, Dtw.mx_auto, Dtw.py_16, Dtw.px_4, Dtw.sm [ Dtw.px_6 ], Dtw.lg [ Dtw.px_8 ] ]) ]
+            [ Header.view model.headerModel
+            , Content.view model.contentModel |> Html.map ContentMsg
+            ]
         ]
-    ]
+
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -46,6 +56,6 @@ update msg model =
             ( { model
                 | contentModel =
                     Content.update contentMsg model.contentModel
-            }
+              }
             , Cmd.none
             )

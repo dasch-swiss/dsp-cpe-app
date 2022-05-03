@@ -2,19 +2,18 @@ module Projects.Focus.Modules.Content exposing (..)
 
 import CustomCss.CssColors exposing (CustomColor(..))
 import CustomCss.DaschTailwind as Dtw
-import Html exposing (Html, div, figcaption, figure, h2, h3, img, li, p, span, text, ul)
+import Html exposing (Html, button, div, figcaption, figure, img, p, span, text)
 import Html.Attributes exposing (alt, class, height, src, width)
-import Html.Attributes.Aria exposing (ariaHidden, role)
+import Html.Attributes.Aria exposing (ariaHidden)
+import Html.Events exposing (onClick)
 import Svg exposing (defs, path, pattern, rect, svg)
 import Svg.Attributes as SvgAttr exposing (clipRule, d, fill, fillRule, id, patternUnits, viewBox, x, y)
-import Html.Attributes exposing (style)
-import Html exposing (button)
-import Html exposing (th)
-import Html.Events exposing (onClick)
 
 
 type alias Model =
-    { text : String
+    { contentBody : String
+    , imagePath : String
+    , imageAltText : String
     , isReadMoreOpen : Bool
     , datasetTitle : String
     }
@@ -24,20 +23,26 @@ type Msg
     = ReadMoreClicked
     | DatasetClicked
 
+
 view : Model -> Html Msg
 view model =
     let
         readMoreText =
             if model.isReadMoreOpen then
                 "Read less"
+
             else
                 "Read more"
 
         contentLineClampStyles =
             if model.isReadMoreOpen then
-                Dtw.classList [] -- remove the classes
+                Dtw.classList []
+                -- remove the classes
+
             else
-                Dtw.classList [ Dtw.line_clamp_10, Dtw.max_h_96  ] -- add largest tailwind max height class available because Safari doesn't handle line clamps on divs correctly
+                Dtw.classList [ Dtw.line_clamp_10, Dtw.max_h_96 ]
+
+        -- add largest tailwind max height class available because Safari doesn't handle line clamps on divs correctly
     in
     div []
         [ div [ class (Dtw.classList [ Dtw.mt_8, Dtw.lg [ Dtw.grid, Dtw.grid_cols_2, Dtw.gap_8 ] ]) ]
@@ -83,8 +88,8 @@ view model =
                         [ div [ class (Dtw.classList [ Dtw.aspect_w_12, Dtw.aspect_h_7, Dtw.lg [ Dtw.aspect_none ] ]) ]
                             [ img
                                 [ class (Dtw.classList [ Dtw.rounded_lg, Dtw.shadow_lg, Dtw.object_cover, Dtw.object_center ])
-                                , src "https://images.unsplash.com/photo-1546913199-55e06682967e?ixlib=rb-1.2.1&auto=format&fit=crop&crop=focalpoint&fp-x=.735&fp-y=.55&w=1184&h=1376&q=80"
-                                , alt "Whitney leaning against a railing on a downtown street"
+                                , src model.imagePath
+                                , alt model.imageAltText
                                 , width 1184
                                 , height 1376
                                 ]
@@ -113,25 +118,11 @@ view model =
                 [ div [ class (Dtw.classList [ Dtw.prose, Dtw.prose_indigo, Dtw.text_gray_500, Dtw.mx_auto, Dtw.lg [ Dtw.max_w_none, Dtw.row_start_1, Dtw.col_start_1 ] ]) ]
                     [ div [ class contentLineClampStyles ]
                         [ p []
-                            [ text "Sagittis scelerisque nulla cursus in enim consectetur quam. Dictum urna sed consectetur neque tristique pellentesque. Blandit amet, sed aenean erat arcu morbi." ]
-                        , p []
-                            [ text "Sollicitudin tristique eros erat odio sed vitae, consequat turpis elementum. Lorem nibh vel, eget pretium arcu vitae. Eros eu viverra donec ut volutpat donec laoreet quam urna." ]
-                        , p []
-                            [ text "Bibendum eu nulla feugiat justo, elit adipiscing. Ut tristique sit nisi lorem pulvinar. Urna, laoreet fusce nibh leo. Dictum et et et sit. Faucibus sed non gravida lectus dignissim imperdiet a. Bibendum eu nulla feugiat justo, elit adipiscing. Ut tristique sit nisi lorem pulvinar. " ]
-                        , p []
-                            [ text "Dictum magnis risus phasellus vitae quam morbi. Quis lorem lorem arcu, metus, egestas netus cursus." ]
-                        , p []
-                            [ text """Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus 
-                                        est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, 
-                                        no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
-                                        Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, 
-                                        vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod 
-                                        tincidunt ut laoreet dolore magna aliquam erat volutpat.""" ]
+                            [ text model.contentBody ]
                         ]
-                        
                     ]
                 , div [ class (Dtw.classList [ Dtw.mb_8, Dtw.prose, Dtw.mx_auto, Dtw.custom_text Primary, Dtw.sm [ Dtw.mt_8 ], Dtw.lg [ Dtw.max_w_none, Dtw.row_start_1, Dtw.col_start_1 ] ]) ]
-                    [ button [ onClick ReadMoreClicked ] [text readMoreText] ]
+                    [ button [ onClick ReadMoreClicked ] [ text readMoreText ] ]
                 , div
                     [ class (Dtw.classList [ Dtw.prose, Dtw.mx_auto, Dtw.lg [ Dtw.max_w_none, Dtw.row_start_1, Dtw.col_start_1 ], Dtw.onHover [ Dtw.cursor_pointer ] ])
                     , onClick DatasetClicked
@@ -142,9 +133,7 @@ view model =
                             , p [ class (Dtw.classList [ Dtw.text_3xl, Dtw.pt_1, Dtw.mt_0, Dtw.mb_0, Dtw.custom_text Primary, Dtw.font_serif ]) ] [ text model.datasetTitle ]
                             ]
                         ]
-
-                    ] 
-                
+                    ]
                 ]
             ]
         ]
@@ -156,5 +145,6 @@ update msg model =
         ReadMoreClicked ->
             { model | isReadMoreOpen = not model.isReadMoreOpen }
 
-        DatasetClicked -> -- do nothing currently
-            { model | text = model.text }
+        DatasetClicked ->
+            -- do nothing currently
+            { model | contentBody = model.contentBody }
