@@ -247,7 +247,7 @@ col_start_2 : String
 col_start_2 =
     "col-start-2"
 
- 
+
 cursor_pointer : String
 cursor_pointer =
     "cursor-pointer"
@@ -306,6 +306,11 @@ font_medium =
 font_semibold : String
 font_semibold =
     "font-semibold"
+
+
+font_serif : String
+font_serif =
+    "font-serif"
 
 
 gap_8 : String
@@ -468,6 +473,21 @@ left_3_slash_4 =
     "left-3/4"
 
 
+line_clamp_6 : String
+line_clamp_6 =
+    "line-clamp-6"
+
+
+line_clamp_10 : String
+line_clamp_10 =
+    "line-clamp-10"
+
+
+line_clamp_12 : String
+line_clamp_12 =
+    "line-clamp-12"
+
+
 m_4 : String
 m_4 =
     "m-4"
@@ -476,6 +496,11 @@ m_4 =
 max_h_12 : String
 max_h_12 =
     "max-h-12"
+
+
+max_h_96 : String
+max_h_96 =
+    "max-h-96"
 
 
 max_w_lg : String
@@ -501,6 +526,16 @@ max_w_xs =
 max_w_7xl : String
 max_w_7xl =
     "max-w-7xl"
+
+
+mb_0 : String
+mb_0 =
+    "mb-0"
+
+
+mb_8 : String
+mb_8 =
+    "mb-8"
 
 
 ml_2 : String
@@ -571,6 +606,11 @@ mx_3 =
 mx_auto : String
 mx_auto =
     "mx-auto"
+
+
+my_8 : String
+my_8 =
+    "my-8"
 
 
 neg_ml_1 : String
@@ -673,10 +713,19 @@ p_3 =
     "p-3"
 
 
+p_6 : String
+p_6 =
+    "p-6"
+
+
 pb_0 : String
 pb_0 =
     "pb-0"
 
+
+pb_2 : String
+pb_2 =
+    "pb-2"
 
 pb_96 : String
 pb_96 =
@@ -913,7 +962,6 @@ space_x_8 =
     "space-x-8"
 
 
-
 static : String
 static =
     "static"
@@ -932,6 +980,11 @@ text_4xl =
 text_base : String
 text_base =
     "text-base"
+
+
+text_blue_500 : String
+text_blue_500 =
+    "text-blue-500"
 
 
 text_blue_700 : String
@@ -1018,7 +1071,7 @@ tracking_wide : String
 tracking_wide =
     "tracking-wide"
 
-    
+
 transition : String
 transition =
     "transition"

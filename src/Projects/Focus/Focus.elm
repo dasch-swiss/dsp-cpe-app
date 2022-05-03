@@ -11,6 +11,7 @@ type alias Model =
     { headerTitle : String
     , headerSubtitle : String
     , contentBody : String
+    , contentDatasetTitle : String
     }
 
 view : Model -> Html msg
@@ -19,6 +20,6 @@ view model =
     [ class (Dtw.classList [ Dtw.bg_white, Dtw.overflow_hidden ]) ]
     [ div [ class (Dtw.classList [ Dtw.relative, Dtw.max_w_7xl, Dtw.mx_auto, Dtw.py_16, Dtw.px_4, Dtw.sm [ Dtw.px_6 ], Dtw.lg [ Dtw.px_8 ] ]) ]
         [ Header.view { title = model.headerTitle, subtitle = model.headerSubtitle }
-        , Content.view { text = model.contentBody }
+        , Content.view { text = model.contentBody, datasetTitle = model.contentDatasetTitle, isReadMoreOpen = False }
         ]
     ]

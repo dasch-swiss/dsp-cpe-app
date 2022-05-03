@@ -157,7 +157,7 @@ view model =
                 ]
             ]
         , div [ class "project-focus" ]
-            [ ProjectFocus.view { headerTitle = "Title", headerSubtitle = "subtitle", contentBody = "hello world" }
+            [ ProjectFocus.view { headerTitle = "Title", headerSubtitle = "subtitle", contentBody = "hello world", contentDatasetTitle = "Test Dataset" }
             ]
         , div [ class "footer" ]
             [ div []

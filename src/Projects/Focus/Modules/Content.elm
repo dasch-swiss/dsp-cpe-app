@@ -1,19 +1,36 @@
 module Projects.Focus.Modules.Content exposing (..)
 
+import CustomCss.CssColors exposing (CustomColor(..))
 import CustomCss.DaschTailwind as Dtw
 import Html exposing (Html, div, figcaption, figure, h2, h3, img, li, p, span, text, ul)
 import Html.Attributes exposing (alt, class, height, src, width)
 import Html.Attributes.Aria exposing (ariaHidden, role)
 import Svg exposing (defs, path, pattern, rect, svg)
 import Svg.Attributes as SvgAttr exposing (clipRule, d, fill, fillRule, id, patternUnits, viewBox, x, y)
+import Html.Attributes exposing (style)
+import Html exposing (button)
+import Html exposing (th)
 
 
 type alias Model =
-    { text : String }
+    { text : String
+    , isReadMoreOpen : Bool
+    , datasetTitle : String
+    }
 
+
+type Msg
+    = ReadMoreClicked
 
 view : Model -> Html msg
 view model =
+    let
+        readMoreText =
+            if model.isReadMoreOpen then
+                "Read more"
+            else
+                "Read less"
+    in
     div []
         [ div [ class (Dtw.classList [ Dtw.mt_8, Dtw.lg [ Dtw.grid, Dtw.grid_cols_2, Dtw.gap_8 ] ]) ]
             [ div [ class (Dtw.classList [ Dtw.relative, Dtw.lg [ Dtw.row_start_1, Dtw.col_start_2 ] ]) ]
@@ -84,37 +101,51 @@ view model =
                         ]
                     ]
                 ]
-            , div [ class (Dtw.classList [ Dtw.mt_8, Dtw.lg [ Dtw.mt_0 ] ]) ]
-                [ div [ class (Dtw.classList [ Dtw.text_base, Dtw.max_w_prose, Dtw.mx_auto, Dtw.lg [ Dtw.max_w_none ] ]) ]
-                    [ p [ class (Dtw.classList [ Dtw.text_lg, Dtw.text_gray_500 ]) ]
-                        [ text "Sagittis scelerisque nulla cursus in enim consectetur quam. Dictum urna sed consectetur neque tristique pellentesque. Blandit amet, sed aenean erat arcu morbi." ]
-                    ]
-                , div [ class (Dtw.classList [ Dtw.mt_5, Dtw.prose, Dtw.prose_indigo, Dtw.text_gray_500, Dtw.mx_auto, Dtw.lg [ Dtw.max_w_none, Dtw.row_start_1, Dtw.col_start_1 ] ]) ]
-                    [ p []
-                        [ text "Sollicitudin tristique eros erat odio sed vitae, consequat turpis elementum. Lorem nibh vel, eget pretium arcu vitae. Eros eu viverra donec ut volutpat donec laoreet quam urna." ]
-                    , p []
-                        [ text "Bibendum eu nulla feugiat justo, elit adipiscing. Ut tristique sit nisi lorem pulvinar. Urna, laoreet fusce nibh leo. Dictum et et et sit. Faucibus sed non gravida lectus dignissim imperdiet a." ]
-                    , p []
-                        [ text "Dictum magnis risus phasellus vitae quam morbi. Quis lorem lorem arcu, metus, egestas netus cursus. In." ]
-                    , ul
-                        [ role "list"
+            , div [ class (Dtw.classList [ Dtw.lg [ Dtw.mt_0 ] ]) ]
+                [ div [ class (Dtw.classList [ Dtw.prose, Dtw.prose_indigo, Dtw.text_gray_500, Dtw.mx_auto, Dtw.lg [ Dtw.max_w_none, Dtw.row_start_1, Dtw.col_start_1 ] ]) ]
+                    [ div [ class (Dtw.classList [ Dtw.line_clamp_10, Dtw.max_h_96 ])] -- add largest tailwind max height class available because Safari doesn't handle line clamps on divs correctly
+                        [ p []
+                            [ text "Sagittis scelerisque nulla cursus in enim consectetur quam. Dictum urna sed consectetur neque tristique pellentesque. Blandit amet, sed aenean erat arcu morbi." ]
+                        , p []
+                            [ text "Sollicitudin tristique eros erat odio sed vitae, consequat turpis elementum. Lorem nibh vel, eget pretium arcu vitae. Eros eu viverra donec ut volutpat donec laoreet quam urna." ]
+                        , p []
+                            [ text "Bibendum eu nulla feugiat justo, elit adipiscing. Ut tristique sit nisi lorem pulvinar. Urna, laoreet fusce nibh leo. Dictum et et et sit. Faucibus sed non gravida lectus dignissim imperdiet a. Bibendum eu nulla feugiat justo, elit adipiscing. Ut tristique sit nisi lorem pulvinar. " ]
+                        , p []
+                            [ text "Dictum magnis risus phasellus vitae quam morbi. Quis lorem lorem arcu, metus, egestas netus cursus." ]
+                        , p []
+                            [ text """Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus 
+                                        est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, 
+                                        no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+                                        Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, 
+                                        vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod 
+                                        tincidunt ut laoreet dolore magna aliquam erat volutpat.""" ]
                         ]
-                        [ li []
-                            [ text "Quis elit egestas venenatis mattis dignissim." ]
-                        , li []
-                            [ text "Cras cras lobortis vitae vivamus ultricies facilisis tempus." ]
-                        , li []
-                            [ text "Orci in sit morbi dignissim metus diam arcu pretium." ]
-                        ]
-                    , p []
-                        [ text "Rhoncus nisl, libero egestas diam fermentum dui. At quis tincidunt vel ultricies. Vulputate aliquet velit faucibus semper. Pellentesque in venenatis vestibulum consectetur nibh id. In id ut tempus egestas. Enim sit aliquam nec, a. Morbi enim fermentum lacus in. Viverra." ]
-                    , h3 []
-                        [ text "How we helped" ]
-                    , p []
-                        [ text "Tincidunt integer commodo, cursus etiam aliquam neque, et. Consectetur pretium in volutpat, diam. Montes, magna cursus nulla feugiat dignissim id lobortis amet. Laoreet sem est phasellus eu proin massa, lectus. Diam rutrum posuere donec ultricies non morbi. Mi a platea auctor mi." ]
-                    , p []
-                        [ text "Sagittis scelerisque nulla cursus in enim consectetur quam. Dictum urna sed consectetur neque tristique pellentesque. Blandit amet, sed aenean erat arcu morbi." ]
+                        
                     ]
+                , div [ class (Dtw.classList [ Dtw.mb_8, Dtw.prose, Dtw.mx_auto, Dtw.lg [ Dtw.max_w_none, Dtw.row_start_1, Dtw.col_start_1 ] ]) ]
+                    [ button [] [text readMoreText]
+
+                    ]
+                , div [ class (Dtw.classList [ Dtw.prose, Dtw.mx_auto, Dtw.lg [ Dtw.max_w_none, Dtw.row_start_1, Dtw.col_start_1 ] ]) ]
+                    [ div [ class (Dtw.classList [ Dtw.border, Dtw.custom_border Primary, Dtw.rounded_lg ]) ]
+                        [ div [ class (Dtw.classList [ Dtw.p_6 ]) ]
+                            [ p [ class (Dtw.classList [ Dtw.text_sm, Dtw.text_blue_500, Dtw.mt_0, Dtw.mb_0 ]) ] [ text "Dataset" ]
+                            , p [ class (Dtw.classList [ Dtw.text_3xl, Dtw.pt_1, Dtw.mt_0, Dtw.mb_0, Dtw.custom_text Primary, Dtw.font_serif ]) ] [ text model.datasetTitle ]
+                            ]
+                        ]
+
+                    ] 
+                
                 ]
             ]
         ]
+
+
+update : Msg -> Model -> Model
+update msg model =
+    case msg of
+        ReadMoreClicked ->
+            if model.isReadMoreOpen then
+                { isReadMoreOpen = False, text = model.text, datasetTitle = model.datasetTitle }
+            else
+                { isReadMoreOpen = True, text = model.text, datasetTitle = model.datasetTitle }

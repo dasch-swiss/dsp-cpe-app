@@ -4,7 +4,19 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="/assets/css/main.css">
-	<script src="https://cdn.tailwindcss.com?plugins=typography,aspect-ratio"></script>
+	<script src="https://cdn.tailwindcss.com?plugins=typography,aspect-ratio,line-clamp"></script>
+	<script>
+		tailwind.config = {
+		  theme: {
+			extend: {
+			  lineClamp: {
+				10: '10',
+				12: '12',
+			  }
+			}
+		  }
+		}
+	  </script>
 </head>
 
 <body>
