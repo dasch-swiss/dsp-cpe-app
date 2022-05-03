@@ -8,6 +8,7 @@ import Buttons.CircularButton exposing (CircularButtonSize(..))
 import Buttons.LeadingIconButton exposing (LeadingSize(..))
 import Buttons.TrailingIconButton exposing (TrailingSize(..))
 import Footer.Footer as Footer
+import GravsearchViewer.GravsearchCountViewer as GravsearchCountViewer exposing (Count)
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Icon as Icon
@@ -23,12 +24,14 @@ import Tiles.ImageTileGrid as ImageTileGrid
 type alias Model =
     { text : String
     , projectDescriptionModel : ProjectDescription.Model
+    , countviewerModel : GravsearchCountViewer.Model
     , accordionModel : Accordion.Model
     }
 
 
 type Msg
     = ProjDes ProjectDescription.Msg
+    | CountMsg GravsearchCountViewer.Msg
     | AccordionMsg Accordion.Msg
 
 
@@ -36,6 +39,7 @@ initialModel : Model
 initialModel =
     { text = "playground"
     , projectDescriptionModel = ProjectDescription.initialModel
+    , countviewerModel = exampleGravCount
     , accordionModel = Accordion.initialModel
     }
 
@@ -165,11 +169,16 @@ view model =
                 , Footer.view { copyrightText = "© 2022 DaSCH", contactUsText = "Contact Us", contactUsUrl = "mailto:info@dasch.swiss", licensingFilePath = "/assets/images/license-cc-beol.jpg" }
                 ]
             ]
-        
+        , div [ class "tiles" ]
+            [ div [ class "preview tiles" ]
+                [ h3 [ class "label" ] [ text "Gravsearch" ]
+                , GravsearchCountViewer.view model.countviewerModel |> Html.map CountMsg
+                ]
+            ]
         ]
 
 
-update : Msg -> Model -> ( Model, Cmd msg )
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         ProjDes projDesMsg ->
@@ -178,6 +187,18 @@ update msg model =
                     ProjectDescription.update projDesMsg model.projectDescriptionModel
               }
             , Cmd.none
+            )
+
+        CountMsg countMsg ->
+            let
+                ( newModel, newCmd ) =
+                    GravsearchCountViewer.update countMsg model.countviewerModel
+            in
+            ( { model
+                | countviewerModel =
+                    newModel
+              }
+            , Cmd.map CountMsg newCmd
             )
 
         AccordionMsg accordionMsg ->
@@ -201,6 +222,11 @@ subscriptions _ =
 exampleImageTile : ImageTile.Model
 exampleImageTile =
     { src = "https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80", alt = "", buttonAlt = "View details for IMG_4985.HEIC", title = "IMG_4985.HEIC", subtitle = "3.9 MB", url = "project/1" }
+
+
+exampleGravCount : GravsearchCountViewer.Model
+exampleGravCount =
+    { query = "PREFIX knora-api: <http://api.knora.org/ontology/knora-api/v2#>CONSTRUCT {?person knora-api:isMainResource true .} WHERE {?person a knora-api:Resource .}", result = Nothing, error = Nothing }
 
 
 someNavitem : NavItem msg
