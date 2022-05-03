@@ -75,9 +75,11 @@ view model =
                     ]
     in
     button
-        [ type_ "button"
-        , class "circular-button"
-        , class btnSize
-        , class circularButtonClasses
-        ]
+        (model.attrs
+            ++ [ type_ "button"
+               , class "circular-button"
+               , class btnSize
+               , class circularButtonClasses
+               ]
+        )
         [ span [ class icnSize ] [ Icon.getHtml model.icon ] ]
