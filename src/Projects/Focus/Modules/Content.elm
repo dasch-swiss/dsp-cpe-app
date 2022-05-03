@@ -22,6 +22,7 @@ type alias Model =
 
 type Msg
     = ReadMoreClicked
+    | DatasetClicked
 
 view : Model -> Html Msg
 view model =
@@ -34,7 +35,7 @@ view model =
 
         contentLineClampStyles =
             if model.isReadMoreOpen then
-                Dtw.classList [ ]
+                Dtw.classList [] -- remove the classes
             else
                 Dtw.classList [ Dtw.line_clamp_10, Dtw.max_h_96  ] -- add largest tailwind max height class available because Safari doesn't handle line clamps on divs correctly
     in
@@ -129,10 +130,13 @@ view model =
                         ]
                         
                     ]
-                , div [ class (Dtw.classList [ Dtw.mb_8, Dtw.prose, Dtw.mx_auto, Dtw.sm [ Dtw.mt_8 ], Dtw.lg [ Dtw.max_w_none, Dtw.row_start_1, Dtw.col_start_1 ] ]) ]
+                , div [ class (Dtw.classList [ Dtw.mb_8, Dtw.prose, Dtw.mx_auto, Dtw.custom_text Primary, Dtw.sm [ Dtw.mt_8 ], Dtw.lg [ Dtw.max_w_none, Dtw.row_start_1, Dtw.col_start_1 ] ]) ]
                     [ button [ onClick ReadMoreClicked ] [text readMoreText] ]
-                , div [ class (Dtw.classList [ Dtw.prose, Dtw.mx_auto, Dtw.lg [ Dtw.max_w_none, Dtw.row_start_1, Dtw.col_start_1 ] ]) ]
-                    [ div [ class (Dtw.classList [ Dtw.border, Dtw.custom_border Primary, Dtw.rounded_lg ]) ]
+                , div
+                    [ class (Dtw.classList [ Dtw.prose, Dtw.mx_auto, Dtw.lg [ Dtw.max_w_none, Dtw.row_start_1, Dtw.col_start_1 ], Dtw.onHover [ Dtw.cursor_pointer ] ])
+                    , onClick DatasetClicked
+                    ]
+                    [ button [ class (Dtw.classList [ Dtw.text_left, Dtw.border, Dtw.custom_border Primary, Dtw.rounded_lg, Dtw.w_full ]) ]
                         [ div [ class (Dtw.classList [ Dtw.p_6 ]) ]
                             [ p [ class (Dtw.classList [ Dtw.text_sm, Dtw.text_blue_500, Dtw.mt_0, Dtw.mb_0 ]) ] [ text "Dataset" ]
                             , p [ class (Dtw.classList [ Dtw.text_3xl, Dtw.pt_1, Dtw.mt_0, Dtw.mb_0, Dtw.custom_text Primary, Dtw.font_serif ]) ] [ text model.datasetTitle ]
@@ -150,7 +154,7 @@ update : Msg -> Model -> Model
 update msg model =
     case msg of
         ReadMoreClicked ->
-            if model.isReadMoreOpen then
-                { isReadMoreOpen = False, text = model.text, datasetTitle = model.datasetTitle }
-            else
-                { isReadMoreOpen = True, text = model.text, datasetTitle = model.datasetTitle }
+            { model | isReadMoreOpen = not model.isReadMoreOpen }
+
+        DatasetClicked -> -- do nothing currently
+            { model | text = model.text }

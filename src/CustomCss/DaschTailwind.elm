@@ -1037,6 +1037,11 @@ text_indigo_700 =
     "text-indigo-700"
 
 
+text_left : String
+text_left =
+    "text-left"
+
+
 text_lg : String
 text_lg =
     "text-lg"
