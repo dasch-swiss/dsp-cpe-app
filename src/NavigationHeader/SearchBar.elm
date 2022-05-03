@@ -1,12 +1,10 @@
 module NavigationHeader.SearchBar exposing (..)
 
-import Buttons.Button exposing (circularButton)
 import Buttons.CircularButton exposing (CircularButtonSize(..))
 import CustomCss.CssColors exposing (CustomColor(..))
 import CustomCss.DaschTailwind as Dtw exposing (classList)
 import Html exposing (Html, div, input)
 import Html.Attributes as Attr exposing (class, id)
-import Icon
 
 
 type alias Model =
@@ -23,12 +21,7 @@ searchString =
 searchBar : Html msg
 searchBar =
     div [ id "outer-search-ct", class outerSearchCtStyle ]
-        [ circularButton CircularNormal Icon.ChevronRight []
-        , div []
-            [ input [ Attr.type_ "Text", Attr.placeholder "Search", class searchBarStyle ] []
-            ]
-        , circularButton CircularNormal Icon.Search []
-        ]
+        [ input [ Attr.type_ "Text", Attr.placeholder "Search", class searchBarStyle ] [] ]
 
 
 
