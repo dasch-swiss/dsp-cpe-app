@@ -7,19 +7,14 @@ import Buttons.Button as Button exposing (primaryButton, secondaryButton, whiteB
 import Buttons.CircularButton exposing (CircularButtonSize(..))
 import Buttons.LeadingIconButton exposing (LeadingSize(..))
 import Buttons.TrailingIconButton exposing (TrailingSize(..))
-import Html exposing (div, h3, text)
-import Html.Attributes exposing (class)
-import Icon as Icon
-import NavigationHeader.Model as H
-import NavigationHeader.Update as HU
-import NavigationHeader.View as Header exposing (..)
 import Footer.Footer as Footer
 import GravsearchViewer.GravsearchCountViewer as GravsearchCountViewer exposing (Count)
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Icon as Icon
-import NavigationHeader.HeaderModule exposing (cpeHeader)
-import NavigationHeader.Navitem exposing (NavItem)
+import NavigationHeader.Model as H
+import NavigationHeader.Update as HU
+import NavigationHeader.View as Header exposing (..)
 import Text.Accordion as Accordion
 import Text.ProjectDescription as ProjectDescription
 import Tiles.ImageTile as ImageTile
@@ -192,6 +187,10 @@ update msg model =
             ( { model
                 | headerModel =
                     HU.update headerMsg model.headerModel
+              }
+            , Cmd.none
+            )
+
         CountMsg countMsg ->
             let
                 ( newModel, newCmd ) =
