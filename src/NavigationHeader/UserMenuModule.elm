@@ -5,7 +5,9 @@ import Avatars.CircularAvatar exposing (CircularAvatarSize(..))
 import CustomCss.DaschTailwind as Dtw exposing (classList)
 import Html exposing (Html, div)
 import Html.Attributes exposing (class, id)
+import Html.Events exposing (onClick)
 import NavigationHeader.HeaderButtons exposing (signInButton, signUpButton)
+import NavigationHeader.Model exposing (Msg(..))
 
 
 type alias User =
@@ -14,7 +16,7 @@ type alias User =
     }
 
 
-userMenu : Maybe User -> Html msg
+userMenu : Maybe User -> Html Msg
 userMenu user =
     case user of
         Nothing ->
@@ -24,31 +26,39 @@ userMenu user =
             userBar u
 
 
-userBar : User -> Html msg
+userBar : User -> Html Msg
 userBar user =
     div [ id "user-cntr", class Dtw.flex ]
-        [ userAvatar user
-        , div [] (signedInButtons user)
+        [ div [] [ userAvatar user ]
+        , div [] [ signedInButton ]
         ]
 
 
-userAvatar : User -> Html msg
+userAvatar : User -> Html Msg
 userAvatar user =
     div []
         [ circular CircularAvatarNormal user.uImg "UserAvatar" []
         ]
 
 
-signedInButtons : User -> List (Html msg)
-signedInButtons user =
-    [ signInButton [] "sign out" ]
+
+--signedInButtons : NavigationHeader.Model.User -> List (Html (LogInOutMsg user))
 
 
-signedOutButtons : Html msg
+signedInButton : Html Msg
+signedInButton =
+    signInButton [ onClick LogOutMsg ] "sign out"
+
+
+
+--signedOutButtons : Maybe User -> Html msg
+
+
+signedOutButtons : Html Msg
 signedOutButtons =
     div []
-        [ signUpButton [] "sign up"
-        , signInButton [] "sign in"
+        [ signUpButton [ onClick SignUpRequestMsg ] "sign up"
+        , signInButton [ onClick SignInRequestMsg ] "sign in"
         ]
 
 
