@@ -28,8 +28,8 @@ type alias NavItem =
 
 
 type alias User =
-    { uId : String
-    , uImg : String
+    { id : String
+    , img : String
     }
 
 
