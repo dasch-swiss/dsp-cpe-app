@@ -85,8 +85,8 @@ iconButtonDivider attr icon text =
 
 
 header : String -> Maybe User -> NavBar msg -> Bool -> Html.Html msg
-header s u n b =
-    Header.view s u n b
+header logo user bar showSb =
+    Header.view logo user bar showSb
 
 
 projectDescription : Bool -> String -> Html.Html ProjectDescription.Msg
