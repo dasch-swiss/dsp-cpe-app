@@ -116,7 +116,7 @@ flexRightElementsCntrStyle =
 
 searchBarStyle : Bool -> String
 searchBarStyle showSb =
-    if showSb == True then
+    if showSb then
         [ Dtw.flex_1
         , Dtw.flex
         , Dtw.justify_center
@@ -141,7 +141,7 @@ mobileMenuCntrStyle =
 
 showButton : Bool -> String
 showButton show =
-    if show == True then
+    if show then
         Dtw.block
 
     else
