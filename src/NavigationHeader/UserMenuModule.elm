@@ -41,17 +41,9 @@ userAvatar user =
         ]
 
 
-
---signedInButtons : NavigationHeader.Model.User -> List (Html (LogInOutMsg user))
-
-
 signedInButton : Html NavHeaderMsg
 signedInButton =
     signInButton [ onClick LogOutMsg ] "sign out"
-
-
-
---signedOutButtons : Maybe User -> Html msg
 
 
 signedOutButtons : Html NavHeaderMsg
