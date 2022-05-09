@@ -21,7 +21,7 @@ type alias HeaderModel =
 type alias NavItem =
     { attrs : List (Attribute NavHeaderMsg) -- onClick, disable and all other events as well as custom attributes
     , text : String
-    , href : String -- set to "#" if you like to run sth via onClick
+    , href : String
     , cmd : Cmd NavHeaderMsg
     , isActive : Bool
     }
