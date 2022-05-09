@@ -13,11 +13,6 @@ type alias Model =
     }
 
 
-searchString : String
-searchString =
-    ""
-
-
 searchBar : Html msg
 searchBar =
     div [ id "outer-search-ct", class outerSearchCtStyle ]
