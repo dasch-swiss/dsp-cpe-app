@@ -43,7 +43,7 @@ view header =
                     ]
 
                 -- right side elements: search bar, buttons.
-                , div [ id "user-menue-cntr" ] [ userMenu header.user ]
+                , div [ id "user-menu-cntr" ] [ userMenu header.user ]
                 ]
             , div [ id "mobile-view-cntr", class mobileMenuButtonCntrStyle ] [] -- Container for mobile menu. Hidden if screen reaches medium size
             ]
