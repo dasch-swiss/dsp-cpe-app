@@ -1,14 +1,13 @@
 module ButtonsTest exposing (..)
 
-import Buttons.BasicButtons.BasicButton exposing (BasicButtonSize(..))
-import Buttons.Button as Button exposing (primaryButton, secondaryButton, whiteButton)
-import Buttons.CircularButton exposing (CircularButtonSize(..))
+import DspCpeApi as Api exposing (primaryButton, secondaryButton, whiteButton)
 import Expect
 import Html exposing (Html)
-import Icon
+import Shared.SharedTypes exposing (BasicButtonSize(..), CircularButtonSize(..))
 import Test exposing (..)
 import Test.Html.Query as Query
 import Test.Html.Selector
+import Util.Icon as Icon
 
 
 primary : Html msg
@@ -58,7 +57,7 @@ whiteCreated =
 
 circular : Html msg
 circular =
-    Button.circularButton CircularLarge Icon.AcademicCap []
+    Api.circularButton CircularLarge Icon.AcademicCap []
 
 
 circularCreated : Test
