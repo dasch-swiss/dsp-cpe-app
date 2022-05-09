@@ -14,6 +14,7 @@ import Html.Attributes exposing (class)
 import Icon as Icon
 import NavigationHeader.HeaderModule exposing (cpeHeader)
 import NavigationHeader.Navitem exposing (NavItem)
+import Projects.Focus.Focus as ProjectFocus
 import Text.Accordion as Accordion
 import Text.ProjectDescription as ProjectDescription
 import Tiles.ImageTile as ImageTile
@@ -25,13 +26,15 @@ type alias Model =
     , projectDescriptionModel : ProjectDescription.Model
     , countviewerModel : GravsearchCountViewer.Model
     , accordionModel : Accordion.Model
+    , projectFocusModel : ProjectFocus.Model
     }
 
 
 type Msg
-    = ProjDes ProjectDescription.Msg
+    = ProjDesMsg ProjectDescription.Msg
     | CountMsg GravsearchCountViewer.Msg
     | AccordionMsg Accordion.Msg
+    | ProjectFocusMsg ProjectFocus.Msg
 
 
 initialModel : Model
@@ -40,6 +43,7 @@ initialModel =
     , projectDescriptionModel = ProjectDescription.initialModel
     , countviewerModel = exampleGravCount
     , accordionModel = Accordion.initialModel
+    , projectFocusModel = ProjectFocus.initialModel
     }
 
 
@@ -144,7 +148,7 @@ view model =
         , div [ class "text" ]
             [ div [ class "preview project description" ]
                 [ h3 [ class "label" ] [ text "Project description" ]
-                , ProjectDescription.view model.projectDescriptionModel |> Html.map ProjDes
+                , ProjectDescription.view model.projectDescriptionModel |> Html.map ProjDesMsg
                 ]
             ]
         , div [ class "accordion" ]
@@ -158,6 +162,9 @@ view model =
                 [ h3 [ class "label" ] [ text "Image Tile Grid" ]
                 , ImageTileGrid.view { tiles = [ exampleImageTile, exampleImageTile, exampleImageTile, exampleImageTile, exampleImageTile, exampleImageTile ] }
                 ]
+            ]
+        , div [ class "project-focus" ]
+            [ ProjectFocus.view model.projectFocusModel |> Html.map ProjectFocusMsg
             ]
         , div [ class "footer" ]
             [ div []
@@ -177,7 +184,7 @@ view model =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        ProjDes projDesMsg ->
+        ProjDesMsg projDesMsg ->
             ( { model
                 | projectDescriptionModel =
                     ProjectDescription.update projDesMsg model.projectDescriptionModel
@@ -201,6 +208,18 @@ update msg model =
             ( { model
                 | accordionModel =
                     Accordion.update accordionMsg model.accordionModel
+              }
+            , Cmd.none
+            )
+
+        ProjectFocusMsg projectFocusMsg ->
+            let
+                ( newModel, _ ) =
+                    ProjectFocus.update projectFocusMsg model.projectFocusModel
+            in
+            ( { model
+                | projectFocusModel =
+                    newModel
               }
             , Cmd.none
             )

@@ -21,6 +21,8 @@ imageTileClasses =
         [ Dtw.group
         , Dtw.block
         , Dtw.w_full
+        , Dtw.aspect_w_10
+        , Dtw.aspect_h_7
         , Dtw.rounded_lg
         , Dtw.bg_gray_100
         , Dtw.overflow_hidden
@@ -48,7 +50,6 @@ view model =
                             [ Dtw.object_cover
                             , Dtw.pointer_events_none
                             , Dtw.onGroupHover [ Dtw.opacity_75 ]
-                            , Dtw.aspect_arbitrary 10 7
                             ]
                         )
                     ]
