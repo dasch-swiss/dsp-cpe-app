@@ -12,8 +12,8 @@ navBar nb =
 
 
 renderNavItems : List NavItem -> List (Html NavigationHeader.Model.Msg)
-renderNavItems nb =
-    nb
+renderNavItems navItems =
+    navItems
         |> List.map (\n -> div [] [ navItem n ])
 
 
