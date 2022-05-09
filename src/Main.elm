@@ -3,11 +3,11 @@ module Main exposing (..)
 import Browser exposing (Document, UrlRequest)
 import Browser.Navigation as Nav
 import Html exposing (Html, h3, text)
-import Projects.ListProjects as ListProjects exposing (..)
-import Projects.TailwindPlayground as Playground exposing (view)
-import Projects.ViewProject as ViewProject exposing (view)
-import Route exposing (Route)
+import Modules.Projects.ListProjects as ListProjects exposing (..)
+import Modules.Projects.TailwindPlayground as Playground exposing (view)
+import Modules.Projects.ViewProject as ViewProject exposing (view)
 import Url exposing (Url)
+import Util.Route exposing (Route(..))
 
 
 type alias Model =
@@ -45,7 +45,7 @@ init : () -> Url -> Nav.Key -> ( Model, Cmd Msg )
 init _ url navKey =
     let
         model =
-            { route = Route.parseUrl url
+            { route = Util.Route.parseUrl url
             , page = NotFoundPage
             , navKey = navKey
             }
@@ -62,24 +62,24 @@ initCurrentPage ( model, existingCmds ) =
     let
         ( currentPage, mappedPageCmds ) =
             case model.route of
-                Route.NotFound ->
+                NotFound ->
                     ( NotFoundPage, Cmd.none )
 
-                Route.Projects ->
+                Projects ->
                     let
                         ( pageModel, pageCmds ) =
                             ListProjects.init model.navKey
                     in
                     ( ListProjectsPage pageModel, Cmd.map ListProjectsPageMsg pageCmds )
 
-                Route.Project projectId ->
+                Project projectId ->
                     let
                         ( pageModel, pageCmds ) =
                             ViewProject.init projectId model.navKey
                     in
                     ( ViewProjectPage pageModel, Cmd.map ViewProjectPageMsg pageCmds )
 
-                Route.Playground ->
+                Playground ->
                     let
                         ( pageModel, pageCmds ) =
                             Playground.init
@@ -177,7 +177,7 @@ update msg model =
         ( UrlChanged url, _ ) ->
             let
                 newRoute =
-                    Route.parseUrl url
+                    Util.Route.parseUrl url
             in
             ( { model | route = newRoute }, Cmd.none )
                 |> initCurrentPage
