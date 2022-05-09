@@ -123,11 +123,6 @@ align_middle =
     "align-middle"
 
 
-aspect_arbitrary : Int -> Int -> String
-aspect_arbitrary w h =
-    "aspect-[" ++ String.fromInt w ++ "/" ++ String.fromInt h ++ "]"
-
-
 aspect_none : String
 aspect_none =
     "aspect-none"
@@ -136,6 +131,11 @@ aspect_none =
 aspect_h_7 : String
 aspect_h_7 =
     "aspect-h-7"
+
+
+aspect_w_10 : String
+aspect_w_10 =
+    "aspect-w-10"
 
 
 aspect_w_12 : String
@@ -726,6 +726,7 @@ pb_0 =
 pb_2 : String
 pb_2 =
     "pb-2"
+
 
 pb_96 : String
 pb_96 =
