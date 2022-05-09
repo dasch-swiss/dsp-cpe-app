@@ -1,13 +1,13 @@
-module Projects.Focus.Modules.Content exposing (..)
+module Modules.Projects.Focus.Modules.Content exposing (..)
 
-import CustomCss.CssColors exposing (CustomColor(..))
-import CustomCss.DaschTailwind as Dtw
 import Html exposing (Html, button, div, figcaption, figure, img, p, span, text)
 import Html.Attributes exposing (alt, class, height, src, width)
 import Html.Attributes.Aria exposing (ariaHidden)
 import Html.Events exposing (onClick)
 import Svg exposing (defs, path, pattern, rect, svg)
 import Svg.Attributes as SvgAttr exposing (clipRule, d, fill, fillRule, id, patternUnits, viewBox, x, y)
+import Util.CustomCss.CssColors exposing (CustomColor(..))
+import Util.CustomCss.DaschTailwind as Dtw
 
 
 type alias Model =

@@ -11,6 +11,7 @@ import Modules.Footer.Footer as Footer
 import Modules.NavigationHeader.HeaderModule as Header
 import Modules.NavigationHeader.NavbarModule exposing (NavBar)
 import Modules.NavigationHeader.UserMenuModule exposing (User)
+import Modules.Projects.Focus.Focus as Focus
 import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
 import Modules.Tiles.ImageTile as ImageTile
@@ -106,3 +107,8 @@ imageTileGrid tiles =
 footer : String -> String -> String -> String -> Html.Html msg
 footer copyrightText contactUsText contactUsUrl licensingFilePath =
     Footer.view { copyrightText = copyrightText, contactUsText = contactUsText, contactUsUrl = contactUsUrl, licensingFilePath = licensingFilePath }
+
+
+focus : Focus.Model -> Html.Html Focus.Msg
+focus model =
+    Focus.view model

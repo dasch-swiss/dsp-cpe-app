@@ -3,13 +3,13 @@ module Modules.Projects.TailwindPlayground exposing (..)
 import DspCpeApi as Api
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
-
+import Modules.Projects.Focus.Focus as ProjectFocus
 import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
 import Modules.Tiles.ImageTile as ImageTile
 import Shared.SharedTypes exposing (BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), NavItem, TrailingSize(..))
 import Util.Icon as Icon
-import Projects.Focus.Focus as ProjectFocus
+
 
 type alias Model =
     { text : String
@@ -20,7 +20,6 @@ type alias Model =
 
 
 type Msg
-
     = ProjDesMsg ProjectDescription.Msg
     | AccordionMsg Accordion.Msg
     | ProjectFocusMsg ProjectFocus.Msg
@@ -31,7 +30,7 @@ initialModel =
     { text = "playground"
     , projectDescriptionModel = ProjectDescription.initialModel
     , accordionModel = exampleAccordion
-    , projectFocusModel = ProjectFocus.initialModel
+    , projectFocusModel = exampleProjectFocus
     }
 
 
@@ -136,7 +135,7 @@ view model =
         , div [ class "text" ]
             [ div [ class "preview project description" ]
                 [ h3 [ class "label" ] [ text "Project description" ]
-                , Api.projectDescription model.projectDescriptionModel.isOpen model.projectDescriptionModel.text |> Html.map ProjDes
+                , Api.projectDescription model.projectDescriptionModel.isOpen model.projectDescriptionModel.text |> Html.map ProjDesMsg
                 ]
             ]
         , div [ class "accordion" ]
@@ -152,7 +151,7 @@ view model =
                 ]
             ]
         , div [ class "project-focus" ]
-            [ ProjectFocus.view model.projectFocusModel |> Html.map ProjectFocusMsg
+            [ Api.focus model.projectFocusModel |> Html.map ProjectFocusMsg
             ]
         , div [ class "footer" ]
             [ div []
@@ -226,6 +225,27 @@ exampleAccordion =
             vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod 
             tincidunt ut laoreet dolore magna aliquam erat volutpat."""
     , size = Accordion.FullWidth
+    }
+
+
+exampleProjectFocus : ProjectFocus.Model
+exampleProjectFocus =
+    { headerModel =
+        { title = "Title"
+        , subtitle = "subtitle"
+        }
+    , contentModel =
+        { contentBody = """Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus 
+                    est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, 
+                    no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, 
+                    vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod 
+                    tincidunt ut laoreet dolore magna aliquam erat volutpat."""
+        , imagePath = "https://images.unsplash.com/photo-1546913199-55e06682967e?ixlib=rb-1.2.1&auto=format&fit=crop&crop=focalpoint&fp-x=.735&fp-y=.55&w=1184&h=1376&q=80"
+        , imageAltText = "Whitney leaning against a railing on a downtown street"
+        , isReadMoreOpen = False
+        , datasetTitle = "Test Dataset"
+        }
     }
 
 
