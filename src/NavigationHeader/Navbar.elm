@@ -6,10 +6,6 @@ import Html.Attributes exposing (class, href)
 import NavigationHeader.Model exposing (Msg, NavItem)
 
 
-type alias NavBar =
-    List NavItem
-
-
 navBar : List NavItem -> Html NavigationHeader.Model.Msg
 navBar nb =
     div [ class navBarInnerStyle ] (renderNavItems nb)
