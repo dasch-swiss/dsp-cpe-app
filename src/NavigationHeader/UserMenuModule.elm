@@ -7,7 +7,7 @@ import Html exposing (Html, div)
 import Html.Attributes exposing (class, id)
 import Html.Events exposing (onClick)
 import NavigationHeader.HeaderButtons exposing (signInButton, signUpButton)
-import NavigationHeader.Model exposing (Msg(..))
+import NavigationHeader.Model exposing (NavHeaderMsg(..))
 
 
 type alias User =
@@ -16,7 +16,7 @@ type alias User =
     }
 
 
-userMenu : Maybe User -> Html Msg
+userMenu : Maybe User -> Html NavHeaderMsg
 userMenu user =
     case user of
         Nothing ->
@@ -26,7 +26,7 @@ userMenu user =
             userBar u
 
 
-userBar : User -> Html Msg
+userBar : User -> Html NavHeaderMsg
 userBar user =
     div [ id "user-cntr", class Dtw.flex ]
         [ div [] [ userAvatar user ]
@@ -34,7 +34,7 @@ userBar user =
         ]
 
 
-userAvatar : User -> Html Msg
+userAvatar : User -> Html NavHeaderMsg
 userAvatar user =
     div []
         [ circular CircularAvatarNormal user.uImg "UserAvatar" []
@@ -45,7 +45,7 @@ userAvatar user =
 --signedInButtons : NavigationHeader.Model.User -> List (Html (LogInOutMsg user))
 
 
-signedInButton : Html Msg
+signedInButton : Html NavHeaderMsg
 signedInButton =
     signInButton [ onClick LogOutMsg ] "sign out"
 
@@ -54,7 +54,7 @@ signedInButton =
 --signedOutButtons : Maybe User -> Html msg
 
 
-signedOutButtons : Html Msg
+signedOutButtons : Html NavHeaderMsg
 signedOutButtons =
     div []
         [ signUpButton [ onClick SignUpRequestMsg ] "sign up"

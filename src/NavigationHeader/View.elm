@@ -7,13 +7,13 @@ import Html exposing (div, img, nav)
 import Html.Attributes exposing (class, id, src)
 import Html.Events exposing (onClick)
 import Icon
-import NavigationHeader.Model exposing (HeaderModel, Msg(..))
+import NavigationHeader.Model exposing (HeaderModel, NavHeaderMsg(..))
 import NavigationHeader.Navbar exposing (navBar)
 import NavigationHeader.SearchBar exposing (searchBar)
 import NavigationHeader.UserMenuModule exposing (userMenu)
 
 
-view : HeaderModel -> Html.Html Msg
+view : HeaderModel -> Html.Html NavHeaderMsg
 view header =
     nav [ id "nav-header-bg-cntr", class navHeaderBgCntrStyle ]
         [ div [ id "standard-view-cntr", class navHeaderCntrStyle ]

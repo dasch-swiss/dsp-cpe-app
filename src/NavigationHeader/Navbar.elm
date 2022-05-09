@@ -3,21 +3,21 @@ module NavigationHeader.Navbar exposing (..)
 import CustomCss.DaschTailwind as Dtw exposing (classList)
 import Html exposing (Attribute, Html, a, div, nav, text)
 import Html.Attributes exposing (class, href)
-import NavigationHeader.Model exposing (Msg, NavItem)
+import NavigationHeader.Model exposing (NavHeaderMsg, NavItem)
 
 
-navBar : List NavItem -> Html NavigationHeader.Model.Msg
+navBar : List NavItem -> Html NavigationHeader.Model.NavHeaderMsg
 navBar nb =
     div [ class navBarInnerStyle ] (renderNavItems nb)
 
 
-renderNavItems : List NavItem -> List (Html NavigationHeader.Model.Msg)
+renderNavItems : List NavItem -> List (Html NavigationHeader.Model.NavHeaderMsg)
 renderNavItems navItems =
     navItems
         |> List.map (\n -> div [] [ navItem n ])
 
 
-navItem : NavItem -> Html Msg
+navItem : NavItem -> Html NavHeaderMsg
 navItem n =
     nav []
         [ a

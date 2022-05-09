@@ -3,7 +3,7 @@ module NavigationHeader.Update exposing (..)
 import NavigationHeader.Model exposing (..)
 
 
-update : Msg -> HeaderModel -> HeaderModel
+update : NavHeaderMsg -> HeaderModel -> HeaderModel
 update msg model =
     case msg of
         ToggleSearchBarMsg ->

@@ -3,7 +3,7 @@ module NavigationHeader.Model exposing (..)
 import Html exposing (Attribute)
 
 
-type Msg
+type NavHeaderMsg
     = ToggleSearchBarMsg
     | LogOutMsg
     | SignInRequestMsg
@@ -19,10 +19,10 @@ type alias HeaderModel =
 
 
 type alias NavItem =
-    { attrs : List (Attribute Msg) -- onClick, disable and all other events as well as custom attributes
+    { attrs : List (Attribute NavHeaderMsg) -- onClick, disable and all other events as well as custom attributes
     , text : String
     , href : String -- set to "#" if you like to run sth via onClick
-    , cmd : Cmd Msg
+    , cmd : Cmd NavHeaderMsg
     , isActive : Bool
     }
 

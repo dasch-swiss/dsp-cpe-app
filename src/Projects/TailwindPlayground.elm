@@ -32,7 +32,7 @@ type alias Model =
 
 type Msg
     = ProjDes ProjectDescription.Msg
-    | HeaderModuleMsg H.Msg
+    | HeaderModuleMsg H.NavHeaderMsg
     | CountMsg GravsearchCountViewer.Msg
     | AccordionMsg Accordion.Msg
 
