@@ -3,23 +3,27 @@ module Modules.Projects.TailwindPlayground exposing (..)
 import DspCpeApi as Api
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
+
 import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
 import Modules.Tiles.ImageTile as ImageTile
 import Shared.SharedTypes exposing (BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), NavItem, TrailingSize(..))
 import Util.Icon as Icon
-
+import Projects.Focus.Focus as ProjectFocus
 
 type alias Model =
     { text : String
     , projectDescriptionModel : ProjectDescription.Model
     , accordionModel : Accordion.Model
+    , projectFocusModel : ProjectFocus.Model
     }
 
 
 type Msg
-    = ProjDes ProjectDescription.Msg
+
+    = ProjDesMsg ProjectDescription.Msg
     | AccordionMsg Accordion.Msg
+    | ProjectFocusMsg ProjectFocus.Msg
 
 
 initialModel : Model
@@ -27,6 +31,7 @@ initialModel =
     { text = "playground"
     , projectDescriptionModel = ProjectDescription.initialModel
     , accordionModel = exampleAccordion
+    , projectFocusModel = ProjectFocus.initialModel
     }
 
 
@@ -146,6 +151,9 @@ view model =
                 , Api.imageTileGrid [ exampleImageTile, exampleImageTile, exampleImageTile, exampleImageTile, exampleImageTile, exampleImageTile ]
                 ]
             ]
+        , div [ class "project-focus" ]
+            [ ProjectFocus.view model.projectFocusModel |> Html.map ProjectFocusMsg
+            ]
         , div [ class "footer" ]
             [ div []
                 [ h3 [ class "label" ] [ text "Footer" ]
@@ -158,7 +166,7 @@ view model =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        ProjDes projDesMsg ->
+        ProjDesMsg projDesMsg ->
             ( { model
                 | projectDescriptionModel =
                     ProjectDescription.update projDesMsg model.projectDescriptionModel
@@ -170,6 +178,18 @@ update msg model =
             ( { model
                 | accordionModel =
                     Accordion.update accordionMsg model.accordionModel
+              }
+            , Cmd.none
+            )
+
+        ProjectFocusMsg projectFocusMsg ->
+            let
+                ( newModel, _ ) =
+                    ProjectFocus.update projectFocusMsg model.projectFocusModel
+            in
+            ( { model
+                | projectFocusModel =
+                    newModel
               }
             , Cmd.none
             )

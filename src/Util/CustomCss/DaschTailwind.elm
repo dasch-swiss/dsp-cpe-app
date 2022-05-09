@@ -123,9 +123,24 @@ align_middle =
     "align-middle"
 
 
-aspect_arbitrary : Int -> Int -> String
-aspect_arbitrary w h =
-    "aspect-[" ++ String.fromInt w ++ "/" ++ String.fromInt h ++ "]"
+aspect_none : String
+aspect_none =
+    "aspect-none"
+
+
+aspect_h_7 : String
+aspect_h_7 =
+    "aspect-h-7"
+
+
+aspect_w_10 : String
+aspect_w_10 =
+    "aspect-w-10"
+
+
+aspect_w_12 : String
+aspect_w_12 =
+    "aspect-w-12"
 
 
 bg_gray_50 : String
@@ -136,6 +151,11 @@ bg_gray_50 =
 bg_gray_100 : String
 bg_gray_100 =
     "bg-gray-100"
+
+
+bg_gray_500 : String
+bg_gray_500 =
+    "bg-gray-500"
 
 
 bg_indigo_100 : String
@@ -213,6 +233,21 @@ border_transparent =
     "border-transparent"
 
 
+bottom_0 : String
+bottom_0 =
+    "bottom-0"
+
+
+col_start_1 : String
+col_start_1 =
+    "col-start-1"
+
+
+col_start_2 : String
+col_start_2 =
+    "col-start-2"
+
+
 cursor_pointer : String
 cursor_pointer =
     "cursor-pointer"
@@ -258,9 +293,29 @@ flex_shrink_0 =
     "flex-shrink-0"
 
 
+font_extrabold : String
+font_extrabold =
+    "font-extrabold"
+
+
 font_medium : String
 font_medium =
     "font-medium"
+
+
+font_semibold : String
+font_semibold =
+    "font-semibold"
+
+
+font_serif : String
+font_serif =
+    "font-serif"
+
+
+gap_8 : String
+gap_8 =
+    "gap-8"
 
 
 gap_x_4 : String
@@ -408,6 +463,31 @@ leading_6 =
     "leading-6"
 
 
+leading_8 : String
+leading_8 =
+    "leading-8"
+
+
+left_3_slash_4 : String
+left_3_slash_4 =
+    "left-3/4"
+
+
+line_clamp_6 : String
+line_clamp_6 =
+    "line-clamp-6"
+
+
+line_clamp_10 : String
+line_clamp_10 =
+    "line-clamp-10"
+
+
+line_clamp_12 : String
+line_clamp_12 =
+    "line-clamp-12"
+
+
 m_4 : String
 m_4 =
     "m-4"
@@ -418,9 +498,19 @@ max_h_12 =
     "max-h-12"
 
 
+max_h_96 : String
+max_h_96 =
+    "max-h-96"
+
+
 max_w_lg : String
 max_w_lg =
     "max-w-lg"
+
+
+max_w_none : String
+max_w_none =
+    "max-w-none"
 
 
 max_w_prose : String
@@ -436,6 +526,16 @@ max_w_xs =
 max_w_7xl : String
 max_w_7xl =
     "max-w-7xl"
+
+
+mb_0 : String
+mb_0 =
+    "mb-0"
+
+
+mb_8 : String
+mb_8 =
+    "mb-8"
 
 
 ml_2 : String
@@ -483,6 +583,11 @@ mt_3 =
     "mt-3"
 
 
+mt_5 : String
+mt_5 =
+    "mt-5"
+
+
 mt_6 : String
 mt_6 =
     "mt-6"
@@ -501,6 +606,11 @@ mx_3 =
 mx_auto : String
 mx_auto =
     "mx-auto"
+
+
+my_8 : String
+my_8 =
+    "my-8"
 
 
 neg_ml_1 : String
@@ -526,6 +636,21 @@ neg_mr_0_dot_5 =
 neg_mr_1 : String
 neg_mr_1 =
     "neg-mr-1"
+
+
+neg_mr_20 : String
+neg_mr_20 =
+    "neg-mr-20"
+
+
+neg_mt_20 : String
+neg_mt_20 =
+    "-mt-20"
+
+
+object_center : String
+object_center =
+    "object-center"
 
 
 object_cover : String
@@ -586,6 +711,26 @@ p_2 =
 p_3 : String
 p_3 =
     "p-3"
+
+
+p_6 : String
+p_6 =
+    "p-6"
+
+
+pb_0 : String
+pb_0 =
+    "pb-0"
+
+
+pb_2 : String
+pb_2 =
+    "pb-2"
+
+
+pb_96 : String
+pb_96 =
+    "pb-96"
 
 
 pointer_events_none : String
@@ -713,9 +858,19 @@ py_12 =
     "py-12"
 
 
+py_16 : String
+py_16 =
+    "py-16"
+
+
 relative : String
 relative =
     "relative"
+
+
+right_0 : String
+right_0 =
+    "right-0"
 
 
 ring_2 : String
@@ -763,6 +918,11 @@ rounded_lg =
     "rounded-lg"
 
 
+row_start_1 : String
+row_start_1 =
+    "row-start-1"
+
+
 self_center : String
 self_center =
     "self-center"
@@ -771,6 +931,11 @@ self_center =
 shadow : String
 shadow =
     "shadow"
+
+
+shadow_lg : String
+shadow_lg =
+    "shadow-lg"
 
 
 shadow_sm : String
@@ -798,14 +963,39 @@ space_x_8 =
     "space-x-8"
 
 
+static : String
+static =
+    "static"
+
+
+text_3xl : String
+text_3xl =
+    "text-3xl"
+
+
+text_4xl : String
+text_4xl =
+    "text-4xl"
+
+
 text_base : String
 text_base =
     "text-base"
 
 
+text_blue_500 : String
+text_blue_500 =
+    "text-blue-500"
+
+
 text_blue_700 : String
 text_blue_700 =
     "text-blue-700"
+
+
+text_gray_200 : String
+text_gray_200 =
+    "text-gray-200"
 
 
 text_gray_300 : String
@@ -838,9 +1028,24 @@ text_gray_900 =
     "text-gray-900"
 
 
+text_indigo_600 : String
+text_indigo_600 =
+    "text-indigo-600"
+
+
 text_indigo_700 : String
 text_indigo_700 =
     "text-indigo-700"
+
+
+text_left : String
+text_left =
+    "text-left"
+
+
+text_lg : String
+text_lg =
+    "text-lg"
 
 
 text_sm : String
@@ -858,6 +1063,21 @@ text_xs =
     "text-xs"
 
 
+top_0 : String
+top_0 =
+    "top-0"
+
+
+tracking_tight : String
+tracking_tight =
+    "tracking-tight"
+
+
+tracking_wide : String
+tracking_wide =
+    "tracking-wide"
+
+
 transition : String
 transition =
     "transition"
@@ -871,6 +1091,11 @@ transition_all =
 truncate : String
 truncate =
     "truncate"
+
+
+uppercase : String
+uppercase =
+    "uppercase"
 
 
 w_4 : String
@@ -921,3 +1146,8 @@ w_14 =
 w_full : String
 w_full =
     "w-full"
+
+
+w_screen : String
+w_screen =
+    "w-screen"
