@@ -47,7 +47,7 @@ initialModel =
     }
 
 
-init : ( Model, Cmd msg )
+init : ( Model, Cmd Msg )
 init =
     ( initialModel, Cmd.none )
 
