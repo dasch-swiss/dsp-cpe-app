@@ -12,9 +12,7 @@ import GravsearchViewer.GravsearchCountViewer as GravsearchCountViewer
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Icon as Icon
-import NavigationHeader.Model as H
-import NavigationHeader.Update as HU
-import NavigationHeader.View as Header exposing (..)
+import NavigationHeader.NavigationHeader as Header exposing (..)
 import Text.Accordion as Accordion
 import Text.ProjectDescription as ProjectDescription
 import Tiles.ImageTile as ImageTile
@@ -24,7 +22,7 @@ import Tiles.ImageTileGrid as ImageTileGrid
 type alias Model =
     { text : String
     , projectDescriptionModel : ProjectDescription.Model
-    , headerModel : H.HeaderModel
+    , headerModel : Header.HeaderModel
     , countviewerModel : GravsearchCountViewer.Model
     , accordionModel : Accordion.Model
     }
@@ -32,7 +30,7 @@ type alias Model =
 
 type Msg
     = ProjDes ProjectDescription.Msg
-    | HeaderModuleMsg H.NavHeaderMsg
+    | HeaderModuleMsg Header.NavHeaderMsg
     | CountMsg GravsearchCountViewer.Msg
     | AccordionMsg Accordion.Msg
 
@@ -187,7 +185,7 @@ update msg model =
         HeaderModuleMsg headerMsg ->
             ( { model
                 | headerModel =
-                    HU.update headerMsg model.headerModel
+                    Header.update headerMsg model.headerModel
               }
             , Cmd.none
             )
@@ -222,7 +220,7 @@ subscriptions _ =
 -- Example data ...
 
 
-header : H.HeaderModel
+header : Header.HeaderModel
 header =
     { logo = "https://beol.dasch.swiss/assets/images/beol-logo.png"
     , user = someUser
@@ -241,12 +239,12 @@ exampleGravCount =
     { query = "PREFIX knora-api: <http://api.knora.org/ontology/knora-api/v2#>CONSTRUCT {?person knora-api:isMainResource true .} WHERE {?person a knora-api:Resource .}", result = Nothing, error = Nothing }
 
 
-someNavitem : H.NavItem
+someNavitem : Header.NavItem
 someNavitem =
     { attrs = [], text = "Dasch", href = "https://www.dasch.swiss", cmd = Cmd.none, isActive = True }
 
 
-otherNavitem : H.NavItem
+otherNavitem : Header.NavItem
 otherNavitem =
     { attrs = [], text = "Beol", href = "project/1", cmd = Cmd.none, isActive = False }
 
