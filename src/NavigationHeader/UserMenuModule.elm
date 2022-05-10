@@ -11,8 +11,8 @@ import NavigationHeader.Model exposing (NavHeaderMsg(..))
 
 
 type alias User =
-    { uId : String
-    , uImg : String
+    { id : String
+    , img : String
     }
 
 
@@ -37,7 +37,7 @@ userBar user =
 userAvatar : User -> Html NavHeaderMsg
 userAvatar user =
     div []
-        [ circular CircularAvatarNormal user.uImg "UserAvatar" []
+        [ circular CircularAvatarNormal user.img "UserAvatar" []
         ]
 
 
