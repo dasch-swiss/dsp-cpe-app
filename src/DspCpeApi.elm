@@ -8,9 +8,7 @@ import Modules.Buttons.LeadingIconButton as LeadingIconButton
 import Modules.Buttons.TrailingIconButton as TrailingIconButton
 import Modules.Dividers.IconButtonDivider as IconButtonDivider
 import Modules.Footer.Footer as Footer
-import Modules.NavigationHeader.HeaderModule as Header
-import Modules.NavigationHeader.NavbarModule exposing (NavBar)
-import Modules.NavigationHeader.UserMenuModule exposing (User)
+import Modules.NavigationHeader.NavigationHeader as Header
 import Modules.Projects.Focus.Focus as Focus
 import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
@@ -84,9 +82,13 @@ iconButtonDivider attr icon text =
     IconButtonDivider.view { buttonAttrs = attr, icon = icon, text = text }
 
 
-header : String -> Maybe User -> NavBar msg -> Bool -> Html.Html msg
-header logo user bar showSb =
-    Header.view logo user bar showSb
+
+--header : String -> Maybe Header.User -> NavBar msg -> Bool -> Html.Html msg
+
+
+header : Header.HeaderModel -> Html Header.Msg
+header headerModel =
+    Header.view headerModel
 
 
 projectDescription : Bool -> String -> Html.Html ProjectDescription.Msg

@@ -3,6 +3,7 @@ module Modules.Projects.TailwindPlayground exposing (..)
 import DspCpeApi as Api
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
+import Modules.NavigationHeader.NavigationHeader as Header
 import Modules.Projects.Focus.Focus as ProjectFocus
 import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
@@ -16,6 +17,7 @@ type alias Model =
     , projectDescriptionModel : ProjectDescription.Model
     , accordionModel : Accordion.Model
     , projectFocusModel : ProjectFocus.Model
+    , headerModel : Header.HeaderModel
     }
 
 
@@ -23,6 +25,7 @@ type Msg
     = ProjDesMsg ProjectDescription.Msg
     | AccordionMsg Accordion.Msg
     | ProjectFocusMsg ProjectFocus.Msg
+    | NavigationHeaderMsg Header.Msg
 
 
 initialModel : Model
@@ -31,6 +34,7 @@ initialModel =
     , projectDescriptionModel = ProjectDescription.initialModel
     , accordionModel = exampleAccordion
     , projectFocusModel = exampleProjectFocus
+    , headerModel = exampleHeader
     }
 
 
@@ -122,15 +126,11 @@ view model =
                     []
                 ]
             ]
-        , div [ class "label" ]
-            [ h3 [] [ text "Header module signed in" ]
-            , div [] []
-            , div [] [ Api.header "https://beol.dasch.swiss/assets/images/beol-logo.png" fakeUser [ someNavitem, otherNavitem ] True ]
-            ]
-        , div [ class "label" ]
-            [ h3 [] [ text "Header module signed out" ]
-            , div [] []
-            , div [] [ Api.header "https://beol.dasch.swiss/assets/images/beol-logo.png" Nothing [ someNavitem, otherNavitem ] True ]
+        , div [ class "text" ]
+            [ div [ class "Header" ]
+                [ h3 [ class "label" ] [ text "Header" ]
+                , Api.header model.headerModel |> Html.map NavigationHeaderMsg
+                ]
             ]
         , div [ class "text" ]
             [ div [ class "preview project description" ]
@@ -177,6 +177,14 @@ update msg model =
             ( { model
                 | accordionModel =
                     Accordion.update accordionMsg model.accordionModel
+              }
+            , Cmd.none
+            )
+
+        NavigationHeaderMsg headerMsg ->
+            ( { model
+                | headerModel =
+                    Header.update headerMsg model.headerModel
               }
             , Cmd.none
             )
@@ -249,6 +257,11 @@ exampleProjectFocus =
     }
 
 
+exampleHeader : Header.HeaderModel
+exampleHeader =
+    { logo = "", navBar = [ someNavitem, otherNavitem ], user = fakeUser, showSearchBar = False }
+
+
 someNavitem : NavItem msg
 someNavitem =
     { attrs = [], text = "Dasch", href = "https://www.dasch.swiss", cmd = Cmd.none, isActive = True }
@@ -259,9 +272,9 @@ otherNavitem =
     { attrs = [], text = "Beol", href = "project/1", cmd = Cmd.none, isActive = False }
 
 
-fakeUser : Maybe { uId : String, uImg : String }
+fakeUser : Maybe Header.User
 fakeUser =
     Just
-        { uId = "sthId"
-        , uImg = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+        { id = "sthId"
+        , img = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
         }
