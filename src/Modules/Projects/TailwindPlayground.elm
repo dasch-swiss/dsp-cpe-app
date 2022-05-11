@@ -259,7 +259,14 @@ exampleProjectFocus =
 
 exampleHeader : Header.HeaderModel
 exampleHeader =
-    { logo = "", navBar = [ someNavitem, otherNavitem ], user = fakeUser, showSearchBar = False }
+    { logo = exampleLogo, navBar = [ someNavitem, otherNavitem ], user = fakeUser, showSearchBar = False }
+
+
+exampleLogo : Header.Logo
+exampleLogo =
+    { src = "https://beol.dasch.swiss/assets/images/beol-logo.png"
+    , lbl = "Beol Logo"
+    }
 
 
 someNavitem : NavItem msg

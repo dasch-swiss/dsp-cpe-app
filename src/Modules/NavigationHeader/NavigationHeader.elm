@@ -1,7 +1,7 @@
-module Modules.NavigationHeader.NavigationHeader exposing (HeaderModel, Msg, NavItem, User, update, view)
+module Modules.NavigationHeader.NavigationHeader exposing (HeaderModel, Logo, Msg, NavItem, User, update, view)
 
 import Html exposing (Attribute, Html, div, img, input, nav, text)
-import Html.Attributes exposing (class, href, id, placeholder, src, type_)
+import Html.Attributes exposing (alt, class, href, id, placeholder, src, type_)
 import Html.Events exposing (onClick)
 import Modules.Avatars.CircularAvatar as CircularAvatar
 import Modules.Buttons.CircularButton as CircularButton
@@ -19,7 +19,7 @@ type Msg
 
 
 type alias HeaderModel =
-    { logo : String
+    { logo : Logo
     , navBar : List NavItem
     , user : Maybe User
     , showSearchBar : Bool
@@ -45,11 +45,7 @@ view header =
                   div [ id "flex-left-elements-cntr", class Dtw.flex ]
                     [ -- Flex all left side elements
                       div [ id "navBar-logo-cntr", class navBarLogoCntrStyle ]
-                        [ img
-                            [ src header.logo
-                            , class logoStyle
-                            ]
-                            []
+                        [ logo header.logo
                         ]
                     , div [ id "mobile-menu-button-cntr", class mobileMenuButtonCntrStyle ] []
                     , div [ id "navbar-nav-cntr", class navBarCntrStyle ] [ navBar header.navBar ] -- navBar container; unhides on medium screen size  "hidden md:ml-6 md:flex md:space-x-8"
@@ -101,12 +97,6 @@ headerElementsCntrStyle =
 navBarLogoCntrStyle : String
 navBarLogoCntrStyle =
     [ Dtw.flex_shrink_0, Dtw.items_center, Dtw.h_3_dot_5 ]
-        |> classList
-
-
-logoStyle : String
-logoStyle =
-    [ Dtw.inline_block, Dtw.max_h_12 ]
         |> classList
 
 
@@ -426,4 +416,30 @@ searchBarStyle =
     , Dtw.sm [ Dtw.text_sm ]
     , Dtw.custom_bg White
     ]
+        |> classList
+
+
+
+-- logo
+
+
+type alias Logo =
+    { src : String
+    , lbl : String
+    }
+
+
+logo : Logo -> Html.Html msg
+logo l =
+    img
+        [ src l.src
+        , alt l.lbl
+        , class logoStyle
+        ]
+        []
+
+
+logoStyle : String
+logoStyle =
+    [ Dtw.inline_block, Dtw.custom_height_px 64 ]
         |> classList
