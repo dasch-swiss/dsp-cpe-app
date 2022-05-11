@@ -1,18 +1,17 @@
-module NavigationHeader.NavigationHeader exposing (HeaderModel, NavHeaderMsg, NavItem, update, view)
+module Modules.NavigationHeader.NavigationHeader exposing (HeaderModel, Msg, NavItem, User, update, view)
 
-import Avatars.Avatar exposing (circular)
-import Avatars.CircularAvatar exposing (CircularAvatarSize(..))
-import Buttons.Button exposing (circularButton)
-import Buttons.CircularButton exposing (CircularButtonSize(..))
-import CustomCss.CssColors exposing (CustomColor(..))
-import CustomCss.DaschTailwind as Dtw exposing (classList)
 import Html exposing (Attribute, Html, div, img, input, nav, text)
 import Html.Attributes exposing (class, href, id, placeholder, src, type_)
 import Html.Events exposing (onClick)
-import Icon
+import Modules.Avatars.CircularAvatar as CircularAvatar
+import Modules.Buttons.CircularButton as CircularButton
+import Shared.SharedTypes exposing (CircularAvatarSize(..), CircularButtonSize(..))
+import Util.CustomCss.CssColors exposing (CustomColor(..))
+import Util.CustomCss.DaschTailwind as Dtw exposing (classList)
+import Util.Icon exposing (Icon(..))
 
 
-type NavHeaderMsg
+type Msg
     = ToggleSearchBarMsg
     | LogOutMsg
     | SignInRequestMsg
@@ -28,15 +27,15 @@ type alias HeaderModel =
 
 
 type alias NavItem =
-    { attrs : List (Attribute NavHeaderMsg) -- onClick, disable and all other events as well as custom attributes
+    { attrs : List (Attribute Msg) -- onClick, disable and all other events as well as custom attributes
     , text : String
     , href : String
-    , cmd : Cmd NavHeaderMsg
+    , cmd : Cmd Msg
     , isActive : Bool
     }
 
 
-view : HeaderModel -> Html.Html NavHeaderMsg
+view : HeaderModel -> Html.Html Msg
 view header =
     nav [ id "nav-header-bg-cntr", class navHeaderBgCntrStyle ]
         [ div [ id "standard-view-cntr", class navHeaderCntrStyle ]
@@ -57,11 +56,11 @@ view header =
                     ]
                 , div [ id "flex-right-elements-cntr", class flexRightElementsCntrStyle ]
                     [ div [ class (showButton header.showSearchBar) ]
-                        [ circularButton CircularNormal Icon.ChevronRight [ onClick ToggleSearchBarMsg ]
+                        [ CircularButton.view { size = CircularNormal, icon = ChevronRight, attrs = [ onClick ToggleSearchBarMsg ] }
                         ]
                     , div [ id "search-view-cntr", class (searchViewCntrStyle header.showSearchBar) ] [ searchBar ]
                     , div [ class (showButton (not header.showSearchBar)) ]
-                        [ circularButton CircularNormal Icon.Search [ onClick ToggleSearchBarMsg ]
+                        [ CircularButton.view { size = CircularNormal, icon = Search, attrs = [ onClick ToggleSearchBarMsg ] }
                         ]
                     ]
 
@@ -171,7 +170,7 @@ showButton show =
         Dtw.hidden
 
 
-update : NavHeaderMsg -> HeaderModel -> HeaderModel
+update : Msg -> HeaderModel -> HeaderModel
 update msg model =
     case msg of
         ToggleSearchBarMsg ->
@@ -197,7 +196,7 @@ type alias User =
     }
 
 
-userMenu : Maybe User -> Html NavHeaderMsg
+userMenu : Maybe User -> Html Msg
 userMenu user =
     case user of
         Nothing ->
@@ -207,7 +206,7 @@ userMenu user =
             userBar u
 
 
-userBar : User -> Html NavHeaderMsg
+userBar : User -> Html Msg
 userBar user =
     div [ id "user-cntr", class Dtw.flex ]
         [ div [] [ userAvatar user ]
@@ -215,19 +214,19 @@ userBar user =
         ]
 
 
-userAvatar : User -> Html NavHeaderMsg
+userAvatar : User -> Html Msg
 userAvatar user =
     div []
-        [ circular CircularAvatarNormal user.img "UserAvatar" []
+        [ CircularAvatar.view { size = CircularAvatarNormal, img = user.img, alt = "UserAvatar", attrs = [] }
         ]
 
 
-signedInButton : Html NavHeaderMsg
+signedInButton : Html Msg
 signedInButton =
     signInButton [ onClick LogOutMsg ] "sign out"
 
 
-signedOutButtons : Html NavHeaderMsg
+signedOutButtons : Html Msg
 signedOutButtons =
     div []
         [ signUpButton [ onClick SignUpRequestMsg ] "sign up"
@@ -253,18 +252,18 @@ newUser =
 -- navbar / navItems
 
 
-navBar : List NavItem -> Html NavHeaderMsg
+navBar : List NavItem -> Html Msg
 navBar nb =
     div [ class navBarInnerStyle ] (renderNavItems nb)
 
 
-renderNavItems : List NavItem -> List (Html NavHeaderMsg)
+renderNavItems : List NavItem -> List (Html Msg)
 renderNavItems navItems =
     navItems
         |> List.map (\n -> div [] [ navItem n ])
 
 
-navItem : NavItem -> Html NavHeaderMsg
+navItem : NavItem -> Html Msg
 navItem n =
     nav
         (class navItemStyle :: href n.href :: getStyleForState n.isActive :: n.attrs)
