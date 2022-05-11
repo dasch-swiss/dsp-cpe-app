@@ -1,4 +1,4 @@
-module Modules.NavigationHeader.NavigationHeader exposing (HeaderModel, Logo, Msg, NavItem, User, update, view)
+module Modules.NavigationHeader.NavigationHeader exposing (HeaderModel, Logo, Msg(..), NavItem, User, update, view)
 
 import Html exposing (Attribute, Html, div, img, input, nav, text)
 import Html.Attributes exposing (alt, class, href, id, placeholder, src, type_)
@@ -426,16 +426,19 @@ searchBarStyle =
 type alias Logo =
     { src : String
     , lbl : String
+    , attrs : List (Attribute Msg)
     }
 
 
-logo : Logo -> Html.Html msg
+logo : Logo -> Html.Html Msg
 logo l =
     img
-        [ src l.src
-        , alt l.lbl
-        , class logoStyle
-        ]
+        (l.attrs
+            ++ [ src l.src
+               , alt l.lbl
+               , class logoStyle
+               ]
+        )
         []
 
 

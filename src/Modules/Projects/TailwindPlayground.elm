@@ -266,6 +266,7 @@ exampleLogo : Header.Logo
 exampleLogo =
     { src = "https://beol.dasch.swiss/assets/images/beol-logo.png"
     , lbl = "Beol Logo"
+    , attrs = []
     }
 
 
