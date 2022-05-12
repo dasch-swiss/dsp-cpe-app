@@ -6,3 +6,4 @@ repl-temp-*
 dist/
 *.code-workspace
 app.js
+src/.DS_Store
