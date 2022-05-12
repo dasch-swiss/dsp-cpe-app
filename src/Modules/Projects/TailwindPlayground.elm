@@ -8,7 +8,7 @@ import Modules.Projects.Focus.Focus as ProjectFocus
 import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
 import Modules.Tiles.ImageTile as ImageTile
-import Shared.SharedTypes exposing (BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), NavItem, TrailingSize(..))
+import Shared.SharedTypes exposing (BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..))
 import Util.Icon as Icon
 
 
@@ -129,7 +129,7 @@ view model =
         , div [ class "text" ]
             [ div [ class "Header" ]
                 [ h3 [ class "label" ] [ text "Header" ]
-                , Api.header model.headerModel |> Html.map NavigationHeaderMsg
+                , Api.header model.headerModel.logo model.headerModel.navBar model.headerModel.user model.headerModel.showSearchBar |> Html.map NavigationHeaderMsg
                 ]
             ]
         , div [ class "text" ]
@@ -259,30 +259,19 @@ exampleProjectFocus =
 
 exampleHeader : Header.HeaderModel
 exampleHeader =
-    { logo = exampleLogo, navBar = [ someNavitem, otherNavitem ], user = fakeUser, showSearchBar = False }
-
-
-exampleLogo : Header.Logo
-exampleLogo =
-    { src = "https://beol.dasch.swiss/assets/images/beol-logo.png"
+    { logo =     { src = "https://beol.dasch.swiss/assets/images/beol-logo.png"
     , lbl = "Beol Logo"
     , attrs = []
     }
 
-
-someNavitem : NavItem msg
-someNavitem =
-    { attrs = [], text = "Dasch", href = "https://www.dasch.swiss", cmd = Cmd.none, isActive = True }
-
-
-otherNavitem : NavItem msg
-otherNavitem =
-    { attrs = [], text = "Beol", href = "project/1", cmd = Cmd.none, isActive = False }
-
-
-fakeUser : Maybe Header.User
-fakeUser =
-    Just
-        { id = "sthId"
-        , img = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-        }
+    , navBar =
+        [ { attrs = [], text = "Dasch", href = "https://www.dasch.swiss", cmd = Cmd.none, isActive = True }
+        , { attrs = [], text = "Beol", href = "project/1", cmd = Cmd.none, isActive = False }
+        ]
+    , user =
+        Just
+            { id = "sthId"
+            , img = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            }
+    , showSearchBar = False
+    }
