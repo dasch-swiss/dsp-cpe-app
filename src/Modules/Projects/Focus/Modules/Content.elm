@@ -35,14 +35,53 @@ view model =
                 "Read more"
 
         contentLineClampStyles =
+            -- if the content is expanded, remove the css classes
             if model.isReadMoreOpen then
                 Dtw.classList []
-                -- remove the classes
-
+            
+            -- else, add line clamp css
+            -- also add largest tailwind max height class available because Safari doesn't handle line clamps on divs correctly
             else
                 Dtw.classList [ Dtw.line_clamp_10, Dtw.max_h_96 ]
 
-        -- add largest tailwind max height class available because Safari doesn't handle line clamps on divs correctly
+        image =
+            -- if the image path is not an empty string, generate the html for the image
+            if model.imagePath /= "" then
+                div [ class (Dtw.classList [ Dtw.relative, Dtw.text_base, Dtw.mx_auto, Dtw.max_w_prose, Dtw.lg [ Dtw.max_w_none ] ]) ]
+                    [ figure
+                        []
+                        [ div [ class (Dtw.classList [ Dtw.aspect_w_12, Dtw.aspect_h_7, Dtw.lg [ Dtw.aspect_none ] ]) ]
+                            [ img
+                                [ class (Dtw.classList [ Dtw.rounded_lg, Dtw.shadow_lg, Dtw.object_cover, Dtw.object_center ])
+                                , src model.imagePath
+                                , alt model.imageAltText
+                                , width 1184
+                                , height 1376
+                                ]
+                                []
+                            ]
+                        , figcaption [ class (Dtw.classList [ Dtw.mt_3, Dtw.flex, Dtw.text_sm, Dtw.text_gray_500 ]) ]
+                            [ svg
+                                [ SvgAttr.class (Dtw.classList [ Dtw.flex_none, Dtw.w_5, Dtw.h_5, Dtw.text_gray_400 ])
+                                , viewBox "0 0 20 20"
+                                , fill "currentColor"
+                                , ariaHidden True
+                                ]
+                                [ path
+                                    [ fillRule "evenodd"
+                                    , d "M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z"
+                                    , clipRule "evenodd"
+                                    ]
+                                    []
+                                ]
+                            , span [ class Dtw.ml_2 ] [ text "Photograph by Marcus O’Leary" ]
+                            ]
+                        ]
+                    ]
+            
+            -- else don't generate the html for the image
+            else
+                div [][]
     in
     div []
         [ div [ class (Dtw.classList [ Dtw.mt_8, Dtw.lg [ Dtw.grid, Dtw.grid_cols_2, Dtw.gap_8 ] ]) ]
@@ -82,37 +121,7 @@ view model =
                         ]
                         []
                     ]
-                , div [ class (Dtw.classList [ Dtw.relative, Dtw.text_base, Dtw.mx_auto, Dtw.max_w_prose, Dtw.lg [ Dtw.max_w_none ] ]) ]
-                    [ figure
-                        []
-                        [ div [ class (Dtw.classList [ Dtw.aspect_w_12, Dtw.aspect_h_7, Dtw.lg [ Dtw.aspect_none ] ]) ]
-                            [ img
-                                [ class (Dtw.classList [ Dtw.rounded_lg, Dtw.shadow_lg, Dtw.object_cover, Dtw.object_center ])
-                                , src model.imagePath
-                                , alt model.imageAltText
-                                , width 1184
-                                , height 1376
-                                ]
-                                []
-                            ]
-                        , figcaption [ class (Dtw.classList [ Dtw.mt_3, Dtw.flex, Dtw.text_sm, Dtw.text_gray_500 ]) ]
-                            [ svg
-                                [ SvgAttr.class (Dtw.classList [ Dtw.flex_none, Dtw.w_5, Dtw.h_5, Dtw.text_gray_400 ])
-                                , viewBox "0 0 20 20"
-                                , fill "currentColor"
-                                , ariaHidden True
-                                ]
-                                [ path
-                                    [ fillRule "evenodd"
-                                    , d "M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z"
-                                    , clipRule "evenodd"
-                                    ]
-                                    []
-                                ]
-                            , span [ class Dtw.ml_2 ] [ text "Photograph by Marcus O’Leary" ]
-                            ]
-                        ]
-                    ]
+                , image
                 ]
             , div [ class (Dtw.classList [ Dtw.lg [ Dtw.mt_0 ] ]) ]
                 [ div [ class (Dtw.classList [ Dtw.prose, Dtw.prose_indigo, Dtw.text_gray_500, Dtw.mx_auto, Dtw.lg [ Dtw.max_w_none, Dtw.row_start_1, Dtw.col_start_1 ] ]) ]
