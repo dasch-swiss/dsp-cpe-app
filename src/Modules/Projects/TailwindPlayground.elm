@@ -259,7 +259,11 @@ exampleProjectFocus =
 
 exampleHeader : Header.HeaderModel
 exampleHeader =
-    { logo = "https://beol.dasch.swiss/assets/images/beol-logo.png"
+    { logo =     { src = "https://beol.dasch.swiss/assets/images/beol-logo.png"
+    , lbl = "Beol Logo"
+    , attrs = []
+    }
+
     , navBar =
         [ { attrs = [], text = "Dasch", href = "https://www.dasch.swiss", cmd = Cmd.none, isActive = True }
         , { attrs = [], text = "Beol", href = "project/1", cmd = Cmd.none, isActive = False }

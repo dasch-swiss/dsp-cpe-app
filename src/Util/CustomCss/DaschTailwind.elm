@@ -109,6 +109,11 @@ custom_text customColor =
     "text-[" ++ getColor customColor ++ "]"
 
 
+custom_height_px : Int -> String
+custom_height_px px =
+    "h-[" ++ String.fromInt px ++ "px]"
+
+
 
 -- Tailwind classes
 
