@@ -1,18 +1,20 @@
 module Modules.NavigationHeader.NavigationHeader exposing (HeaderModel, Logo, Msg(..), NavItem, User, update, view)
 
-import Html exposing (Attribute, Html, div, img, input, nav, text)
+import Html exposing (Attribute, Html, a, button, div, img, input, nav, span, text)
 import Html.Attributes exposing (alt, class, href, id, placeholder, src, type_)
+import Html.Attributes.Aria exposing (ariaControls, ariaExpanded, ariaHidden)
 import Html.Events exposing (onClick)
 import Modules.Avatars.CircularAvatar as CircularAvatar
 import Modules.Buttons.CircularButton as CircularButton
 import Shared.SharedTypes exposing (CircularAvatarSize(..), CircularButtonSize(..))
 import Util.CustomCss.CssColors exposing (CustomColor(..))
 import Util.CustomCss.DaschTailwind as Dtw exposing (classList)
-import Util.Icon exposing (Icon(..))
+import Util.Icon as Icon exposing (Icon(..))
 
 
 type Msg
     = ToggleSearchBarMsg
+    | ToggleMobileMenuMsg
     | LogOutMsg
     | SignInRequestMsg
     | SignUpRequestMsg
@@ -23,6 +25,7 @@ type alias HeaderModel =
     , navBar : List NavItem
     , user : Maybe User
     , showSearchBar : Bool
+    , showMobileMenu : Bool
     }
 
 
@@ -39,32 +42,31 @@ view : HeaderModel -> Html.Html Msg
 view header =
     nav [ id "nav-header-bg-cntr", class navHeaderBgCntrStyle ]
         [ div [ id "standard-view-cntr", class navHeaderCntrStyle ]
-            [ -- Nav header container for elements & menu entries
-              div [ id "header-elements-cntr", class headerElementsCntrStyle ]
-                [ -- "flex justify-between h-16"; Container for all the header elements
-                  div [ id "flex-left-elements-cntr", class Dtw.flex ]
-                    [ -- Flex all left side elements
-                      div [ id "navBar-logo-cntr", class navBarLogoCntrStyle ]
+            [ div [ id "header-elements-cntr", class headerElementsCntrStyle ]
+                [ div [ id "flex-left-elements-cntr", class Dtw.flex ]
+                    [ div [ id "navBar-logo-cntr", class navBarLogoCntrStyle ]
                         [ logo header.logo
                         ]
-                    , div [ id "mobile-menu-button-cntr", class mobileMenuButtonCntrStyle ] []
-                    , div [ id "navbar-nav-cntr", class navBarCntrStyle ] [ navBar header.navBar ] -- navBar container; unhides on medium screen size  "hidden md:ml-6 md:flex md:space-x-8"
-                    ]
-                , div [ id "flex-right-elements-cntr", class flexRightElementsCntrStyle ]
-                    [ div [ class (showButton header.showSearchBar) ]
-                        [ CircularButton.view { size = CircularNormal, icon = ChevronRight, attrs = [ onClick ToggleSearchBarMsg ] }
+                    , div [ id "mobile-menu-cntr", class (mobileMenuButtonCntrStyle header.showSearchBar) ]
+                        [ mobileMenuButton
                         ]
-                    , div [ id "search-view-cntr", class (searchViewCntrStyle header.showSearchBar) ] [ searchBar ]
-                    , div [ class (showButton (not header.showSearchBar)) ]
-                        [ CircularButton.view { size = CircularNormal, icon = Search, attrs = [ onClick ToggleSearchBarMsg ] }
-                        ]
+                    , div [ id "navbar-nav-cntr", class (navBarCntrStyle header.showSearchBar) ] [ navBar header.navBar ]
                     ]
 
                 -- right side elements: search bar, buttons.
+                , div [ id "flex-right-elements-cntr", class flexRightElementsCntrStyle ]
+                    [ div [ class (display header.showSearchBar) ]
+                        [ CircularButton.view { size = CircularNormal, icon = ChevronRight, attrs = [ onClick ToggleSearchBarMsg ] }
+                        ]
+                    , div [ id "search-view-cntr", class (searchViewCntrStyle header.showSearchBar) ] [ searchBar ]
+                    , div [ class (display (not header.showSearchBar)) ]
+                        [ CircularButton.view { size = CircularNormal, icon = Search, attrs = [ onClick ToggleSearchBarMsg ] }
+                        ]
+                    ]
                 , div [ id "user-menu-cntr" ] [ userMenu header.user ]
                 ]
-            , div [ id "mobile-view-cntr", class mobileMenuButtonCntrStyle ] [] -- Container for mobile menu. Hidden if screen reaches medium size
             ]
+        , mobileMenu header.navBar header.showMobileMenu
         ]
 
 
@@ -80,14 +82,21 @@ navHeaderCntrStyle : String
 navHeaderCntrStyle =
     [ Dtw.max_w_7xl
     , Dtw.mx_auto
-    , Dtw.px_4
+    , Dtw.px_2
+    , Dtw.sm
+        [ Dtw.px_6
+        ]
+    , Dtw.lg
+        [ Dtw.px_8
+        ]
     ]
         |> classList
 
 
 headerElementsCntrStyle : String
 headerElementsCntrStyle =
-    [ Dtw.flex
+    [ Dtw.relative
+    , Dtw.flex
     , Dtw.justify_between
     , Dtw.h_16
     ]
@@ -100,24 +109,18 @@ navBarLogoCntrStyle =
         |> classList
 
 
-mobileMenuButtonCntrStyle : String
-mobileMenuButtonCntrStyle =
-    [ Dtw.neg_ml_2
-    , Dtw.mr_2
-    , Dtw.flex
-    , Dtw.items_center
-    , Dtw.md [ Dtw.hidden ] -- hidden if break point reaches screen size medium
-    ]
-        |> classList
+navBarCntrStyle : Bool -> String
+navBarCntrStyle showSearchBar =
+    if showSearchBar then
+        [ Dtw.hidden ]
+            |> classList
 
-
-navBarCntrStyle : String
-navBarCntrStyle =
-    [ Dtw.hidden
-    , Dtw.md [ Dtw.ml_6, Dtw.flex, Dtw.space_x_8 ]
-    , Dtw.self_center
-    ]
-        |> classList
+    else
+        [ Dtw.hidden -- also hidden if smaller than md
+        , Dtw.md [ Dtw.ml_6, Dtw.flex, Dtw.space_x_8 ]
+        , Dtw.self_center
+        ]
+            |> classList
 
 
 flexRightElementsCntrStyle : String
@@ -141,18 +144,78 @@ searchViewCntrStyle showSb =
         Dtw.hidden
 
 
-mobileMenuCntrStyle : String
-mobileMenuCntrStyle =
-    [ Dtw.md
-        [ -- if breakpoint reaches medium size
-          Dtw.hidden
+
+-- the mobile menu button and the mobile menu items
+
+
+mobileMenuButton : Html Msg
+mobileMenuButton =
+    div []
+        [ button [ id "mobile-menu-button", type_ "button", class mobileMenuButtonStyle, onClick ToggleMobileMenuMsg ]
+            [ span
+                [ id "mobile-menu-icon"
+                , class iconstyle
+                ]
+                [ Icon.getHtml Menu ]
+            ]
+        ]
+
+
+iconstyle : String
+iconstyle =
+    [ Dtw.h_5
+    , Dtw.w_5
+    ]
+        |> Dtw.classList
+
+
+mobileMenuButtonStyle : String
+mobileMenuButtonStyle =
+    [ Dtw.inline_flex
+    , Dtw.items_center
+    , Dtw.justify_center
+    , Dtw.p_2
+    , Dtw.rounded_md
+    , Dtw.text_gray_400
+    , Dtw.onHover
+        [ Dtw.text_gray_500
+        , Dtw.bg_gray_100
+        ]
+    , Dtw.onFocus
+        [ Dtw.outline_none
+        , Dtw.ring_inset
+        , Dtw.ring_indigo_500
         ]
     ]
         |> classList
 
 
-showButton : Bool -> String
-showButton show =
+mobileMenu : List NavItem -> Bool -> Html Msg
+mobileMenu navItems showMenu =
+    if showMenu then
+        div [ id "mobile-menu", class mobileMenuStyle ] (mobileMenuEntries navItems)
+
+    else
+        div [ id "mobile-menu", class Dtw.hidden ] []
+
+
+mobileMenuStyle : String
+mobileMenuStyle =
+    [ Dtw.pt_2
+    , Dtw.pb_3
+    , Dtw.space_y_1
+    ]
+        |> classList
+
+
+mobileMenuEntries : List NavItem -> List (Html Msg)
+mobileMenuEntries navItems =
+    navItems
+        |> List.map (\n -> div [ href n.href ] [ a [] [ text n.text ] ])
+
+
+display : Bool -> String
+display show =
     if show then
         Dtw.block
 
@@ -160,11 +223,41 @@ showButton show =
         Dtw.hidden
 
 
+mobileMenuButtonCntrStyle : Bool -> String
+mobileMenuButtonCntrStyle displayMenu =
+    if displayMenu then
+        -- displayed
+        [ Dtw.neg_ml_2
+        , Dtw.mr_2
+        , Dtw.flex
+        , Dtw.items_center
+        ]
+            |> classList
+
+    else
+        -- still displayed except screen size bigger than md
+        [ Dtw.neg_ml_2
+        , Dtw.mr_2
+        , Dtw.flex
+        , Dtw.items_center
+        , Dtw.md
+            [ Dtw.hidden
+            ]
+        ]
+            |> classList
+
+
 update : Msg -> HeaderModel -> HeaderModel
 update msg model =
     case msg of
         ToggleSearchBarMsg ->
-            { model | showSearchBar = not model.showSearchBar }
+            { model
+                | showSearchBar = not model.showSearchBar
+                , showMobileMenu = False
+            }
+
+        ToggleMobileMenuMsg ->
+            { model | showMobileMenu = not model.showMobileMenu }
 
         SignInRequestMsg ->
             { model | user = newUser }

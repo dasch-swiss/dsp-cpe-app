@@ -129,7 +129,7 @@ view model =
         , div [ class "text" ]
             [ div [ class "Header" ]
                 [ h3 [ class "label" ] [ text "Header" ]
-                , Api.header model.headerModel.logo model.headerModel.navBar model.headerModel.user model.headerModel.showSearchBar |> Html.map NavigationHeaderMsg
+                , Api.header model.headerModel.logo model.headerModel.navBar model.headerModel.user model.headerModel.showSearchBar model.headerModel.showMobileMenu |> Html.map NavigationHeaderMsg
                 ]
             ]
         , div [ class "text" ]
@@ -259,11 +259,11 @@ exampleProjectFocus =
 
 exampleHeader : Header.HeaderModel
 exampleHeader =
-    { logo =     { src = "https://beol.dasch.swiss/assets/images/beol-logo.png"
-    , lbl = "Beol Logo"
-    , attrs = []
-    }
-
+    { logo =
+        { src = "https://beol.dasch.swiss/assets/images/beol-logo.png"
+        , lbl = "Beol Logo"
+        , attrs = []
+        }
     , navBar =
         [ { attrs = [], text = "Dasch", href = "https://www.dasch.swiss", cmd = Cmd.none, isActive = True }
         , { attrs = [], text = "Beol", href = "project/1", cmd = Cmd.none, isActive = False }
@@ -274,4 +274,5 @@ exampleHeader =
             , img = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
             }
     , showSearchBar = False
+    , showMobileMenu = False
     }
