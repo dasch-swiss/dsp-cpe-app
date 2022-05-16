@@ -733,6 +733,11 @@ pb_2 =
     "pb-2"
 
 
+pb_3 : String
+pb_3 =
+    "pb-3"
+
+
 pb_96 : String
 pb_96 =
     "pb-96"
@@ -801,6 +806,11 @@ prose_lg =
 pt_1 : String
 pt_1 =
     "pt-1"
+
+
+pt_2 : String
+pt_2 =
+    "pt-2"
 
 
 px_1 : String
@@ -918,6 +928,11 @@ rounded_full =
     "rounded-full"
 
 
+rounded_md : String
+rounded_md =
+    "rounded-md"
+
+
 rounded_lg : String
 rounded_lg =
     "rounded-lg"
@@ -948,6 +963,11 @@ shadow_sm =
     "shadow-sm"
 
 
+sm_hidden : String
+sm_hidden =
+    "sm-hidden"
+
+
 sr_only : String
 sr_only =
     "sr-only"
@@ -966,6 +986,11 @@ space_x_6 =
 space_x_8 : String
 space_x_8 =
     "space-x-8"
+
+
+space_y_1 : String
+space_y_1 =
+    "space-y-1"
 
 
 static : String
