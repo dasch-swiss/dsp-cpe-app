@@ -40,7 +40,7 @@ type alias NavItem =
 
 view : HeaderModel -> Html.Html Msg
 view header =
-    nav [ id "nav-header-bg-cntr", class navHeaderBgCntrStyle ]
+    div [ id "nav-header-bg-cntr", class navHeaderBgCntrStyle ]
         [ div [ id "standard-view-cntr", class navHeaderCntrStyle ]
             [ div [ id "header-elements-cntr", class headerElementsCntrStyle ]
                 [ div [ id "flex-left-elements-cntr", class Dtw.flex ]
@@ -193,10 +193,10 @@ mobileMenuButtonStyle =
 mobileMenu : List NavItem -> Bool -> Html Msg
 mobileMenu navItems showMenu =
     if showMenu then
-        div [ id "mobile-menu", class mobileMenuStyle ] (mobileMenuEntries navItems)
+        nav [ id "mobile-menu", class mobileMenuStyle ] (mobileMenuEntries navItems)
 
     else
-        div [ id "mobile-menu", class Dtw.hidden ] []
+        nav [ id "mobile-menu", class Dtw.hidden ] []
 
 
 mobileMenuStyle : String
@@ -211,7 +211,7 @@ mobileMenuStyle =
 mobileMenuEntries : List NavItem -> List (Html Msg)
 mobileMenuEntries navItems =
     navItems
-        |> List.map (\n -> div [ href n.href ] [ a [] [ text n.text ] ])
+        |> List.map (\n -> div [] [ a [ href n.href ] [ text n.text ] ])
 
 
 display : Bool -> String
@@ -337,7 +337,7 @@ newUser =
 
 navBar : List NavItem -> Html Msg
 navBar nb =
-    div [ class navBarInnerStyle ] (renderNavItems nb)
+    nav [ class navBarInnerStyle ] (renderNavItems nb)
 
 
 renderNavItems : List NavItem -> List (Html Msg)
@@ -348,7 +348,7 @@ renderNavItems navItems =
 
 navItem : NavItem -> Html Msg
 navItem n =
-    nav
+    a
         (class navItemStyle :: href n.href :: getStyleForState n.isActive :: n.attrs)
         [ text n.text
         ]
