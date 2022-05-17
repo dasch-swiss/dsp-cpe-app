@@ -2,7 +2,6 @@ module Modules.NavigationHeader.NavigationHeader exposing (HeaderModel, Logo, Ms
 
 import Html exposing (Attribute, Html, a, button, div, img, input, nav, span, text)
 import Html.Attributes exposing (alt, class, href, id, placeholder, src, type_)
-import Html.Attributes.Aria exposing (ariaControls, ariaExpanded, ariaHidden)
 import Html.Events exposing (onClick)
 import Modules.Avatars.CircularAvatar as CircularAvatar
 import Modules.Buttons.CircularButton as CircularButton
@@ -43,8 +42,8 @@ view header =
     div [ id "nav-header-bg-cntr", class navHeaderBgCntrStyle ]
         [ div [ id "standard-view-cntr", class navHeaderCntrStyle ]
             [ div [ id "header-elements-cntr", class headerElementsCntrStyle ]
-                [ div [ id "flex-left-elements-cntr", class Dtw.flex ]
-                    [ div [ id "navBar-logo-cntr", class navBarLogoCntrStyle ]
+                [ div [ id "header-left-elements-cntr", class headerLeftElements ]
+                    [ div [ id "navbar-logo-cntr", class navBarLogoCntrStyle ]
                         [ logo header.logo
                         ]
                     , div [ id "mobile-menu-cntr", class (mobileMenuButtonCntrStyle header.showSearchBar) ]
@@ -53,8 +52,8 @@ view header =
                     , div [ id "navbar-nav-cntr", class (navBarCntrStyle header.showSearchBar) ] [ navBar header.navBar ]
                     ]
 
-                -- right side elements: search bar, buttons.
-                , div [ id "flex-right-elements-cntr", class flexRightElementsCntrStyle ]
+                -- search bar
+                , div [ id "searchbar-cntr", class searchBarCntrStyle ]
                     [ div [ class (display header.showSearchBar) ]
                         [ CircularButton.view { size = CircularNormal, icon = ChevronRight, attrs = [ onClick ToggleSearchBarMsg ] }
                         ]
@@ -63,7 +62,7 @@ view header =
                         [ CircularButton.view { size = CircularNormal, icon = Search, attrs = [ onClick ToggleSearchBarMsg ] }
                         ]
                     ]
-                , div [ id "user-menu-cntr" ] [ userMenu header.user ]
+                , div [ id "user-menu-cntr", class userMenuCntrStyle ] [ userMenu header.user ]
                 ]
             ]
         , mobileMenu header.navBar header.showMobileMenu
@@ -80,32 +79,39 @@ navHeaderBgCntrStyle =
 
 navHeaderCntrStyle : String
 navHeaderCntrStyle =
-    [ Dtw.max_w_7xl
-    , Dtw.mx_auto
-    , Dtw.px_2
-    , Dtw.sm
-        [ Dtw.px_6
-        ]
-    , Dtw.lg
-        [ Dtw.px_8
-        ]
+    [ Dtw.justify_between
     ]
         |> classList
 
 
 headerElementsCntrStyle : String
 headerElementsCntrStyle =
-    [ Dtw.relative
-    , Dtw.flex
+    [ Dtw.flex
     , Dtw.justify_between
     , Dtw.h_16
+    , Dtw.items_center
+    ]
+        |> classList
+
+
+
+--flex-1 flex items-center justify-center sm:items-stretch sm:justify-start
+
+
+headerLeftElements : String
+headerLeftElements =
+    [ Dtw.flex
+    , Dtw.items_center
+    , Dtw.justify_start
     ]
         |> classList
 
 
 navBarLogoCntrStyle : String
 navBarLogoCntrStyle =
-    [ Dtw.flex_shrink_0, Dtw.items_center, Dtw.h_3_dot_5 ]
+    [ Dtw.items_center
+    , Dtw.flex_shrink_0
+    ]
         |> classList
 
 
@@ -123,8 +129,8 @@ navBarCntrStyle showSearchBar =
             |> classList
 
 
-flexRightElementsCntrStyle : String
-flexRightElementsCntrStyle =
+searchBarCntrStyle : String
+searchBarCntrStyle =
     [ Dtw.flex, Dtw.items_center, Dtw.space_x_4, Dtw.md [ Dtw.ml_6, Dtw.justify_end ] ]
         |> classList
 
@@ -247,6 +253,13 @@ mobileMenuButtonCntrStyle displayMenu =
             |> classList
 
 
+userMenuCntrStyle : String
+userMenuCntrStyle =
+    [ Dtw.flex_shrink_0
+    ]
+        |> classList
+
+
 update : Msg -> HeaderModel -> HeaderModel
 update msg model =
     case msg of
@@ -291,17 +304,18 @@ userMenu user =
 
 userBar : User -> Html Msg
 userBar user =
-    div [ id "user-cntr", class Dtw.flex ]
-        [ div [] [ userAvatar user ]
+    div [ id "user-cntr", class userBarStyle ]
+        [ div [] [ CircularAvatar.view { size = CircularAvatarNormal, img = user.img, alt = "UserAvatar", attrs = [] } ]
         , div [] [ signedInButton ]
         ]
 
 
-userAvatar : User -> Html Msg
-userAvatar user =
-    div []
-        [ CircularAvatar.view { size = CircularAvatarNormal, img = user.img, alt = "UserAvatar", attrs = [] }
-        ]
+userBarStyle : String
+userBarStyle =
+    [ Dtw.flex
+    , Dtw.flex_shrink_0
+    ]
+        |> classList
 
 
 signedInButton : Html Msg
@@ -315,12 +329,6 @@ signedOutButtons =
         [ signUpButton [ onClick SignUpRequestMsg ] "sign up"
         , signInButton [ onClick SignInRequestMsg ] "sign in"
         ]
-
-
-userDropDownStyle : String
-userDropDownStyle =
-    [ Dtw.hidden ]
-        |> classList
 
 
 newUser : Maybe User
