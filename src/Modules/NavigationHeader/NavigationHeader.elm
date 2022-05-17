@@ -131,7 +131,7 @@ navBarCntrStyle showSearchBar =
 
 searchBarCntrStyle : String
 searchBarCntrStyle =
-    [ Dtw.flex, Dtw.items_center, Dtw.space_x_4, Dtw.md [ Dtw.ml_6, Dtw.justify_end ] ]
+    [ Dtw.flex, Dtw.grow, Dtw.items_center, Dtw.justify_end, Dtw.space_x_4 ]
         |> classList
 
 
@@ -140,6 +140,7 @@ searchViewCntrStyle showSb =
     if showSb then
         [ Dtw.flex_1
         , Dtw.flex
+        , Dtw.grow
         , Dtw.justify_center
         , Dtw.px_2
         , Dtw.justify_between
@@ -492,6 +493,7 @@ searchBar =
 outerSearchCtStyle : String
 outerSearchCtStyle =
     [ Dtw.flex
+    , Dtw.grow
     , Dtw.justify_between
     , Dtw.items_center
     ]
@@ -501,6 +503,7 @@ outerSearchCtStyle =
 searchBarStyle : String
 searchBarStyle =
     [ Dtw.block
+    , Dtw.grow
     , Dtw.w_full
     , Dtw.max_w_lg
     , Dtw.pl_10
@@ -511,10 +514,7 @@ searchBarStyle =
     , Dtw.text_gray_300
     , Dtw.placeholder_gray_400
     , Dtw.outline_none
-    , Dtw.md [ Dtw.rounded ]
-    , Dtw.lg [ Dtw.max_w_xs ]
     , Dtw.onFocus [ Dtw.outline_none, Dtw.ring_white, Dtw.text_gray_900 ]
-    , Dtw.sm [ Dtw.text_sm ]
     , Dtw.custom_bg White
     ]
         |> classList

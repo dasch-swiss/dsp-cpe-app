@@ -348,6 +348,11 @@ grid =
     "grid"
 
 
+grow : String
+grow =
+    "grow"
+
+
 grid_cols_2 : String
 grid_cols_2 =
     "grid-cols-2"
@@ -462,10 +467,10 @@ justify_end : String
 justify_end =
     "justify-end"
 
+
 justify_start : String
 justify_start =
     "justify-start"
-
 
 
 leading_4 : String
