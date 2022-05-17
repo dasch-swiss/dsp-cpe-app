@@ -433,9 +433,19 @@ inset_0 =
     "inset-0"
 
 
+inset_y_0 : String
+inset_y_0 =
+    "inset-y-0"
+
+
 items_center : String
 items_center =
     "items-center"
+
+
+items_stretch : String
+items_stretch =
+    "items-stretch"
 
 
 justify_between : String
@@ -451,6 +461,11 @@ justify_center =
 justify_end : String
 justify_end =
     "justify-end"
+
+justify_start : String
+justify_start =
+    "justify-start"
+
 
 
 leading_4 : String
@@ -471,6 +486,11 @@ leading_6 =
 leading_8 : String
 leading_8 =
     "leading-8"
+
+
+left_0 : String
+left_0 =
+    "left-0"
 
 
 left_3_slash_4 : String
