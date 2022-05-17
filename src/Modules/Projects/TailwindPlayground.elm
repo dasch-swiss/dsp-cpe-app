@@ -265,8 +265,13 @@ exampleHeader =
         , attrs = []
         }
     , navBar =
-        [ { attrs = [], text = "Dasch", href = "https://www.dasch.swiss", cmd = Cmd.none, isActive = True }
-        , { attrs = [], text = "Beol", href = "project/1", cmd = Cmd.none, isActive = False }
+        [ { attrs = [], text = "Goldbach", href = "https://www.dasch.swiss", cmd = Cmd.none, isActive = True }
+        , { attrs = [], text = "Meditationes", href = "project/1", cmd = Cmd.none, isActive = False }
+        , { attrs = [], text = "Condorcet-Turgo", href = "project/1", cmd = Cmd.none, isActive = False }
+        , { attrs = [], text = "Leibniz", href = "project/1", cmd = Cmd.none, isActive = False }
+        , { attrs = [], text = "Newton", href = "project/1", cmd = Cmd.none, isActive = False }
+        , { attrs = [], text = "3D graph", href = "project/1", cmd = Cmd.none, isActive = False }
+        , { attrs = [], text = "Advanced Search", href = "project/1", cmd = Cmd.none, isActive = False }
         ]
     , user =
         Just
