@@ -42,7 +42,7 @@ view header =
     div [ id "nav-header-bg-cntr", class navHeaderBgCntrStyle ]
         [ div [ id "standard-view-cntr", class navHeaderCntrStyle ]
             [ div [ id "header-elements-cntr", class headerElementsCntrStyle ]
-                [ div [ id "header-left-elements-cntr", class headerLeftElements ]
+                [ div [ id "header-left-elements-cntr", class leftSideElementsStyle ]
                     [ div [ id "navbar-logo-cntr", class navBarLogoCntrStyle ]
                         [ logo header.logo
                         ]
@@ -51,18 +51,18 @@ view header =
                         ]
                     , div [ id "navbar-nav-cntr", class (navBarCntrStyle header.showSearchBar) ] [ navBar header.navBar ]
                     ]
-
-                -- search bar
-                , div [ id "searchbar-cntr", class searchBarCntrStyle ]
+                ]
+            , div [ id "header-right-elements-cntr", class rightSideElementsStyle ]
+                [ div [ id "searchbar-cntr", class searchBarCntrStyle ]
                     [ div [ id "search-view-cntr", class (searchViewCntrStyle header.showSearchBar) ] [ searchBar ]
                     , div [ class (display (not header.showSearchBar)) ]
                         [ CircularButton.view { size = CircularNormal, icon = Search, attrs = [ onClick ToggleSearchBarMsg ] }
                         ]
                     ]
-                , div [ id "user-menu-cntr", class userMenuCntrStyle ] [ userMenu header.user ]
+                , userMenu header.user
                 ]
+            , mobileMenu header.navBar header.showMobileMenu
             ]
-        , mobileMenu header.navBar header.showMobileMenu
         ]
 
 
@@ -77,6 +77,7 @@ navHeaderBgCntrStyle =
 navHeaderCntrStyle : String
 navHeaderCntrStyle =
     [ Dtw.justify_between
+    , Dtw.flex
     ]
         |> classList
 
@@ -87,6 +88,7 @@ headerElementsCntrStyle =
     , Dtw.justify_between
     , Dtw.h_16
     , Dtw.items_center
+    , Dtw.gap_x_6
     ]
         |> classList
 
@@ -95,8 +97,8 @@ headerElementsCntrStyle =
 --flex-1 flex items-center justify-center sm:items-stretch sm:justify-start
 
 
-headerLeftElements : String
-headerLeftElements =
+leftSideElementsStyle : String
+leftSideElementsStyle =
     [ Dtw.flex
     , Dtw.items_center
     , Dtw.justify_start
@@ -120,7 +122,7 @@ navBarCntrStyle showSearchBar =
 
     else
         [ Dtw.hidden -- also hidden if smaller than md
-        , Dtw.md [ Dtw.ml_6, Dtw.flex, Dtw.space_x_8 ]
+        , Dtw.md [ Dtw.ml_6, Dtw.flex ]
         , Dtw.self_center
         , Dtw.flex_shrink_0
         ]
@@ -129,7 +131,7 @@ navBarCntrStyle showSearchBar =
 
 searchBarCntrStyle : String
 searchBarCntrStyle =
-    [ Dtw.flex, Dtw.grow, Dtw.items_center, Dtw.space_x_4 ]
+    [ Dtw.flex, Dtw.justify_end, Dtw.grow, Dtw.items_center, Dtw.gap_x_4 ]
         |> classList
 
 
@@ -252,9 +254,12 @@ mobileMenuButtonCntrStyle displayMenu =
             |> classList
 
 
-userMenuCntrStyle : String
-userMenuCntrStyle =
-    [ Dtw.flex_shrink_0
+rightSideElementsStyle : String
+rightSideElementsStyle =
+    [ Dtw.flex
+    , Dtw.flex_shrink_0
+    , Dtw.grow
+    , Dtw.gap_x_4
     ]
         |> classList
 
@@ -313,6 +318,8 @@ userBarStyle : String
 userBarStyle =
     [ Dtw.flex
     , Dtw.flex_shrink_0
+    , Dtw.items_center
+    , Dtw.gap_x_4
     ]
         |> classList
 
@@ -324,10 +331,19 @@ signedInButton =
 
 signedOutButtons : Html Msg
 signedOutButtons =
-    div []
+    div [ id "signed-out-cntr", class signedOutStyle ]
         [ signUpButton [ onClick SignUpRequestMsg ] "sign up"
         , signInButton [ onClick SignInRequestMsg ] "sign in"
         ]
+
+
+signedOutStyle : String
+signedOutStyle =
+    [ Dtw.flex
+    , Dtw.gap_x_4
+    , Dtw.items_center
+    ]
+        |> classList
 
 
 newUser : Maybe User
@@ -372,8 +388,8 @@ getStyleForState isActive =
 
 navBarInnerStyle : String
 navBarInnerStyle =
-    [ Dtw.hidden
-    , Dtw.md [ Dtw.ml_6, Dtw.flex, Dtw.space_x_8 ]
+    [ Dtw.hidden -- hidden if smaller than md
+    , Dtw.md [ Dtw.ml_6, Dtw.flex, Dtw.space_x_4 ]
     ]
         |> classList
 
@@ -495,6 +511,7 @@ outerSearchCtStyle =
     [ Dtw.flex
     , Dtw.grow
     , Dtw.justify_end
+    , Dtw.gap_x_4
     , Dtw.items_center
     ]
         |> classList
