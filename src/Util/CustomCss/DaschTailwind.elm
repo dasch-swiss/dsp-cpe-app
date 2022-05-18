@@ -733,6 +733,11 @@ outline_none =
     "outline-none"
 
 
+overflow_clip : String
+overflow_clip =
+    "object-scale-down"
+
+
 overflow_hidden : String
 overflow_hidden =
     "overflow-hidden"

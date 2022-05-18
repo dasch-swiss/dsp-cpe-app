@@ -6,6 +6,7 @@ import Html.Events exposing (onClick)
 import Modules.Avatars.CircularAvatar as CircularAvatar
 import Modules.Buttons.CircularButton as CircularButton
 import Shared.SharedTypes exposing (CircularAvatarSize(..), CircularButtonSize(..))
+import Svg exposing (svg)
 import Util.CustomCss.CssColors exposing (CustomColor(..))
 import Util.CustomCss.DaschTailwind as Dtw exposing (classList)
 import Util.Icon as Icon exposing (Icon(..))
@@ -502,8 +503,23 @@ searchBar : Html Msg
 searchBar =
     div [ id "outer-search-ct", class outerSearchCtStyle ]
         [ CircularButton.view { size = CircularNormal, icon = ChevronRight, attrs = [ onClick ToggleSearchBarMsg ] }
-        , input [ type_ "Text", placeholder "Search", class searchBarStyle ] []
+        , div [ class Dtw.w_full ]
+            [ div [ class Dtw.relative ]
+                [ div
+                    [ class Dtw.absolute, class Dtw.inset_y_0, class Dtw.left_0, class Dtw.flex, class Dtw.items_center ]
+                    [ div
+                        [ id "search-icon", class searchIconStyle ]
+                        [ Icon.getHtml Search ]
+                    ]
+                , input [ type_ "Text", placeholder "Search", class searchBarStyle ] []
+                ]
+            ]
         ]
+
+
+
+--       <div class="min-w-0 flex-1 md:px-8 lg:px-0 xl:col-span-6">
+--        <div class="flex items-center px-6 py-4 md:max-w-3xl md:mx-auto lg:max-w-none lg:mx-0 xl:px-0">
 
 
 outerSearchCtStyle : String
@@ -534,6 +550,12 @@ searchBarStyle =
     , Dtw.onFocus [ Dtw.outline_none, Dtw.ring_white, Dtw.text_gray_900 ]
     , Dtw.custom_bg White
     ]
+        |> classList
+
+
+searchIconStyle : String
+searchIconStyle =
+    [ Dtw.flex, Dtw.items_center, Dtw.pointer_events_none, Dtw.h_5, Dtw.w_5, Dtw.text_gray_400, Dtw.m_4 ]
         |> classList
 
 
