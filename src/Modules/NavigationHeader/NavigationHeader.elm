@@ -125,6 +125,7 @@ navBarCntrStyle showSearchBar =
         [ Dtw.hidden -- also hidden if smaller than md
         , Dtw.md [ Dtw.ml_6, Dtw.flex, Dtw.space_x_8 ]
         , Dtw.self_center
+        , Dtw.flex_shrink_0
         ]
             |> classList
 
