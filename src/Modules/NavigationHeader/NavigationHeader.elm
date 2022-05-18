@@ -54,10 +54,7 @@ view header =
 
                 -- search bar
                 , div [ id "searchbar-cntr", class searchBarCntrStyle ]
-                    [ div [ class (display header.showSearchBar) ]
-                        [ CircularButton.view { size = CircularNormal, icon = ChevronRight, attrs = [ onClick ToggleSearchBarMsg ] }
-                        ]
-                    , div [ id "search-view-cntr", class (searchViewCntrStyle header.showSearchBar) ] [ searchBar ]
+                    [ div [ id "search-view-cntr", class (searchViewCntrStyle header.showSearchBar) ] [ searchBar ]
                     , div [ class (display (not header.showSearchBar)) ]
                         [ CircularButton.view { size = CircularNormal, icon = Search, attrs = [ onClick ToggleSearchBarMsg ] }
                         ]
@@ -132,7 +129,7 @@ navBarCntrStyle showSearchBar =
 
 searchBarCntrStyle : String
 searchBarCntrStyle =
-    [ Dtw.flex, Dtw.grow, Dtw.items_center, Dtw.justify_end, Dtw.space_x_4 ]
+    [ Dtw.flex, Dtw.grow, Dtw.items_center, Dtw.space_x_4 ]
         |> classList
 
 
@@ -485,17 +482,19 @@ signInStyle =
 -- searchBar
 
 
-searchBar : Html msg
+searchBar : Html Msg
 searchBar =
     div [ id "outer-search-ct", class outerSearchCtStyle ]
-        [ input [ type_ "Text", placeholder "Search", class searchBarStyle ] [] ]
+        [ CircularButton.view { size = CircularNormal, icon = ChevronRight, attrs = [ onClick ToggleSearchBarMsg ] }
+        , input [ type_ "Text", placeholder "Search", class searchBarStyle ] []
+        ]
 
 
 outerSearchCtStyle : String
 outerSearchCtStyle =
     [ Dtw.flex
     , Dtw.grow
-    , Dtw.justify_between
+    , Dtw.justify_end
     , Dtw.items_center
     ]
         |> classList
