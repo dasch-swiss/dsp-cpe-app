@@ -562,5 +562,5 @@ logo l =
 
 logoStyle : String
 logoStyle =
-    [ Dtw.inline_block, Dtw.custom_height_px 64 ]
+    [ Dtw.inline_block, Dtw.max_h_14, Dtw.m_2 ]
         |> classList

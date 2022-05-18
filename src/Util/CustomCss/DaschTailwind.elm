@@ -318,6 +318,11 @@ font_serif =
     "font-serif"
 
 
+gap_2_dot_5 : String
+gap_2_dot_5 =
+    "gap-2.5"
+
+
 gap_8 : String
 gap_8 =
     "gap-8"
@@ -518,9 +523,19 @@ line_clamp_12 =
     "line-clamp-12"
 
 
+m_2 : String
+m_2 =
+    "m-2"
+
+
 m_4 : String
 m_4 =
     "m-4"
+
+
+max_h_14 : String
+max_h_14 =
+    "max-h-14"
 
 
 max_h_12 : String
@@ -736,6 +751,11 @@ p_1_dot_5 =
 p_2 : String
 p_2 =
     "p-2"
+
+
+p_2_dot_5 : String
+p_2_dot_5 =
+    "p-2.5"
 
 
 p_3 : String
