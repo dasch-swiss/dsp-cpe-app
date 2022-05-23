@@ -129,7 +129,7 @@ view model =
         , div [ class "text" ]
             [ div [ class "Header" ]
                 [ h3 [ class "label" ] [ text "Header" ]
-                , Api.header model.headerModel.logo model.headerModel.navBar model.headerModel.user model.headerModel.showSearchBar model.headerModel.showMobileMenu |> Html.map NavigationHeaderMsg
+                , Api.header model.headerModel.logo model.headerModel.navBar model.headerModel.showSearchBar model.headerModel.user model.headerModel.showMobileMenu |> Html.map NavigationHeaderMsg
                 ]
             ]
         , div [ class "text" ]
