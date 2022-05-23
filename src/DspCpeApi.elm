@@ -84,7 +84,7 @@ iconButtonDivider attr icon text =
 
 header : Header.Logo -> List Header.NavItem -> Bool -> Maybe Header.User -> Bool -> Html Header.Msg
 header logo navBar showSearchBar user showMobileMenu =
-    Header.view { logo = logo, navBar = navBar, user = user, showSearchBar = showSearchBar, showMobileMenu = showMobileMenu }
+    Header.view { logo = logo, navBar = navBar, showSearchBar = showSearchBar, user = user, showMobileMenu = showMobileMenu }
 
 
 projectDescription : Bool -> String -> Html.Html ProjectDescription.Msg
