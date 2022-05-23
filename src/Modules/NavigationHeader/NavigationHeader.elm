@@ -55,7 +55,7 @@ view header =
             , div [ id "header-right-elements-cntr", class rightSideElementsStyle ]
                 [ div [ id "searchbar-cntr", class searchBarCntrStyle ]
                     [ div [ id "search-view-cntr", class (searchViewCntrStyle header.showSearchBar) ] [ searchBar ]
-                    , div [ class (display (not header.showSearchBar)) ]
+                    , div [ class (isVisible (not header.showSearchBar)) ]
                         [ CircularButton.view { size = CircularNormal, icon = Search, attrs = [ onClick ToggleSearchBarMsg ] }
                         ]
                     ]
@@ -217,8 +217,8 @@ mobileMenuEntries navItems =
         |> List.map (\n -> div [] [ a [ href n.href ] [ text n.text ] ])
 
 
-display : Bool -> String
-display show =
+isVisible : Bool -> String
+isVisible show =
     if show then
         Dtw.block
 
