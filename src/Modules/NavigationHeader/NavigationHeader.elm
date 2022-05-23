@@ -61,15 +61,15 @@ view header =
                     ]
                 , userMenu header.user
                 ]
-            , mobileMenu header.navBar header.showMobileMenu
             ]
+        , mobileMenu header
         ]
 
 
 navHeaderBgCntrStyle : String
 navHeaderBgCntrStyle =
     [ Dtw.bg_white
-    , Dtw.shadow
+    , Dtw.space_y_2
     ]
         |> classList
 
@@ -78,6 +78,7 @@ navHeaderCntrStyle : String
 navHeaderCntrStyle =
     [ Dtw.justify_between
     , Dtw.flex
+    , Dtw.shadow
     ]
         |> classList
 
@@ -193,20 +194,43 @@ mobileMenuButtonStyle =
         |> classList
 
 
-mobileMenu : List NavItem -> Bool -> Html Msg
-mobileMenu navItems showMenu =
-    if showMenu then
-        nav [ id "mobile-menu", class mobileMenuStyle ] (mobileMenuEntries navItems)
+mobileMenu : HeaderModel -> Html Msg
+mobileMenu header =
+    if header.showMobileMenu then
+        div [ id "mobile-menu", class mobileMenuStyle ]
+            [ nav [] (mobileMenuEntries header.navBar)
+            , case header.user of
+                Nothing ->
+                    div [ class Dtw.hidden ] []
+
+                Just u ->
+                    div [ id "mobile-user-menu", class mobileMenuUserStyle ]
+                        [ div [ id "mobile-user-avatar", class mobileUserAvatar ]
+                            [ CircularAvatar.view { size = CircularAvatarNormal, img = u.img, alt = "UserAvatar", attrs = [] }
+                            , div []
+                                [ div [ id "user-name-mobile", class mobileTextStyle ] [ text u.name ]
+                                , div [ id "user-mail-mobile", class userMailStyle ] [ text u.mail ]
+                                ]
+                            ]
+                        , div [] [ a [ id "user-profile", href "#", class mobileTextStyle ] [ text "Your profile" ] ]
+                        , div [] [ a [ id "sign-out", href "#", onClick LogOutMsg, class mobileTextStyle ] [ text "Sign out" ] ]
+                        ]
+            ]
 
     else
-        nav [ id "mobile-menu", class Dtw.hidden ] []
+        div [ id "mobile-menu", class Dtw.hidden ] []
 
 
 mobileMenuStyle : String
 mobileMenuStyle =
-    [ Dtw.pt_2
+    [ Dtw.max_w_xs
+    , Dtw.grow
+    , Dtw.pt_2
     , Dtw.pb_3
     , Dtw.space_y_1
+    , Dtw.bg_white
+    , Dtw.pl_2
+    , Dtw.shadow_sm
     ]
         |> classList
 
@@ -214,7 +238,63 @@ mobileMenuStyle =
 mobileMenuEntries : List NavItem -> List (Html Msg)
 mobileMenuEntries navItems =
     navItems
-        |> List.map (\n -> div [] [ a [ href n.href ] [ text n.text ] ])
+        |> List.map (\n -> div [] [ a [ href n.href, class (mobileNavEntriesStyle n.isActive) ] [ text n.text ] ])
+
+
+mobileNavEntriesStyle : Bool -> String
+mobileNavEntriesStyle isActive =
+    if isActive then
+        [ Dtw.border_l_2
+        , Dtw.border_blue_700
+        , Dtw.pl_2
+        , Dtw.pr_3
+        ]
+            |> Dtw.classList
+
+    else
+        [ Dtw.block
+        , Dtw.onHover
+            [ Dtw.bg_gray_50
+            , Dtw.pl_2
+            , Dtw.border_l_2
+            , Dtw.border_gray_300
+            ]
+        ]
+            |> Dtw.classList
+
+
+mobileMenuUserStyle : String
+mobileMenuUserStyle =
+    [ Dtw.gap_3
+    , Dtw.border_t
+    , Dtw.border_gray_200
+    ]
+        |> Dtw.classList
+
+
+mobileUserAvatar : String
+mobileUserAvatar =
+    [ Dtw.flex
+    , Dtw.pt_2
+    , Dtw.gap_4
+    ]
+        |> Dtw.classList
+
+
+mobileTextStyle : String
+mobileTextStyle =
+    [ Dtw.text_base
+    , Dtw.text_gray_700
+    ]
+        |> Dtw.classList
+
+
+userMailStyle : String
+userMailStyle =
+    [ Dtw.text_sm
+    , Dtw.text_gray_700
+    ]
+        |> Dtw.classList
 
 
 isVisible : Bool -> String
@@ -288,6 +368,8 @@ update msg model =
 type alias User =
     { id : String
     , img : String
+    , name : String
+    , mail : String
     }
 
 
@@ -346,6 +428,8 @@ newUser =
     Just
         { id = "someId"
         , img = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+        , name = "Tom Cook"
+        , mail = "tom@example.com"
         }
 
 
@@ -404,7 +488,7 @@ navItemStyle =
 
 navItemActive : String
 navItemActive =
-    [ Dtw.border_indigo_500
+    [ Dtw.border_blue_700
     , Dtw.text_gray_900
     ]
         |> classList
@@ -534,7 +618,7 @@ searchBarStyle =
     , Dtw.border
     , Dtw.leading_5
     , Dtw.text_blue_700
-    , Dtw.placeholder_blue_700
+    , Dtw.placeholder_gray_400
     , Dtw.outline_none
     , Dtw.onFocus [ Dtw.outline_none, Dtw.ring_white, Dtw.text_blue_700 ]
     , Dtw.custom_bg White

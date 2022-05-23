@@ -148,6 +148,11 @@ aspect_w_12 =
     "aspect-w-12"
 
 
+bg_blue_700 : String
+bg_blue_700 =
+    "bg-blue-700"
+
+
 bg_gray_50 : String
 bg_gray_50 =
     "bg-gray-50"
@@ -183,11 +188,6 @@ bg_indigo_700 =
     "bg-indigo-700"
 
 
-bg_blue_700 : String
-bg_blue_700 =
-    "bg-blue-700"
-
-
 bg_white : String
 bg_white =
     "bg-white"
@@ -213,9 +213,19 @@ border_b_2 =
     "border-b-2"
 
 
+border_blue_500 : String
+border_blue_500 =
+    "border-blue-500"
+
+
 border_blue_700 : String
 border_blue_700 =
     "border-blue-700"
+
+
+border_gray_200 : String
+border_gray_200 =
+    "border-gray-200"
 
 
 border_gray_300 : String
@@ -226,6 +236,11 @@ border_gray_300 =
 border_indigo_500 : String
 border_indigo_500 =
     "border-indigo-500"
+
+
+border_l_2 : String
+border_l_2 =
+    "border-l-2"
 
 
 border_t : String
@@ -298,6 +313,11 @@ flex_shrink_0 =
     "flex-shrink-0"
 
 
+flex_shrink_1 : String
+flex_shrink_1 =
+    "max-w-fit"
+
+
 font_extrabold : String
 font_extrabold =
     "font-extrabold"
@@ -321,6 +341,16 @@ font_serif =
 gap_2_dot_5 : String
 gap_2_dot_5 =
     "gap-2.5"
+
+
+gap_3 : String
+gap_3 =
+    "gap-3"
+
+
+gap_4 : String
+gap_4 =
+    "gap-4"
 
 
 gap_8 : String
@@ -803,6 +833,11 @@ pl_1 =
     "pl-1"
 
 
+pl_2 : String
+pl_2 =
+    "pl-2"
+
+
 pl_3 : String
 pl_3 =
     "pl-3"
@@ -1048,6 +1083,11 @@ space_y_1 =
     "space-y-1"
 
 
+space_y_2 : String
+space_y_2 =
+    "space-y-2"
+
+
 static : String
 static =
     "static"
@@ -1066,6 +1106,11 @@ text_4xl =
 text_base : String
 text_base =
     "text-base"
+
+
+text_blue_50 : String
+text_blue_50 =
+    "text-blue-50"
 
 
 text_blue_500 : String
