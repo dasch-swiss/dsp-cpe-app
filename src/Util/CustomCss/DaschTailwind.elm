@@ -818,6 +818,11 @@ pl_10 =
     "pl-10"
 
 
+placeholder_blue_700 : String
+placeholder_blue_700 =
+    "placeholder-blue-700"
+
+
 placeholder_gray_400 : String
 placeholder_gray_400 =
     "placeholder-gray-400"

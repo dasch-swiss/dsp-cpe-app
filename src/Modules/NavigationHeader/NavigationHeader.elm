@@ -6,7 +6,6 @@ import Html.Events exposing (onClick)
 import Modules.Avatars.CircularAvatar as CircularAvatar
 import Modules.Buttons.CircularButton as CircularButton
 import Shared.SharedTypes exposing (CircularAvatarSize(..), CircularButtonSize(..))
-import Svg exposing (svg)
 import Util.CustomCss.CssColors exposing (CustomColor(..))
 import Util.CustomCss.DaschTailwind as Dtw exposing (classList)
 import Util.Icon as Icon exposing (Icon(..))
@@ -94,10 +93,6 @@ headerElementsCntrStyle =
         |> classList
 
 
-
---flex-1 flex items-center justify-center sm:items-stretch sm:justify-start
-
-
 leftSideElementsStyle : String
 leftSideElementsStyle =
     [ Dtw.flex
@@ -122,7 +117,7 @@ navBarCntrStyle showSearchBar =
             |> classList
 
     else
-        [ Dtw.hidden -- also hidden if smaller than md
+        [ Dtw.hidden -- hidden if smaller than md
         , Dtw.md [ Dtw.ml_6, Dtw.flex ]
         , Dtw.self_center
         , Dtw.flex_shrink_0
@@ -234,7 +229,6 @@ display show =
 mobileMenuButtonCntrStyle : Bool -> String
 mobileMenuButtonCntrStyle displayMenu =
     if displayMenu then
-        -- displayed
         [ Dtw.neg_ml_2
         , Dtw.mr_2
         , Dtw.flex
@@ -243,12 +237,12 @@ mobileMenuButtonCntrStyle displayMenu =
             |> classList
 
     else
-        -- still displayed except screen size bigger than md
         [ Dtw.neg_ml_2
         , Dtw.mr_2
         , Dtw.flex
         , Dtw.items_center
         , Dtw.md
+            -- displayed except screen size reaches md
             [ Dtw.hidden
             ]
         ]
@@ -517,11 +511,6 @@ searchBar =
         ]
 
 
-
---       <div class="min-w-0 flex-1 md:px-8 lg:px-0 xl:col-span-6">
---        <div class="flex items-center px-6 py-4 md:max-w-3xl md:mx-auto lg:max-w-none lg:mx-0 xl:px-0">
-
-
 outerSearchCtStyle : String
 outerSearchCtStyle =
     [ Dtw.flex
@@ -544,10 +533,10 @@ searchBarStyle =
     , Dtw.py_2
     , Dtw.border
     , Dtw.leading_5
-    , Dtw.text_gray_300
-    , Dtw.placeholder_gray_400
+    , Dtw.text_blue_700
+    , Dtw.placeholder_blue_700
     , Dtw.outline_none
-    , Dtw.onFocus [ Dtw.outline_none, Dtw.ring_white, Dtw.text_gray_900 ]
+    , Dtw.onFocus [ Dtw.outline_none, Dtw.ring_white, Dtw.text_blue_700 ]
     , Dtw.custom_bg White
     ]
         |> classList
@@ -555,7 +544,7 @@ searchBarStyle =
 
 searchIconStyle : String
 searchIconStyle =
-    [ Dtw.flex, Dtw.items_center, Dtw.pointer_events_none, Dtw.h_5, Dtw.w_5, Dtw.text_gray_400, Dtw.m_4 ]
+    [ Dtw.flex, Dtw.items_center, Dtw.pointer_events_none, Dtw.h_5, Dtw.w_5, Dtw.text_blue_700, Dtw.m_4 ]
         |> classList
 
 
