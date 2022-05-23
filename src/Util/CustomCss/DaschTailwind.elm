@@ -148,6 +148,11 @@ aspect_w_12 =
     "aspect-w-12"
 
 
+bg_blue_50 : String
+bg_blue_50 =
+    "bg-blue-50"
+
+
 bg_blue_700 : String
 bg_blue_700 =
     "bg-blue-700"

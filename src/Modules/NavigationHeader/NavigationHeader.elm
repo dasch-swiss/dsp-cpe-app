@@ -47,7 +47,7 @@ view header =
                         [ logo header.logo
                         ]
                     , div [ id "mobile-menu-cntr", class (mobileMenuButtonCntrStyle header.showSearchBar) ]
-                        [ mobileMenuButton
+                        [ mobileMenuButton header.showMobileMenu
                         ]
                     , div [ id "navbar-nav-cntr", class (navBarCntrStyle header.showSearchBar) ] [ navBar header.navBar ]
                     ]
@@ -152,10 +152,10 @@ searchViewCntrStyle showSb =
 -- the mobile menu button and the mobile menu items
 
 
-mobileMenuButton : Html Msg
-mobileMenuButton =
+mobileMenuButton : Bool -> Html Msg
+mobileMenuButton menuIsOpen =
     div []
-        [ button [ id "mobile-menu-button", type_ "button", class mobileMenuButtonStyle, onClick ToggleMobileMenuMsg ]
+        [ button [ id "mobile-menu-button", type_ "button", class (mobileMenuButtonStyle menuIsOpen), onClick ToggleMobileMenuMsg ]
             [ span
                 [ id "mobile-menu-icon"
                 , class iconstyle
@@ -173,8 +173,8 @@ iconstyle =
         |> Dtw.classList
 
 
-mobileMenuButtonStyle : String
-mobileMenuButtonStyle =
+mobileMenuButtonStyle : Bool -> String
+mobileMenuButtonStyle menuOpen =
     [ Dtw.inline_flex
     , Dtw.items_center
     , Dtw.justify_center
@@ -183,13 +183,18 @@ mobileMenuButtonStyle =
     , Dtw.text_gray_400
     , Dtw.onHover
         [ Dtw.text_gray_500
-        , Dtw.bg_gray_100
+        , Dtw.bg_blue_50
         ]
     , Dtw.onFocus
         [ Dtw.outline_none
         , Dtw.ring_inset
         , Dtw.ring_indigo_500
         ]
+    , if menuOpen then
+        Dtw.bg_blue_50
+
+      else
+        ""
     ]
         |> classList
 
