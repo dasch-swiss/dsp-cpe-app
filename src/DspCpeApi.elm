@@ -82,9 +82,9 @@ iconButtonDivider attr icon text =
     IconButtonDivider.view { buttonAttrs = attr, icon = icon, text = text }
 
 
-header : Header.Logo -> List Header.NavItem -> Maybe Header.User -> Bool -> Bool -> Html Header.Msg
-header logo navBar user showSearchBar showMobileMenu =
-    Header.view { logo = logo, navBar = navBar, user = user, showSearchBar = showSearchBar, showMobileMenu = showMobileMenu }
+header : Header.Logo -> List Header.NavItem -> Bool -> Maybe Header.User -> Bool -> Html Header.Msg
+header logo navBar showSearchBar user showMobileMenu =
+    Header.view { logo = logo, navBar = navBar, showSearchBar = showSearchBar, user = user, showMobileMenu = showMobileMenu }
 
 
 projectDescription : Bool -> String -> Html.Html ProjectDescription.Msg

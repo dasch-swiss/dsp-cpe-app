@@ -148,6 +148,16 @@ aspect_w_12 =
     "aspect-w-12"
 
 
+bg_blue_50 : String
+bg_blue_50 =
+    "bg-blue-50"
+
+
+bg_blue_700 : String
+bg_blue_700 =
+    "bg-blue-700"
+
+
 bg_gray_50 : String
 bg_gray_50 =
     "bg-gray-50"
@@ -183,11 +193,6 @@ bg_indigo_700 =
     "bg-indigo-700"
 
 
-bg_blue_700 : String
-bg_blue_700 =
-    "bg-blue-700"
-
-
 bg_white : String
 bg_white =
     "bg-white"
@@ -213,9 +218,19 @@ border_b_2 =
     "border-b-2"
 
 
+border_blue_500 : String
+border_blue_500 =
+    "border-blue-500"
+
+
 border_blue_700 : String
 border_blue_700 =
     "border-blue-700"
+
+
+border_gray_200 : String
+border_gray_200 =
+    "border-gray-200"
 
 
 border_gray_300 : String
@@ -226,6 +241,11 @@ border_gray_300 =
 border_indigo_500 : String
 border_indigo_500 =
     "border-indigo-500"
+
+
+border_l_2 : String
+border_l_2 =
+    "border-l-2"
 
 
 border_t : String
@@ -298,6 +318,11 @@ flex_shrink_0 =
     "flex-shrink-0"
 
 
+flex_shrink_1 : String
+flex_shrink_1 =
+    "max-w-fit"
+
+
 font_extrabold : String
 font_extrabold =
     "font-extrabold"
@@ -316,6 +341,26 @@ font_semibold =
 font_serif : String
 font_serif =
     "font-serif"
+
+
+gap_1 : String
+gap_1 =
+    "gap-1"
+
+
+gap_2_dot_5 : String
+gap_2_dot_5 =
+    "gap-2.5"
+
+
+gap_3 : String
+gap_3 =
+    "gap-3"
+
+
+gap_4 : String
+gap_4 =
+    "gap-4"
 
 
 gap_8 : String
@@ -346,6 +391,11 @@ gap_y_8 =
 grid : String
 grid =
     "grid"
+
+
+grow : String
+grow =
+    "grow"
 
 
 grid_cols_2 : String
@@ -462,10 +512,10 @@ justify_end : String
 justify_end =
     "justify-end"
 
+
 justify_start : String
 justify_start =
     "justify-start"
-
 
 
 leading_4 : String
@@ -513,9 +563,19 @@ line_clamp_12 =
     "line-clamp-12"
 
 
+m_2 : String
+m_2 =
+    "m-2"
+
+
 m_4 : String
 m_4 =
     "m-4"
+
+
+max_h_14 : String
+max_h_14 =
+    "max-h-14"
 
 
 max_h_12 : String
@@ -713,6 +773,11 @@ outline_none =
     "outline-none"
 
 
+overflow_clip : String
+overflow_clip =
+    "object-scale-down"
+
+
 overflow_hidden : String
 overflow_hidden =
     "overflow-hidden"
@@ -731,6 +796,11 @@ p_1_dot_5 =
 p_2 : String
 p_2 =
     "p-2"
+
+
+p_2_dot_5 : String
+p_2_dot_5 =
+    "p-2.5"
 
 
 p_3 : String
@@ -773,6 +843,11 @@ pl_1 =
     "pl-1"
 
 
+pl_2 : String
+pl_2 =
+    "pl-2"
+
+
 pl_3 : String
 pl_3 =
     "pl-3"
@@ -786,6 +861,11 @@ pl_5 =
 pl_10 : String
 pl_10 =
     "pl-10"
+
+
+placeholder_blue_700 : String
+placeholder_blue_700 =
+    "placeholder-blue-700"
 
 
 placeholder_gray_400 : String
@@ -1013,6 +1093,11 @@ space_y_1 =
     "space-y-1"
 
 
+space_y_2 : String
+space_y_2 =
+    "space-y-2"
+
+
 static : String
 static =
     "static"
@@ -1031,6 +1116,11 @@ text_4xl =
 text_base : String
 text_base =
     "text-base"
+
+
+text_blue_50 : String
+text_blue_50 =
+    "text-blue-50"
 
 
 text_blue_500 : String

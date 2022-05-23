@@ -129,7 +129,7 @@ view model =
         , div [ class "text" ]
             [ div [ class "Header" ]
                 [ h3 [ class "label" ] [ text "Header" ]
-                , Api.header model.headerModel.logo model.headerModel.navBar model.headerModel.user model.headerModel.showSearchBar model.headerModel.showMobileMenu |> Html.map NavigationHeaderMsg
+                , Api.header model.headerModel.logo model.headerModel.navBar model.headerModel.showSearchBar model.headerModel.user model.headerModel.showMobileMenu |> Html.map NavigationHeaderMsg
                 ]
             ]
         , div [ class "text" ]
@@ -277,6 +277,8 @@ exampleHeader =
         Just
             { id = "sthId"
             , img = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            , name = "Tom Cook"
+            , mail = "tom@example.com"
             }
     , showSearchBar = False
     , showMobileMenu = False

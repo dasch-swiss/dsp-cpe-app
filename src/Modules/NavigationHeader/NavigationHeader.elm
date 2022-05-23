@@ -42,37 +42,34 @@ view header =
     div [ id "nav-header-bg-cntr", class navHeaderBgCntrStyle ]
         [ div [ id "standard-view-cntr", class navHeaderCntrStyle ]
             [ div [ id "header-elements-cntr", class headerElementsCntrStyle ]
-                [ div [ id "header-left-elements-cntr", class headerLeftElements ]
+                [ div [ id "header-left-elements-cntr", class leftSideElementsStyle ]
                     [ div [ id "navbar-logo-cntr", class navBarLogoCntrStyle ]
                         [ logo header.logo
                         ]
                     , div [ id "mobile-menu-cntr", class (mobileMenuButtonCntrStyle header.showSearchBar) ]
-                        [ mobileMenuButton
+                        [ mobileMenuButton header.showMobileMenu
                         ]
                     , div [ id "navbar-nav-cntr", class (navBarCntrStyle header.showSearchBar) ] [ navBar header.navBar ]
                     ]
-
-                -- search bar
-                , div [ id "searchbar-cntr", class searchBarCntrStyle ]
-                    [ div [ class (display header.showSearchBar) ]
-                        [ CircularButton.view { size = CircularNormal, icon = ChevronRight, attrs = [ onClick ToggleSearchBarMsg ] }
-                        ]
-                    , div [ id "search-view-cntr", class (searchViewCntrStyle header.showSearchBar) ] [ searchBar ]
-                    , div [ class (display (not header.showSearchBar)) ]
+                ]
+            , div [ id "header-right-elements-cntr", class rightSideElementsStyle ]
+                [ div [ id "searchbar-cntr", class searchBarCntrStyle ]
+                    [ div [ id "search-view-cntr", class (searchViewCntrStyle header.showSearchBar) ] [ searchBar ]
+                    , div [ class (isVisible (not header.showSearchBar)) ]
                         [ CircularButton.view { size = CircularNormal, icon = Search, attrs = [ onClick ToggleSearchBarMsg ] }
                         ]
                     ]
-                , div [ id "user-menu-cntr", class userMenuCntrStyle ] [ userMenu header.user ]
+                , userMenu header.user
                 ]
             ]
-        , mobileMenu header.navBar header.showMobileMenu
+        , mobileMenu header
         ]
 
 
 navHeaderBgCntrStyle : String
 navHeaderBgCntrStyle =
     [ Dtw.bg_white
-    , Dtw.shadow
+    , Dtw.space_y_2
     ]
         |> classList
 
@@ -80,6 +77,8 @@ navHeaderBgCntrStyle =
 navHeaderCntrStyle : String
 navHeaderCntrStyle =
     [ Dtw.justify_between
+    , Dtw.flex
+    , Dtw.shadow
     ]
         |> classList
 
@@ -90,16 +89,13 @@ headerElementsCntrStyle =
     , Dtw.justify_between
     , Dtw.h_16
     , Dtw.items_center
+    , Dtw.gap_x_6
     ]
         |> classList
 
 
-
---flex-1 flex items-center justify-center sm:items-stretch sm:justify-start
-
-
-headerLeftElements : String
-headerLeftElements =
+leftSideElementsStyle : String
+leftSideElementsStyle =
     [ Dtw.flex
     , Dtw.items_center
     , Dtw.justify_start
@@ -122,16 +118,17 @@ navBarCntrStyle showSearchBar =
             |> classList
 
     else
-        [ Dtw.hidden -- also hidden if smaller than md
-        , Dtw.md [ Dtw.ml_6, Dtw.flex, Dtw.space_x_8 ]
+        [ Dtw.hidden -- hidden if smaller than md
+        , Dtw.md [ Dtw.ml_6, Dtw.flex ]
         , Dtw.self_center
+        , Dtw.flex_shrink_0
         ]
             |> classList
 
 
 searchBarCntrStyle : String
 searchBarCntrStyle =
-    [ Dtw.flex, Dtw.items_center, Dtw.space_x_4, Dtw.md [ Dtw.ml_6, Dtw.justify_end ] ]
+    [ Dtw.flex, Dtw.justify_end, Dtw.grow, Dtw.items_center, Dtw.gap_x_4 ]
         |> classList
 
 
@@ -140,6 +137,7 @@ searchViewCntrStyle showSb =
     if showSb then
         [ Dtw.flex_1
         , Dtw.flex
+        , Dtw.grow
         , Dtw.justify_center
         , Dtw.px_2
         , Dtw.justify_between
@@ -154,10 +152,10 @@ searchViewCntrStyle showSb =
 -- the mobile menu button and the mobile menu items
 
 
-mobileMenuButton : Html Msg
-mobileMenuButton =
+mobileMenuButton : Bool -> Html Msg
+mobileMenuButton menuIsOpen =
     div []
-        [ button [ id "mobile-menu-button", type_ "button", class mobileMenuButtonStyle, onClick ToggleMobileMenuMsg ]
+        [ button [ id "mobile-menu-button", type_ "button", class (mobileMenuButtonStyle menuIsOpen), onClick ToggleMobileMenuMsg ]
             [ span
                 [ id "mobile-menu-icon"
                 , class iconstyle
@@ -175,8 +173,8 @@ iconstyle =
         |> Dtw.classList
 
 
-mobileMenuButtonStyle : String
-mobileMenuButtonStyle =
+mobileMenuButtonStyle : Bool -> String
+mobileMenuButtonStyle menuOpen =
     [ Dtw.inline_flex
     , Dtw.items_center
     , Dtw.justify_center
@@ -185,31 +183,62 @@ mobileMenuButtonStyle =
     , Dtw.text_gray_400
     , Dtw.onHover
         [ Dtw.text_gray_500
-        , Dtw.bg_gray_100
+        , Dtw.bg_blue_50
         ]
     , Dtw.onFocus
         [ Dtw.outline_none
         , Dtw.ring_inset
         , Dtw.ring_indigo_500
         ]
+    , if menuOpen then
+        Dtw.bg_blue_50
+
+      else
+        ""
     ]
         |> classList
 
 
-mobileMenu : List NavItem -> Bool -> Html Msg
-mobileMenu navItems showMenu =
-    if showMenu then
-        nav [ id "mobile-menu", class mobileMenuStyle ] (mobileMenuEntries navItems)
+mobileMenu : HeaderModel -> Html Msg
+mobileMenu header =
+    if header.showMobileMenu then
+        div [ id "mobile-menu", class mobileMenuStyle ]
+            [ nav [] (mobileMenuEntries header.navBar)
+            , case header.user of
+                Nothing ->
+                    div [ class Dtw.hidden ] []
+
+                Just u ->
+                    div [ id "mobile-profile-menu", class mobileProfileStyle ]
+                        [ div [ id "mobile-user-avatar", class mobileUserAvatar ]
+                            [ CircularAvatar.view { size = CircularAvatarNormal, img = u.img, alt = "UserAvatar", attrs = [] }
+                            , div []
+                                [ div [ id "user-name-mobile", class mobileTextStyle ] [ text u.name ]
+                                , div [ id "user-mail-mobile", class userMailStyle ] [ text u.mail ]
+                                ]
+                            ]
+                        , div [ id "mobile-user-menu", class Dtw.gap_1 ]
+                            [ div [] [ a [ id "user-profile", href "#", class mobileTextStyle ] [ text "Your profile" ] ]
+                            , div [] [ a [ id "user-settings", href "#", class mobileTextStyle ] [ text "Settings" ] ]
+                            , div [] [ a [ id "sign-out", href "#", onClick LogOutMsg, class mobileTextStyle ] [ text "Sign out" ] ]
+                            ]
+                        ]
+            ]
 
     else
-        nav [ id "mobile-menu", class Dtw.hidden ] []
+        div [ id "mobile-menu", class Dtw.hidden ] []
 
 
 mobileMenuStyle : String
 mobileMenuStyle =
-    [ Dtw.pt_2
+    [ Dtw.max_w_xs
+    , Dtw.grow
+    , Dtw.pt_2
     , Dtw.pb_3
     , Dtw.space_y_1
+    , Dtw.bg_white
+    , Dtw.pl_2
+    , Dtw.shadow_sm
     ]
         |> classList
 
@@ -217,11 +246,67 @@ mobileMenuStyle =
 mobileMenuEntries : List NavItem -> List (Html Msg)
 mobileMenuEntries navItems =
     navItems
-        |> List.map (\n -> div [] [ a [ href n.href ] [ text n.text ] ])
+        |> List.map (\n -> div [] [ a [ href n.href, class (mobileNavEntriesStyle n.isActive) ] [ text n.text ] ])
 
 
-display : Bool -> String
-display show =
+mobileNavEntriesStyle : Bool -> String
+mobileNavEntriesStyle isActive =
+    if isActive then
+        [ Dtw.border_l_2
+        , Dtw.border_blue_700
+        , Dtw.pl_2
+        , Dtw.pr_3
+        ]
+            |> Dtw.classList
+
+    else
+        [ Dtw.block
+        , Dtw.onHover
+            [ Dtw.bg_gray_50
+            , Dtw.pl_2
+            , Dtw.border_l_2
+            , Dtw.border_gray_300
+            ]
+        ]
+            |> Dtw.classList
+
+
+mobileProfileStyle : String
+mobileProfileStyle =
+    [ Dtw.gap_3
+    , Dtw.border_t
+    , Dtw.border_gray_200
+    ]
+        |> Dtw.classList
+
+
+mobileUserAvatar : String
+mobileUserAvatar =
+    [ Dtw.flex
+    , Dtw.pt_2
+    , Dtw.gap_4
+    ]
+        |> Dtw.classList
+
+
+mobileTextStyle : String
+mobileTextStyle =
+    [ Dtw.text_base
+    , Dtw.text_gray_700
+    ]
+        |> Dtw.classList
+
+
+userMailStyle : String
+userMailStyle =
+    [ Dtw.text_sm
+    , Dtw.text_gray_700
+    ]
+        |> Dtw.classList
+
+
+isVisible : Bool -> String
+isVisible show =
     if show then
         Dtw.block
 
@@ -232,7 +317,6 @@ display show =
 mobileMenuButtonCntrStyle : Bool -> String
 mobileMenuButtonCntrStyle displayMenu =
     if displayMenu then
-        -- displayed
         [ Dtw.neg_ml_2
         , Dtw.mr_2
         , Dtw.flex
@@ -241,21 +325,24 @@ mobileMenuButtonCntrStyle displayMenu =
             |> classList
 
     else
-        -- still displayed except screen size bigger than md
         [ Dtw.neg_ml_2
         , Dtw.mr_2
         , Dtw.flex
         , Dtw.items_center
         , Dtw.md
+            -- displayed except screen size reaches md
             [ Dtw.hidden
             ]
         ]
             |> classList
 
 
-userMenuCntrStyle : String
-userMenuCntrStyle =
-    [ Dtw.flex_shrink_0
+rightSideElementsStyle : String
+rightSideElementsStyle =
+    [ Dtw.flex
+    , Dtw.flex_shrink_0
+    , Dtw.grow
+    , Dtw.gap_x_4
     ]
         |> classList
 
@@ -273,7 +360,7 @@ update msg model =
             { model | showMobileMenu = not model.showMobileMenu }
 
         SignInRequestMsg ->
-            { model | user = newUser }
+            { model | user = model.user }
 
         LogOutMsg ->
             { model | user = Nothing }
@@ -289,6 +376,8 @@ update msg model =
 type alias User =
     { id : String
     , img : String
+    , name : String
+    , mail : String
     }
 
 
@@ -314,6 +403,8 @@ userBarStyle : String
 userBarStyle =
     [ Dtw.flex
     , Dtw.flex_shrink_0
+    , Dtw.items_center
+    , Dtw.gap_x_4
     ]
         |> classList
 
@@ -325,18 +416,19 @@ signedInButton =
 
 signedOutButtons : Html Msg
 signedOutButtons =
-    div []
+    div [ id "signed-out-cntr", class signedOutStyle ]
         [ signUpButton [ onClick SignUpRequestMsg ] "sign up"
         , signInButton [ onClick SignInRequestMsg ] "sign in"
         ]
 
 
-newUser : Maybe User
-newUser =
-    Just
-        { id = "someId"
-        , img = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-        }
+signedOutStyle : String
+signedOutStyle =
+    [ Dtw.flex
+    , Dtw.gap_x_4
+    , Dtw.items_center
+    ]
+        |> classList
 
 
 
@@ -373,8 +465,8 @@ getStyleForState isActive =
 
 navBarInnerStyle : String
 navBarInnerStyle =
-    [ Dtw.hidden
-    , Dtw.md [ Dtw.ml_6, Dtw.flex, Dtw.space_x_8 ]
+    [ Dtw.hidden -- hidden if smaller than md
+    , Dtw.md [ Dtw.ml_6, Dtw.flex, Dtw.space_x_4 ]
     ]
         |> classList
 
@@ -394,7 +486,7 @@ navItemStyle =
 
 navItemActive : String
 navItemActive =
-    [ Dtw.border_indigo_500
+    [ Dtw.border_blue_700
     , Dtw.text_gray_900
     ]
         |> classList
@@ -483,16 +575,30 @@ signInStyle =
 -- searchBar
 
 
-searchBar : Html msg
+searchBar : Html Msg
 searchBar =
     div [ id "outer-search-ct", class outerSearchCtStyle ]
-        [ input [ type_ "Text", placeholder "Search", class searchBarStyle ] [] ]
+        [ CircularButton.view { size = CircularNormal, icon = ChevronRight, attrs = [ onClick ToggleSearchBarMsg ] }
+        , div [ class Dtw.w_full ]
+            [ div [ class Dtw.relative ]
+                [ div
+                    [ class Dtw.absolute, class Dtw.inset_y_0, class Dtw.left_0, class Dtw.flex, class Dtw.items_center ]
+                    [ div
+                        [ id "search-icon", class searchIconStyle ]
+                        [ Icon.getHtml Search ]
+                    ]
+                , input [ type_ "Text", placeholder "Search", class searchBarStyle ] []
+                ]
+            ]
+        ]
 
 
 outerSearchCtStyle : String
 outerSearchCtStyle =
     [ Dtw.flex
-    , Dtw.justify_between
+    , Dtw.grow
+    , Dtw.justify_end
+    , Dtw.gap_x_4
     , Dtw.items_center
     ]
         |> classList
@@ -501,6 +607,7 @@ outerSearchCtStyle =
 searchBarStyle : String
 searchBarStyle =
     [ Dtw.block
+    , Dtw.grow
     , Dtw.w_full
     , Dtw.max_w_lg
     , Dtw.pl_10
@@ -508,15 +615,18 @@ searchBarStyle =
     , Dtw.py_2
     , Dtw.border
     , Dtw.leading_5
-    , Dtw.text_gray_300
+    , Dtw.text_blue_700
     , Dtw.placeholder_gray_400
     , Dtw.outline_none
-    , Dtw.md [ Dtw.rounded ]
-    , Dtw.lg [ Dtw.max_w_xs ]
-    , Dtw.onFocus [ Dtw.outline_none, Dtw.ring_white, Dtw.text_gray_900 ]
-    , Dtw.sm [ Dtw.text_sm ]
+    , Dtw.onFocus [ Dtw.outline_none, Dtw.ring_white, Dtw.text_blue_700 ]
     , Dtw.custom_bg White
     ]
+        |> classList
+
+
+searchIconStyle : String
+searchIconStyle =
+    [ Dtw.flex, Dtw.items_center, Dtw.pointer_events_none, Dtw.h_5, Dtw.w_5, Dtw.text_blue_700, Dtw.m_4 ]
         |> classList
 
 
@@ -545,5 +655,5 @@ logo l =
 
 logoStyle : String
 logoStyle =
-    [ Dtw.inline_block, Dtw.custom_height_px 64 ]
+    [ Dtw.inline_block, Dtw.max_h_14, Dtw.m_2 ]
         |> classList
