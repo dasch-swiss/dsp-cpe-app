@@ -209,7 +209,7 @@ mobileMenu header =
                     div [ class Dtw.hidden ] []
 
                 Just u ->
-                    div [ id "mobile-user-menu", class mobileMenuUserStyle ]
+                    div [ id "mobile-profile-menu", class mobileProfileStyle ]
                         [ div [ id "mobile-user-avatar", class mobileUserAvatar ]
                             [ CircularAvatar.view { size = CircularAvatarNormal, img = u.img, alt = "UserAvatar", attrs = [] }
                             , div []
@@ -217,8 +217,11 @@ mobileMenu header =
                                 , div [ id "user-mail-mobile", class userMailStyle ] [ text u.mail ]
                                 ]
                             ]
-                        , div [] [ a [ id "user-profile", href "#", class mobileTextStyle ] [ text "Your profile" ] ]
-                        , div [] [ a [ id "sign-out", href "#", onClick LogOutMsg, class mobileTextStyle ] [ text "Sign out" ] ]
+                        , div [ id "mobile-user-menu", class Dtw.gap_1 ]
+                            [ div [] [ a [ id "user-profile", href "#", class mobileTextStyle ] [ text "Your profile" ] ]
+                            , div [] [ a [ id "user-settings", href "#", class mobileTextStyle ] [ text "Settings" ] ]
+                            , div [] [ a [ id "sign-out", href "#", onClick LogOutMsg, class mobileTextStyle ] [ text "Sign out" ] ]
+                            ]
                         ]
             ]
 
@@ -268,8 +271,8 @@ mobileNavEntriesStyle isActive =
             |> Dtw.classList
 
 
-mobileMenuUserStyle : String
-mobileMenuUserStyle =
+mobileProfileStyle : String
+mobileProfileStyle =
     [ Dtw.gap_3
     , Dtw.border_t
     , Dtw.border_gray_200

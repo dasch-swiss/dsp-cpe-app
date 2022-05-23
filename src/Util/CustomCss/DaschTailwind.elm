@@ -343,6 +343,11 @@ font_serif =
     "font-serif"
 
 
+gap_1 : String
+gap_1 =
+    "gap-1"
+
+
 gap_2_dot_5 : String
 gap_2_dot_5 =
     "gap-2.5"
