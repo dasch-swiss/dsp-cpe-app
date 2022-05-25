@@ -64,7 +64,6 @@ view : Model -> Html Msg
 view model =
     div []
         [ div [] [ text model.query ]
-        , primaryButton [ onClick Fetch ] "Search" BasicLarge
         , viewRes model
         , viewError model.error
         ]

@@ -15,6 +15,7 @@ import Modules.Text.ProjectDescription as ProjectDescription
 import Modules.Tiles.ImageTile as ImageTile
 import Modules.Tiles.ImageTileGrid as ImageTileGrid
 import Shared.SharedTypes exposing (BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..))
+import Util.CustomCss.ColorSchema as CS
 import Util.Icon as Icon
 
 
@@ -27,27 +28,27 @@ circularAvatar size img alt attrs =
 -- convenience function: returns a basicButton with the Variant "Primary"
 
 
-primaryButton : List (Attribute msg) -> String -> BasicButtonSize -> Html msg
-primaryButton attrs txt size =
-    basicButton attrs txt size Primary
+primaryButton : List (Attribute msg) -> String -> BasicButtonSize -> CS.Model -> Html msg
+primaryButton attrs txt size c =
+    basicButton attrs txt size Primary c
 
 
 
 -- convenience function: returns a basicButton with the Variant "Secondary"
 
 
-secondaryButton : List (Attribute msg) -> String -> BasicButtonSize -> Html msg
-secondaryButton attrs txt size =
-    basicButton attrs txt size Secondary
+secondaryButton : List (Attribute msg) -> String -> BasicButtonSize -> CS.Model -> Html msg
+secondaryButton attrs txt size c =
+    basicButton attrs txt size Secondary c
 
 
 
 -- convenience function: returns a basicButton with the Variant "White"
 
 
-whiteButton : List (Attribute msg) -> String -> BasicButtonSize -> Html msg
-whiteButton attrs txt size =
-    basicButton attrs txt size White
+whiteButton : List (Attribute msg) -> String -> BasicButtonSize -> CS.Model -> Html msg
+whiteButton attrs txt size c =
+    basicButton attrs txt size White c
 
 
 

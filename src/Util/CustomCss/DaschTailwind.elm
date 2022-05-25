@@ -1,7 +1,7 @@
 module Util.CustomCss.DaschTailwind exposing (..)
 
 import String exposing (concat, join)
-import Util.CustomCss.CssColors exposing (CustomColor, getColor)
+import Util.CustomCss.ColorSchema exposing (SemanticColor, colorize)
 
 
 
@@ -89,24 +89,24 @@ toEventClass twClasses event =
 -- Custom Tailwind colors with arbitrary values
 
 
-custom_bg : CustomColor -> String
-custom_bg customColor =
-    "bg-[" ++ getColor customColor ++ "]"
+backgroundColor : String -> String
+backgroundColor customColor =
+    "bg-[" ++ customColor ++ "]"
 
 
-custom_border : CustomColor -> String
-custom_border customColor =
-    "border-[" ++ getColor customColor ++ "]"
+borderColor : SemanticColor -> String
+borderColor customColor =
+    "border-[" ++ colorize customColor ++ "]"
 
 
-custom_ring : CustomColor -> String
-custom_ring customColor =
-    "ring-[" ++ getColor customColor ++ "]"
+ringColor : SemanticColor -> String
+ringColor customColor =
+    "ring-[" ++ colorize customColor ++ "]"
 
 
-custom_text : CustomColor -> String
-custom_text customColor =
-    "text-[" ++ getColor customColor ++ "]"
+textColor : SemanticColor -> String
+textColor customColor =
+    "text-[" ++ colorize customColor ++ "]"
 
 
 custom_height_px : Int -> String

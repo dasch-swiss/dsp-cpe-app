@@ -1,14 +1,14 @@
 module Modules.Buttons.BasicButtons.PrimaryButton exposing (..)
 
-import Util.CustomCss.CssColors exposing (CustomColor(..))
+import Util.CustomCss.ColorSchema as CS exposing (SemanticColor(..))
 import Util.CustomCss.DaschTailwind as Dtw
 
 
-primaryButtonClasses : String
-primaryButtonClasses =
+primaryButtonClasses : CS.Model -> String
+primaryButtonClasses colors =
     Dtw.classList
         [ Dtw.text_white
-        , Dtw.custom_bg Primary
+        , Dtw.backgroundColor colors.primary
         , Dtw.border_transparent
-        , Dtw.onHover [ Dtw.custom_bg Secondary ]
+        , Dtw.onHover [ Dtw.backgroundColor colors.secondary ]
         ]

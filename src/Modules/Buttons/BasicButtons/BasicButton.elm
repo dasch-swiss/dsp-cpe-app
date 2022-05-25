@@ -6,6 +6,7 @@ import Modules.Buttons.BasicButtons.PrimaryButton exposing (primaryButtonClasses
 import Modules.Buttons.BasicButtons.SecondaryButton exposing (secondaryButtonClasses)
 import Modules.Buttons.BasicButtons.WhiteButton exposing (whiteButtonClasses)
 import Shared.SharedTypes exposing (BasicButtonSize(..))
+import Util.CustomCss.ColorSchema as CS
 import Util.CustomCss.DaschTailwind as Dtw
 
 
@@ -72,6 +73,7 @@ type alias BasicButtonModel msg =
     , text : String
     , size : BasicButtonSize
     , variant : Variant
+    , colours : CS.Model
     }
 
 
@@ -79,9 +81,9 @@ type alias BasicButtonModel msg =
 -- convenience function: Constructs the Buttonmodel and passes it into view; returns the view
 
 
-basicButton : List (Attribute msg) -> String -> BasicButtonSize -> Variant -> Html msg
-basicButton attributes text size variant =
-    view { attrs = attributes, text = text, size = size, variant = variant }
+basicButton : List (Attribute msg) -> String -> BasicButtonSize -> Variant -> CS.Model -> Html msg
+basicButton attributes text size variant colours =
+    view { attrs = attributes, text = text, size = size, variant = variant, colours = colours }
 
 
 type Variant
@@ -90,11 +92,11 @@ type Variant
     | White
 
 
-getVariantClasses : Variant -> String
-getVariantClasses variant =
+getVariantClasses : Variant -> CS.Model -> String
+getVariantClasses variant colours =
     case variant of
         Primary ->
-            primaryButtonClasses
+            primaryButtonClasses colours
 
         Secondary ->
             secondaryButtonClasses
@@ -108,7 +110,7 @@ view b =
     button
         (b.attrs
             ++ [ class (getBtnSizeClasses b.size)
-               , class (getVariantClasses b.variant)
+               , class (getVariantClasses b.variant b.colours)
                , class baseButtonClasses
                ]
         )

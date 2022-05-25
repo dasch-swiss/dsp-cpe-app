@@ -3,7 +3,7 @@ module Modules.Text.Accordion exposing (..)
 import Html exposing (Html, div, p, text)
 import Html.Attributes exposing (class)
 import Html.Events exposing (onClick)
-import Util.CustomCss.CssColors exposing (CustomColor(..))
+import Util.CustomCss.ColorSchema exposing (SemanticColor(..), colorize)
 import Util.CustomCss.DaschTailwind as Dtw
 import Util.Icon as Icon
 
@@ -41,8 +41,7 @@ view model =
                     [ Dtw.rounded_lg
                     , Dtw.border_2
                     , Dtw.cursor_pointer
-                    , Dtw.custom_bg Secondary
-                    , Dtw.custom_border Secondary
+                    , Dtw.borderColor Secondary
                     ]
 
             else
@@ -50,15 +49,15 @@ view model =
                     [ Dtw.rounded_lg
                     , Dtw.border_2
                     , Dtw.cursor_pointer
-                    , Dtw.custom_border Primary
+                    , Dtw.borderColor Primary
                     ]
 
         accordionHeaderTextClasses =
             if model.isOpen then
-                Dtw.classList [ Dtw.p_2, Dtw.pl_3, Dtw.custom_text White ]
+                Dtw.classList [ Dtw.p_2, Dtw.pl_3, Dtw.textColor Background ]
 
             else
-                Dtw.classList [ Dtw.p_2, Dtw.pl_3, Dtw.custom_text Primary ]
+                Dtw.classList [ Dtw.p_2, Dtw.pl_3, Dtw.textColor Primary ]
 
         accordionContentClasses =
             if model.isOpen then
@@ -76,10 +75,10 @@ view model =
 
         iconColor =
             if model.isOpen then
-                Dtw.custom_text White
+                colorize Background
 
             else
-                Dtw.custom_text Primary
+                Dtw.textColor Primary
 
         iconClasses =
             Dtw.classList

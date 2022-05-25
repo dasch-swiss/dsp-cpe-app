@@ -6,7 +6,7 @@ import Html.Events exposing (onClick)
 import Modules.Avatars.CircularAvatar as CircularAvatar
 import Modules.Buttons.CircularButton as CircularButton
 import Shared.SharedTypes exposing (CircularAvatarSize(..), CircularButtonSize(..))
-import Util.CustomCss.CssColors exposing (CustomColor(..))
+import Util.CustomCss.ColorSchema exposing (SemanticColor(..))
 import Util.CustomCss.DaschTailwind as Dtw exposing (classList)
 import Util.Icon as Icon exposing (Icon(..))
 
@@ -495,7 +495,7 @@ navItemActive =
 navItemInactive : String
 navItemInactive =
     [ Dtw.border_transparent
-    , Dtw.text_gray_500
+    , Dtw.textColor Primary
     , Dtw.onHover
         [ Dtw.text_gray_700
         , Dtw.border_gray_300
@@ -537,7 +537,6 @@ signUpStyle =
     , Dtw.inline_flex
     , Dtw.items_center
     , Dtw.justify_center
-    , Dtw.bg_white
     , Dtw.border
     , Dtw.rounded
     , Dtw.shadow_sm
@@ -619,7 +618,6 @@ searchBarStyle =
     , Dtw.placeholder_gray_400
     , Dtw.outline_none
     , Dtw.onFocus [ Dtw.outline_none, Dtw.ring_white, Dtw.text_blue_700 ]
-    , Dtw.custom_bg White
     ]
         |> classList
 

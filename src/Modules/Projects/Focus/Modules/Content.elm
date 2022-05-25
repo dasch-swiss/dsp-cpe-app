@@ -6,7 +6,7 @@ import Html.Attributes.Aria exposing (ariaHidden)
 import Html.Events exposing (onClick)
 import Svg exposing (defs, path, pattern, rect, svg)
 import Svg.Attributes as SvgAttr exposing (clipRule, d, fill, fillRule, id, patternUnits, viewBox, x, y)
-import Util.CustomCss.CssColors exposing (CustomColor(..))
+import Util.CustomCss.ColorSchema exposing (SemanticColor(..))
 import Util.CustomCss.DaschTailwind as Dtw
 
 
@@ -38,9 +38,9 @@ view model =
             -- if the content is expanded, remove the css classes
             if model.isReadMoreOpen then
                 Dtw.classList []
-            
-            -- else, add line clamp css
-            -- also add largest tailwind max height class available because Safari doesn't handle line clamps on divs correctly
+                -- else, add line clamp css
+                -- also add largest tailwind max height class available because Safari doesn't handle line clamps on divs correctly
+
             else
                 Dtw.classList [ Dtw.line_clamp_10, Dtw.max_h_96 ]
 
@@ -78,10 +78,10 @@ view model =
                             ]
                         ]
                     ]
-            
-            -- else don't generate the html for the image
+                -- else don't generate the html for the image
+
             else
-                div [][]
+                div [] []
     in
     div []
         [ div [ class (Dtw.classList [ Dtw.mt_8, Dtw.lg [ Dtw.grid, Dtw.grid_cols_2, Dtw.gap_8 ] ]) ]
@@ -130,16 +130,16 @@ view model =
                             [ text model.contentBody ]
                         ]
                     ]
-                , div [ class (Dtw.classList [ Dtw.mb_8, Dtw.prose, Dtw.mx_auto, Dtw.custom_text Primary, Dtw.sm [ Dtw.mt_8 ], Dtw.lg [ Dtw.max_w_none, Dtw.row_start_1, Dtw.col_start_1 ] ]) ]
+                , div [ class (Dtw.classList [ Dtw.mb_8, Dtw.prose, Dtw.mx_auto, Dtw.textColor Primary, Dtw.sm [ Dtw.mt_8 ], Dtw.lg [ Dtw.max_w_none, Dtw.row_start_1, Dtw.col_start_1 ] ]) ]
                     [ button [ onClick ReadMoreClicked ] [ text readMoreText ] ]
                 , div
                     [ class (Dtw.classList [ Dtw.prose, Dtw.mx_auto, Dtw.lg [ Dtw.max_w_none, Dtw.row_start_1, Dtw.col_start_1 ], Dtw.onHover [ Dtw.cursor_pointer ] ])
                     , onClick DatasetClicked
                     ]
-                    [ button [ class (Dtw.classList [ Dtw.text_left, Dtw.border, Dtw.custom_border Primary, Dtw.rounded_lg, Dtw.w_full ]) ]
+                    [ button [ class (Dtw.classList [ Dtw.text_left, Dtw.border, Dtw.borderColor Primary, Dtw.rounded_lg, Dtw.w_full ]) ]
                         [ div [ class (Dtw.classList [ Dtw.p_6 ]) ]
                             [ p [ class (Dtw.classList [ Dtw.text_sm, Dtw.text_blue_500, Dtw.mt_0, Dtw.mb_0 ]) ] [ text "Dataset" ]
-                            , p [ class (Dtw.classList [ Dtw.text_3xl, Dtw.pt_1, Dtw.mt_0, Dtw.mb_0, Dtw.custom_text Primary, Dtw.font_serif ]) ] [ text model.datasetTitle ]
+                            , p [ class (Dtw.classList [ Dtw.text_3xl, Dtw.pt_1, Dtw.mt_0, Dtw.mb_0, Dtw.textColor Primary, Dtw.font_serif ]) ] [ text model.datasetTitle ]
                             ]
                         ]
                     ]

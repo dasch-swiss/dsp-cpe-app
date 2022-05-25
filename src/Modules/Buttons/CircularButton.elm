@@ -3,7 +3,7 @@ module Modules.Buttons.CircularButton exposing (..)
 import Html exposing (Attribute, Html, button, span)
 import Html.Attributes exposing (class, type_)
 import Shared.SharedTypes exposing (CircularButtonSize(..))
-import Util.CustomCss.CssColors exposing (CustomColor(..))
+import Util.CustomCss.ColorSchema exposing (SemanticColor(..))
 import Util.CustomCss.DaschTailwind as Dtw
 import Util.Icon as Icon
 
@@ -25,13 +25,11 @@ circularButtonClasses =
         , Dtw.rounded_full
         , Dtw.shadow_sm
         , Dtw.text_white
-        , Dtw.custom_bg Primary
         , Dtw.onFocus
             [ Dtw.outline_none
             , Dtw.ring_2
             , Dtw.ring_offset_2
-            , Dtw.custom_bg Secondary
-            , Dtw.custom_ring Primary
+            , Dtw.ringColor Primary
             ]
         ]
 

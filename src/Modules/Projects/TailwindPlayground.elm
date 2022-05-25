@@ -3,12 +3,14 @@ module Modules.Projects.TailwindPlayground exposing (..)
 import DspCpeApi as Api
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
+import Html.Events exposing (onClick)
 import Modules.NavigationHeader.NavigationHeader as Header
 import Modules.Projects.Focus.Focus as ProjectFocus
 import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
 import Modules.Tiles.ImageTile as ImageTile
 import Shared.SharedTypes exposing (BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..))
+import Util.CustomCss.ColorSchema as ColorSchema
 import Util.Icon as Icon
 
 
@@ -18,6 +20,7 @@ type alias Model =
     , accordionModel : Accordion.Model
     , projectFocusModel : ProjectFocus.Model
     , headerModel : Header.HeaderModel
+    , colorSchemaModel : ColorSchema.Model
     }
 
 
@@ -26,6 +29,7 @@ type Msg
     | AccordionMsg Accordion.Msg
     | ProjectFocusMsg ProjectFocus.Msg
     | NavigationHeaderMsg Header.Msg
+    | SchemaChangeMsg ColorSchema.Msg
 
 
 initialModel : Model
@@ -35,6 +39,7 @@ initialModel =
     , accordionModel = exampleAccordion
     , projectFocusModel = exampleProjectFocus
     , headerModel = exampleHeader
+    , colorSchemaModel = exampleColorSchema
     }
 
 
@@ -49,27 +54,27 @@ view model =
         [ div [ class "buttons" ]
             [ div [ class "preview primary-button" ]
                 [ h3 [ class "label" ] [ text "Primary Buttons" ]
-                , Api.primaryButton [] "Extra small" BasicExtraSmall
-                , Api.primaryButton [] "Small" BasicSmall
-                , Api.primaryButton [] "Normal" BasicNormal
-                , Api.primaryButton [] "Large" BasicLarge
-                , Api.primaryButton [] "Extra large" BasicExtraLarge
+                , Api.primaryButton [] "Extra small" BasicExtraSmall model.colorSchemaModel
+                , Api.primaryButton [] "Small" BasicSmall model.colorSchemaModel
+                , Api.primaryButton [] "Normal" BasicNormal model.colorSchemaModel
+                , Api.primaryButton [] "Large" BasicLarge model.colorSchemaModel
+                , Api.primaryButton [] "Extra large" BasicExtraLarge model.colorSchemaModel
                 ]
             , div [ class "preview secondary-button" ]
                 [ h3 [ class "label" ] [ text "Secondary Buttons" ]
-                , Api.secondaryButton [] "Extra small" BasicExtraSmall
-                , Api.secondaryButton [] "Small" BasicSmall
-                , Api.secondaryButton [] "Normal" BasicNormal
-                , Api.secondaryButton [] "Large" BasicLarge
-                , Api.secondaryButton [] "Extra large" BasicExtraLarge
+                , Api.secondaryButton [] "Extra small" BasicExtraSmall model.colorSchemaModel
+                , Api.secondaryButton [] "Small" BasicSmall model.colorSchemaModel
+                , Api.secondaryButton [] "Normal" BasicNormal model.colorSchemaModel
+                , Api.secondaryButton [] "Large" BasicLarge model.colorSchemaModel
+                , Api.secondaryButton [] "Extra large" BasicExtraLarge model.colorSchemaModel
                 ]
             , div [ class "preview white-button" ]
                 [ h3 [ class "label" ] [ text "White Buttons" ]
-                , Api.whiteButton [] "Extra small" BasicExtraSmall
-                , Api.whiteButton [] "Small" BasicSmall
-                , Api.whiteButton [] "Normal" BasicNormal
-                , Api.whiteButton [] "Large" BasicLarge
-                , Api.whiteButton [] "Extra large" BasicExtraLarge
+                , Api.whiteButton [] "Extra small" BasicExtraSmall model.colorSchemaModel
+                , Api.whiteButton [] "Small" BasicSmall model.colorSchemaModel
+                , Api.whiteButton [] "Normal" BasicNormal model.colorSchemaModel
+                , Api.whiteButton [] "Large" BasicLarge model.colorSchemaModel
+                , Api.whiteButton [] "Extra large" BasicExtraLarge model.colorSchemaModel
                 ]
             , div [ class "preview circular-button" ]
                 [ h3 [ class "label" ] [ text "Circular Buttons" ]
@@ -131,6 +136,9 @@ view model =
                 [ h3 [ class "label" ] [ text "Header" ]
                 , Api.header model.headerModel.logo model.headerModel.navBar model.headerModel.showSearchBar model.headerModel.user model.headerModel.showMobileMenu |> Html.map NavigationHeaderMsg
                 ]
+            ]
+        , div []
+            [ Api.primaryButton [ onClick ColorSchema.ColorSchemaMsg ] "Change schema" BasicExtraLarge model.colorSchemaModel |> Html.map SchemaChangeMsg
             ]
         , div [ class "text" ]
             [ div [ class "preview project description" ]
@@ -197,6 +205,14 @@ update msg model =
             ( { model
                 | projectFocusModel =
                     newModel
+              }
+            , Cmd.none
+            )
+
+        SchemaChangeMsg colorSchemaMsg ->
+            ( { model
+                | colorSchemaModel =
+                    ColorSchema.update colorSchemaMsg otherColorSchema
               }
             , Cmd.none
             )
@@ -282,4 +298,20 @@ exampleHeader =
             }
     , showSearchBar = False
     , showMobileMenu = False
+    }
+
+
+exampleColorSchema : ColorSchema.Model
+exampleColorSchema =
+    { primary = "#1D4ED8"
+    , secondary = "#130075"
+    , background = "#187330"
+    }
+
+
+otherColorSchema : ColorSchema.Model
+otherColorSchema =
+    { primary = "#a80816"
+    , secondary = "#e06c76"
+    , background = "#210f11"
     }

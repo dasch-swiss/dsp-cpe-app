@@ -20,6 +20,7 @@
             "fapian/elm-html-aria": "1.4.0",
             "jasonliang-dev/elm-heroicons": "1.0.3",
             "krisajenkins/remotedata": "6.0.1",
+            "miniBill/elm-ui-with-context": "2.0.0",
             "rtfeldman/elm-css": "17.0.5"
         },
         "indirect": {
@@ -28,6 +29,7 @@
             "elm/file": "1.0.5",
             "elm/regex": "1.0.0",
             "elm/time": "1.0.0",
+            "mdgriffith/elm-ui": "1.1.8",
             "robinheghan/murmur3": "1.0.0",
             "rtfeldman/elm-hex": "1.0.0"
         }

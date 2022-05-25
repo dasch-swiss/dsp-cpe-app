@@ -60,7 +60,7 @@ view model =
             [ h2 [] [ text "DSP CPE APP" ]
             ]
         , div [ class "buttons" ]
-            [ primaryButton [ onClick (ClickedProject "/playground") ] "playground" BasicNormal ]
+            [ primaryButton [ onClick (ClickedProject "/playground") ] "playground" BasicNormal { primary = "", secondary = "", background = "" } ]
         , div [ class "header" ]
             [ h2 [] [ text "Projects" ]
             ]
@@ -94,7 +94,7 @@ viewProject project =
         projectPath =
             "/project/" ++ Project.idToString project.id
     in
-    primaryButton [ onClick (ClickedProject projectPath) ] project.title BasicNormal
+    primaryButton [ onClick (ClickedProject projectPath) ] project.title BasicNormal { primary = "", secondary = "", background = "" }
 
 
 viewFetchError : String -> Html Msg
