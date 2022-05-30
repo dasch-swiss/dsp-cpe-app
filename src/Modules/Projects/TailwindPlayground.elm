@@ -1,8 +1,10 @@
 module Modules.Projects.TailwindPlayground exposing (..)
 
+import Browser.Navigation as Nav
 import DspCpeApi as Api
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
+import Modules.Buttons.BackButton as BackButton
 import Modules.NavigationHeader.NavigationHeader as Header
 import Modules.Projects.Focus.Focus as ProjectFocus
 import Modules.Text.Accordion as Accordion
@@ -18,6 +20,7 @@ type alias Model =
     , accordionModel : Accordion.Model
     , projectFocusModel : ProjectFocus.Model
     , headerModel : Header.HeaderModel
+    , navKey : Nav.Key
     }
 
 
@@ -26,21 +29,23 @@ type Msg
     | AccordionMsg Accordion.Msg
     | ProjectFocusMsg ProjectFocus.Msg
     | NavigationHeaderMsg Header.Msg
+    | BackButtonMsg BackButton.Msg
 
 
-initialModel : Model
-initialModel =
+initialModel : Nav.Key -> Model
+initialModel nav =
     { text = "playground"
     , projectDescriptionModel = ProjectDescription.initialModel
     , accordionModel = exampleAccordion
     , projectFocusModel = exampleProjectFocus
     , headerModel = exampleHeader
+    , navKey = nav
     }
 
 
-init : ( Model, Cmd Msg )
-init =
-    ( initialModel, Cmd.none )
+init : Nav.Key -> ( Model, Cmd Msg )
+init nav =
+    ( initialModel nav, Cmd.none )
 
 
 view : Model -> Html Msg
@@ -159,6 +164,9 @@ view model =
                 , Api.footer "© 2022 DaSCH" "Contact Us" "mailto:info@dasch.swiss" "/assets/images/license-cc-beol.jpg"
                 ]
             ]
+        , div []
+            [ Api.back |> Html.map BackButtonMsg
+            ]
         ]
 
 
@@ -200,6 +208,9 @@ update msg model =
               }
             , Cmd.none
             )
+
+        BackButtonMsg backMsg ->
+            ( model, BackButton.update backMsg model.navKey )
 
 
 subscriptions : Model -> Sub msg

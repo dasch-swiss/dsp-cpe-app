@@ -2,6 +2,7 @@ module DspCpeApi exposing (..)
 
 import Html exposing (Attribute, Html)
 import Modules.Avatars.CircularAvatar as CircularAvatar
+import Modules.Buttons.BackButton as BackButton
 import Modules.Buttons.BasicButtons.BasicButton exposing (Variant(..), basicButton)
 import Modules.Buttons.CircularButton as CircularButton
 import Modules.Buttons.LeadingIconButton as LeadingIconButton
@@ -110,3 +111,8 @@ footer copyrightText contactUsText contactUsUrl licensingFilePath =
 focus : Focus.Model -> Html.Html Focus.Msg
 focus model =
     Focus.view model
+
+
+back : Html.Html BackButton.Msg
+back =
+    BackButton.view

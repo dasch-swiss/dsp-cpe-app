@@ -82,7 +82,7 @@ initCurrentPage ( model, existingCmds ) =
                 Playground ->
                     let
                         ( pageModel, pageCmds ) =
-                            Playground.init
+                            Playground.init model.navKey
                     in
                     ( PlaygroundPage pageModel, Cmd.map PlaygroundPageMsg pageCmds )
     in

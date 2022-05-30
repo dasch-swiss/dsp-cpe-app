@@ -109,10 +109,12 @@ view model =
             Icon.getHtml model.icon
     in
     button
-        [ type_ "button"
-        , class btnClasses
-        , class baseButtonClasses
-        ]
+        (model.attrs
+            ++ [ type_ "button"
+               , class btnClasses
+               , class baseButtonClasses
+               ]
+        )
         [ span [ class svgClasses ] [ iconMethod ]
         , text model.text
         ]
