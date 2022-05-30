@@ -1,6 +1,6 @@
 module Modules.Text.ProjectDescription exposing (..)
 
-import Html exposing (Html, div, p, text)
+import Html exposing (Html, div, h2, h3, p, text)
 import Html.Attributes exposing (class, style)
 import Html.Events exposing (onClick)
 import Modules.Dividers.IconButtonDivider as IconButtonDivider
@@ -11,6 +11,8 @@ import Util.Icon as Icon
 type alias Model =
     { isOpen : Bool
     , text : String
+    , title : String
+    , subtitle : String
     }
 
 
@@ -19,28 +21,32 @@ type Msg
     | Hide
 
 
-initialModel : Model
-initialModel =
-    { isOpen = False
-    , text = """Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus 
-            est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, 
-            no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
-            Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, 
-            vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod 
-            tincidunt ut laoreet dolore magna aliquam erat volutpat."""
-    }
-
-
-init : () -> ( Model, Cmd Msg )
-init _ =
-    ( initialModel, Cmd.none )
-
-
 view : Model -> Html Msg
 view model =
+    let
+        title =
+            div []
+                [ div [ class (Dtw.classList [ Dtw.hidden, Dtw.bg_gray_50, Dtw.absolute, Dtw.top_0, Dtw.bottom_0, Dtw.left_3_slash_4, Dtw.w_screen, Dtw.lg [ Dtw.block ] ]) ] []
+                , div [ class (Dtw.classList [ Dtw.mx_auto, Dtw.text_base, Dtw.max_w_prose ]) ]
+                    [ div []
+                        [ if model.subtitle /= "" then
+                            h2 [ class (Dtw.classList [ Dtw.text_base, Dtw.text_gray_600, Dtw.font_semibold, Dtw.tracking_wide, Dtw.uppercase ]) ] [ text model.subtitle ]
+
+                          else
+                            text ""
+                        , if model.text /= "" then
+                            h3 [ class (Dtw.classList [ Dtw.mt_2, Dtw.text_3xl, Dtw.leading_8, Dtw.font_extrabold, Dtw.tracking_tight, Dtw.text_gray_900, Dtw.sm [ Dtw.text_4xl ] ]) ] [ text model.title ]
+
+                          else
+                            text ""
+                        ]
+                    ]
+                ]
+    in
     if model.isOpen then
         div []
-            [ div
+            [ title
+            , div
                 [ class (Dtw.classList [ Dtw.mt_6, Dtw.prose, Dtw.prose_indigo, Dtw.prose_lg, Dtw.text_gray_500, Dtw.mx_auto, Dtw.max_w_prose ]) ]
                 [ p [ style "padding-bottom" "1%" ] [ text model.text ] ]
             , IconButtonDivider.view { buttonAttrs = [ onClick Hide ], icon = Icon.PlusSm, text = "Read Less" }
@@ -48,7 +54,8 @@ view model =
 
     else
         div []
-            [ div
+            [ title
+            , div
                 [ class (Dtw.classList [ Dtw.mt_6, Dtw.prose, Dtw.prose_indigo, Dtw.prose_lg, Dtw.text_gray_500, Dtw.mx_auto, Dtw.max_w_prose ]) ]
                 [ p
                     [ style "overflow" "hidden"
@@ -71,7 +78,7 @@ update : Msg -> Model -> Model
 update msg model =
     case msg of
         Show ->
-            { isOpen = True, text = model.text }
+            { model | isOpen = True }
 
         Hide ->
-            { isOpen = False, text = model.text }
+            { model | isOpen = False }

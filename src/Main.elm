@@ -3,6 +3,7 @@ module Main exposing (..)
 import Browser exposing (Document, UrlRequest)
 import Browser.Navigation as Nav
 import Html exposing (Html, h3, text)
+import Modules.Projects.Beol as Beol
 import Modules.Projects.ListProjects as ListProjects exposing (..)
 import Modules.Projects.TailwindPlayground as Playground exposing (view)
 import Modules.Projects.ViewProject as ViewProject exposing (view)
@@ -22,6 +23,7 @@ type Page
     | ListProjectsPage ListProjects.Model
     | ViewProjectPage ViewProject.Model
     | PlaygroundPage Playground.Model
+    | BeolPage Beol.Model
 
 
 
@@ -33,6 +35,7 @@ type Msg
     = ListProjectsPageMsg ListProjects.Msg
     | ViewProjectPageMsg ViewProject.Msg
     | PlaygroundPageMsg Playground.Msg
+    | BeolMsg Beol.Msg
     | LinkClicked UrlRequest
     | UrlChanged Url
 
@@ -85,6 +88,13 @@ initCurrentPage ( model, existingCmds ) =
                             Playground.init model.navKey
                     in
                     ( PlaygroundPage pageModel, Cmd.map PlaygroundPageMsg pageCmds )
+
+                Beol ->
+                    let
+                        ( pageModel, pageCmds ) =
+                            Beol.init
+                    in
+                    ( BeolPage pageModel, Cmd.map BeolMsg pageCmds )
     in
     ( { model | page = currentPage }
     , Cmd.batch [ existingCmds, mappedPageCmds ]
@@ -120,6 +130,10 @@ currentView model =
         PlaygroundPage pageModel ->
             Playground.view pageModel
                 |> Html.map PlaygroundPageMsg
+
+        BeolPage beolModel ->
+            Beol.view beolModel
+                |> Html.map BeolMsg
 
 
 notFoundView : Html msg
@@ -160,6 +174,15 @@ update msg model =
             in
             ( { model | page = PlaygroundPage updatedPageModel }
             , Cmd.map PlaygroundPageMsg updatedCmd
+            )
+
+        ( BeolMsg subMsg, BeolPage beolModel ) ->
+            let
+                ( updatedPageModel, updatedCmd ) =
+                    Beol.update subMsg beolModel
+            in
+            ( { model | page = BeolPage updatedPageModel }
+            , Cmd.map BeolMsg updatedCmd
             )
 
         ( LinkClicked urlRequest, _ ) ->

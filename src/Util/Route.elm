@@ -10,6 +10,7 @@ type Route
     | Projects
     | Project ProjectId
     | Playground
+    | Beol
 
 
 parseUrl : Url -> Route
@@ -29,4 +30,5 @@ matchRoute =
         , map Projects (s "projects") -- /projects
         , map Project (s "project" </> idParser) --/project/1
         , map Playground (s "playground") -- /project/playground
+        , map Beol (s "beol") -- /project/beol
         ]
