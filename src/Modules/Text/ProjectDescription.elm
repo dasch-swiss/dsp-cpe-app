@@ -26,8 +26,7 @@ view model =
     let
         title =
             div []
-                [ div [ class (Dtw.classList [ Dtw.hidden, Dtw.bg_gray_50, Dtw.absolute, Dtw.top_0, Dtw.bottom_0, Dtw.left_3_slash_4, Dtw.w_screen, Dtw.lg [ Dtw.block ] ]) ] []
-                , div [ class (Dtw.classList [ Dtw.mx_auto, Dtw.text_base, Dtw.max_w_prose ]) ]
+                [ div [ class (Dtw.classList [ Dtw.mx_auto, Dtw.text_base, Dtw.max_w_prose ]) ]
                     [ div []
                         [ if model.subtitle /= "" then
                             h2 [ class (Dtw.classList [ Dtw.text_base, Dtw.text_gray_600, Dtw.font_semibold, Dtw.tracking_wide, Dtw.uppercase ]) ] [ text model.subtitle ]
