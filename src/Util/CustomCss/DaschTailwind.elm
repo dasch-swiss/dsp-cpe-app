@@ -1133,6 +1133,11 @@ text_blue_700 =
     "text-blue-700"
 
 
+text_center : String
+text_center =
+    "text-center"
+
+
 text_gray_200 : String
 text_gray_200 =
     "text-gray-200"
