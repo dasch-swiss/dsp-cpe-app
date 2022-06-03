@@ -6,7 +6,7 @@ To run the project, you will need the following:
 
 Elm: [https://guide.elm-lang.org/install/elm.html](https://guide.elm-lang.org/install/elm.html)
 
-elm-go (installed globally): `npm intsall -g elm-go`
+elm-go (installed globally): `npm install -g elm-go`
 
 json-server (installed globally): `npm install -g json-server`
 
