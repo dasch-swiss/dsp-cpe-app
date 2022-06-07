@@ -140,7 +140,7 @@ view model =
         , div [ class "text" ]
             [ div [ class "preview project description" ]
                 [ h3 [ class "label" ] [ text "Project description" ]
-                , Api.projectDescription model.projectDescriptionModel.isOpen model.projectDescriptionModel.text model.projectDescriptionModel.title model.projectDescriptionModel.subtitle |> Html.map ProjDesMsg
+                , Api.projectDescription model.projectDescriptionModel |> Html.map ProjDesMsg
                 ]
             ]
         , div [ class "accordion" ]

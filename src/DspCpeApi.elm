@@ -88,9 +88,9 @@ header logo navBar showSearchBar user showMobileMenu =
     Header.view { logo = logo, navBar = navBar, showSearchBar = showSearchBar, user = user, showMobileMenu = showMobileMenu }
 
 
-projectDescription : Bool -> String -> String -> String -> Html.Html ProjectDescription.Msg
-projectDescription isOpen text title subtitle =
-    ProjectDescription.view { isOpen = isOpen, text = text, title = title, subtitle = subtitle }
+projectDescription : { isOpen : Bool, text : String, title : String, subtitle: String} -> Html.Html ProjectDescription.Msg
+projectDescription args =
+    ProjectDescription.view { isOpen = args.isOpen, text = args.text, title = args.title, subtitle = args.subtitle }
 
 
 accordion : Bool -> String -> Accordion.AccordionSize -> Html.Html Accordion.Msg
