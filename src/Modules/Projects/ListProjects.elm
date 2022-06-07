@@ -60,7 +60,9 @@ view model =
             [ h2 [] [ text "DSP CPE APP" ]
             ]
         , div [ class "buttons" ]
-            [ primaryButton [ onClick (ClickedProject "/playground") ] "playground" BasicNormal ]
+            [ primaryButton [ onClick (ClickedProject "/playground") ] "playground" BasicNormal
+            , primaryButton [ onClick (ClickedProject "/beol") ] "Beol" BasicNormal
+            ]
         , div [ class "header" ]
             [ h2 [] [ text "Projects" ]
             ]
