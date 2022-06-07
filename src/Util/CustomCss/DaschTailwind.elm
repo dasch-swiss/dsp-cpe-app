@@ -297,6 +297,7 @@ fixed : String
 fixed =
     "fixed"
 
+
 flex : String
 flex =
     "flex"
@@ -467,6 +468,11 @@ h_16 =
     "h-16"
 
 
+h_32 : String
+h_32 =
+    "h-32"
+
+
 hidden : String
 hidden =
     "hidden"
@@ -490,6 +496,7 @@ inset_0 =
 inset_x_0 : String
 inset_x_0 =
     "inset-x-0"
+
 
 inset_y_0 : String
 inset_y_0 =
@@ -644,6 +651,11 @@ ml_3 =
 ml_6 : String
 ml_6 =
     "ml-6"
+
+
+min_h_screen : String
+min_h_screen =
+    "min-h-screen"
 
 
 mr_1 : String
@@ -834,6 +846,11 @@ pb_2 =
 pb_3 : String
 pb_3 =
     "pb-3"
+
+
+pb_32 : String
+pb_32 =
+    "pb-32"
 
 
 pb_96 : String
@@ -1309,6 +1326,7 @@ w_full =
 w_screen : String
 w_screen =
     "w-screen"
+
 
 z_50 : String
 z_50 =
