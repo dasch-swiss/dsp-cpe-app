@@ -18,7 +18,7 @@ type alias Model =
 
 view : Model -> Html msg
 view model =
-    footer [ class Dtw.bg_white ]
+    footer [ class (Dtw.classList [Dtw.bg_white, Dtw.inset_x_0, Dtw.bottom_0]) ]
         [ div
             [ class
                 (Dtw.classList

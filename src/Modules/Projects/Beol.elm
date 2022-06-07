@@ -26,6 +26,7 @@ view model =
             model.header.showSearchBar
             model.header.user
             model.header.showMobileMenu
+            model.header.fixedPosition
             |> Html.map NavigationHeaderMsg
         , Api.projectDescription model.projectDescription.isOpen model.projectDescription.text model.projectDescription.title model.projectDescription.subtitle |> Html.map ProjectDescriptionMsg
         , Api.footer "The contents on our website are licensed under a" "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License." "https://creativecommons.org/licenses/by-nc-nd/4.0/" "/assets/images/license-cc-beol.jpg"
@@ -65,6 +66,7 @@ init =
             , user = Nothing
             , showSearchBar = False
             , showMobileMenu = False
+            , fixedPosition = True
             }
       , projectDescription =
             { title = "Bernoulli Euler Online"

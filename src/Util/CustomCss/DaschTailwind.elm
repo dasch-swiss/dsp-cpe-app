@@ -293,6 +293,10 @@ fill_white =
     "fill-white"
 
 
+fixed : String
+fixed =
+    "fixed"
+
 flex : String
 flex =
     "flex"
@@ -482,6 +486,10 @@ inset_0 : String
 inset_0 =
     "inset-0"
 
+
+inset_x_0 : String
+inset_x_0 =
+    "inset-x-0"
 
 inset_y_0 : String
 inset_y_0 =
@@ -1103,6 +1111,11 @@ static =
     "static"
 
 
+sticky : String
+sticky =
+    "sticky"
+
+
 text_3xl : String
 text_3xl =
     "text-3xl"
@@ -1296,3 +1309,7 @@ w_full =
 w_screen : String
 w_screen =
     "w-screen"
+
+z_50 : String
+z_50 =
+    "z-50"

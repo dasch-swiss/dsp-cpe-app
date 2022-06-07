@@ -1,6 +1,6 @@
 module Modules.NavigationHeader.NavigationHeader exposing (HeaderModel, Logo, Msg(..), NavItem, User, update, view)
 
-import Html exposing (Attribute, Html, a, button, div, img, input, nav, span, text)
+import Html exposing (Attribute, Html, a, button, div, header, img, input, nav, span, text)
 import Html.Attributes exposing (alt, class, href, id, placeholder, src, type_)
 import Html.Events exposing (onClick)
 import Modules.Avatars.CircularAvatar as CircularAvatar
@@ -25,6 +25,7 @@ type alias HeaderModel =
     , user : Maybe User
     , showSearchBar : Bool
     , showMobileMenu : Bool
+    , fixedPosition : Bool
     }
 
 
@@ -38,39 +39,52 @@ type alias NavItem =
 
 
 view : HeaderModel -> Html.Html Msg
-view header =
-    div [ id "nav-header-bg-cntr", class navHeaderBgCntrStyle ]
+view model =
+    header [ id "nav-header-bg-cntr", class (navHeaderBgCntrStyle model.fixedPosition) ]
         [ div [ id "standard-view-cntr", class navHeaderCntrStyle ]
             [ div [ id "header-elements-cntr", class headerElementsCntrStyle ]
                 [ div [ id "header-left-elements-cntr", class leftSideElementsStyle ]
                     [ div [ id "navbar-logo-cntr", class navBarLogoCntrStyle ]
-                        [ logo header.logo
+                        [ logo model.logo
                         ]
-                    , div [ id "mobile-menu-cntr", class (mobileMenuButtonCntrStyle header.showSearchBar) ]
-                        [ mobileMenuButton header.showMobileMenu
+                    , div [ id "mobile-menu-cntr", class (mobileMenuButtonCntrStyle model.showSearchBar) ]
+                        [ mobileMenuButton model.showMobileMenu
                         ]
-                    , div [ id "navbar-nav-cntr", class (navBarCntrStyle header.showSearchBar) ] [ navBar header.navBar ]
+                    , div [ id "navbar-nav-cntr", class (navBarCntrStyle model.showSearchBar) ] [ navBar model.navBar ]
                     ]
                 ]
             , div [ id "header-right-elements-cntr", class rightSideElementsStyle ]
                 [ div [ id "searchbar-cntr", class searchBarCntrStyle ]
-                    [ div [ id "search-view-cntr", class (searchViewCntrStyle header.showSearchBar) ] [ searchBar ]
-                    , div [ class (isVisible (not header.showSearchBar)) ]
+                    [ div [ id "search-view-cntr", class (searchViewCntrStyle model.showSearchBar) ] [ searchBar ]
+                    , div [ class (isVisible (not model.showSearchBar)) ]
                         [ CircularButton.view { size = CircularNormal, icon = Search, attrs = [ onClick ToggleSearchBarMsg ] }
                         ]
                     ]
-                , userMenu header.user
+                , userMenu model.user
                 ]
             ]
-        , mobileMenu header
+        , mobileMenu model
         ]
 
 
-navHeaderBgCntrStyle : String
-navHeaderBgCntrStyle =
-    [ Dtw.bg_white
-    , Dtw.space_y_2
-    ]
+navHeaderBgCntrStyle : Bool -> String
+navHeaderBgCntrStyle fixedPos =
+    let
+        style =
+            if fixedPos then
+                [ Dtw.bg_white
+                , Dtw.space_y_2
+                , Dtw.sticky
+                , Dtw.top_0
+                , Dtw.z_50
+                ]
+
+            else
+                [ Dtw.bg_white
+                , Dtw.space_y_2
+                ]
+    in
+    style
         |> classList
 
 
