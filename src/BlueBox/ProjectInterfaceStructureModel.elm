@@ -38,7 +38,7 @@ type alias Body msg =
     , iconButtonDividers : Maybe (List { attrs : List (Attribute msg), icon : Icon, text : String })
     , projectDescriptions : Maybe (List { isOpen : Bool, text : String, title : String, subtitle : String })
     , accordions : Maybe (List { isOpen : Bool, text : String, size : AccordionSize })
-    , imageTileGrids : Maybe (List ImageTile.Model)
+    , imageTileGrids : Maybe (List (List ImageTile.Model))
     , focus : Maybe (List Focus.Model)
     , back : Maybe {}
     }

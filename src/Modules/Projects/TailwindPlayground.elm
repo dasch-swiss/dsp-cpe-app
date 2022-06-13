@@ -1,7 +1,7 @@
 module Modules.Projects.TailwindPlayground exposing (..)
 
 import Browser.Navigation as Nav
-import DspCpeApi as Api
+import DspCpeApi as Api exposing (accordion)
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Modules.Buttons.BackButton as BackButton
@@ -10,7 +10,7 @@ import Modules.Projects.Focus.Focus as ProjectFocus
 import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
 import Modules.Tiles.ImageTile as ImageTile
-import Shared.SharedTypes exposing (BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..))
+import Shared.SharedTypes exposing (AccordionSize(..), BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..))
 import Util.Icon as Icon
 
 
@@ -151,7 +151,7 @@ view model =
         , div [ class "accordion" ]
             [ div []
                 [ h3 [ class "label" ] [ text "Accordion" ]
-                , Api.accordion model.accordionModel.isOpen model.accordionModel.text model.accordionModel.size |> Html.map AccordionMsg
+                , Api.accordion model.accordionModel |> Html.map AccordionMsg
                 ]
             ]
         , div [ class "tiles" ]
@@ -166,7 +166,7 @@ view model =
         , div [ class "footer" ]
             [ div []
                 [ h3 [ class "label" ] [ text "Footer" ]
-                , Api.footer "© 2022 DaSCH" "Contact Us" "mailto:info@dasch.swiss" "/assets/images/license-cc-beol.jpg"
+                , Api.footer { copyrightText = "© 2022 DaSCH", contactUsText = "Contact Us", contactUsUrl = "mailto:info@dasch.swiss", licensingFilePath = "/assets/images/license-cc-beol.jpg" }
                 ]
             ]
         , div []
@@ -248,7 +248,7 @@ exampleAccordion =
             Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, 
             vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod 
             tincidunt ut laoreet dolore magna aliquam erat volutpat."""
-    , size = Accordion.FullWidth
+    , size = FullWidth
     }
 
 

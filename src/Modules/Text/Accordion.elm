@@ -3,14 +3,10 @@ module Modules.Text.Accordion exposing (..)
 import Html exposing (Html, div, p, text)
 import Html.Attributes exposing (class)
 import Html.Events exposing (onClick)
+import Shared.SharedTypes exposing (AccordionSize(..))
 import Util.CustomCss.CssColors exposing (CustomColor(..))
 import Util.CustomCss.DaschTailwind as Dtw
 import Util.Icon as Icon
-
-
-type AccordionSize
-    = HalfWidth
-    | FullWidth
 
 
 type alias Model =

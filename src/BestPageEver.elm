@@ -40,7 +40,7 @@ header =
 body : Struct.Body msg
 body =
     { circularAvatars = Nothing
-    , primaryButtons = Just [ { attrs = [ href "https://scryfall.com/card/2xm/109/thoughtseize" ], text = "Black", size = BasicNormal }, { attrs = [ href "https://scryfall.com/card/clb/187/lightning-bolt" ], text = "Red", size = BasicNormal }, { attrs = [ href "https://scryfall.com/card/2xm/151/ancient-stirrings" ], text = "Green", size = BasicNormal }, { attrs = [ href "https://scryfall.com/card/vma/1/ancestral-recall" ], text = "Blue", size = BasicNormal }, { attrs = [ href "https://scryfall.com/card/ncc/211/swords-to-plowshares" ], text = "White", size = BasicNormal } ]
+    , primaryButtons = Nothing
     , secondaryButtons = Nothing
     , whiteButtons = Nothing
     , circularButtons = Nothing
@@ -49,7 +49,15 @@ body =
     , iconButtonDividers = Nothing
     , projectDescriptions = Nothing
     , accordions = Nothing
-    , imageTileGrids = Nothing
+    , imageTileGrids =
+        Just
+            [ [ { src = "https://m.media-amazon.com/images/I/51Dmo6as7CL._AC_SX385._SX._UX._SY._UY_.jpg", alt = "Black", buttonAlt = "", title = "Black", subtitle = "Best Black card", url = "https://scryfall.com/card/2xm/109/thoughtseize" }
+              , { src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4Urm7Ecn8IHA1AVD9G-2F2mbzdpuynQzMAg&usqp=CAU", alt = "Green", buttonAlt = "", title = "Green", subtitle = "Best Green card", url = "https://scryfall.com/card/3ed/194/fastbond" }
+              , { src = "https://www.pngitem.com/pimgs/m/484-4849222_the-gathering-magic-points-mana-playing-card-collectible.png", alt = "Red", buttonAlt = "", title = "Red", subtitle = "Best Red card", url = "https://scryfall.com/card/clb/187/lightning-bolt" }
+              , { src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBZCpVcmUL7Rja96CMxRtCE4DzvUSug4IJxg&usqp=CAU", alt = "Blue", buttonAlt = "", title = "Blue", subtitle = "Best Blue card", url = "https://scryfall.com/card/vma/1/ancestral-recall" }
+              , { src = "https://static.wikia.nocookie.net/mtgsalvation_gamepedia/images/8/8d/Old_W.svg/revision/latest/scale-to-width-down/200?cb=20170110205458", alt = "White", buttonAlt = "", title = "White", subtitle = "Best White card", url = "https://scryfall.com/card/ncc/211/swords-to-plowshares" }
+              ]
+            ]
     , focus = Nothing
     , back = Just {}
     }

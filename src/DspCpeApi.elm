@@ -15,7 +15,7 @@ import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
 import Modules.Tiles.ImageTile as ImageTile
 import Modules.Tiles.ImageTileGrid as ImageTileGrid
-import Shared.SharedTypes exposing (BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..))
+import Shared.SharedTypes exposing (AccordionSize(..), BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..))
 import Util.Icon as Icon
 
 
@@ -78,9 +78,9 @@ trailingIconButton args =
     TrailingIconButton.view { size = args.size, text = args.text, icon = args.icon, attrs = args.attrs }
 
 
-iconButtonDivider : List (Attribute msg) -> Icon.Icon -> String -> Html msg
-iconButtonDivider attr icon text =
-    IconButtonDivider.view { buttonAttrs = attr, icon = icon, text = text }
+iconButtonDivider : { attrs : List (Attribute msg), icon : Icon.Icon, text : String } -> Html msg
+iconButtonDivider args =
+    IconButtonDivider.view { buttonAttrs = args.attrs, icon = args.icon, text = args.text }
 
 
 header : { logo : Header.Logo, navBar : List Header.NavItem, showSearchBar : Bool, user : Maybe Header.User, showMobileMenu : Bool } -> Html Header.Msg
@@ -93,9 +93,9 @@ projectDescription args =
     ProjectDescription.view { isOpen = args.isOpen, text = args.text, title = args.title, subtitle = args.subtitle }
 
 
-accordion : Bool -> String -> Accordion.AccordionSize -> Html.Html Accordion.Msg
-accordion isOpen text size =
-    Accordion.view { isOpen = isOpen, text = text, size = size }
+accordion : { isOpen : Bool, text : String, size : AccordionSize } -> Html.Html Accordion.Msg
+accordion args =
+    Accordion.view { isOpen = args.isOpen, text = args.text, size = args.size }
 
 
 imageTileGrid : List ImageTile.Model -> Html.Html msg
@@ -103,9 +103,9 @@ imageTileGrid tiles =
     ImageTileGrid.view { tiles = tiles }
 
 
-footer : String -> String -> String -> String -> Html.Html msg
-footer copyrightText contactUsText contactUsUrl licensingFilePath =
-    Footer.view { copyrightText = copyrightText, contactUsText = contactUsText, contactUsUrl = contactUsUrl, licensingFilePath = licensingFilePath }
+footer : { copyrightText : String, contactUsText : String, contactUsUrl : String, licensingFilePath : String } -> Html.Html msg
+footer args =
+    Footer.view { copyrightText = args.copyrightText, contactUsText = args.contactUsText, contactUsUrl = args.contactUsUrl, licensingFilePath = args.licensingFilePath }
 
 
 focus : Focus.Model -> Html.Html Focus.Msg
