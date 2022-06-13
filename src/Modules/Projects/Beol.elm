@@ -21,11 +21,7 @@ view : Model -> Html.Html Msg
 view model =
     div []
         [ Api.header
-            model.header.logo
-            model.header.navBar
-            model.header.showSearchBar
-            model.header.user
-            model.header.showMobileMenu
+            model.header
             |> Html.map NavigationHeaderMsg
         , Api.projectDescription model.projectDescription |> Html.map ProjectDescriptionMsg
         , Api.footer "The contents on our website are licensed under a" "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License." "https://creativecommons.org/licenses/by-nc-nd/4.0/" "/assets/images/license-cc-beol.jpg"

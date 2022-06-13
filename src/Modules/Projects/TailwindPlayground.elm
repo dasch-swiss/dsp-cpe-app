@@ -70,33 +70,33 @@ view model =
                 ]
             , div [ class "preview white-button" ]
                 [ h3 [ class "label" ] [ text "White Buttons" ]
-                , Api.whiteButton [] "Extra small" BasicExtraSmall
-                , Api.whiteButton [] "Small" BasicSmall
-                , Api.whiteButton [] "Normal" BasicNormal
-                , Api.whiteButton [] "Large" BasicLarge
-                , Api.whiteButton [] "Extra large" BasicExtraLarge
+                , Api.whiteButton { attrs = [], text = "Extra small", size = BasicExtraSmall }
+                , Api.whiteButton { attrs = [], text = "Small", size = BasicSmall }
+                , Api.whiteButton { attrs = [], text = "Normal", size = BasicNormal }
+                , Api.whiteButton { attrs = [], text = "Large", size = BasicLarge }
+                , Api.whiteButton { attrs = [], text = "Extra large", size = BasicExtraLarge }
                 ]
             , div [ class "preview circular-button" ]
                 [ h3 [ class "label" ] [ text "Circular Buttons" ]
-                , Api.circularButton CircularExtraSmall Icon.ArrowRight []
-                , Api.circularButton CircularSmall Icon.Annotation []
-                , Api.circularButton CircularNormal Icon.Plus []
-                , Api.circularButton CircularLarge Icon.Check []
-                , Api.circularButton CircularExtraLarge Icon.EmojiHappy []
+                , Api.circularButton { size = CircularExtraSmall, icon = Icon.ArrowRight, attrs = [] }
+                , Api.circularButton { size = CircularSmall, icon = Icon.Annotation, attrs = [] }
+                , Api.circularButton { size = CircularNormal, icon = Icon.Plus, attrs = [] }
+                , Api.circularButton { size = CircularLarge, icon = Icon.Check, attrs = [] }
+                , Api.circularButton { size = CircularExtraLarge, icon = Icon.EmojiHappy, attrs = [] }
                 ]
             , div [ class "preview leading-button" ]
                 [ h3 [ class "label" ] [ text "Leading Icon Buttons" ]
-                , Api.leadingIconButton LeadingSmall "Small" Icon.Annotation []
-                , Api.leadingIconButton LeadingNormal "Normal" Icon.EmojiHappy []
-                , Api.leadingIconButton LeadingLarge "Large" Icon.Plus []
-                , Api.leadingIconButton LeadingExtraLarge "Extra Large" Icon.Check []
+                , Api.leadingIconButton { size = LeadingSmall, text = "Small", icon = Icon.Annotation, attrs = [] }
+                , Api.leadingIconButton { size = LeadingNormal, text = "Normal", icon = Icon.EmojiHappy, attrs = [] }
+                , Api.leadingIconButton { size = LeadingLarge, text = "Large", icon = Icon.Plus, attrs = [] }
+                , Api.leadingIconButton { size = LeadingExtraLarge, text = "Extra Large", icon = Icon.Check, attrs = [] }
                 ]
             , div [ class "preview leading-button" ]
                 [ h3 [ class "label" ] [ text "Trailing Icon Buttons" ]
-                , Api.trailingIconButton TrailingSmall "Small" Icon.Annotation []
-                , Api.trailingIconButton TrailingNormal "Normal" Icon.EmojiHappy []
-                , Api.trailingIconButton TrailingLarge "Large" Icon.Plus []
-                , Api.trailingIconButton TrailingExtraLarge "Extra Large" Icon.Check []
+                , Api.trailingIconButton { size = TrailingSmall, text = "Small", icon = Icon.Annotation, attrs = [] }
+                , Api.trailingIconButton { size = TrailingNormal, text = "Normal", icon = Icon.EmojiHappy, attrs = [] }
+                , Api.trailingIconButton { size = TrailingLarge, text = "Large", icon = Icon.Plus, attrs = [] }
+                , Api.trailingIconButton { size = TrailingExtraLarge, text = "Extra Large", icon = Icon.Check, attrs = [] }
                 ]
 
             -- insert other buttons here
@@ -139,7 +139,7 @@ view model =
         , div [ class "text" ]
             [ div [ class "Header" ]
                 [ h3 [ class "label" ] [ text "Header" ]
-                , Api.header model.headerModel.logo model.headerModel.navBar model.headerModel.showSearchBar model.headerModel.user model.headerModel.showMobileMenu |> Html.map NavigationHeaderMsg
+                , Api.header model.headerModel |> Html.map NavigationHeaderMsg
                 ]
             ]
         , div [ class "text" ]

@@ -1,10 +1,10 @@
 module BlueBox.ProjectInterfaceStructureModel exposing (..)
 
 import Html exposing (Attribute)
-import Modules.NavigationHeader.NavigationHeader exposing (Logo, User)
+import Modules.NavigationHeader.NavigationHeader exposing (Logo, NavItem, User)
 import Modules.Projects.Focus.Focus as Focus
 import Modules.Tiles.ImageTile as ImageTile
-import Shared.SharedTypes exposing (AccordionSize, BasicButtonSize, CircularAvatarSize, CircularButtonSize, LeadingSize, NavItem, TrailingSize)
+import Shared.SharedTypes exposing (AccordionSize, BasicButtonSize, CircularAvatarSize, CircularButtonSize, LeadingSize, TrailingSize)
 import Util.Icon exposing (Icon)
 
 
@@ -23,7 +23,7 @@ type alias Header msg =
     , circularButtons : Maybe (List { size : CircularButtonSize, icon : Icon, attrs : List (Attribute msg) })
     , leadingIconButtons : Maybe (List { size : LeadingSize, text : String, icon : Icon, attrs : List (Attribute msg) })
     , trailingIconButtons : Maybe (List { size : TrailingSize, text : String, icon : Icon, attrs : List (Attribute msg) })
-    , header : Maybe { logo : Logo, navBar : List (NavItem msg), showSearchBar : Bool, user : Maybe User, showMobileMenu : Bool }
+    , header : Maybe { logo : Logo, navBar : List NavItem, showSearchBar : Bool, user : Maybe User, showMobileMenu : Bool }
     }
 
 

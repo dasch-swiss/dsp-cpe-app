@@ -46,36 +46,36 @@ secondaryButton args =
 -- convenience function: returns a basicButton with the Variant "White"
 
 
-whiteButton : List (Attribute msg) -> String -> BasicButtonSize -> Html msg
-whiteButton attrs txt size =
-    basicButton attrs txt size White
+whiteButton : { attrs : List (Attribute msg), text : String, size : BasicButtonSize } -> Html msg
+whiteButton args =
+    basicButton args.attrs args.text args.size White
 
 
 
 -- convenience function: returns a "Circular" button
 
 
-circularButton : CircularButtonSize -> Icon.Icon -> List (Attribute msg) -> Html msg
-circularButton size icon attrs =
-    CircularButton.view { size = size, icon = icon, attrs = attrs }
+circularButton : { size : CircularButtonSize, icon : Icon.Icon, attrs : List (Attribute msg) } -> Html msg
+circularButton args =
+    CircularButton.view { size = args.size, icon = args.icon, attrs = args.attrs }
 
 
 
 -- convenience function: returns a "LeadingIcon" button
 
 
-leadingIconButton : LeadingSize -> String -> Icon.Icon -> List (Attribute msg) -> Html msg
-leadingIconButton size text icon attrs =
-    LeadingIconButton.view { size = size, text = text, icon = icon, attrs = attrs }
+leadingIconButton : { size : LeadingSize, text : String, icon : Icon.Icon, attrs : List (Attribute msg) } -> Html msg
+leadingIconButton args =
+    LeadingIconButton.view { size = args.size, text = args.text, icon = args.icon, attrs = args.attrs }
 
 
 
 -- convenience function: returns a "TrailingIcon" button
 
 
-trailingIconButton : TrailingSize -> String -> Icon.Icon -> List (Attribute msg) -> Html msg
-trailingIconButton size text icon attrs =
-    TrailingIconButton.view { size = size, text = text, icon = icon, attrs = attrs }
+trailingIconButton : { size : TrailingSize, text : String, icon : Icon.Icon, attrs : List (Attribute msg) } -> Html msg
+trailingIconButton args =
+    TrailingIconButton.view { size = args.size, text = args.text, icon = args.icon, attrs = args.attrs }
 
 
 iconButtonDivider : List (Attribute msg) -> Icon.Icon -> String -> Html msg
@@ -83,9 +83,9 @@ iconButtonDivider attr icon text =
     IconButtonDivider.view { buttonAttrs = attr, icon = icon, text = text }
 
 
-header : Header.Logo -> List Header.NavItem -> Bool -> Maybe Header.User -> Bool -> Html Header.Msg
-header logo navBar showSearchBar user showMobileMenu =
-    Header.view { logo = logo, navBar = navBar, showSearchBar = showSearchBar, user = user, showMobileMenu = showMobileMenu }
+header : { logo : Header.Logo, navBar : List Header.NavItem, showSearchBar : Bool, user : Maybe Header.User, showMobileMenu : Bool } -> Html Header.Msg
+header args =
+    Header.view { logo = args.logo, navBar = args.navBar, showSearchBar = args.showSearchBar, user = args.user, showMobileMenu = args.showMobileMenu }
 
 
 projectDescription : { isOpen : Bool, text : String, title : String, subtitle : String } -> Html.Html ProjectDescription.Msg

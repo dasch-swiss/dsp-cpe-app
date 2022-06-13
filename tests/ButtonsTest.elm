@@ -42,7 +42,7 @@ secondaryCreated =
 
 white : Html msg
 white =
-    whiteButton [] "White Button" BasicExtraSmall
+    whiteButton { attrs = [], text = "White Button", size = BasicExtraSmall }
 
 
 whiteCreated : Test
@@ -57,7 +57,7 @@ whiteCreated =
 
 circular : Html msg
 circular =
-    Api.circularButton CircularLarge Icon.AcademicCap []
+    Api.circularButton { size = CircularLarge, icon = Icon.AcademicCap, attrs = [] }
 
 
 circularCreated : Test

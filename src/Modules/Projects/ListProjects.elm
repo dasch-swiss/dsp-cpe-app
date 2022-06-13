@@ -62,6 +62,7 @@ view model =
         , div [ class "buttons" ]
             [ primaryButton { attrs = [ onClick (ClickedProject "/playground") ], text = "playground", size = BasicNormal }
             , primaryButton { attrs = [ onClick (ClickedProject "/beol") ], text = "Beol", size = BasicNormal }
+            , primaryButton { attrs = [ onClick (ClickedProject "/executor") ], text = "EXECUTE IMMEDIATLY", size = BasicNormal }
             ]
         , div [ class "header" ]
             [ h2 [] [ text "Projects" ]

@@ -30,9 +30,9 @@ header =
                 , attrs = []
                 }
             , navBar = []
-            , showSearchBar = False
+            , showSearchBar = True
             , user = Nothing
-            , showMobileMenu = False
+            , showMobileMenu = True
             }
     }
 
