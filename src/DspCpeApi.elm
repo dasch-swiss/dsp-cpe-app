@@ -19,27 +19,27 @@ import Shared.SharedTypes exposing (BasicButtonSize(..), CircularAvatarSize(..),
 import Util.Icon as Icon
 
 
-circularAvatar : CircularAvatarSize -> String -> String -> List (Attribute msg) -> Html msg
-circularAvatar size img alt attrs =
-    CircularAvatar.view { size = size, img = img, alt = alt, attrs = attrs }
+circularAvatar : { size : CircularAvatarSize, img : String, alt : String, attrs : List (Attribute msg) } -> Html msg
+circularAvatar args =
+    CircularAvatar.view { size = args.size, img = args.img, alt = args.alt, attrs = args.attrs }
 
 
 
 -- convenience function: returns a basicButton with the Variant "Primary"
 
 
-primaryButton : List (Attribute msg) -> String -> BasicButtonSize -> Html msg
-primaryButton attrs txt size =
-    basicButton attrs txt size Primary
+primaryButton : { attrs : List (Attribute msg), text : String, size : BasicButtonSize } -> Html msg
+primaryButton args =
+    basicButton args.attrs args.text args.size Primary
 
 
 
 -- convenience function: returns a basicButton with the Variant "Secondary"
 
 
-secondaryButton : List (Attribute msg) -> String -> BasicButtonSize -> Html msg
-secondaryButton attrs txt size =
-    basicButton attrs txt size Secondary
+secondaryButton : { attrs : List (Attribute msg), text : String, size : BasicButtonSize } -> Html msg
+secondaryButton args =
+    basicButton args.attrs args.text args.size Secondary
 
 
 
@@ -88,7 +88,7 @@ header logo navBar showSearchBar user showMobileMenu =
     Header.view { logo = logo, navBar = navBar, showSearchBar = showSearchBar, user = user, showMobileMenu = showMobileMenu }
 
 
-projectDescription : { isOpen : Bool, text : String, title : String, subtitle: String} -> Html.Html ProjectDescription.Msg
+projectDescription : { isOpen : Bool, text : String, title : String, subtitle : String } -> Html.Html ProjectDescription.Msg
 projectDescription args =
     ProjectDescription.view { isOpen = args.isOpen, text = args.text, title = args.title, subtitle = args.subtitle }
 

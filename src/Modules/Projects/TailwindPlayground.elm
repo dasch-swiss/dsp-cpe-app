@@ -54,19 +54,19 @@ view model =
         [ div [ class "buttons" ]
             [ div [ class "preview primary-button" ]
                 [ h3 [ class "label" ] [ text "Primary Buttons" ]
-                , Api.primaryButton [] "Extra small" BasicExtraSmall
-                , Api.primaryButton [] "Small" BasicSmall
-                , Api.primaryButton [] "Normal" BasicNormal
-                , Api.primaryButton [] "Large" BasicLarge
-                , Api.primaryButton [] "Extra large" BasicExtraLarge
+                , Api.primaryButton { attrs = [], text = "Extra small", size = BasicExtraSmall }
+                , Api.primaryButton { attrs = [], text = "Small", size = BasicSmall }
+                , Api.primaryButton { attrs = [], text = "Normal", size = BasicNormal }
+                , Api.primaryButton { attrs = [], text = "Large", size = BasicLarge }
+                , Api.primaryButton { attrs = [], text = "Extra large", size = BasicExtraLarge }
                 ]
             , div [ class "preview secondary-button" ]
                 [ h3 [ class "label" ] [ text "Secondary Buttons" ]
-                , Api.secondaryButton [] "Extra small" BasicExtraSmall
-                , Api.secondaryButton [] "Small" BasicSmall
-                , Api.secondaryButton [] "Normal" BasicNormal
-                , Api.secondaryButton [] "Large" BasicLarge
-                , Api.secondaryButton [] "Extra large" BasicExtraLarge
+                , Api.secondaryButton { attrs = [], text = "Extra small", size = BasicExtraSmall }
+                , Api.secondaryButton { attrs = [], text = "Small", size = BasicSmall }
+                , Api.secondaryButton { attrs = [], text = "Normal", size = BasicNormal }
+                , Api.secondaryButton { attrs = [], text = "Large", size = BasicLarge }
+                , Api.secondaryButton { attrs = [], text = "Extra large", size = BasicExtraLarge }
                 ]
             , div [ class "preview white-button" ]
                 [ h3 [ class "label" ] [ text "White Buttons" ]
@@ -105,30 +105,35 @@ view model =
             [ div [ class "preview circular-avatar" ]
                 [ h3 [ class "label" ] [ text "Circular Avatar" ]
                 , Api.circularAvatar
-                    CircularAvatarExtraSmall
-                    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    "Extra small"
-                    []
+                    { size = CircularAvatarExtraSmall
+                    , img = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    , alt = "Extra small"
+                    , attrs = []
+                    }
                 , Api.circularAvatar
-                    CircularAvatarSmall
-                    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    "Small"
-                    []
+                    { size = CircularAvatarSmall
+                    , img = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    , alt = "Small"
+                    , attrs = []
+                    }
                 , Api.circularAvatar
-                    CircularAvatarNormal
-                    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    "Normal"
-                    []
+                    { size = CircularAvatarNormal
+                    , img = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    , alt = "Normal"
+                    , attrs = []
+                    }
                 , Api.circularAvatar
-                    CircularAvatarLarge
-                    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    "Large"
-                    []
+                    { size = CircularAvatarLarge
+                    , img = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    , alt = "Large"
+                    , attrs = []
+                    }
                 , Api.circularAvatar
-                    CircularAvatarExtraLarge
-                    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    "Extra large"
-                    []
+                    { size = CircularAvatarExtraLarge
+                    , img = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    , alt = "Extra large"
+                    , attrs = []
+                    }
                 ]
             ]
         , div [ class "text" ]

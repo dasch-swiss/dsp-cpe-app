@@ -12,7 +12,7 @@ import Util.Icon as Icon
 
 primary : Html msg
 primary =
-    primaryButton [] "Primary Button" BasicExtraSmall
+    primaryButton { attrs = [], text = "Primary Button", size = BasicExtraSmall }
 
 
 primaryCreated : Test
@@ -27,7 +27,7 @@ primaryCreated =
 
 secondary : Html msg
 secondary =
-    secondaryButton [] "Secondary Button" BasicExtraSmall
+    secondaryButton { attrs = [], text = "Secondary Button", size = BasicExtraSmall }
 
 
 secondaryCreated : Test
