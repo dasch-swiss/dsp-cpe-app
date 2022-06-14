@@ -298,6 +298,7 @@ exampleHeader =
             }
     , showSearchBar = False
     , showMobileMenu = False
+    , fixedPosition = False
     }
 
 

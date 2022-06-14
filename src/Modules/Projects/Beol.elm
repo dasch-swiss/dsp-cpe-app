@@ -2,8 +2,10 @@ module Modules.Projects.Beol exposing (..)
 
 import DspCpeApi as Api
 import Html exposing (div)
+import Html.Attributes exposing (class)
 import Modules.NavigationHeader.NavigationHeader as Header
 import Modules.Text.ProjectDescription as ProjectDescription
+import Util.CustomCss.DaschTailwind as Dtw
 
 
 type alias Model =
@@ -61,6 +63,7 @@ init =
             , user = Nothing
             , showSearchBar = False
             , showMobileMenu = False
+            , fixedPosition = True
             }
       , projectDescription =
             { title = "Bernoulli Euler Online"

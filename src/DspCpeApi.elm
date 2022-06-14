@@ -83,9 +83,9 @@ iconButtonDivider args =
     IconButtonDivider.view { buttonAttrs = args.attrs, icon = args.icon, text = args.text }
 
 
-header : { logo : Header.Logo, navBar : List Header.NavItem, showSearchBar : Bool, user : Maybe Header.User, showMobileMenu : Bool } -> Html Header.Msg
+header : { logo : Header.Logo, navBar : List Header.NavItem, showSearchBar : Bool, user : Maybe Header.User, showMobileMenu : Bool, fixedPosition : Bool } -> Html Header.Msg
 header args =
-    Header.view { logo = args.logo, navBar = args.navBar, showSearchBar = args.showSearchBar, user = args.user, showMobileMenu = args.showMobileMenu }
+    Header.view { logo = args.logo, navBar = args.navBar, showSearchBar = args.showSearchBar, user = args.user, showMobileMenu = args.showMobileMenu, fixedPosition = args.fixedPosition }
 
 
 projectDescription : { isOpen : Bool, text : String, title : String, subtitle : String } -> Html.Html ProjectDescription.Msg

@@ -33,6 +33,7 @@ header =
             , showSearchBar = True
             , user = Nothing
             , showMobileMenu = True
+            , fixedPosition = True
             }
     }
 

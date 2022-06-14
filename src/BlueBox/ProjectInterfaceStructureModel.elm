@@ -23,7 +23,7 @@ type alias Header msg =
     , circularButtons : Maybe (List { size : CircularButtonSize, icon : Icon, attrs : List (Attribute msg) })
     , leadingIconButtons : Maybe (List { size : LeadingSize, text : String, icon : Icon, attrs : List (Attribute msg) })
     , trailingIconButtons : Maybe (List { size : TrailingSize, text : String, icon : Icon, attrs : List (Attribute msg) })
-    , header : Maybe { logo : Logo, navBar : List NavItem, showSearchBar : Bool, user : Maybe User, showMobileMenu : Bool }
+    , header : Maybe { logo : Logo, navBar : List NavItem, showSearchBar : Bool, user : Maybe User, showMobileMenu : Bool, fixedPosition : Bool }
     }
 
 
