@@ -26,6 +26,7 @@ execute model =
     div []
         [ executeHeader model.header
         , executeBody model.body
+        , executeFooter model.footer
         ]
 
 
@@ -227,6 +228,75 @@ executeBody body =
             ++ back
         )
 
+executeFooter : Struct.Footer Msg -> Html.Html Msg
+executeFooter footer =
+    let
+        circularAvatars =
+            case footer.circularAvatars of
+                Just avatars ->
+                    map Api.circularAvatar avatars
+
+                Nothing ->
+                    []
+
+        primaryBtns =
+            case footer.primaryButtons of
+                Just buttons ->
+                    map Api.primaryButton buttons
+
+                Nothing ->
+                    []
+
+        secondaryBtns =
+            case footer.secondaryButtons of
+                Just buttons ->
+                    map Api.secondaryButton buttons
+
+                Nothing ->
+                    []
+
+        whiteBtns =
+            case footer.whiteButtons of
+                Just buttons ->
+                    map Api.whiteButton buttons
+
+                Nothing ->
+                    []
+
+        circularBtns =
+            case footer.circularButtons of
+                Just buttons ->
+                    map Api.circularButton buttons
+
+                Nothing ->
+                    []
+
+        leadingIconBtns =
+            case footer.leadingIconButtons of
+                Just buttons ->
+                    map Api.leadingIconButton buttons
+
+                Nothing ->
+                    []
+
+        trailingIconBtns =
+            case footer.trailingIconButtons of
+                Just buttons ->
+                    map Api.trailingIconButton buttons
+
+                Nothing ->
+                    []
+
+        footerHtml =
+            case footer.footer of
+                Just f ->
+                    [ Api.footer f ]
+
+                Nothing ->
+                    []
+    in
+    div [] (circularAvatars ++ primaryBtns ++ secondaryBtns ++ whiteBtns ++ circularBtns ++ leadingIconBtns ++ trailingIconBtns ++ footerHtml)
+
 
 update : Msg -> Struct.Model Msg -> ( Struct.Model Msg, Cmd Msg )
 update msg model =
@@ -246,6 +316,21 @@ update msg model =
                       }
                     , Cmd.none
                     )
+
+                Nothing ->
+                    ( model, Cmd.none )
+
+        AccordionMsg accMsg ->
+            case model.body.accordions of
+                Just a ->
+
+                    let
+                        oldBody = model.body
+
+                        newBody = { oldBody | accordions = Just (map (\acc -> Accordion.update accMsg acc) a) }
+
+                    in
+                    ({ model | body = newBody }, Cmd.none)
 
                 Nothing ->
                     ( model, Cmd.none )

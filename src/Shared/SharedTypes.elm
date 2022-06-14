@@ -53,3 +53,6 @@ type alias NavItem msg =
     , cmd : Cmd msg
     , isActive : Bool
     }
+
+type ModuleInstanceId
+    = ModuleInstanceId Int

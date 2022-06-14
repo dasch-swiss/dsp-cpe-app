@@ -17,6 +17,7 @@ import Modules.Tiles.ImageTile as ImageTile
 import Modules.Tiles.ImageTileGrid as ImageTileGrid
 import Shared.SharedTypes exposing (AccordionSize(..), BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..))
 import Util.Icon as Icon
+import Shared.SharedTypes exposing (ModuleInstanceId)
 
 
 circularAvatar : { size : CircularAvatarSize, img : String, alt : String, attrs : List (Attribute msg) } -> Html msg
@@ -93,9 +94,9 @@ projectDescription args =
     ProjectDescription.view { isOpen = args.isOpen, text = args.text, title = args.title, subtitle = args.subtitle }
 
 
-accordion : { isOpen : Bool, text : String, size : AccordionSize } -> Html.Html Accordion.Msg
+accordion : { isOpen : Bool, text : String, size : AccordionSize, id : ModuleInstanceId } -> Html.Html Accordion.Msg
 accordion args =
-    Accordion.view { isOpen = args.isOpen, text = args.text, size = args.size }
+    Accordion.view { isOpen = args.isOpen, text = args.text, size = args.size, id = args.id }
 
 
 imageTileGrid : List ImageTile.Model -> Html.Html msg

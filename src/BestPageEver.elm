@@ -2,7 +2,7 @@ module BestPageEver exposing (..)
 
 import BlueBox.ProjectInterfaceStructureModel as Struct
 import Html.Attributes exposing (href)
-import Shared.SharedTypes exposing (BasicButtonSize(..))
+import Shared.SharedTypes exposing (AccordionSize(..), BasicButtonSize(..), ModuleInstanceId(..))
 
 
 bestPage : Struct.Model msg
@@ -49,7 +49,29 @@ body =
     , trailingIconButtons = Nothing
     , iconButtonDividers = Nothing
     , projectDescriptions = Nothing
-    , accordions = Nothing
+    , accordions =
+        Just
+            [ { isOpen = False
+              , text = """Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus 
+                        est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, 
+                        no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+                        Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, 
+                        vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod 
+                        tincidunt ut laoreet dolore magna aliquam erat volutpat."""
+              , size = FullWidth
+              , id = ModuleInstanceId 1
+              }
+            , { isOpen = False
+              , text = """Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus 
+                        est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, 
+                        no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+                        Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, 
+                        vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod 
+                        tincidunt ut laoreet dolore magna aliquam erat volutpat."""
+              , size = FullWidth
+              , id = ModuleInstanceId 2
+              }
+            ]
     , imageTileGrids =
         Just
             [ [ { src = "https://m.media-amazon.com/images/I/51Dmo6as7CL._AC_SX385._SX._UX._SY._UY_.jpg", alt = "Black", buttonAlt = "", title = "Black", subtitle = "Best Black card", url = "https://scryfall.com/card/2xm/109/thoughtseize" }
@@ -73,5 +95,5 @@ footer =
     , circularButtons = Nothing
     , leadingIconButtons = Nothing
     , trailingIconButtons = Nothing
-    , footer = Just { copyrightText = "Owned by smart Devs near you", contactUsText = "Please dont contact us", contactUsUrl = "google.ch", licensingFilePath = "" }
+    , footer = Just { copyrightText = "Owned by smart Devs near you", contactUsText = "Please dont contact us", contactUsUrl = "https://www.google.ch", licensingFilePath = "" }
     }

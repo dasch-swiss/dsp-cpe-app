@@ -4,7 +4,7 @@ import Html exposing (Attribute)
 import Modules.NavigationHeader.NavigationHeader exposing (Logo, NavItem, User)
 import Modules.Projects.Focus.Focus as Focus
 import Modules.Tiles.ImageTile as ImageTile
-import Shared.SharedTypes exposing (AccordionSize, BasicButtonSize, CircularAvatarSize, CircularButtonSize, LeadingSize, TrailingSize)
+import Shared.SharedTypes exposing (AccordionSize, BasicButtonSize, CircularAvatarSize, CircularButtonSize, LeadingSize, ModuleInstanceId, TrailingSize)
 import Util.Icon exposing (Icon)
 
 
@@ -37,7 +37,7 @@ type alias Body msg =
     , trailingIconButtons : Maybe (List { size : TrailingSize, text : String, icon : Icon, attrs : List (Attribute msg) })
     , iconButtonDividers : Maybe (List { attrs : List (Attribute msg), icon : Icon, text : String })
     , projectDescriptions : Maybe (List { isOpen : Bool, text : String, title : String, subtitle : String })
-    , accordions : Maybe (List { isOpen : Bool, text : String, size : AccordionSize })
+    , accordions : Maybe (List { isOpen : Bool, text : String, size : AccordionSize, id : ModuleInstanceId })
     , imageTileGrids : Maybe (List (List ImageTile.Model))
     , focus : Maybe (List Focus.Model)
     , back : Maybe {}
