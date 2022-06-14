@@ -6,6 +6,7 @@ import Html.Events exposing (onClick)
 import Modules.Dividers.IconButtonDivider as IconButtonDivider
 import Util.CustomCss.DaschTailwind as Dtw
 import Util.Icon as Icon
+import Shared.SharedTypes exposing (ModuleInstanceId(..))
 
 
 type alias Model =
@@ -13,12 +14,12 @@ type alias Model =
     , text : String
     , title : String
     , subtitle : String
+    , id: ModuleInstanceId
     }
 
 
 type Msg
-    = Show
-    | Hide
+    = Clicked ModuleInstanceId
 
 
 view : Model -> Html Msg
@@ -48,7 +49,7 @@ view model =
             , div
                 [ class (Dtw.classList [ Dtw.mt_6, Dtw.prose, Dtw.prose_indigo, Dtw.prose_lg, Dtw.text_gray_500, Dtw.mx_auto, Dtw.max_w_prose ]) ]
                 [ p [ style "padding-bottom" "1%" ] [ text model.text ] ]
-            , IconButtonDivider.view { buttonAttrs = [ onClick Hide ], icon = Icon.PlusSm, text = "Read Less" }
+            , IconButtonDivider.view { buttonAttrs = [ onClick (Clicked model.id) ], icon = Icon.PlusSm, text = "Read Less" }
             ]
 
     else
@@ -69,15 +70,18 @@ view model =
                 ]
 
             -- Don't use api to avoid circularities
-            , IconButtonDivider.view { buttonAttrs = [ onClick Show ], icon = Icon.PlusSm, text = "Read More" }
+            , IconButtonDivider.view { buttonAttrs = [ onClick (Clicked model.id)], icon = Icon.PlusSm, text = "Read More" }
             ]
 
 
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        Show ->
-            { model | isOpen = True }
-
-        Hide ->
-            { model | isOpen = False }
+        Clicked id->
+            if id == model.id then
+                let 
+                    newVal = not model.isOpen
+                in
+                    { model | isOpen = newVal }
+            else 
+                model

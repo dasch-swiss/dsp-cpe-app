@@ -5,8 +5,7 @@ import Html exposing (div)
 import Html.Attributes exposing (class)
 import Modules.NavigationHeader.NavigationHeader as Header
 import Modules.Text.ProjectDescription as ProjectDescription
-import Util.CustomCss.DaschTailwind as Dtw
-
+import Shared.SharedTypes exposing (ModuleInstanceId(..))
 
 type alias Model =
     { header : Header.HeaderModel
@@ -21,20 +20,12 @@ type Msg
 
 view : Model -> Html.Html Msg
 view model =
-    div [ class (Dtw.classList [ Dtw.relative, Dtw.min_h_screen ])]
-        [ div [ class Dtw.pb_32]
-            [ Api.header
-                model.header.logo
-                model.header.navBar
-                model.header.showSearchBar
-                model.header.user
-                model.header.showMobileMenu
-                model.header.fixedPosition
-                |> Html.map NavigationHeaderMsg
-            , Api.projectDescription model.projectDescription |> Html.map ProjectDescriptionMsg
-            , Api.footer "The contents on our website are licensed under a" "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License." "https://creativecommons.org/licenses/by-nc-nd/4.0/" "/assets/images/license-cc-beol.jpg"
-            ]
-            
+    div []
+        [ Api.header
+            model.header
+            |> Html.map NavigationHeaderMsg
+        , Api.projectDescription model.projectDescription |> Html.map ProjectDescriptionMsg
+        , Api.footer { copyrightText = "The contents on our website are licensed under a", contactUsText = "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.", contactUsUrl = "https://creativecommons.org/licenses/by-nc-nd/4.0/", licensingFilePath = "/assets/images/license-cc-beol.jpg" }
         ]
 
 
@@ -82,6 +73,7 @@ Currently, the BEOL platform contains three main editions: Basler Edition der Be
 
 BEOL is connected to the repositories of The Newton Project and the Briefportal Leibniz initiating the formation of a network of digital editions of the correspondence among the early modern natural philosophers."""
             , isOpen = False
+            , id = ModuleInstanceId 3
             }
       }
     , Cmd.none

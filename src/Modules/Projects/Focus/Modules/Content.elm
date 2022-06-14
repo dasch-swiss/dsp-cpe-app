@@ -38,9 +38,9 @@ view model =
             -- if the content is expanded, remove the css classes
             if model.isReadMoreOpen then
                 Dtw.classList []
-            
-            -- else, add line clamp css
-            -- also add largest tailwind max height class available because Safari doesn't handle line clamps on divs correctly
+                -- else, add line clamp css
+                -- also add largest tailwind max height class available because Safari doesn't handle line clamps on divs correctly
+
             else
                 Dtw.classList [ Dtw.line_clamp_10, Dtw.max_h_96 ]
 
@@ -78,10 +78,10 @@ view model =
                             ]
                         ]
                     ]
-            
-            -- else don't generate the html for the image
+                -- else don't generate the html for the image
+
             else
-                div [][]
+                div [] []
     in
     div []
         [ div [ class (Dtw.classList [ Dtw.mt_8, Dtw.lg [ Dtw.grid, Dtw.grid_cols_2, Dtw.gap_8 ] ]) ]

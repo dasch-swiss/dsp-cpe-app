@@ -64,7 +64,7 @@ view : Model -> Html Msg
 view model =
     div []
         [ div [] [ text model.query ]
-        , primaryButton [ onClick Fetch ] "Search" BasicLarge
+        , primaryButton { attrs = [ onClick Fetch ], text = "Search", size = BasicLarge }
         , viewRes model
         , viewError model.error
         ]

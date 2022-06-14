@@ -1,5 +1,7 @@
 module Main exposing (..)
 
+import BlueBox.Executor as Executor
+import BlueBox.ProjectInterfaceStructureModel as Struct
 import Browser exposing (Document, UrlRequest)
 import Browser.Navigation as Nav
 import Html exposing (Html, h3, text)
@@ -24,6 +26,7 @@ type Page
     | ViewProjectPage ViewProject.Model
     | PlaygroundPage Playground.Model
     | BeolPage Beol.Model
+    | ExecutorPage (Struct.Model Executor.Msg)
 
 
 
@@ -36,6 +39,7 @@ type Msg
     | ViewProjectPageMsg ViewProject.Msg
     | PlaygroundPageMsg Playground.Msg
     | BeolMsg Beol.Msg
+    | ExecutorMsg Executor.Msg
     | LinkClicked UrlRequest
     | UrlChanged Url
 
@@ -95,6 +99,9 @@ initCurrentPage ( model, existingCmds ) =
                             Beol.init
                     in
                     ( BeolPage pageModel, Cmd.map BeolMsg pageCmds )
+
+                Executor ->
+                    ( ExecutorPage Executor.initTest, Cmd.none )
     in
     ( { model | page = currentPage }
     , Cmd.batch [ existingCmds, mappedPageCmds ]
@@ -134,6 +141,10 @@ currentView model =
         BeolPage beolModel ->
             Beol.view beolModel
                 |> Html.map BeolMsg
+
+        ExecutorPage executorModel ->
+            Executor.execute executorModel
+                |> Html.map ExecutorMsg
 
 
 notFoundView : Html msg
@@ -183,6 +194,15 @@ update msg model =
             in
             ( { model | page = BeolPage updatedPageModel }
             , Cmd.map BeolMsg updatedCmd
+            )
+
+        ( ExecutorMsg subMsg, ExecutorPage executorModel ) ->
+            let
+                ( updatedPageModel, updatedCmd ) =
+                    Executor.update subMsg executorModel model.navKey
+            in
+            ( { model | page = ExecutorPage updatedPageModel }
+            , Cmd.map ExecutorMsg updatedCmd
             )
 
         ( LinkClicked urlRequest, _ ) ->

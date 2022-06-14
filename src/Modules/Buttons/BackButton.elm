@@ -7,7 +7,6 @@ import Modules.Buttons.LeadingIconButton as LeadingIconButton
 import Shared.SharedTypes as Types
 import Util.Icon as Icon
 
-
 type Msg
     = Clicked
 
