@@ -2,16 +2,17 @@ module BlueBox.Executor exposing (..)
 
 import BestPageEver
 import BlueBox.ProjectInterfaceStructureModel as Struct
+import Browser.Navigation as Nav
 import DspCpeApi as Api exposing (iconButtonDivider, projectDescription)
 import Html exposing (div)
 import List exposing (map)
+import Modules.Buttons.BackButton as BackButton
 import Modules.NavigationHeader.NavigationHeader as NavigationHeader
 import Modules.Projects.Focus.Focus as Focus
 import Modules.Projects.TailwindPlayground exposing (Msg(..))
 import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
-import Modules.Buttons.BackButton as BackButton
-import Browser.Navigation as Nav
+
 
 type Msg
     = NavigationHeaderMsg NavigationHeader.Msg
@@ -228,6 +229,7 @@ executeBody body =
             ++ back
         )
 
+
 executeFooter : Struct.Footer Msg -> Html.Html Msg
 executeFooter footer =
     let
@@ -323,48 +325,52 @@ update msg model key =
         AccordionMsg accMsg ->
             case model.body.accordions of
                 Just a ->
-
                     let
-                        oldBody = model.body
+                        oldBody =
+                            model.body
 
-                        newBody = { oldBody | accordions = Just (map (\acc -> Accordion.update accMsg acc) a) }
-
+                        newBody =
+                            { oldBody | accordions = Just (map (\acc -> Accordion.update accMsg acc) a) }
                     in
-                    ({ model | body = newBody }, Cmd.none)
+                    ( { model | body = newBody }, Cmd.none )
 
                 Nothing ->
                     ( model, Cmd.none )
+
         ProjectDescriptionMsg projDesMsg ->
             case model.body.projectDescriptions of
                 Just a ->
-
                     let
-                        oldBody = model.body
+                        oldBody =
+                            model.body
 
-                        newBody = { oldBody | projectDescriptions = Just (map (\proj -> ProjectDescription.update projDesMsg proj) a) }
-
+                        newBody =
+                            { oldBody | projectDescriptions = Just (map (\proj -> ProjectDescription.update projDesMsg proj) a) }
                     in
-                    ({ model | body = newBody }, Cmd.none)
+                    ( { model | body = newBody }, Cmd.none )
 
                 Nothing ->
                     ( model, Cmd.none )
+
         FocusMsg focusMsg ->
             case model.body.focuses of
                 Just a ->
-
                     let
-                        oldBody = model.body
+                        oldBody =
+                            model.body
 
-                        newBody = { oldBody | focuses = Just (map (\foc -> Focus.update focusMsg foc) a) }
-
+                        newBody =
+                            { oldBody | focuses = Just (map (\foc -> Focus.update focusMsg foc) a) }
                     in
-                    ({ model | body = newBody }, Cmd.none)
+                    ( { model | body = newBody }, Cmd.none )
 
                 Nothing ->
                     ( model, Cmd.none )
+
         BackButtonMsg backMsg ->
             case model.body.back of
                 Just _ ->
-                    (model, (BackButton.update backMsg key))
+                    ( model, BackButton.update backMsg key )
+
                 Nothing ->
-                    (model, Cmd.none)
+                    ( model, Cmd.none )

@@ -3,11 +3,10 @@ module Modules.Text.Accordion exposing (..)
 import Html exposing (Html, div, p, text)
 import Html.Attributes exposing (class)
 import Html.Events exposing (onClick)
-import Shared.SharedTypes exposing (AccordionSize(..))
+import Shared.SharedTypes exposing (AccordionSize(..), ModuleInstanceId(..))
 import Util.CustomCss.CssColors exposing (CustomColor(..))
 import Util.CustomCss.DaschTailwind as Dtw
 import Util.Icon as Icon
-import Shared.SharedTypes exposing (ModuleInstanceId(..))
 
 
 type alias Model =
@@ -20,6 +19,7 @@ type alias Model =
 
 type Msg
     = AccordionClicked ModuleInstanceId
+
 
 view : Model -> Html Msg
 view model =
@@ -109,5 +109,6 @@ update msg model =
 
                 else
                     { model | isOpen = True }
+
             else
                 model

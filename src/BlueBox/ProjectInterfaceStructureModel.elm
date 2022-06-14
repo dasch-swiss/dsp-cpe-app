@@ -7,6 +7,7 @@ import Modules.Tiles.ImageTile as ImageTile
 import Shared.SharedTypes exposing (AccordionSize, BasicButtonSize, CircularAvatarSize, CircularButtonSize, LeadingSize, ModuleInstanceId, TrailingSize)
 import Util.Icon exposing (Icon)
 
+
 type alias Model msg =
     { header : Header msg
     , body : Body msg
@@ -35,7 +36,7 @@ type alias Body msg =
     , leadingIconButtons : Maybe (List { size : LeadingSize, text : String, icon : Icon, attrs : List (Attribute msg) })
     , trailingIconButtons : Maybe (List { size : TrailingSize, text : String, icon : Icon, attrs : List (Attribute msg) })
     , iconButtonDividers : Maybe (List { attrs : List (Attribute msg), icon : Icon, text : String })
-    , projectDescriptions : Maybe (List { isOpen : Bool, text : String, title : String, subtitle : String, id: ModuleInstanceId })
+    , projectDescriptions : Maybe (List { isOpen : Bool, text : String, title : String, subtitle : String, id : ModuleInstanceId })
     , accordions : Maybe (List { isOpen : Bool, text : String, size : AccordionSize, id : ModuleInstanceId })
     , imageTileGrids : Maybe (List (List ImageTile.Model))
     , focuses : Maybe (List Focus.Model)

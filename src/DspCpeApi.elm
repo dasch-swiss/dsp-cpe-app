@@ -15,9 +15,8 @@ import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
 import Modules.Tiles.ImageTile as ImageTile
 import Modules.Tiles.ImageTileGrid as ImageTileGrid
-import Shared.SharedTypes exposing (AccordionSize(..), BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..))
+import Shared.SharedTypes exposing (AccordionSize(..), BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), ModuleInstanceId, TrailingSize(..))
 import Util.Icon as Icon
-import Shared.SharedTypes exposing (ModuleInstanceId)
 
 
 circularAvatar : { size : CircularAvatarSize, img : String, alt : String, attrs : List (Attribute msg) } -> Html msg
@@ -89,7 +88,7 @@ header args =
     Header.view { logo = args.logo, navBar = args.navBar, showSearchBar = args.showSearchBar, user = args.user, showMobileMenu = args.showMobileMenu, fixedPosition = args.fixedPosition }
 
 
-projectDescription : { isOpen : Bool, text : String, title : String, subtitle : String, id: ModuleInstanceId } -> Html.Html ProjectDescription.Msg
+projectDescription : { isOpen : Bool, text : String, title : String, subtitle : String, id : ModuleInstanceId } -> Html.Html ProjectDescription.Msg
 projectDescription args =
     ProjectDescription.view { isOpen = args.isOpen, text = args.text, title = args.title, subtitle = args.subtitle, id = args.id }
 
