@@ -22,7 +22,7 @@ type Msg
 view : Model -> Html.Html Msg
 view model =
     div [ class (Dtw.classList [ Dtw.relative, Dtw.min_h_screen ])]
-        [ div [ class (Dtw.classList [Dtw.pb_32])]
+        [ div [ class Dtw.pb_32]
             [ Api.header
                 model.header.logo
                 model.header.navBar

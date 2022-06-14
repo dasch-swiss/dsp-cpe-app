@@ -69,23 +69,19 @@ view model =
 
 navHeaderBgCntrStyle : Bool -> String
 navHeaderBgCntrStyle fixedPos =
-    let
-        style =
-            if fixedPos then
-                [ Dtw.bg_white
-                , Dtw.space_y_2
-                , Dtw.sticky
-                , Dtw.top_0
-                , Dtw.z_50
-                ]
+    (if fixedPos then
+        [ Dtw.bg_white
+        , Dtw.space_y_2
+        , Dtw.sticky
+        , Dtw.top_0
+        , Dtw.z_50
+        ]
 
-            else
-                [ Dtw.bg_white
-                , Dtw.space_y_2
-                ]
-    in
-    style
-        |> classList
+    else
+        [ Dtw.bg_white
+        , Dtw.space_y_2
+        ])
+    |> classList
 
 
 navHeaderCntrStyle : String
