@@ -5,16 +5,18 @@ import Html.Attributes exposing (class)
 import Modules.Projects.Focus.Modules.Content as Content
 import Modules.Projects.Focus.Modules.Header as Header
 import Util.CustomCss.DaschTailwind as Dtw
+import Shared.SharedTypes exposing (ModuleInstanceId(..))
 
 
 type alias Model =
     { headerModel : Header.Model
     , contentModel : Content.Model
+    , id: ModuleInstanceId
     }
 
 
 type Msg
-    = ContentMsg Content.Msg
+    = ContentMsg ModuleInstanceId Content.Msg 
 
 
 view : Model -> Html Msg
@@ -23,18 +25,19 @@ view model =
         [ class (Dtw.classList [ Dtw.bg_white, Dtw.overflow_hidden ]) ]
         [ div [ class (Dtw.classList [ Dtw.relative, Dtw.max_w_7xl, Dtw.mx_auto, Dtw.py_16, Dtw.px_4, Dtw.sm [ Dtw.px_6 ], Dtw.lg [ Dtw.px_8 ] ]) ]
             [ Header.view model.headerModel
-            , Content.view model.contentModel |> Html.map ContentMsg
+            , Content.view model.contentModel |> Html.map (ContentMsg model.id)
             ]
         ]
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Msg -> Model -> Model
 update msg model =
     case msg of
-        ContentMsg contentMsg ->
-            ( { model
-                | contentModel =
-                    Content.update contentMsg model.contentModel
-              }
-            , Cmd.none
-            )
+        ContentMsg id contentMsg ->
+            if id == model.id then
+                { model
+                    | contentModel =
+                        Content.update contentMsg model.contentModel
+                }
+                
+            else model

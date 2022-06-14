@@ -11,7 +11,7 @@ import Modules.Projects.TailwindPlayground exposing (Msg(..))
 import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
 import Modules.Buttons.BackButton as BackButton
-
+import Browser.Navigation as Nav
 
 type Msg
     = NavigationHeaderMsg NavigationHeader.Msg
@@ -196,8 +196,8 @@ executeBody body =
                 Nothing ->
                     []
 
-        focus =
-            case body.focus of
+        focuses =
+            case body.focuses of
                 Just f ->
                     map Api.focus f |> map (Html.map FocusMsg)
 
@@ -224,7 +224,7 @@ executeBody body =
             ++ projectDescriptions
             ++ accordions
             ++ imgTileGrids
-            ++ focus
+            ++ focuses
             ++ back
         )
 
@@ -298,8 +298,8 @@ executeFooter footer =
     div [] (circularAvatars ++ primaryBtns ++ secondaryBtns ++ whiteBtns ++ circularBtns ++ leadingIconBtns ++ trailingIconBtns ++ footerHtml)
 
 
-update : Msg -> Struct.Model Msg -> ( Struct.Model Msg, Cmd Msg )
-update msg model =
+update : Msg -> Struct.Model Msg -> Nav.Key -> ( Struct.Model Msg, Cmd Msg )
+update msg model key =
     case msg of
         NavigationHeaderMsg headerMsg ->
             case model.header.header of
@@ -334,6 +334,37 @@ update msg model =
 
                 Nothing ->
                     ( model, Cmd.none )
+        ProjectDescriptionMsg projDesMsg ->
+            case model.body.projectDescriptions of
+                Just a ->
 
-        _ ->
-            ( model, Cmd.none )
+                    let
+                        oldBody = model.body
+
+                        newBody = { oldBody | projectDescriptions = Just (map (\proj -> ProjectDescription.update projDesMsg proj) a) }
+
+                    in
+                    ({ model | body = newBody }, Cmd.none)
+
+                Nothing ->
+                    ( model, Cmd.none )
+        FocusMsg focusMsg ->
+            case model.body.focuses of
+                Just a ->
+
+                    let
+                        oldBody = model.body
+
+                        newBody = { oldBody | focuses = Just (map (\foc -> Focus.update focusMsg foc) a) }
+
+                    in
+                    ({ model | body = newBody }, Cmd.none)
+
+                Nothing ->
+                    ( model, Cmd.none )
+        BackButtonMsg backMsg ->
+            case model.body.back of
+                Just _ ->
+                    (model, (BackButton.update backMsg key))
+                Nothing ->
+                    (model, Cmd.none)

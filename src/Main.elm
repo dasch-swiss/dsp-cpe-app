@@ -199,7 +199,7 @@ update msg model =
         ( ExecutorMsg subMsg, ExecutorPage executorModel ) ->
             let
                 ( updatedPageModel, updatedCmd ) =
-                    Executor.update subMsg executorModel
+                    Executor.update subMsg executorModel model.navKey
             in
             ( { model | page = ExecutorPage updatedPageModel }
             , Cmd.map ExecutorMsg updatedCmd

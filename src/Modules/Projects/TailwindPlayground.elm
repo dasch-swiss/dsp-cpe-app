@@ -204,7 +204,7 @@ update msg model =
 
         ProjectFocusMsg projectFocusMsg ->
             let
-                ( newModel, _ ) =
+                newModel =
                     ProjectFocus.update projectFocusMsg model.projectFocusModel
             in
             ( { model
@@ -271,6 +271,7 @@ exampleProjectFocus =
         , isReadMoreOpen = False
         , datasetTitle = "Test Dataset"
         }
+    , id = ModuleInstanceId 5
     }
 
 
@@ -314,4 +315,5 @@ exampleProjectDescription =
     , title = "Title"
     , subtitle = "Subtitle"
     , isOpen = False
+    , id = ModuleInstanceId 4
     }
