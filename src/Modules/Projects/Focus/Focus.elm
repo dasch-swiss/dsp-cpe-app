@@ -28,13 +28,11 @@ view model =
         ]
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Msg -> Model -> Model
 update msg model =
     case msg of
         ContentMsg contentMsg ->
-            ( { model
+            { model
                 | contentModel =
                     Content.update contentMsg model.contentModel
-              }
-            , Cmd.none
-            )
+            }

@@ -198,13 +198,9 @@ update msg model =
             )
 
         ProjectFocusMsg projectFocusMsg ->
-            let
-                ( newModel, _ ) =
-                    ProjectFocus.update projectFocusMsg model.projectFocusModel
-            in
             ( { model
                 | projectFocusModel =
-                    newModel
+                    ProjectFocus.update projectFocusMsg model.projectFocusModel
               }
             , Cmd.none
             )

@@ -1,6 +1,6 @@
 module BlueBoxes.PageStructureModel exposing (..)
 import Modules.Text.ProjectDescription as ProjectDescription
-
+import Modules.Projects.Focus.Focus as ProjectFocus
 type Page
     = Page (List PagePart)
 
@@ -15,7 +15,7 @@ type Content
 
 type ContentPart
     = ProjectDescription ProjectDescription.Model
-    | ProjectFocus
+    | ProjectFocus ProjectFocus.Model
 
 
 

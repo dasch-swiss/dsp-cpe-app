@@ -4,9 +4,10 @@ import BlueBoxes.PageStructureModel as Struct
 import DspCpeApi as Api
 import Html exposing (Html, div, text)
 import List exposing (map)
+import Modules.Projects.Focus.Focus as ProjectFocus
 import Modules.Projects.TestPage as Test
 import Modules.Text.ProjectDescription as ProjectDescription
-import Modules.Projects.Focus.Focus as ProjectFocus
+
 
 type alias Model =
     { page : Struct.Page }
@@ -49,8 +50,9 @@ executeContentPart contentPart =
             Api.projectDescription projDescModel
                 |> Html.map ProjectDescriptionMsg
 
-        Struct.ProjectFocus ->
-            text ""
+        Struct.ProjectFocus focusModel ->
+            Api.focus focusModel
+                |> Html.map ProjectFocusMsg
 
 
 view : Model -> Html Msg
@@ -82,6 +84,11 @@ updateContentPart msg content =
 
                 _ ->
                     content
-                    
-        Struct.ProjectFocus ->
-            content
+
+        Struct.ProjectFocus focusModel ->
+            case msg of
+                ProjectFocusMsg focusMsg ->
+                    Struct.ProjectFocus (ProjectFocus.update focusMsg focusModel)
+
+                _ ->
+                    content
