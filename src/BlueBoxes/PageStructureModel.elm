@@ -1,44 +1,34 @@
 module BlueBoxes.PageStructureModel exposing (..)
-
+import Modules.Text.ProjectDescription as ProjectDescription
 
 type Page
     = Page (List PagePart)
 
 
 type PagePart
-    = PageHeader Header
-    | PageBody Body
-    | PageFooter Footer
+    = PageContent Content
 
 
-type Header
-    = Header (List HeaderPart)
+type Content
+    = Content (List ContentPart)
 
 
-type HeaderPart
-    = AppHeader
+type ContentPart
+    = ProjectDescription ProjectDescription.Model
+    | ProjectFocus
 
 
-type Body
-    = Body (List BodyPart)
 
-
-type BodyPart
-    = ProjectDescription { isOpen : Bool, text : String, title : String, subtitle : String}
-
-type Footer
-    = Footer (List FooterPart)
-
-
-type FooterPart
-    = AppFooter
-
-
--- type alias Page =
---     { pagePart : List PagePart }
--- type PagePart
---     = Header HeaderPart Logo Profile
---     | Body
---     | Footer
--- type alias HeaderPart =
---     { header : Header }
+-- = PageHeader Header
+-- | PageContent Content
+-- | PageFooter Footer
+-- type Header
+--     = Header (List HeaderPart)
+-- type HeaderPart
+--     = Logo
+--     | Profile
+-- type Footer
+--     = Footer (List FooterPart)
+-- type FooterPart
+--     = Copyright
+--     | Legal

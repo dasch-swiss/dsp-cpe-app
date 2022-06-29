@@ -11,6 +11,7 @@ type Route
     | Project ProjectId
     | Playground
     | Beol
+    | Executor
 
 
 parseUrl : Url -> Route
@@ -29,6 +30,7 @@ matchRoute =
         [ map Projects top -- /
         , map Projects (s "projects") -- /projects
         , map Project (s "project" </> idParser) --/project/1
-        , map Playground (s "playground") -- /project/playground
-        , map Beol (s "beol") -- /project/beol
+        , map Playground (s "playground") -- /playground
+        , map Beol (s "beol") -- /beol
+        , map Executor (s "executor") -- /executor
         ]
