@@ -35,19 +35,58 @@ testProjectFocus =
         }
 
 
+testNavHeader : Struct.HeaderPart
+testNavHeader =
+    Struct.NavHeader
+        { logo =
+            { src = "https://beol.dasch.swiss/assets/images/beol-logo.png"
+            , lbl = "Beol Logo"
+            , attrs = []
+            }
+        , navBar =
+            [ { attrs = [], text = "Goldbach", href = "https://www.dasch.swiss", cmd = Cmd.none, isActive = True }
+            , { attrs = [], text = "Meditationes", href = "project/1", cmd = Cmd.none, isActive = False }
+            , { attrs = [], text = "Condorcet-Turgo", href = "project/1", cmd = Cmd.none, isActive = False }
+            , { attrs = [], text = "Leibniz", href = "project/1", cmd = Cmd.none, isActive = False }
+            , { attrs = [], text = "Newton", href = "project/1", cmd = Cmd.none, isActive = False }
+            , { attrs = [], text = "3D graph", href = "project/1", cmd = Cmd.none, isActive = False }
+            , { attrs = [], text = "Advanced Search", href = "project/1", cmd = Cmd.none, isActive = False }
+            ]
+        , user =
+            Just
+                { id = "sthId"
+                , img = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                , name = "Tom Cook"
+                , mail = "tom@example.com"
+                }
+        , showSearchBar = False
+        , showMobileMenu = False
+        , fixedPosition = False
+        }
+
+
+testHeader : Struct.Header
+testHeader =
+    Struct.Header [ testNavHeader ]
+
+
 testContent : Struct.Content
 testContent =
     Struct.Content [ testProjectDescription, testProjectFocus ]
 
 
-testPagePart : Struct.PagePart
-testPagePart =
+testPageContentPagePart : Struct.PagePart
+testPageContentPagePart =
     Struct.PageContent testContent
 
 
+testPageHeaderPagePart : Struct.PagePart
+testPageHeaderPagePart =
+    Struct.PageHeader testHeader
+
 testPage : Struct.Page
 testPage =
-    Struct.Page [ testPagePart ]
+    Struct.Page [ testPageHeaderPagePart, testPageContentPagePart ]
 
 
 

@@ -4,6 +4,7 @@ import BlueBoxes.PageStructureModel as Struct
 import DspCpeApi as Api
 import Html exposing (Html, div, text)
 import List exposing (map)
+import Modules.NavigationHeader.NavigationHeader as NavigationHeader
 import Modules.Projects.Focus.Focus as ProjectFocus
 import Modules.Projects.TestPage as Test
 import Modules.Text.ProjectDescription as ProjectDescription
@@ -16,6 +17,7 @@ type alias Model =
 type Msg
     = ProjectDescriptionMsg ProjectDescription.Msg
     | ProjectFocusMsg ProjectFocus.Msg
+    | NavHeaderMsg NavigationHeader.Msg
 
 
 init : ( Model, Cmd Msg )
@@ -31,16 +33,19 @@ execute (Struct.Page pageParts) =
 executePagePart : Struct.PagePart -> Html Msg
 executePagePart pagePart =
     case pagePart of
+        Struct.PageHeader (Struct.Header headerPart) ->
+            div [] (map executeHeaderPart headerPart)
+
         Struct.PageContent (Struct.Content contentPart) ->
             div [] (map executeContentPart contentPart)
 
 
-
--- Struct.PageHeader (Struct.Header headerPart)->
---     [text ""]
--- Struct.PageFooter (Struct.Footer footerPart)->
---     text ""
--- { isOpen = False, text = "My Project", title = "Title", subtitle = "Subtitle" }
+executeHeaderPart : Struct.HeaderPart -> Html Msg
+executeHeaderPart headerPart =
+    case headerPart of
+        Struct.NavHeader headerModel ->
+            Api.header headerModel
+                |> Html.map NavHeaderMsg
 
 
 executeContentPart : Struct.ContentPart -> Html Msg
@@ -70,8 +75,23 @@ update msg model =
 updatePagePart : Msg -> Struct.PagePart -> Struct.PagePart
 updatePagePart msg pagePart =
     case pagePart of
+        Struct.PageHeader (Struct.Header headerParts) ->
+            Struct.PageHeader (Struct.Header (map (updateHeaderPart msg) headerParts))
+
         Struct.PageContent (Struct.Content contentParts) ->
             Struct.PageContent (Struct.Content (map (updateContentPart msg) contentParts))
+
+
+updateHeaderPart : Msg -> Struct.HeaderPart -> Struct.HeaderPart
+updateHeaderPart msg header =
+    case header of
+        Struct.NavHeader headerModel ->
+            case msg of
+                NavHeaderMsg headerMsg ->
+                    Struct.NavHeader (NavigationHeader.update headerMsg headerModel)
+
+                _ ->
+                    header
 
 
 updateContentPart : Msg -> Struct.ContentPart -> Struct.ContentPart
