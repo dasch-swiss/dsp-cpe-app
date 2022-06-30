@@ -27,7 +27,7 @@ view model =
                 model.header
                 |> Html.map NavigationHeaderMsg
             , Api.projectDescription model.projectDescription |> Html.map ProjectDescriptionMsg
-            , Api.footer "The contents on our website are licensed under a" "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License." "https://creativecommons.org/licenses/by-nc-nd/4.0/" "/assets/images/license-cc-beol.jpg"
+            , Api.footer { copyrightText = "The contents on our website are licensed under a", contactUsText = "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.", contactUsUrl = "https://creativecommons.org/licenses/by-nc-nd/4.0/", licensingFilePath = "/assets/images/license-cc-beol.jpg" }
             ]
         ]
 
