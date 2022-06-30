@@ -3,13 +3,14 @@ module BlueBoxes.Executor exposing (..)
 import BlueBoxes.PageStructureModel as Struct
 import DspCpeApi as Api
 import Html exposing (Html, div, footer, header, main_)
+import Html.Attributes exposing (class)
 import List exposing (map)
 import Modules.NavigationHeader.NavigationHeader as NavigationHeader
 import Modules.Projects.Focus.Focus as ProjectFocus
 import Modules.Projects.TestPage as Test
+import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
 import Util.CustomCss.DaschTailwind as Dtw
-import Html.Attributes exposing (class)
 
 
 type alias Model =
@@ -20,6 +21,7 @@ type Msg
     = ProjectDescriptionMsg ProjectDescription.Msg
     | ProjectFocusMsg ProjectFocus.Msg
     | AppHeaderMsg NavigationHeader.Msg
+    | AccordionMsg Accordion.Msg
 
 
 init : ( Model, Cmd Msg )
@@ -37,7 +39,7 @@ executePagePart pagePart =
     case pagePart of
         Struct.PageHeader (Struct.Header headerPart) ->
             header
-                [ class (Dtw.classList[Dtw.sticky, Dtw.top_0, Dtw.z_50, Dtw.mb_5]) ]
+                [ class (Dtw.classList [ Dtw.sticky, Dtw.top_0, Dtw.z_50, Dtw.mb_5 ]) ]
                 (map executeHeaderPart headerPart)
 
         Struct.PageContent (Struct.Content contentPart) ->
@@ -69,6 +71,10 @@ executeContentPart contentPart =
         Struct.ProjectFocus focusModel ->
             Api.focus focusModel
                 |> Html.map ProjectFocusMsg
+
+        Struct.Accordion accModel ->
+            Api.accordion accModel
+                |> Html.map AccordionMsg
 
 
 executeFooterPart : Struct.FooterPart -> Html Msg
@@ -130,6 +136,14 @@ updateContentPart msg content =
             case msg of
                 ProjectFocusMsg focusMsg ->
                     Struct.ProjectFocus (ProjectFocus.update focusMsg focusModel)
+
+                _ ->
+                    content
+
+        Struct.Accordion accModel ->
+            case msg of
+                AccordionMsg accMsg ->
+                    Struct.Accordion (Accordion.update accMsg accModel)
 
                 _ ->
                     content

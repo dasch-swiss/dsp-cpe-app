@@ -3,7 +3,7 @@ module Modules.Text.Accordion exposing (..)
 import Html exposing (Html, div, p, text)
 import Html.Attributes exposing (class)
 import Html.Events exposing (onClick)
-import Shared.SharedTypes exposing (AccordionSize(..))
+import Shared.SharedTypes exposing (AccordionSize(..), WidgetInstanceId(..))
 import Util.CustomCss.CssColors exposing (CustomColor(..))
 import Util.CustomCss.DaschTailwind as Dtw
 import Util.Icon as Icon
@@ -13,11 +13,12 @@ type alias Model =
     { isOpen : Bool
     , text : String
     , size : AccordionSize
+    , id : WidgetInstanceId
     }
 
 
 type Msg
-    = AccordionClicked
+    = AccordionClicked WidgetInstanceId
 
 
 view : Model -> Html Msg
@@ -88,7 +89,7 @@ view model =
     in
     div [ class accordionSize ]
         [ div
-            [ class accordionHeaderClasses, onClick AccordionClicked ]
+            [ class accordionHeaderClasses, onClick (AccordionClicked model.id) ]
             [ div [ class (Dtw.classList [ Dtw.inline_flex ]) ]
                 [ div [ class iconClasses ] [ icon ]
                 , div [ class accordionHeaderTextClasses ] [ text "Annotations" ]
@@ -101,9 +102,9 @@ view model =
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        AccordionClicked ->
-            if model.isOpen then
-                { isOpen = False, text = model.text, size = model.size }
+        AccordionClicked id ->
+            if id == model.id then
+                { model | isOpen = not model.isOpen }
 
             else
-                { isOpen = True, text = model.text, size = model.size }
+                model

@@ -3,6 +3,10 @@ module Shared.SharedTypes exposing (..)
 import Html exposing (Attribute)
 
 
+type WidgetInstanceId
+    = WidgetInstanceId Int
+
+
 type CircularAvatarSize
     = CircularAvatarExtraSmall
     | CircularAvatarSmall

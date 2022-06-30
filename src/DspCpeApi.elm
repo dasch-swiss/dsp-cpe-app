@@ -15,7 +15,7 @@ import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
 import Modules.Tiles.ImageTile as ImageTile
 import Modules.Tiles.ImageTileGrid as ImageTileGrid
-import Shared.SharedTypes exposing (AccordionSize(..), BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..))
+import Shared.SharedTypes exposing (AccordionSize(..), BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..), WidgetInstanceId(..))
 import Util.Icon as Icon
 
 
@@ -88,14 +88,14 @@ header args =
     Header.view { logo = args.logo, navBar = args.navBar, showSearchBar = args.showSearchBar, user = args.user, showMobileMenu = args.showMobileMenu }
 
 
-projectDescription : { isOpen : Bool, text : String, title : String, subtitle : String } -> Html.Html ProjectDescription.Msg
+projectDescription : { isOpen : Bool, text : String, title : String, subtitle : String, id : WidgetInstanceId } -> Html.Html ProjectDescription.Msg
 projectDescription args =
-    ProjectDescription.view { isOpen = args.isOpen, text = args.text, title = args.title, subtitle = args.subtitle }
+    ProjectDescription.view { isOpen = args.isOpen, text = args.text, title = args.title, subtitle = args.subtitle, id = args.id }
 
 
-accordion : { isOpen : Bool, text : String, size : AccordionSize } -> Html.Html Accordion.Msg
+accordion : { isOpen : Bool, text : String, size : AccordionSize, id : WidgetInstanceId } -> Html.Html Accordion.Msg
 accordion args =
-    Accordion.view { isOpen = args.isOpen, text = args.text, size = args.size }
+    Accordion.view { isOpen = args.isOpen, text = args.text, size = args.size, id = args.id }
 
 
 imageTileGrid : List ImageTile.Model -> Html.Html msg

@@ -5,6 +5,7 @@ import Html exposing (div)
 import Html.Attributes exposing (class)
 import Modules.NavigationHeader.NavigationHeader as Header
 import Modules.Text.ProjectDescription as ProjectDescription
+import Shared.SharedTypes exposing (WidgetInstanceId(..))
 import Util.CustomCss.DaschTailwind as Dtw
 
 
@@ -75,6 +76,7 @@ Currently, the BEOL platform contains three main editions: Basler Edition der Be
 
 BEOL is connected to the repositories of The Newton Project and the Briefportal Leibniz initiating the formation of a network of digital editions of the correspondence among the early modern natural philosophers."""
             , isOpen = False
+            , id = WidgetInstanceId 1
             }
       }
     , Cmd.none

@@ -4,6 +4,7 @@ import Modules.NavigationHeader.NavigationHeader as NavigationHeader
 import Modules.Projects.Focus.Focus as ProjectFocus
 import Modules.Text.ProjectDescription as ProjectDescription
 import Modules.Footer.Footer as Footer
+import Modules.Text.Accordion as Accordion
 
 type Page
     = Page (List PagePart)
@@ -30,6 +31,7 @@ type Content
 type ContentPart
     = ProjectDescription ProjectDescription.Model
     | ProjectFocus ProjectFocus.Model
+    | Accordion Accordion.Model
 
 
 type Footer

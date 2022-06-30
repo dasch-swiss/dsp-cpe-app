@@ -10,7 +10,7 @@ import Modules.Projects.Focus.Focus as ProjectFocus
 import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
 import Modules.Tiles.ImageTile as ImageTile
-import Shared.SharedTypes exposing (AccordionSize(..), BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..))
+import Shared.SharedTypes exposing (AccordionSize(..), BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..), WidgetInstanceId(..))
 import Util.Icon as Icon
 
 
@@ -245,6 +245,7 @@ exampleAccordion =
             vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod 
             tincidunt ut laoreet dolore magna aliquam erat volutpat."""
     , size = FullWidth
+    , id = WidgetInstanceId 3
     }
 
 
@@ -266,6 +267,7 @@ exampleProjectFocus =
         , isReadMoreOpen = False
         , datasetTitle = "Test Dataset"
         }
+    , id = WidgetInstanceId 2
     }
 
 
@@ -308,4 +310,5 @@ exampleProjectDescription =
     , title = "Title"
     , subtitle = "Subtitle"
     , isOpen = False
+    , id = WidgetInstanceId 1
     }
