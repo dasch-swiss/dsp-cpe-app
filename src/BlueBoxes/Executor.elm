@@ -17,7 +17,7 @@ type alias Model =
 type Msg
     = ProjectDescriptionMsg ProjectDescription.Msg
     | ProjectFocusMsg ProjectFocus.Msg
-    | NavHeaderMsg NavigationHeader.Msg
+    | AppHeaderMsg NavigationHeader.Msg
 
 
 init : ( Model, Cmd Msg )
@@ -39,13 +39,16 @@ executePagePart pagePart =
         Struct.PageContent (Struct.Content contentPart) ->
             div [] (map executeContentPart contentPart)
 
+        Struct.PageFooter (Struct.Footer footerPart) ->
+            div [] (map executeFooterPart footerPart)
+
 
 executeHeaderPart : Struct.HeaderPart -> Html Msg
 executeHeaderPart headerPart =
     case headerPart of
-        Struct.NavHeader headerModel ->
+        Struct.AppHeader headerModel ->
             Api.header headerModel
-                |> Html.map NavHeaderMsg
+                |> Html.map AppHeaderMsg
 
 
 executeContentPart : Struct.ContentPart -> Html Msg
@@ -58,6 +61,13 @@ executeContentPart contentPart =
         Struct.ProjectFocus focusModel ->
             Api.focus focusModel
                 |> Html.map ProjectFocusMsg
+
+
+executeFooterPart : Struct.FooterPart -> Html Msg
+executeFooterPart footerPart =
+    case footerPart of
+        Struct.AppFooter footerModel ->
+            Api.footer footerModel
 
 
 view : Model -> Html Msg
@@ -81,14 +91,17 @@ updatePagePart msg pagePart =
         Struct.PageContent (Struct.Content contentParts) ->
             Struct.PageContent (Struct.Content (map (updateContentPart msg) contentParts))
 
+        Struct.PageFooter (Struct.Footer footerParts) ->
+            Struct.PageFooter (Struct.Footer (map (updateFooterPart msg) footerParts))
+
 
 updateHeaderPart : Msg -> Struct.HeaderPart -> Struct.HeaderPart
 updateHeaderPart msg header =
     case header of
-        Struct.NavHeader headerModel ->
+        Struct.AppHeader headerModel ->
             case msg of
-                NavHeaderMsg headerMsg ->
-                    Struct.NavHeader (NavigationHeader.update headerMsg headerModel)
+                AppHeaderMsg headerMsg ->
+                    Struct.AppHeader (NavigationHeader.update headerMsg headerModel)
 
                 _ ->
                     header
@@ -112,3 +125,13 @@ updateContentPart msg content =
 
                 _ ->
                     content
+
+
+updateFooterPart : Msg -> Struct.FooterPart -> Struct.FooterPart
+updateFooterPart msg footer =
+    case footer of
+        Struct.AppFooter footerModel ->
+            case msg of
+                -- this currently doesn't do anything because nothing in the footer has an update function
+                _ ->
+                    footer

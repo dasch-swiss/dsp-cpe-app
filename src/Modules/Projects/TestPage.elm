@@ -35,9 +35,9 @@ testProjectFocus =
         }
 
 
-testNavHeader : Struct.HeaderPart
-testNavHeader =
-    Struct.NavHeader
+testAppHeader : Struct.HeaderPart
+testAppHeader =
+    Struct.AppHeader
         { logo =
             { src = "https://beol.dasch.swiss/assets/images/beol-logo.png"
             , lbl = "Beol Logo"
@@ -61,19 +61,33 @@ testNavHeader =
                 }
         , showSearchBar = False
         , showMobileMenu = False
-        , fixedPosition = False
+        , fixedPosition = True
+        }
+
+
+testAppFooter : Struct.FooterPart
+testAppFooter =
+    Struct.AppFooter
+        { copyrightText = "© 2022 DaSCH"
+        , contactUsText = "Contact Us"
+        , contactUsUrl = "mailto:info@dasch.swiss"
+        , licensingFilePath = "/assets/images/license-cc-beol.jpg"
         }
 
 
 testHeader : Struct.Header
 testHeader =
-    Struct.Header [ testNavHeader ]
+    Struct.Header [ testAppHeader ]
 
 
 testContent : Struct.Content
 testContent =
     Struct.Content [ testProjectDescription, testProjectFocus ]
 
+
+testFooter : Struct.Footer
+testFooter =
+    Struct.Footer [ testAppFooter ]
 
 testPageContentPagePart : Struct.PagePart
 testPageContentPagePart =
@@ -84,9 +98,15 @@ testPageHeaderPagePart : Struct.PagePart
 testPageHeaderPagePart =
     Struct.PageHeader testHeader
 
+
+testPageFooterPagePart : Struct.PagePart
+testPageFooterPagePart =
+    Struct.PageFooter testFooter
+
+
 testPage : Struct.Page
 testPage =
-    Struct.Page [ testPageHeaderPagePart, testPageContentPagePart ]
+    Struct.Page [ testPageHeaderPagePart, testPageContentPagePart, testPageFooterPagePart ]
 
 
 

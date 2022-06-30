@@ -1,8 +1,9 @@
 module BlueBoxes.PageStructureModel exposing (..)
 
+import Modules.NavigationHeader.NavigationHeader as NavigationHeader
 import Modules.Projects.Focus.Focus as ProjectFocus
 import Modules.Text.ProjectDescription as ProjectDescription
-import Modules.NavigationHeader.NavigationHeader as NavigationHeader
+import Modules.Footer.Footer as Footer
 
 type Page
     = Page (List PagePart)
@@ -11,6 +12,7 @@ type Page
 type PagePart
     = PageHeader Header
     | PageContent Content
+    | PageFooter Footer
 
 
 type Header
@@ -18,7 +20,7 @@ type Header
 
 
 type HeaderPart
-    = NavHeader NavigationHeader.HeaderModel
+    = AppHeader NavigationHeader.HeaderModel
 
 
 type Content
@@ -30,12 +32,9 @@ type ContentPart
     | ProjectFocus ProjectFocus.Model
 
 
+type Footer
+    = Footer (List FooterPart)
 
--- = PageHeader Header
--- | PageContent Content
--- | PageFooter Footer
--- type Footer
---     = Footer (List FooterPart)
--- type FooterPart
---     = Copyright
---     | Legal
+
+type FooterPart
+    = AppFooter Footer.Model
