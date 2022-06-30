@@ -2,12 +2,14 @@ module BlueBoxes.Executor exposing (..)
 
 import BlueBoxes.PageStructureModel as Struct
 import DspCpeApi as Api
-import Html exposing (Html, div, text)
+import Html exposing (Html, div, footer, header, main_)
 import List exposing (map)
 import Modules.NavigationHeader.NavigationHeader as NavigationHeader
 import Modules.Projects.Focus.Focus as ProjectFocus
 import Modules.Projects.TestPage as Test
 import Modules.Text.ProjectDescription as ProjectDescription
+import Util.CustomCss.DaschTailwind as Dtw
+import Html.Attributes exposing (class)
 
 
 type alias Model =
@@ -34,13 +36,19 @@ executePagePart : Struct.PagePart -> Html Msg
 executePagePart pagePart =
     case pagePart of
         Struct.PageHeader (Struct.Header headerPart) ->
-            div [] (map executeHeaderPart headerPart)
+            header
+                [ class (Dtw.classList[Dtw.sticky, Dtw.top_0, Dtw.z_50, Dtw.mb_5]) ]
+                (map executeHeaderPart headerPart)
 
         Struct.PageContent (Struct.Content contentPart) ->
-            div [] (map executeContentPart contentPart)
+            main_
+                []
+                (map executeContentPart contentPart)
 
         Struct.PageFooter (Struct.Footer footerPart) ->
-            div [] (map executeFooterPart footerPart)
+            footer
+                []
+                (map executeFooterPart footerPart)
 
 
 executeHeaderPart : Struct.HeaderPart -> Html Msg

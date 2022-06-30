@@ -65,7 +65,6 @@ init =
             , user = Nothing
             , showSearchBar = False
             , showMobileMenu = False
-            , fixedPosition = True
             }
       , projectDescription =
             { title = "Bernoulli Euler Online"

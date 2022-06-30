@@ -61,7 +61,6 @@ testAppHeader =
                 }
         , showSearchBar = False
         , showMobileMenu = False
-        , fixedPosition = True
         }
 
 
@@ -89,6 +88,7 @@ testFooter : Struct.Footer
 testFooter =
     Struct.Footer [ testAppFooter ]
 
+
 testPageContentPagePart : Struct.PagePart
 testPageContentPagePart =
     Struct.PageContent testContent
@@ -107,14 +107,3 @@ testPageFooterPagePart =
 testPage : Struct.Page
 testPage =
     Struct.Page [ testPageHeaderPagePart, testPageContentPagePart, testPageFooterPagePart ]
-
-
-
--- testContentPart : Struct.ContentPart
--- testContentPart = Struct.ProjectDescription
--- testContent : Struct.ContentPart -> Struct.Content
--- testContent contentPart = Struct.Content [contentPart]
--- testPagePart : Struct.Content -> Struct.PagePart
--- testPagePart content = Struct.PageContent content
--- testPage : Struct.PagePart -> Struct.Page
--- testPage pagePart = Struct.Page [pagePart]

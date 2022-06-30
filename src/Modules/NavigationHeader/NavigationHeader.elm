@@ -25,7 +25,6 @@ type alias HeaderModel =
     , user : Maybe User
     , showSearchBar : Bool
     , showMobileMenu : Bool
-    , fixedPosition : Bool
     }
 
 
@@ -40,7 +39,7 @@ type alias NavItem =
 
 view : HeaderModel -> Html.Html Msg
 view model =
-    header [ id "nav-header-bg-cntr", class (navHeaderBgCntrStyle model.fixedPosition) ]
+    div [ id "nav-header-bg-cntr", class navHeaderBgCntrStyle ]
         [ div [ id "standard-view-cntr", class navHeaderCntrStyle ]
             [ div [ id "header-elements-cntr", class headerElementsCntrStyle ]
                 [ div [ id "header-left-elements-cntr", class leftSideElementsStyle ]
@@ -67,20 +66,11 @@ view model =
         ]
 
 
-navHeaderBgCntrStyle : Bool -> String
-navHeaderBgCntrStyle fixedPos =
-    (if fixedPos then
-        [ Dtw.bg_white
-        , Dtw.space_y_2
-        , Dtw.sticky
-        , Dtw.top_0
-        , Dtw.z_50
-        ]
-
-    else
-        [ Dtw.bg_white
-        , Dtw.space_y_2
-        ])
+navHeaderBgCntrStyle : String
+navHeaderBgCntrStyle =
+    [ Dtw.bg_white
+    , Dtw.space_y_2
+    ]
     |> classList
 
 
