@@ -19,9 +19,9 @@ import Shared.SharedTypes exposing (AccordionSize(..), BasicButtonSize(..), Circ
 import Util.Icon as Icon
 
 
-circularAvatar : { size : CircularAvatarSize, img : String, alt : String, attrs : List (Attribute msg) } -> Html msg
+circularAvatar : { attrs : List (Attribute msg), size : CircularAvatarSize, img : String, alt : String } -> Html msg
 circularAvatar args =
-    CircularAvatar.view { size = args.size, img = args.img, alt = args.alt, attrs = args.attrs }
+    CircularAvatar.view { attrs = args.attrs, size = args.size, img = args.img, alt = args.alt }
 
 
 
@@ -55,32 +55,32 @@ whiteButton args =
 -- convenience function: returns a "Circular" button
 
 
-circularButton : { size : CircularButtonSize, icon : Icon.Icon, attrs : List (Attribute msg) } -> Html msg
+circularButton : { attrs : List (Attribute msg), size : CircularButtonSize, icon : Icon.Icon } -> Html msg
 circularButton args =
-    CircularButton.view { size = args.size, icon = args.icon, attrs = args.attrs }
+    CircularButton.view { attrs = args.attrs, size = args.size, icon = args.icon }
 
 
 
 -- convenience function: returns a "LeadingIcon" button
 
 
-leadingIconButton : { size : LeadingSize, text : String, icon : Icon.Icon, attrs : List (Attribute msg) } -> Html msg
+leadingIconButton : { attrs : List (Attribute msg), text : String, size : LeadingSize, icon : Icon.Icon } -> Html msg
 leadingIconButton args =
-    LeadingIconButton.view { size = args.size, text = args.text, icon = args.icon, attrs = args.attrs }
+    LeadingIconButton.view { attrs = args.attrs, text = args.text, size = args.size, icon = args.icon }
 
 
 
 -- convenience function: returns a "TrailingIcon" button
 
 
-trailingIconButton : { size : TrailingSize, text : String, icon : Icon.Icon, attrs : List (Attribute msg) } -> Html msg
+trailingIconButton : { attrs : List (Attribute msg), text : String, size : TrailingSize, icon : Icon.Icon } -> Html msg
 trailingIconButton args =
-    TrailingIconButton.view { size = args.size, text = args.text, icon = args.icon, attrs = args.attrs }
+    TrailingIconButton.view { attrs = args.attrs, text = args.text, size = args.size,  icon = args.icon }
 
 
-iconButtonDivider : { attrs : List (Attribute msg), icon : Icon.Icon, text : String } -> Html msg
+iconButtonDivider : { attrs : List (Attribute msg), text : String, icon : Icon.Icon } -> Html msg
 iconButtonDivider args =
-    IconButtonDivider.view { buttonAttrs = args.attrs, icon = args.icon, text = args.text }
+    IconButtonDivider.view { buttonAttrs = args.attrs, text = args.text, icon = args.icon }
 
 
 header : { logo : Header.Logo, navBar : List Header.NavItem, showSearchBar : Bool, user : Maybe Header.User, showMobileMenu : Bool } -> Html Header.Msg

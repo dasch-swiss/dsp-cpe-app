@@ -78,25 +78,24 @@ view model =
                 ]
             , div [ class "preview circular-button" ]
                 [ h3 [ class "label" ] [ text "Circular Buttons" ]
-                , Api.circularButton { size = CircularExtraSmall, icon = Icon.ArrowRight, attrs = [] }
-                , Api.circularButton { size = CircularSmall, icon = Icon.Annotation, attrs = [] }
-                , Api.circularButton { size = CircularNormal, icon = Icon.Plus, attrs = [] }
-                , Api.circularButton { size = CircularLarge, icon = Icon.Check, attrs = [] }
-                , Api.circularButton { size = CircularExtraLarge, icon = Icon.EmojiHappy, attrs = [] }
-                ]
-            , div [ class "preview leading-button" ]
+                , Api.circularButton { attrs = [], size = CircularExtraSmall, icon = Icon.ArrowRight }
+                , Api.circularButton { attrs = [], size = CircularSmall, icon = Icon.Annotation }
+                , Api.circularButton { attrs = [], size = CircularNormal, icon = Icon.Plus }
+                , Api.circularButton { attrs = [], size = CircularLarge, icon = Icon.Check }
+                , Api.circularButton { attrs = [], size = CircularExtraLarge, icon = Icon.EmojiHappy }
+                ] , div [ class "preview leading-button" ]
                 [ h3 [ class "label" ] [ text "Leading Icon Buttons" ]
-                , Api.leadingIconButton { size = LeadingSmall, text = "Small", icon = Icon.Annotation, attrs = [] }
-                , Api.leadingIconButton { size = LeadingNormal, text = "Normal", icon = Icon.EmojiHappy, attrs = [] }
-                , Api.leadingIconButton { size = LeadingLarge, text = "Large", icon = Icon.Plus, attrs = [] }
-                , Api.leadingIconButton { size = LeadingExtraLarge, text = "Extra Large", icon = Icon.Check, attrs = [] }
+                , Api.leadingIconButton { attrs = [], size = LeadingSmall, text = "Small", icon = Icon.Annotation }
+                , Api.leadingIconButton { attrs = [], size = LeadingNormal, text = "Normal", icon = Icon.EmojiHappy }
+                , Api.leadingIconButton { attrs = [], size = LeadingLarge, text = "Large", icon = Icon.Plus }
+                , Api.leadingIconButton { attrs = [], size = LeadingExtraLarge, text = "Extra Large", icon = Icon.Check }
                 ]
             , div [ class "preview leading-button" ]
                 [ h3 [ class "label" ] [ text "Trailing Icon Buttons" ]
-                , Api.trailingIconButton { size = TrailingSmall, text = "Small", icon = Icon.Annotation, attrs = [] }
-                , Api.trailingIconButton { size = TrailingNormal, text = "Normal", icon = Icon.EmojiHappy, attrs = [] }
-                , Api.trailingIconButton { size = TrailingLarge, text = "Large", icon = Icon.Plus, attrs = [] }
-                , Api.trailingIconButton { size = TrailingExtraLarge, text = "Extra Large", icon = Icon.Check, attrs = [] }
+                , Api.trailingIconButton { attrs = [], size = TrailingSmall, text = "Small", icon = Icon.Annotation }
+                , Api.trailingIconButton { attrs = [], size = TrailingNormal, text = "Normal", icon = Icon.EmojiHappy }
+                , Api.trailingIconButton { attrs = [], size = TrailingLarge, text = "Large", icon = Icon.Plus }
+                , Api.trailingIconButton { attrs = [], size = TrailingExtraLarge, text = "Extra Large", icon = Icon.Check }
                 ]
 
             -- insert other buttons here
