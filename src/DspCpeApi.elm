@@ -3,7 +3,7 @@ module DspCpeApi exposing (..)
 import Html exposing (Attribute, Html)
 import Modules.Avatars.CircularAvatar as CircularAvatar
 import Modules.Buttons.BackButton as BackButton
-import Modules.Buttons.BasicButtons.BasicButton exposing (Variant(..), basicButton)
+import Modules.Buttons.BasicButtons.BasicButton exposing (Variant(..), basicButton, BasicButtonModel)
 import Modules.Buttons.CircularButton as CircularButton
 import Modules.Buttons.LeadingIconButton as LeadingIconButton
 import Modules.Buttons.TrailingIconButton as TrailingIconButton
@@ -28,7 +28,7 @@ circularAvatar args =
 -- convenience function: returns a basicButton with the Variant "Primary"
 
 
-primaryButton : { attrs : List (Attribute msg), text : String, size : BasicButtonSize } -> Html msg
+primaryButton : BasicButtonModel msg -> Html msg
 primaryButton args =
     basicButton args.attrs args.text args.size Primary
 
@@ -37,7 +37,7 @@ primaryButton args =
 -- convenience function: returns a basicButton with the Variant "Secondary"
 
 
-secondaryButton : { attrs : List (Attribute msg), text : String, size : BasicButtonSize } -> Html msg
+secondaryButton : BasicButtonModel msg -> Html msg
 secondaryButton args =
     basicButton args.attrs args.text args.size Secondary
 
@@ -46,7 +46,7 @@ secondaryButton args =
 -- convenience function: returns a basicButton with the Variant "White"
 
 
-whiteButton : { attrs : List (Attribute msg), text : String, size : BasicButtonSize } -> Html msg
+whiteButton : BasicButtonModel msg -> Html msg
 whiteButton args =
     basicButton args.attrs args.text args.size White
 
