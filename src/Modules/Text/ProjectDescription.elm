@@ -4,6 +4,7 @@ import Html exposing (Html, div, h2, h3, p, text)
 import Html.Attributes exposing (class, style)
 import Html.Events exposing (onClick)
 import Modules.Dividers.IconButtonDivider as IconButtonDivider
+import Shared.SharedTypes exposing (WidgetInstanceId(..))
 import Util.CustomCss.DaschTailwind as Dtw
 import Util.Icon as Icon
 
@@ -13,12 +14,13 @@ type alias Model =
     , text : String
     , title : String
     , subtitle : String
+    , id : WidgetInstanceId
     }
 
 
 type Msg
-    = Show
-    | Hide
+    = Show WidgetInstanceId
+    | Hide WidgetInstanceId
 
 
 view : Model -> Html Msg
@@ -48,7 +50,7 @@ view model =
             , div
                 [ class (Dtw.classList [ Dtw.mt_6, Dtw.prose, Dtw.prose_indigo, Dtw.prose_lg, Dtw.text_gray_500, Dtw.mx_auto, Dtw.max_w_prose ]) ]
                 [ p [ style "padding-bottom" "1%" ] [ text model.text ] ]
-            , IconButtonDivider.view { buttonAttrs = [ onClick Hide ], icon = Icon.PlusSm, text = "Read Less" }
+            , IconButtonDivider.view { buttonAttrs = [ onClick (Hide model.id) ], icon = Icon.PlusSm, text = "Read Less" }
             ]
 
     else
@@ -69,15 +71,23 @@ view model =
                 ]
 
             -- Don't use api to avoid circularities
-            , IconButtonDivider.view { buttonAttrs = [ onClick Show ], icon = Icon.PlusSm, text = "Read More" }
+            , IconButtonDivider.view { buttonAttrs = [ onClick (Show model.id) ], icon = Icon.PlusSm, text = "Read More" }
             ]
 
 
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        Show ->
-            { model | isOpen = True }
+        Show id ->
+            if id == model.id then
+                { model | isOpen = True }
 
-        Hide ->
-            { model | isOpen = False }
+            else
+                model
+
+        Hide id ->
+            if id == model.id then
+                { model | isOpen = False }
+
+            else
+                model

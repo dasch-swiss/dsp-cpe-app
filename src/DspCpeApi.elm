@@ -15,87 +15,87 @@ import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
 import Modules.Tiles.ImageTile as ImageTile
 import Modules.Tiles.ImageTileGrid as ImageTileGrid
-import Shared.SharedTypes exposing (BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..))
+import Shared.SharedTypes exposing (AccordionSize(..), BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..), WidgetInstanceId(..))
 import Util.Icon as Icon
 
 
-circularAvatar : CircularAvatarSize -> String -> String -> List (Attribute msg) -> Html msg
-circularAvatar size img alt attrs =
-    CircularAvatar.view { size = size, img = img, alt = alt, attrs = attrs }
+circularAvatar : { attrs : List (Attribute msg), size : CircularAvatarSize, img : String, alt : String } -> Html msg
+circularAvatar args =
+    CircularAvatar.view { attrs = args.attrs, size = args.size, img = args.img, alt = args.alt }
 
 
 
 -- convenience function: returns a basicButton with the Variant "Primary"
 
 
-primaryButton : List (Attribute msg) -> String -> BasicButtonSize -> Html msg
-primaryButton attrs txt size =
-    basicButton attrs txt size Primary
+primaryButton : { attrs : List (Attribute msg), text : String, size : BasicButtonSize } -> Html msg
+primaryButton args =
+    basicButton args.attrs args.text args.size Primary
 
 
 
 -- convenience function: returns a basicButton with the Variant "Secondary"
 
 
-secondaryButton : List (Attribute msg) -> String -> BasicButtonSize -> Html msg
-secondaryButton attrs txt size =
-    basicButton attrs txt size Secondary
+secondaryButton : { attrs : List (Attribute msg), text : String, size : BasicButtonSize } -> Html msg
+secondaryButton args =
+    basicButton args.attrs args.text args.size Secondary
 
 
 
 -- convenience function: returns a basicButton with the Variant "White"
 
 
-whiteButton : List (Attribute msg) -> String -> BasicButtonSize -> Html msg
-whiteButton attrs txt size =
-    basicButton attrs txt size White
+whiteButton : { attrs : List (Attribute msg), text : String, size : BasicButtonSize } -> Html msg
+whiteButton args =
+    basicButton args.attrs args.text args.size White
 
 
 
 -- convenience function: returns a "Circular" button
 
 
-circularButton : CircularButtonSize -> Icon.Icon -> List (Attribute msg) -> Html msg
-circularButton size icon attrs =
-    CircularButton.view { size = size, icon = icon, attrs = attrs }
+circularButton : { attrs : List (Attribute msg), size : CircularButtonSize, icon : Icon.Icon } -> Html msg
+circularButton args =
+    CircularButton.view { attrs = args.attrs, size = args.size, icon = args.icon }
 
 
 
 -- convenience function: returns a "LeadingIcon" button
 
 
-leadingIconButton : LeadingSize -> String -> Icon.Icon -> List (Attribute msg) -> Html msg
-leadingIconButton size text icon attrs =
-    LeadingIconButton.view { size = size, text = text, icon = icon, attrs = attrs }
+leadingIconButton : { attrs : List (Attribute msg), text : String, size : LeadingSize, icon : Icon.Icon } -> Html msg
+leadingIconButton args =
+    LeadingIconButton.view { attrs = args.attrs, text = args.text, size = args.size, icon = args.icon }
 
 
 
 -- convenience function: returns a "TrailingIcon" button
 
 
-trailingIconButton : TrailingSize -> String -> Icon.Icon -> List (Attribute msg) -> Html msg
-trailingIconButton size text icon attrs =
-    TrailingIconButton.view { size = size, text = text, icon = icon, attrs = attrs }
+trailingIconButton : { attrs : List (Attribute msg), text : String, size : TrailingSize, icon : Icon.Icon } -> Html msg
+trailingIconButton args =
+    TrailingIconButton.view { attrs = args.attrs, text = args.text, size = args.size,  icon = args.icon }
 
 
-iconButtonDivider : List (Attribute msg) -> Icon.Icon -> String -> Html msg
-iconButtonDivider attr icon text =
-    IconButtonDivider.view { buttonAttrs = attr, icon = icon, text = text }
+iconButtonDivider : { attrs : List (Attribute msg), text : String, icon : Icon.Icon } -> Html msg
+iconButtonDivider args =
+    IconButtonDivider.view { buttonAttrs = args.attrs, text = args.text, icon = args.icon }
 
 
-header : Header.Logo -> List Header.NavItem -> Bool -> Maybe Header.User -> Bool -> Bool -> Html Header.Msg
-header logo navBar showSearchBar user showMobileMenu fixedPosition =
-    Header.view { logo = logo, navBar = navBar, showSearchBar = showSearchBar, user = user, showMobileMenu = showMobileMenu, fixedPosition = fixedPosition }
+header : { logo : Header.Logo, navBar : List Header.NavItem, showSearchBar : Bool, user : Maybe Header.User, showMobileMenu : Bool } -> Html Header.Msg
+header args =
+    Header.view { logo = args.logo, navBar = args.navBar, showSearchBar = args.showSearchBar, user = args.user, showMobileMenu = args.showMobileMenu }
 
 
-projectDescription : { isOpen : Bool, text : String, title : String, subtitle: String} -> Html.Html ProjectDescription.Msg
+projectDescription : { isOpen : Bool, text : String, title : String, subtitle : String, id : WidgetInstanceId } -> Html.Html ProjectDescription.Msg
 projectDescription args =
-    ProjectDescription.view { isOpen = args.isOpen, text = args.text, title = args.title, subtitle = args.subtitle }
+    ProjectDescription.view { isOpen = args.isOpen, text = args.text, title = args.title, subtitle = args.subtitle, id = args.id }
 
 
-accordion : Bool -> String -> Accordion.AccordionSize -> Html.Html Accordion.Msg
-accordion isOpen text size =
-    Accordion.view { isOpen = isOpen, text = text, size = size }
+accordion : { isOpen : Bool, text : String, size : AccordionSize, id : WidgetInstanceId } -> Html.Html Accordion.Msg
+accordion args =
+    Accordion.view { isOpen = args.isOpen, text = args.text, size = args.size, id = args.id }
 
 
 imageTileGrid : List ImageTile.Model -> Html.Html msg
@@ -103,9 +103,9 @@ imageTileGrid tiles =
     ImageTileGrid.view { tiles = tiles }
 
 
-footer : String -> String -> String -> String -> Html.Html msg
-footer copyrightText contactUsText contactUsUrl licensingFilePath =
-    Footer.view { copyrightText = copyrightText, contactUsText = contactUsText, contactUsUrl = contactUsUrl, licensingFilePath = licensingFilePath }
+footer : { copyrightText : String, contactUsText : String, contactUsUrl : String, licensingFilePath : String } -> Html.Html msg
+footer args =
+    Footer.view { copyrightText = args.copyrightText, contactUsText = args.contactUsText, contactUsUrl = args.contactUsUrl, licensingFilePath = args.licensingFilePath }
 
 
 focus : Focus.Model -> Html.Html Focus.Msg

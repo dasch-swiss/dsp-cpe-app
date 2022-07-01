@@ -12,7 +12,7 @@ import Util.Icon as Icon
 
 primary : Html msg
 primary =
-    primaryButton [] "Primary Button" BasicExtraSmall
+    primaryButton { attrs = [], text = "Primary Button", size = BasicExtraSmall }
 
 
 primaryCreated : Test
@@ -27,7 +27,7 @@ primaryCreated =
 
 secondary : Html msg
 secondary =
-    secondaryButton [] "Secondary Button" BasicExtraSmall
+    secondaryButton { attrs = [], text = "Secondary Button", size = BasicExtraSmall }
 
 
 secondaryCreated : Test
@@ -42,7 +42,7 @@ secondaryCreated =
 
 white : Html msg
 white =
-    whiteButton [] "White Button" BasicExtraSmall
+    whiteButton { attrs = [], text = "White Button", size = BasicExtraSmall }
 
 
 whiteCreated : Test
@@ -57,7 +57,7 @@ whiteCreated =
 
 circular : Html msg
 circular =
-    Api.circularButton CircularLarge Icon.AcademicCap []
+    Api.circularButton { size = CircularLarge, icon = Icon.AcademicCap, attrs = [] }
 
 
 circularCreated : Test

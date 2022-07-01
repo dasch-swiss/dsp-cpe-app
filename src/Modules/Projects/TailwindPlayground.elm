@@ -10,7 +10,7 @@ import Modules.Projects.Focus.Focus as ProjectFocus
 import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
 import Modules.Tiles.ImageTile as ImageTile
-import Shared.SharedTypes exposing (BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..))
+import Shared.SharedTypes exposing (AccordionSize(..), BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..), WidgetInstanceId(..))
 import Util.Icon as Icon
 
 
@@ -54,49 +54,48 @@ view model =
         [ div [ class "buttons" ]
             [ div [ class "preview primary-button" ]
                 [ h3 [ class "label" ] [ text "Primary Buttons" ]
-                , Api.primaryButton [] "Extra small" BasicExtraSmall
-                , Api.primaryButton [] "Small" BasicSmall
-                , Api.primaryButton [] "Normal" BasicNormal
-                , Api.primaryButton [] "Large" BasicLarge
-                , Api.primaryButton [] "Extra large" BasicExtraLarge
+                , Api.primaryButton { attrs = [], text = "Extra small", size = BasicExtraSmall }
+                , Api.primaryButton { attrs = [], text = "Small", size = BasicSmall }
+                , Api.primaryButton { attrs = [], text = "Normal", size = BasicNormal }
+                , Api.primaryButton { attrs = [], text = "Large", size = BasicLarge }
+                , Api.primaryButton { attrs = [], text = "Extra large", size = BasicExtraLarge }
                 ]
             , div [ class "preview secondary-button" ]
                 [ h3 [ class "label" ] [ text "Secondary Buttons" ]
-                , Api.secondaryButton [] "Extra small" BasicExtraSmall
-                , Api.secondaryButton [] "Small" BasicSmall
-                , Api.secondaryButton [] "Normal" BasicNormal
-                , Api.secondaryButton [] "Large" BasicLarge
-                , Api.secondaryButton [] "Extra large" BasicExtraLarge
+                , Api.secondaryButton { attrs = [], text = "Extra small", size = BasicExtraSmall }
+                , Api.secondaryButton { attrs = [], text = "Small", size = BasicSmall }
+                , Api.secondaryButton { attrs = [], text = "Normal", size = BasicNormal }
+                , Api.secondaryButton { attrs = [], text = "Large", size = BasicLarge }
+                , Api.secondaryButton { attrs = [], text = "Extra large", size = BasicExtraLarge }
                 ]
             , div [ class "preview white-button" ]
                 [ h3 [ class "label" ] [ text "White Buttons" ]
-                , Api.whiteButton [] "Extra small" BasicExtraSmall
-                , Api.whiteButton [] "Small" BasicSmall
-                , Api.whiteButton [] "Normal" BasicNormal
-                , Api.whiteButton [] "Large" BasicLarge
-                , Api.whiteButton [] "Extra large" BasicExtraLarge
+                , Api.whiteButton { attrs = [], text = "Extra small", size = BasicExtraSmall }
+                , Api.whiteButton { attrs = [], text = "Small", size = BasicSmall }
+                , Api.whiteButton { attrs = [], text = "Normal", size = BasicNormal }
+                , Api.whiteButton { attrs = [], text = "Large", size = BasicLarge }
+                , Api.whiteButton { attrs = [], text = "Extra large", size = BasicExtraLarge }
                 ]
             , div [ class "preview circular-button" ]
                 [ h3 [ class "label" ] [ text "Circular Buttons" ]
-                , Api.circularButton CircularExtraSmall Icon.ArrowRight []
-                , Api.circularButton CircularSmall Icon.Annotation []
-                , Api.circularButton CircularNormal Icon.Plus []
-                , Api.circularButton CircularLarge Icon.Check []
-                , Api.circularButton CircularExtraLarge Icon.EmojiHappy []
-                ]
-            , div [ class "preview leading-button" ]
+                , Api.circularButton { attrs = [], size = CircularExtraSmall, icon = Icon.ArrowRight }
+                , Api.circularButton { attrs = [], size = CircularSmall, icon = Icon.Annotation }
+                , Api.circularButton { attrs = [], size = CircularNormal, icon = Icon.Plus }
+                , Api.circularButton { attrs = [], size = CircularLarge, icon = Icon.Check }
+                , Api.circularButton { attrs = [], size = CircularExtraLarge, icon = Icon.EmojiHappy }
+                ] , div [ class "preview leading-button" ]
                 [ h3 [ class "label" ] [ text "Leading Icon Buttons" ]
-                , Api.leadingIconButton LeadingSmall "Small" Icon.Annotation []
-                , Api.leadingIconButton LeadingNormal "Normal" Icon.EmojiHappy []
-                , Api.leadingIconButton LeadingLarge "Large" Icon.Plus []
-                , Api.leadingIconButton LeadingExtraLarge "Extra Large" Icon.Check []
+                , Api.leadingIconButton { attrs = [], size = LeadingSmall, text = "Small", icon = Icon.Annotation }
+                , Api.leadingIconButton { attrs = [], size = LeadingNormal, text = "Normal", icon = Icon.EmojiHappy }
+                , Api.leadingIconButton { attrs = [], size = LeadingLarge, text = "Large", icon = Icon.Plus }
+                , Api.leadingIconButton { attrs = [], size = LeadingExtraLarge, text = "Extra Large", icon = Icon.Check }
                 ]
             , div [ class "preview leading-button" ]
                 [ h3 [ class "label" ] [ text "Trailing Icon Buttons" ]
-                , Api.trailingIconButton TrailingSmall "Small" Icon.Annotation []
-                , Api.trailingIconButton TrailingNormal "Normal" Icon.EmojiHappy []
-                , Api.trailingIconButton TrailingLarge "Large" Icon.Plus []
-                , Api.trailingIconButton TrailingExtraLarge "Extra Large" Icon.Check []
+                , Api.trailingIconButton { attrs = [], size = TrailingSmall, text = "Small", icon = Icon.Annotation }
+                , Api.trailingIconButton { attrs = [], size = TrailingNormal, text = "Normal", icon = Icon.EmojiHappy }
+                , Api.trailingIconButton { attrs = [], size = TrailingLarge, text = "Large", icon = Icon.Plus }
+                , Api.trailingIconButton { attrs = [], size = TrailingExtraLarge, text = "Extra Large", icon = Icon.Check }
                 ]
 
             -- insert other buttons here
@@ -105,36 +104,41 @@ view model =
             [ div [ class "preview circular-avatar" ]
                 [ h3 [ class "label" ] [ text "Circular Avatar" ]
                 , Api.circularAvatar
-                    CircularAvatarExtraSmall
-                    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    "Extra small"
-                    []
+                    { size = CircularAvatarExtraSmall
+                    , img = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    , alt = "Extra small"
+                    , attrs = []
+                    }
                 , Api.circularAvatar
-                    CircularAvatarSmall
-                    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    "Small"
-                    []
+                    { size = CircularAvatarSmall
+                    , img = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    , alt = "Small"
+                    , attrs = []
+                    }
                 , Api.circularAvatar
-                    CircularAvatarNormal
-                    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    "Normal"
-                    []
+                    { size = CircularAvatarNormal
+                    , img = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    , alt = "Normal"
+                    , attrs = []
+                    }
                 , Api.circularAvatar
-                    CircularAvatarLarge
-                    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    "Large"
-                    []
+                    { size = CircularAvatarLarge
+                    , img = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    , alt = "Large"
+                    , attrs = []
+                    }
                 , Api.circularAvatar
-                    CircularAvatarExtraLarge
-                    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    "Extra large"
-                    []
+                    { size = CircularAvatarExtraLarge
+                    , img = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    , alt = "Extra large"
+                    , attrs = []
+                    }
                 ]
             ]
         , div [ class "text" ]
             [ div [ class "Header" ]
                 [ h3 [ class "label" ] [ text "Header" ]
-                , Api.header model.headerModel.logo model.headerModel.navBar model.headerModel.showSearchBar model.headerModel.user model.headerModel.showMobileMenu model.headerModel.fixedPosition |> Html.map NavigationHeaderMsg
+                , Api.header model.headerModel |> Html.map NavigationHeaderMsg
                 ]
             ]
         , div [ class "text" ]
@@ -146,7 +150,7 @@ view model =
         , div [ class "accordion" ]
             [ div []
                 [ h3 [ class "label" ] [ text "Accordion" ]
-                , Api.accordion model.accordionModel.isOpen model.accordionModel.text model.accordionModel.size |> Html.map AccordionMsg
+                , Api.accordion model.accordionModel |> Html.map AccordionMsg
                 ]
             ]
         , div [ class "tiles" ]
@@ -161,7 +165,7 @@ view model =
         , div [ class "footer" ]
             [ div []
                 [ h3 [ class "label" ] [ text "Footer" ]
-                , Api.footer "© 2022 DaSCH" "Contact Us" "mailto:info@dasch.swiss" "/assets/images/license-cc-beol.jpg"
+                , Api.footer { copyrightText = "© 2022 DaSCH", contactUsText = "Contact Us", contactUsUrl = "mailto:info@dasch.swiss", licensingFilePath = "/assets/images/license-cc-beol.jpg" }
                 ]
             ]
         , div []
@@ -198,13 +202,9 @@ update msg model =
             )
 
         ProjectFocusMsg projectFocusMsg ->
-            let
-                ( newModel, _ ) =
-                    ProjectFocus.update projectFocusMsg model.projectFocusModel
-            in
             ( { model
                 | projectFocusModel =
-                    newModel
+                    ProjectFocus.update projectFocusMsg model.projectFocusModel
               }
             , Cmd.none
             )
@@ -243,7 +243,8 @@ exampleAccordion =
             Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, 
             vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod 
             tincidunt ut laoreet dolore magna aliquam erat volutpat."""
-    , size = Accordion.FullWidth
+    , size = FullWidth
+    , id = WidgetInstanceId 3
     }
 
 
@@ -265,6 +266,7 @@ exampleProjectFocus =
         , isReadMoreOpen = False
         , datasetTitle = "Test Dataset"
         }
+    , id = WidgetInstanceId 2
     }
 
 
@@ -293,7 +295,6 @@ exampleHeader =
             }
     , showSearchBar = False
     , showMobileMenu = False
-    , fixedPosition = False
     }
 
 
@@ -308,4 +309,5 @@ exampleProjectDescription =
     , title = "Title"
     , subtitle = "Subtitle"
     , isOpen = False
+    , id = WidgetInstanceId 1
     }

@@ -633,6 +633,11 @@ mb_0 =
     "mb-0"
 
 
+mb_5 : String
+mb_5 =
+    "mb-5"
+
+
 mb_8 : String
 mb_8 =
     "mb-8"
