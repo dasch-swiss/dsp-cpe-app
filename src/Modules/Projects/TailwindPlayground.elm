@@ -16,7 +16,6 @@ import Util.Icon as Icon
 
 type alias Model =
     { text : String
-    , projectDescriptionModel : ProjectDescription.Model
     , accordionModel : Accordion.Model
     , projectFocusModel : ProjectFocus.Model
     , headerModel : Header.HeaderModel
@@ -25,8 +24,7 @@ type alias Model =
 
 
 type Msg
-    = ProjDesMsg ProjectDescription.Msg
-    | AccordionMsg Accordion.Msg
+    = AccordionMsg Accordion.Msg
     | ProjectFocusMsg ProjectFocus.Msg
     | NavigationHeaderMsg Header.Msg
     | BackButtonMsg BackButton.Msg
@@ -35,7 +33,6 @@ type Msg
 initialModel : Nav.Key -> Model
 initialModel nav =
     { text = "playground"
-    , projectDescriptionModel = exampleProjectDescription
     , accordionModel = exampleAccordion
     , projectFocusModel = exampleProjectFocus
     , headerModel = exampleHeader
@@ -141,12 +138,6 @@ view model =
                 , Api.header model.headerModel |> Html.map NavigationHeaderMsg
                 ]
             ]
-        , div [ class "text" ]
-            [ div [ class "preview project description" ]
-                [ h3 [ class "label" ] [ text "Project description" ]
-                , Api.projectDescription model.projectDescriptionModel |> Html.map ProjDesMsg
-                ]
-            ]
         , div [ class "accordion" ]
             [ div []
                 [ h3 [ class "label" ] [ text "Accordion" ]
@@ -177,13 +168,6 @@ view model =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        ProjDesMsg projDesMsg ->
-            ( { model
-                | projectDescriptionModel =
-                    ProjectDescription.update projDesMsg model.projectDescriptionModel
-              }
-            , Cmd.none
-            )
 
         AccordionMsg accordionMsg ->
             ( { model
@@ -295,19 +279,4 @@ exampleHeader =
             }
     , showSearchBar = False
     , showMobileMenu = False
-    }
-
-
-exampleProjectDescription : ProjectDescription.Model
-exampleProjectDescription =
-    { text = """Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus 
-                    est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, 
-                    no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
-                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, 
-                    vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod 
-                    tincidunt ut laoreet dolore magna aliquam erat volutpat."""
-    , title = "Title"
-    , subtitle = "Subtitle"
-    , isOpen = False
-    , id = WidgetInstanceId 1
     }

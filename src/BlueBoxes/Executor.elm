@@ -65,8 +65,7 @@ executeContentPart : Struct.ContentPart -> Html Msg
 executeContentPart contentPart =
     case contentPart of
         Struct.ProjectDescription projDescModel ->
-            Api.projectDescription projDescModel
-                |> Html.map ProjectDescriptionMsg
+            div [][]
 
         Struct.ProjectFocus focusModel ->
             Api.focus focusModel
@@ -127,7 +126,10 @@ updateContentPart msg content =
         Struct.ProjectDescription projModel ->
             case msg of
                 ProjectDescriptionMsg projMsg ->
-                    Struct.ProjectDescription (ProjectDescription.update projMsg projModel)
+                    let
+                        (projDescModel, _) = ProjectDescription.update projMsg projModel
+                    in
+                    Struct.ProjectDescription projDescModel
 
                 _ ->
                     content

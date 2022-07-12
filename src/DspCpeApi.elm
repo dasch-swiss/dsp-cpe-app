@@ -17,6 +17,7 @@ import Modules.Tiles.ImageTile as ImageTile
 import Modules.Tiles.ImageTileGrid as ImageTileGrid
 import Shared.SharedTypes exposing (AccordionSize(..), BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..), WidgetInstanceId(..))
 import Util.Icon as Icon
+import RemoteData
 
 
 circularAvatar : { attrs : List (Attribute msg), size : CircularAvatarSize, img : String, alt : String } -> Html msg
@@ -88,10 +89,14 @@ header args =
     Header.view { logo = args.logo, navBar = args.navBar, showSearchBar = args.showSearchBar, user = args.user, showMobileMenu = args.showMobileMenu }
 
 
-projectDescription : { isOpen : Bool, text : String, title : String, subtitle : String, id : WidgetInstanceId } -> Html.Html ProjectDescription.Msg
+projectDescription : { isOpen : Bool, id : WidgetInstanceId } -> Html.Html ProjectDescription.Msg
 projectDescription args =
-    ProjectDescription.view { isOpen = args.isOpen, text = args.text, title = args.title, subtitle = args.subtitle, id = args.id }
+    ProjectDescription.view { isOpen = args.isOpen, data = RemoteData.NotAsked, id = args.id }
 
+
+newProjectDescription : WidgetInstanceId -> (ProjectDescription.Model, Cmd ProjectDescription.Msg)
+newProjectDescription wid =
+    ProjectDescription.init wid
 
 accordion : { isOpen : Bool, text : String, size : AccordionSize, id : WidgetInstanceId } -> Html.Html Accordion.Msg
 accordion args =
