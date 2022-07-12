@@ -7,7 +7,7 @@ import Html.Attributes exposing (class)
 import List exposing (map)
 import Modules.NavigationHeader.NavigationHeader as NavigationHeader
 import Modules.Projects.Focus.Focus as ProjectFocus
-import Modules.Projects.TestPage as Test
+import Modules.Projects.PageStructureService as StructureService
 import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
 import Util.CustomCss.DaschTailwind as Dtw
@@ -26,7 +26,7 @@ type Msg
 
 init : ( Model, Cmd Msg )
 init =
-    ( { page = Test.testPage }, Cmd.none )
+    ( { page = StructureService.getProjectByID 1 }, Cmd.none )
 
 
 execute : Struct.Page -> Html Msg
