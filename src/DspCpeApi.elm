@@ -15,9 +15,9 @@ import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
 import Modules.Tiles.ImageTile as ImageTile
 import Modules.Tiles.ImageTileGrid as ImageTileGrid
+import RemoteData
 import Shared.SharedTypes exposing (AccordionSize(..), BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..), WidgetInstanceId(..))
 import Util.Icon as Icon
-import RemoteData
 
 
 circularAvatar : { attrs : List (Attribute msg), size : CircularAvatarSize, img : String, alt : String } -> Html msg
@@ -76,7 +76,7 @@ leadingIconButton args =
 
 trailingIconButton : { attrs : List (Attribute msg), text : String, size : TrailingSize, icon : Icon.Icon } -> Html msg
 trailingIconButton args =
-    TrailingIconButton.view { attrs = args.attrs, text = args.text, size = args.size,  icon = args.icon }
+    TrailingIconButton.view { attrs = args.attrs, text = args.text, size = args.size, icon = args.icon }
 
 
 iconButtonDivider : { attrs : List (Attribute msg), text : String, icon : Icon.Icon } -> Html msg
@@ -94,13 +94,19 @@ projectDescription args =
     ProjectDescription.view { isOpen = args.isOpen, data = RemoteData.NotAsked, id = args.id }
 
 
-newProjectDescription : WidgetInstanceId -> (ProjectDescription.Model, Cmd ProjectDescription.Msg)
+newProjectDescription : WidgetInstanceId -> ( ProjectDescription.Model, Cmd ProjectDescription.Msg )
 newProjectDescription wid =
     ProjectDescription.init wid
 
-accordion : { isOpen : Bool, text : String, size : AccordionSize, id : WidgetInstanceId } -> Html.Html Accordion.Msg
+
+accordion : { isOpen : Bool, id : WidgetInstanceId } -> Html.Html Accordion.Msg
 accordion args =
-    Accordion.view { isOpen = args.isOpen, text = args.text, size = args.size, id = args.id }
+    Accordion.view { isOpen = args.isOpen, data = RemoteData.NotAsked, id = args.id }
+
+
+newAccordion : WidgetInstanceId -> ( Accordion.Model, Cmd Accordion.Msg )
+newAccordion wid =
+    Accordion.init wid
 
 
 imageTileGrid : List ImageTile.Model -> Html.Html msg

@@ -6,31 +6,28 @@ import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Http
 import Modules.Projects.Project exposing (Project, ProjectId, idToString, projectDecoder)
-import Modules.Projects.TestPage as TestPage
-import Modules.Text.ProjectDescription as ProjectDescription
 import RemoteData exposing (WebData)
 import Shared.SharedTypes exposing (WidgetInstanceId(..))
 import Util.Error exposing (buildErrorMessage)
-
+import BlueBoxes.GuiElement as GuiElement
 
 type alias Model =
     { project : WebData Project
-    , projectDescription : ProjectDescription.Model
+    , guiElements : List GuiElement.Model
     , navKey : Nav.Key
     }
-
 
 type Msg
     = FetchProject ProjectId
     | ProjectReceived (WebData Project)
-    | ProjectDescriptionMsg ProjectDescription.Msg
+    | GuiElementMsg GuiElement.Msg
 
 
-initialModel : ProjectDescription.Model -> Nav.Key -> Model
-initialModel projDescModel navKey =
-    { navKey = navKey
-    , project = RemoteData.Loading
-    , projectDescription = projDescModel
+initialModel : List GuiElement.Model -> Nav.Key -> Model
+initialModel guiElements navKey =
+    { project = RemoteData.Loading
+    , guiElements = guiElements
+    , navKey = navKey
     }
 
 
@@ -39,8 +36,11 @@ init projectId navKey =
     let
         ( projModel, projCmd ) =
             NewExecutor.executeNewProjectDescription (WidgetInstanceId 9001)
+
+        ( accModel, accCmd ) =
+            NewExecutor.executeNewAccordion (WidgetInstanceId 9002)
     in
-    ( initialModel projModel navKey, Cmd.batch [ fetchProject projectId, Cmd.map ProjectDescriptionMsg projCmd ] )
+    ( initialModel [projModel, accModel] navKey, Cmd.batch [ fetchProject projectId, Cmd.map GuiElementMsg projCmd, Cmd.map GuiElementMsg accCmd ] )
 
 
 fetchProject : ProjectId -> Cmd Msg
@@ -62,11 +62,15 @@ update msg model =
         FetchProject projectId ->
             ( { model | project = RemoteData.Loading }, fetchProject projectId )
 
-        ProjectDescriptionMsg projDescMsg ->
+        GuiElementMsg guiElemMsg ->
             let
-                (newModel, newCmd) = ProjectDescription.update projDescMsg model.projectDescription
+                (newModel, newCmd) = destructGuiElementList (List.map (GuiElement.update guiElemMsg) model.guiElements)
             in
-                ( {model | projectDescription = newModel}, Cmd.map ProjectDescriptionMsg newCmd )
+                ( {model | guiElements = newModel}, Cmd.map GuiElementMsg newCmd )
+
+destructGuiElementList : List ( GuiElement.Model, Cmd GuiElement.Msg) -> ( List GuiElement.Model, Cmd GuiElement.Msg )
+destructGuiElementList list =
+    ((List.map (\tuple -> Tuple.first tuple) list), Cmd.batch (List.map (\tuple -> Tuple.second tuple) list))
 
 view : Model -> Html Msg
 view model =
@@ -84,7 +88,7 @@ viewProject model =
 
         RemoteData.Success currentProject ->
             if idToString currentProject.id == "3" then
-                ProjectDescription.view model.projectDescription |> Html.map ProjectDescriptionMsg
+                div [] (List.map GuiElement.view model.guiElements) |> Html.map GuiElementMsg
 
             else
                 div [ class "project" ]

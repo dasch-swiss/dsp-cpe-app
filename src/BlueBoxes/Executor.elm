@@ -72,8 +72,7 @@ executeContentPart contentPart =
                 |> Html.map ProjectFocusMsg
 
         Struct.Accordion accModel ->
-            Api.accordion accModel
-                |> Html.map AccordionMsg
+            div [] []
 
 
 executeFooterPart : Struct.FooterPart -> Html Msg
@@ -145,7 +144,7 @@ updateContentPart msg content =
         Struct.Accordion accModel ->
             case msg of
                 AccordionMsg accMsg ->
-                    Struct.Accordion (Accordion.update accMsg accModel)
+                    Struct.Accordion accModel
 
                 _ ->
                     content
