@@ -1,21 +1,24 @@
 module Modules.Projects.ViewProject exposing (..)
 
+import BlueBoxes.GuiElement as GuiElement
 import BlueBoxes.NewExecutor as NewExecutor
 import Browser.Navigation as Nav
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Http
+import Modules.Projects.NewTestPage as NewTestPage
 import Modules.Projects.Project exposing (Project, ProjectId, idToString, projectDecoder)
 import RemoteData exposing (WebData)
 import Shared.SharedTypes exposing (WidgetInstanceId(..))
 import Util.Error exposing (buildErrorMessage)
-import BlueBoxes.GuiElement as GuiElement
+
 
 type alias Model =
     { project : WebData Project
     , guiElements : List GuiElement.Model
     , navKey : Nav.Key
     }
+
 
 type Msg
     = FetchProject ProjectId
@@ -34,13 +37,10 @@ initialModel guiElements navKey =
 init : ProjectId -> Nav.Key -> ( Model, Cmd Msg )
 init projectId navKey =
     let
-        ( projModel, projCmd ) =
-            NewExecutor.executeNewProjectDescription (WidgetInstanceId 9001)
-
-        ( accModel, accCmd ) =
-            NewExecutor.executeNewAccordion (WidgetInstanceId 9002)
+        ( newModel, newCmd ) =
+            NewExecutor.execute NewTestPage.testPage
     in
-    ( initialModel [projModel, accModel] navKey, Cmd.batch [ fetchProject projectId, Cmd.map GuiElementMsg projCmd, Cmd.map GuiElementMsg accCmd ] )
+    ( initialModel newModel navKey, Cmd.batch [ fetchProject projectId, Cmd.map GuiElementMsg newCmd ] )
 
 
 fetchProject : ProjectId -> Cmd Msg
@@ -64,13 +64,16 @@ update msg model =
 
         GuiElementMsg guiElemMsg ->
             let
-                (newModel, newCmd) = destructGuiElementList (List.map (GuiElement.update guiElemMsg) model.guiElements)
+                ( newModel, newCmd ) =
+                    deconstructGuiElementList (List.map (GuiElement.update guiElemMsg) model.guiElements)
             in
-                ( {model | guiElements = newModel}, Cmd.map GuiElementMsg newCmd )
+            ( { model | guiElements = newModel }, Cmd.map GuiElementMsg newCmd )
 
-destructGuiElementList : List ( GuiElement.Model, Cmd GuiElement.Msg) -> ( List GuiElement.Model, Cmd GuiElement.Msg )
-destructGuiElementList list =
-    ((List.map (\tuple -> Tuple.first tuple) list), Cmd.batch (List.map (\tuple -> Tuple.second tuple) list))
+
+deconstructGuiElementList : List ( GuiElement.Model, Cmd GuiElement.Msg ) -> ( List GuiElement.Model, Cmd GuiElement.Msg )
+deconstructGuiElementList list =
+    ( List.map (\tuple -> Tuple.first tuple) list, Cmd.batch (List.map (\tuple -> Tuple.second tuple) list) )
+
 
 view : Model -> Html Msg
 view model =

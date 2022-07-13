@@ -16,3 +16,4 @@ type Content
 -- in the future, this will also hold onto the position
 type ContentPart
     = ProjectDescription WidgetInstanceId
+    | Accordion WidgetInstanceId

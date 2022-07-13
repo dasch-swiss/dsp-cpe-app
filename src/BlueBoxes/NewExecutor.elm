@@ -3,61 +3,47 @@ module BlueBoxes.NewExecutor exposing (..)
 import BlueBoxes.GuiElement as GuiElement
 import BlueBoxes.NewPageStructureModel as Struct
 import DspCpeApi as Api
-import Html exposing (Html, div, footer, header, main_)
-import Html.Attributes exposing (class)
-import List exposing (map)
-import Modules.Projects.NewTestPage as NewTest
-import Shared.SharedTypes exposing (WidgetInstanceId(..))
+import List
 
 
 type alias Model =
     { page : Struct.Page }
 
 
-init : ( Model, Cmd msg )
-init =
-    ( { page = NewTest.testPage }, Cmd.none )
-
-
-execute : Struct.Page -> Html msg
+execute : Struct.Page -> ( List GuiElement.Model, Cmd GuiElement.Msg )
 execute (Struct.Page pageParts) =
-    div [] (map executePagePart pageParts)
+    deconstructGuiElementList (List.map executePagePart pageParts)
 
 
-executePagePart : Struct.PagePart -> Html msg
+deconstructGuiElementList : List ( List GuiElement.Model, Cmd GuiElement.Msg ) -> ( List GuiElement.Model, Cmd GuiElement.Msg )
+deconstructGuiElementList list =
+    ( List.concatMap (\tuple -> Tuple.first tuple) list, Cmd.batch (List.map (\tuple -> Tuple.second tuple) list) )
+
+
+executePagePart : Struct.PagePart -> ( List GuiElement.Model, Cmd GuiElement.Msg )
 executePagePart pagePart =
     case pagePart of
         Struct.PageContent (Struct.Content contentPart) ->
-            main_
-                []
-                (map executeContentPart contentPart)
+            let
+                list =
+                    List.map executeContentPart contentPart
+            in
+            ( List.map (\tuple -> Tuple.first tuple) list, Cmd.batch (List.map (\tuple -> Tuple.second tuple) list) )
 
 
-executeContentPart : Struct.ContentPart -> Html msg
+executeContentPart : Struct.ContentPart -> ( GuiElement.Model, Cmd GuiElement.Msg )
 executeContentPart contentPart =
     case contentPart of
         Struct.ProjectDescription wid ->
-            div [] []
+            let
+                ( model, cmd ) =
+                    Api.newProjectDescription wid
+            in
+            ( { variant = GuiElement.ProjectDescriptionElement model }, Cmd.map GuiElement.ProjectDescriptionMsg cmd )
 
-
-executeNewProjectDescription : WidgetInstanceId -> ( GuiElement.Model, Cmd GuiElement.Msg )
-executeNewProjectDescription wid =
-    let
-        ( model, cmd ) =
-            Api.newProjectDescription wid
-    in
-    ( { variant = GuiElement.ProjectDescriptionElement model }, Cmd.map GuiElement.ProjectDescriptionMsg cmd )
-
-
-executeNewAccordion : WidgetInstanceId -> ( GuiElement.Model, Cmd GuiElement.Msg )
-executeNewAccordion wid =
-    let
-        ( model, cmd ) =
-            Api.newAccordion wid
-    in
-    ( { variant = GuiElement.AccordionElement model }, Cmd.map GuiElement.AccordionMsg cmd )
-
-
-view : Model -> Html msg
-view model =
-    execute model.page
+        Struct.Accordion wid ->
+            let
+                ( model, cmd ) =
+                    Api.newAccordion wid
+            in
+            ( { variant = GuiElement.AccordionElement model }, Cmd.map GuiElement.AccordionMsg cmd )
