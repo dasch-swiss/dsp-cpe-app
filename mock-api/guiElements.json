@@ -5,7 +5,8 @@
             "text" : "please work"
         },
     "accordion": { 
-        "text": "accordion text"
+        "text": "accordion text",
+        "size": "Half"
     }
 
 }

@@ -10,7 +10,7 @@ import Util.CustomCss.DaschTailwind as Dtw
 import Util.Icon as Icon
 import Http
 import Json.Decode as Decode exposing (Decoder)
-import Json.Decode.Pipeline exposing (required, hardcoded)
+import Json.Decode.Pipeline exposing (required)
 
 
 type alias Model =
@@ -50,12 +50,32 @@ dataDecoder : Decoder WidgetData
 dataDecoder =
     Decode.succeed WidgetData
         |> required "text" Decode.string
-        |> hardcoded FullWidth
+        |> required "size" accordionSizeDecoder
 
 
--- accordionSizeDecoder : Decoder AccordionSize
--- accordionSizeDecoder =
---     Decode.map AccordionSize string
+accordionSizeDecoder : Decoder AccordionSize
+accordionSizeDecoder =
+    Decode.string |> Decode.andThen (fromResult << parseSize)
+
+
+fromResult : Result String a -> Decoder a
+fromResult result =
+  case result of
+    Ok a -> Decode.succeed a
+    Err errorMessage -> Decode.fail errorMessage
+
+
+parseSize : String -> Result String AccordionSize
+parseSize string =
+    case string of
+        "Full" ->
+            Result.Ok FullWidth
+        
+        "Half" ->
+            Result.Ok HalfWidth
+
+        _ ->
+            Result.Err ("Invalid width: " ++ string)
 
 view : Model -> Html Msg
 view model =
