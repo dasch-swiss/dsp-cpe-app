@@ -89,19 +89,9 @@ header args =
     Header.view { logo = args.logo, navBar = args.navBar, showSearchBar = args.showSearchBar, user = args.user, showMobileMenu = args.showMobileMenu }
 
 
-projectDescription : { isOpen : Bool, id : WidgetInstanceId } -> Html.Html ProjectDescription.Msg
-projectDescription args =
-    ProjectDescription.view { isOpen = args.isOpen, data = RemoteData.NotAsked, id = args.id }
-
-
 initProjectDescription : WidgetInstanceId -> ( ProjectDescription.Model, Cmd ProjectDescription.Msg )
 initProjectDescription wid =
     ProjectDescription.init wid
-
-
-accordion : { isOpen : Bool, id : WidgetInstanceId } -> Html.Html Accordion.Msg
-accordion args =
-    Accordion.view { isOpen = args.isOpen, data = RemoteData.NotAsked, id = args.id }
 
 
 initAccordion : WidgetInstanceId -> ( Accordion.Model, Cmd Accordion.Msg )
