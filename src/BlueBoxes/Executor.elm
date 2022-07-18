@@ -13,7 +13,7 @@ type alias Model =
 execute : Struct.Page -> ( List GuiElement.Model, Cmd GuiElement.Msg )
 execute (Struct.Page pageParts) =
     deconstructGuiElementList (List.map executePagePart pageParts)
-
+    
 
 deconstructGuiElementList : List ( List GuiElement.Model, Cmd GuiElement.Msg ) -> ( List GuiElement.Model, Cmd GuiElement.Msg )
 deconstructGuiElementList list =
