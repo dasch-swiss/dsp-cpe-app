@@ -1,4 +1,4 @@
-module Modules.Projects.Focus.Modules.Content exposing (..)
+module Modules.Focus.Modules.Content exposing (..)
 
 import Html exposing (Html, button, div, figcaption, figure, img, p, span, text)
 import Html.Attributes exposing (alt, class, height, src, width)

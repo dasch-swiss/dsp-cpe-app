@@ -12,7 +12,7 @@ type alias Model =
 type GuiElementVariant
     = ProjectDescriptionElement ProjectDescription.Model
     | AccordionElement Accordion.Model
-
+-- More variants will be added here
 
 type Msg
     = ProjectDescriptionMsg ProjectDescription.Msg

@@ -1,13 +1,13 @@
-module Modules.Projects.ViewProject exposing (..)
+module Projects.ViewProject exposing (..)
 
 import BlueBoxes.GuiElement as GuiElement
-import BlueBoxes.NewExecutor as NewExecutor
+import BlueBoxes.Executor as Executor
 import Browser.Navigation as Nav
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Http
-import Modules.Projects.NewTestPage as NewTestPage
-import Modules.Projects.Project exposing (Project, ProjectId, idToString, projectDecoder)
+import Projects.TestPage as NewTestPage
+import Projects.Project exposing (Project, ProjectId, idToString, projectDecoder)
 import RemoteData exposing (WebData)
 import Shared.SharedTypes exposing (WidgetInstanceId(..))
 import Util.Error exposing (buildErrorMessage)
@@ -38,7 +38,7 @@ init : ProjectId -> Nav.Key -> ( Model, Cmd Msg )
 init projectId navKey =
     let
         ( newModel, newCmd ) =
-            NewExecutor.execute NewTestPage.testPage
+            Executor.execute NewTestPage.testPage
     in
     ( initialModel newModel navKey, Cmd.batch [ fetchProject projectId, Cmd.map GuiElementMsg newCmd ] )
 
@@ -90,7 +90,7 @@ viewProject model =
             h3 [] [ text "Loading Project..." ]
 
         RemoteData.Success currentProject ->
-            if idToString currentProject.id == "3" then
+            if idToString currentProject.id == "3" then -- This shouldn't be hardcoded
                 div [] (List.map GuiElement.view model.guiElements) |> Html.map GuiElementMsg
 
             else

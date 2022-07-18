@@ -1,6 +1,6 @@
-module Modules.Projects.NewTestPage exposing (..)
+module Projects.TestPage exposing (..)
 
-import BlueBoxes.NewPageStructureModel as Struct
+import BlueBoxes.PageStructureModel as Struct
 import Shared.SharedTypes exposing (WidgetInstanceId(..))
 
 testAccordion : Struct.ContentPart

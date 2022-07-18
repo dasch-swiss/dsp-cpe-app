@@ -1,10 +1,9 @@
-module Modules.Projects.Beol exposing (..)
+module Projects.Beol exposing (..)
 
 import DspCpeApi as Api
 import Html exposing (div)
 import Html.Attributes exposing (class)
 import Modules.NavigationHeader.NavigationHeader as Header
-import Modules.Text.ProjectDescription as ProjectDescription
 import Shared.SharedTypes exposing (WidgetInstanceId(..))
 import Util.CustomCss.DaschTailwind as Dtw
 

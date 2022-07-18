@@ -1,13 +1,12 @@
 module Main exposing (..)
 
-import BlueBoxes.Executor as Executor
 import Browser exposing (Document, UrlRequest)
 import Browser.Navigation as Nav
 import Html exposing (Html, h3, text)
-import Modules.Projects.Beol as Beol
-import Modules.Projects.ListProjects as ListProjects exposing (..)
-import Modules.Projects.TailwindPlayground as Playground exposing (view)
-import Modules.Projects.ViewProject as ViewProject exposing (view)
+import Projects.Beol as Beol
+import Projects.ListProjects as ListProjects exposing (..)
+import Projects.TailwindPlayground as Playground exposing (view)
+import Projects.ViewProject as ViewProject exposing (view)
 import Url exposing (Url)
 import Util.Route exposing (Route(..))
 
@@ -25,7 +24,6 @@ type Page
     | ViewProjectPage ViewProject.Model
     | PlaygroundPage Playground.Model
     | BeolPage Beol.Model
-    | ExecutorPage Executor.Model
 
 
 
@@ -37,7 +35,6 @@ type Msg
     = ListProjectsPageMsg ListProjects.Msg
     | ViewProjectPageMsg ViewProject.Msg
     | PlaygroundPageMsg Playground.Msg
-    | ExecutorMsg Executor.Msg
     | BeolMsg Beol.Msg
     | LinkClicked UrlRequest
     | UrlChanged Url
@@ -98,13 +95,6 @@ initCurrentPage ( model, existingCmds ) =
                             Beol.init
                     in
                     ( BeolPage pageModel, Cmd.map BeolMsg pageCmds )
-
-                Executor ->
-                    let
-                        ( pageModel, pageCmds ) =
-                            Executor.init
-                    in
-                    ( ExecutorPage pageModel, Cmd.map ExecutorMsg pageCmds )
     in
     ( { model | page = currentPage }
     , Cmd.batch [ existingCmds, mappedPageCmds ]
@@ -144,10 +134,6 @@ currentView model =
         BeolPage beolModel ->
             Beol.view beolModel
                 |> Html.map BeolMsg
-
-        ExecutorPage executorModel ->
-            Executor.view executorModel
-                |> Html.map ExecutorMsg
 
 
 notFoundView : Html msg
@@ -199,14 +185,6 @@ update msg model =
             , Cmd.map BeolMsg updatedCmd
             )
 
-        ( ExecutorMsg subMsg, ExecutorPage executorModel ) ->
-            let
-                ( updatedPageModel, updatedCmd ) =
-                    Executor.update subMsg executorModel
-            in
-            ( { model | page = ExecutorPage updatedPageModel }
-            , Cmd.map ExecutorMsg updatedCmd
-            )
 
         ( LinkClicked urlRequest, _ ) ->
             case urlRequest of

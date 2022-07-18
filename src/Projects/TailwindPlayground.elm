@@ -1,4 +1,4 @@
-module Modules.Projects.TailwindPlayground exposing (..)
+module Projects.TailwindPlayground exposing (..)
 
 import Browser.Navigation as Nav
 import DspCpeApi as Api
@@ -6,7 +6,7 @@ import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Modules.Buttons.BackButton as BackButton
 import Modules.NavigationHeader.NavigationHeader as Header
-import Modules.Projects.Focus.Focus as ProjectFocus
+import Modules.Focus.Focus as ProjectFocus
 import Modules.Tiles.ImageTile as ImageTile
 import Shared.SharedTypes exposing (AccordionSize(..), BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..), WidgetInstanceId(..))
 import Util.Icon as Icon

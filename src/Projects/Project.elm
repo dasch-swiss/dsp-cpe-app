@@ -1,4 +1,4 @@
-module Modules.Projects.Project exposing (..)
+module Projects.Project exposing (..)
 
 import Json.Decode as Decode exposing (Decoder, int, list, string)
 import Json.Decode.Pipeline exposing (required)

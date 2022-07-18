@@ -118,7 +118,7 @@ view model =
 
         RemoteData.Failure httpError ->
             div [] [ text "Failed" ]
-
+        -- TODO: We need cleaner Error handling here
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =

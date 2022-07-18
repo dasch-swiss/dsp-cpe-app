@@ -10,7 +10,7 @@ import Modules.Buttons.TrailingIconButton as TrailingIconButton
 import Modules.Dividers.IconButtonDivider as IconButtonDivider
 import Modules.Footer.Footer as Footer
 import Modules.NavigationHeader.NavigationHeader as Header
-import Modules.Projects.Focus.Focus as Focus
+import Modules.Focus.Focus as Focus
 import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
 import Modules.Tiles.ImageTile as ImageTile
@@ -94,8 +94,8 @@ projectDescription args =
     ProjectDescription.view { isOpen = args.isOpen, data = RemoteData.NotAsked, id = args.id }
 
 
-newProjectDescription : WidgetInstanceId -> ( ProjectDescription.Model, Cmd ProjectDescription.Msg )
-newProjectDescription wid =
+initProjectDescription : WidgetInstanceId -> ( ProjectDescription.Model, Cmd ProjectDescription.Msg )
+initProjectDescription wid =
     ProjectDescription.init wid
 
 
@@ -104,8 +104,8 @@ accordion args =
     Accordion.view { isOpen = args.isOpen, data = RemoteData.NotAsked, id = args.id }
 
 
-newAccordion : WidgetInstanceId -> ( Accordion.Model, Cmd Accordion.Msg )
-newAccordion wid =
+initAccordion : WidgetInstanceId -> ( Accordion.Model, Cmd Accordion.Msg )
+initAccordion wid =
     Accordion.init wid
 
 

@@ -1,6 +1,6 @@
 module Util.Route exposing (Route(..), parseUrl)
 
-import Modules.Projects.Project exposing (ProjectId, idParser)
+import Projects.Project exposing (ProjectId, idParser)
 import Url exposing (Url)
 import Url.Parser exposing (..)
 
@@ -11,8 +11,6 @@ type Route
     | Project ProjectId
     | Playground
     | Beol
-    | Executor
-
 
 parseUrl : Url -> Route
 parseUrl url =
@@ -32,5 +30,4 @@ matchRoute =
         , map Project (s "project" </> idParser) --/project/1
         , map Playground (s "playground") -- /playground
         , map Beol (s "beol") -- /beol
-        , map Executor (s "executor") -- /executor
         ]
