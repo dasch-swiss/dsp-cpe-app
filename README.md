@@ -14,6 +14,8 @@ json-server (installed globally): `npm install -g json-server`
 
 Run: `make start-dev-server` to start the local dev server.
 
+Run : `make start-dev-widget-data` to start the local json server that holds on to the widget data in mock-api/gui-elements.json
+
 If you'd rather host the database via docker, you can run `make start-mock-api`.
 
 Then run: `make build-dev` to start the app.

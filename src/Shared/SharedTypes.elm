@@ -45,11 +45,6 @@ type TrailingSize
     | TrailingExtraLarge
 
 
-type AccordionSize
-    = HalfWidth
-    | FullWidth
-
-
 type alias NavItem msg =
     { attrs : List (Attribute msg) -- onClick, disable and all other events as well as custom attributes
     , text : String

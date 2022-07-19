@@ -1,4 +1,4 @@
-module Modules.Projects.TailwindPlayground exposing (..)
+module Projects.TailwindPlayground exposing (..)
 
 import Browser.Navigation as Nav
 import DspCpeApi as Api
@@ -6,18 +6,14 @@ import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Modules.Buttons.BackButton as BackButton
 import Modules.NavigationHeader.NavigationHeader as Header
-import Modules.Projects.Focus.Focus as ProjectFocus
-import Modules.Text.Accordion as Accordion
-import Modules.Text.ProjectDescription as ProjectDescription
+import Modules.Focus.Focus as ProjectFocus
 import Modules.Tiles.ImageTile as ImageTile
-import Shared.SharedTypes exposing (AccordionSize(..), BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..), WidgetInstanceId(..))
+import Shared.SharedTypes exposing (BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..), WidgetInstanceId(..))
 import Util.Icon as Icon
 
 
 type alias Model =
     { text : String
-    , projectDescriptionModel : ProjectDescription.Model
-    , accordionModel : Accordion.Model
     , projectFocusModel : ProjectFocus.Model
     , headerModel : Header.HeaderModel
     , navKey : Nav.Key
@@ -25,9 +21,7 @@ type alias Model =
 
 
 type Msg
-    = ProjDesMsg ProjectDescription.Msg
-    | AccordionMsg Accordion.Msg
-    | ProjectFocusMsg ProjectFocus.Msg
+    = ProjectFocusMsg ProjectFocus.Msg
     | NavigationHeaderMsg Header.Msg
     | BackButtonMsg BackButton.Msg
 
@@ -35,8 +29,6 @@ type Msg
 initialModel : Nav.Key -> Model
 initialModel nav =
     { text = "playground"
-    , projectDescriptionModel = exampleProjectDescription
-    , accordionModel = exampleAccordion
     , projectFocusModel = exampleProjectFocus
     , headerModel = exampleHeader
     , navKey = nav
@@ -141,18 +133,6 @@ view model =
                 , Api.header model.headerModel |> Html.map NavigationHeaderMsg
                 ]
             ]
-        , div [ class "text" ]
-            [ div [ class "preview project description" ]
-                [ h3 [ class "label" ] [ text "Project description" ]
-                , Api.projectDescription model.projectDescriptionModel |> Html.map ProjDesMsg
-                ]
-            ]
-        , div [ class "accordion" ]
-            [ div []
-                [ h3 [ class "label" ] [ text "Accordion" ]
-                , Api.accordion model.accordionModel |> Html.map AccordionMsg
-                ]
-            ]
         , div [ class "tiles" ]
             [ div [ class "preview tiles" ]
                 [ h3 [ class "label" ] [ text "Image Tile Grid" ]
@@ -177,21 +157,6 @@ view model =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        ProjDesMsg projDesMsg ->
-            ( { model
-                | projectDescriptionModel =
-                    ProjectDescription.update projDesMsg model.projectDescriptionModel
-              }
-            , Cmd.none
-            )
-
-        AccordionMsg accordionMsg ->
-            ( { model
-                | accordionModel =
-                    Accordion.update accordionMsg model.accordionModel
-              }
-            , Cmd.none
-            )
 
         NavigationHeaderMsg headerMsg ->
             ( { model
@@ -232,20 +197,6 @@ exampleImageTile =
 -- exampleGravCount : GravsearchCountViewer.Model
 -- exampleGravCount =
 --    { query = "PREFIX knora-api: <http://api.knora.org/ontology/knora-api/v2#>CONSTRUCT {?person knora-api:isMainResource true .} WHERE {?person a knora-api:Resource .}", result = Nothing, error = Nothing }
-
-
-exampleAccordion : Accordion.Model
-exampleAccordion =
-    { isOpen = False
-    , text = """Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus 
-            est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, 
-            no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
-            Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, 
-            vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod 
-            tincidunt ut laoreet dolore magna aliquam erat volutpat."""
-    , size = FullWidth
-    , id = WidgetInstanceId 3
-    }
 
 
 exampleProjectFocus : ProjectFocus.Model
@@ -295,19 +246,4 @@ exampleHeader =
             }
     , showSearchBar = False
     , showMobileMenu = False
-    }
-
-
-exampleProjectDescription : ProjectDescription.Model
-exampleProjectDescription =
-    { text = """Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus 
-                    est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, 
-                    no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
-                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, 
-                    vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod 
-                    tincidunt ut laoreet dolore magna aliquam erat volutpat."""
-    , title = "Title"
-    , subtitle = "Subtitle"
-    , isOpen = False
-    , id = WidgetInstanceId 1
     }

@@ -1,4 +1,4 @@
-module Modules.Projects.Focus.Modules.Header exposing (..)
+module Modules.Focus.Modules.Header exposing (..)
 
 import Html exposing (Html, div, h2, h3, text)
 import Html.Attributes exposing (class)

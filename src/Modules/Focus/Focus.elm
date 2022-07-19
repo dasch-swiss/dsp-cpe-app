@@ -1,9 +1,9 @@
-module Modules.Projects.Focus.Focus exposing (..)
+module Modules.Focus.Focus exposing (..)
 
 import Html exposing (Html, div)
 import Html.Attributes exposing (class)
-import Modules.Projects.Focus.Modules.Content as Content
-import Modules.Projects.Focus.Modules.Header as Header
+import Modules.Focus.Modules.Content as Content
+import Modules.Focus.Modules.Header as Header
 import Shared.SharedTypes exposing (WidgetInstanceId(..))
 import Util.CustomCss.DaschTailwind as Dtw
 

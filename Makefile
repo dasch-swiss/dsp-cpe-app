@@ -44,11 +44,12 @@ build-dev: ## build elm app in dev mode
 .PHONY: start-dev-server
 start-dev-server: ## start local dev server hosting db.json
 	@json-server --watch mock-api/db.json -p 2022
-
 .PHONY: start-mock-api
 start-mock-api: docker-build-mock-api ## start docker container hosting db.json
 	@docker run -d -p 2022:3000 --name="CPE-Mock-API" -v $(CURRENT_DIR)/mock-api/db.json:/data/db/db.json $(DOCKER_IMAGE_MOCK_API)
-
+.PHONY: start-dev-widget-data
+start-dev-widget-data:
+	@json-server --watch mock-api/guiElements.json -p 2023
 .PHONY: stop-mock-api
 stop-mock-api: ## stop docker container hosting db.json
 	@docker stop CPE-Mock-API

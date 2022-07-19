@@ -1,4 +1,4 @@
-module Modules.Projects.ListProjects exposing (Model, Msg, init, update, view)
+module Projects.ListProjects exposing (Model, Msg, init, update, view)
 
 import Browser.Navigation as Nav
 import DspCpeApi exposing (primaryButton)
@@ -6,7 +6,7 @@ import Html exposing (Html, div, h2, h3, text)
 import Html.Attributes exposing (class)
 import Html.Events exposing (onClick)
 import Http
-import Modules.Projects.Project as Project exposing (Project)
+import Projects.Project as Project exposing (Project)
 import RemoteData exposing (WebData)
 import Shared.SharedTypes exposing (BasicButtonSize(..))
 import Util.Config as Config
@@ -62,7 +62,6 @@ view model =
         , div [ class "buttons" ]
             [ primaryButton { attrs = [ onClick (ClickedProject "/playground") ], text = "playground", size = BasicNormal }
             , primaryButton { attrs = [ onClick (ClickedProject "/beol") ], text = "Beol", size = BasicNormal }
-            , primaryButton { attrs = [ onClick (ClickedProject "/executor") ], text = "EXECUTE IMMEDIATLY", size = BasicNormal }
             ]
         , div [ class "header" ]
             [ h2 [] [ text "Projects" ]

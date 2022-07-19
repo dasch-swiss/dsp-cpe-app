@@ -1,42 +1,19 @@
 module BlueBoxes.PageStructureModel exposing (..)
 
-import Modules.NavigationHeader.NavigationHeader as NavigationHeader
-import Modules.Projects.Focus.Focus as ProjectFocus
-import Modules.Text.ProjectDescription as ProjectDescription
-import Modules.Footer.Footer as Footer
-import Modules.Text.Accordion as Accordion
+import Shared.SharedTypes exposing (WidgetInstanceId(..))
 
 type Page
     = Page (List PagePart)
 
 
 type PagePart
-    = PageHeader Header
-    | PageContent Content
-    | PageFooter Footer
-
-
-type Header
-    = Header (List HeaderPart)
-
-
-type HeaderPart
-    = AppHeader NavigationHeader.HeaderModel
-
+    = PageContent Content
+-- Header and Footer need to be added at some point
 
 type Content
     = Content (List ContentPart)
 
-
+-- in the future, this will also hold onto the position
 type ContentPart
-    = ProjectDescription ProjectDescription.Model
-    | ProjectFocus ProjectFocus.Model
-    | Accordion Accordion.Model
-
-
-type Footer
-    = Footer (List FooterPart)
-
-
-type FooterPart
-    = AppFooter Footer.Model
+    = ProjectDescription WidgetInstanceId
+    | Accordion WidgetInstanceId

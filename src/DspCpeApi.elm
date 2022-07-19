@@ -8,14 +8,14 @@ import Modules.Buttons.CircularButton as CircularButton
 import Modules.Buttons.LeadingIconButton as LeadingIconButton
 import Modules.Buttons.TrailingIconButton as TrailingIconButton
 import Modules.Dividers.IconButtonDivider as IconButtonDivider
+import Modules.Focus.Focus as Focus
 import Modules.Footer.Footer as Footer
 import Modules.NavigationHeader.NavigationHeader as Header
-import Modules.Projects.Focus.Focus as Focus
 import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
 import Modules.Tiles.ImageTile as ImageTile
 import Modules.Tiles.ImageTileGrid as ImageTileGrid
-import Shared.SharedTypes exposing (AccordionSize(..), BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..), WidgetInstanceId(..))
+import Shared.SharedTypes exposing (BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..), WidgetInstanceId(..))
 import Util.Icon as Icon
 
 
@@ -75,7 +75,7 @@ leadingIconButton args =
 
 trailingIconButton : { attrs : List (Attribute msg), text : String, size : TrailingSize, icon : Icon.Icon } -> Html msg
 trailingIconButton args =
-    TrailingIconButton.view { attrs = args.attrs, text = args.text, size = args.size,  icon = args.icon }
+    TrailingIconButton.view { attrs = args.attrs, text = args.text, size = args.size, icon = args.icon }
 
 
 iconButtonDivider : { attrs : List (Attribute msg), text : String, icon : Icon.Icon } -> Html msg
@@ -88,14 +88,14 @@ header args =
     Header.view { logo = args.logo, navBar = args.navBar, showSearchBar = args.showSearchBar, user = args.user, showMobileMenu = args.showMobileMenu }
 
 
-projectDescription : { isOpen : Bool, text : String, title : String, subtitle : String, id : WidgetInstanceId } -> Html.Html ProjectDescription.Msg
-projectDescription args =
-    ProjectDescription.view { isOpen = args.isOpen, text = args.text, title = args.title, subtitle = args.subtitle, id = args.id }
+initProjectDescription : WidgetInstanceId -> ( ProjectDescription.Model, Cmd ProjectDescription.Msg )
+initProjectDescription widgetID =
+    ProjectDescription.init widgetID
 
 
-accordion : { isOpen : Bool, text : String, size : AccordionSize, id : WidgetInstanceId } -> Html.Html Accordion.Msg
-accordion args =
-    Accordion.view { isOpen = args.isOpen, text = args.text, size = args.size, id = args.id }
+initAccordion : WidgetInstanceId -> ( Accordion.Model, Cmd Accordion.Msg )
+initAccordion widgetID =
+    Accordion.init widgetID
 
 
 imageTileGrid : List ImageTile.Model -> Html.Html msg
