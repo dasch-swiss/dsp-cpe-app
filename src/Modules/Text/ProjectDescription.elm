@@ -34,8 +34,8 @@ type Msg
 
 
 init : WidgetInstanceId -> ( Model, Cmd Msg )
-init wid =
-    ( { isOpen = False, data = RemoteData.Loading, id = wid }, fetchData wid )
+init widgetID =
+    ( { isOpen = False, data = RemoteData.Loading, id = widgetID }, fetchData widgetID )
 
 
 fetchData : WidgetInstanceId -> Cmd Msg
@@ -118,7 +118,11 @@ view model =
 
         RemoteData.Failure httpError ->
             div [] [ text "Failed" ]
-        -- TODO: We need cleaner Error handling here
+
+
+
+-- TODO: We need cleaner Error handling here
+
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -135,8 +139,8 @@ update msg model =
             else
                 ( model, Cmd.none )
 
-        FetchWidgetData wid ->
-            ( { model | data = RemoteData.Loading }, fetchData wid )
+        FetchWidgetData widgetID ->
+            ( { model | data = RemoteData.Loading }, fetchData widgetID )
 
         WidgetDataReceived res ->
             ( { model | data = res }, Cmd.none )

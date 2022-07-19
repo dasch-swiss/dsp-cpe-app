@@ -3,14 +3,14 @@ module Modules.Text.Accordion exposing (..)
 import Html exposing (Html, div, p, text)
 import Html.Attributes exposing (class)
 import Html.Events exposing (onClick)
+import Http
+import Json.Decode as Decode exposing (Decoder)
+import Json.Decode.Pipeline exposing (required)
 import RemoteData exposing (WebData)
 import Shared.SharedTypes exposing (AccordionSize(..), WidgetInstanceId(..))
 import Util.CustomCss.CssColors exposing (CustomColor(..))
 import Util.CustomCss.DaschTailwind as Dtw
 import Util.Icon as Icon
-import Http
-import Json.Decode as Decode exposing (Decoder)
-import Json.Decode.Pipeline exposing (required)
 
 
 type alias Model =
@@ -33,8 +33,8 @@ type Msg
 
 
 init : WidgetInstanceId -> ( Model, Cmd Msg )
-init wid =
-    ( { isOpen = False, data = RemoteData.Loading, id = wid }, fetchData wid )
+init widgetID =
+    ( { isOpen = False, data = RemoteData.Loading, id = widgetID }, fetchData widgetID )
 
 
 fetchData : WidgetInstanceId -> Cmd Msg
@@ -45,6 +45,7 @@ fetchData _ =
             dataDecoder
                 |> Http.expectJson (RemoteData.fromResult >> WidgetDataReceived)
         }
+
 
 dataDecoder : Decoder WidgetData
 dataDecoder =
@@ -60,9 +61,12 @@ accordionSizeDecoder =
 
 fromResult : Result String a -> Decoder a
 fromResult result =
-  case result of
-    Ok a -> Decode.succeed a
-    Err errorMessage -> Decode.fail errorMessage
+    case result of
+        Ok a ->
+            Decode.succeed a
+
+        Err errorMessage ->
+            Decode.fail errorMessage
 
 
 parseSize : String -> Result String AccordionSize
@@ -70,19 +74,20 @@ parseSize string =
     case string of
         "Full" ->
             Result.Ok FullWidth
-        
+
         "Half" ->
             Result.Ok HalfWidth
 
         _ ->
             Result.Err ("Invalid width: " ++ string)
 
+
 view : Model -> Html Msg
 view model =
     case model.data of
         RemoteData.NotAsked ->
             text ""
-        
+
         -- skeleton loading
         RemoteData.Loading ->
             div [] [ text "Loading..." ]
@@ -165,24 +170,29 @@ view model =
 
         RemoteData.Failure httpError ->
             div [] [ text "Failed" ]
-        -- TODO: We need cleaner error handling here
 
-update : Msg -> Model -> (Model, Cmd Msg)
+
+
+-- TODO: We need cleaner error handling here
+
+
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         AccordionClicked id ->
             if id == model.id then
                 case model.data of
                     RemoteData.Success _ ->
-                        ({ model | isOpen = not model.isOpen }, Cmd.none)
+                        ( { model | isOpen = not model.isOpen }, Cmd.none )
 
                     _ ->
-                        (model, Cmd.none)
-            else
-                (model, Cmd.none)
+                        ( model, Cmd.none )
 
-        FetchWidgetData wid ->
-            ( { model | data = RemoteData.Loading }, fetchData wid )
+            else
+                ( model, Cmd.none )
+
+        FetchWidgetData widgetID ->
+            ( { model | data = RemoteData.Loading }, fetchData widgetID )
 
         WidgetDataReceived res ->
             ( { model | data = res }, Cmd.none )

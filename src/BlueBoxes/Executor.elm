@@ -13,7 +13,7 @@ type alias Model =
 execute : Struct.Page -> ( List GuiElement.Model, Cmd GuiElement.Msg )
 execute (Struct.Page pageParts) =
     deconstructGuiElementList (List.map executePagePart pageParts)
-    
+
 
 deconstructGuiElementList : List ( List GuiElement.Model, Cmd GuiElement.Msg ) -> ( List GuiElement.Model, Cmd GuiElement.Msg )
 deconstructGuiElementList list =
@@ -34,16 +34,16 @@ executePagePart pagePart =
 executeContentPart : Struct.ContentPart -> ( GuiElement.Model, Cmd GuiElement.Msg )
 executeContentPart contentPart =
     case contentPart of
-        Struct.ProjectDescription wid ->
+        Struct.ProjectDescription widgetID ->
             let
                 ( model, cmd ) =
-                    Api.initProjectDescription wid
+                    Api.initProjectDescription widgetID
             in
             ( { variant = GuiElement.ProjectDescriptionElement model }, Cmd.map GuiElement.ProjectDescriptionMsg cmd )
 
-        Struct.Accordion wid ->
+        Struct.Accordion widgetID ->
             let
                 ( model, cmd ) =
-                    Api.initAccordion wid
+                    Api.initAccordion widgetID
             in
             ( { variant = GuiElement.AccordionElement model }, Cmd.map GuiElement.AccordionMsg cmd )

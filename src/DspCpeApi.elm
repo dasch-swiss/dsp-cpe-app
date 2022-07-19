@@ -8,9 +8,9 @@ import Modules.Buttons.CircularButton as CircularButton
 import Modules.Buttons.LeadingIconButton as LeadingIconButton
 import Modules.Buttons.TrailingIconButton as TrailingIconButton
 import Modules.Dividers.IconButtonDivider as IconButtonDivider
+import Modules.Focus.Focus as Focus
 import Modules.Footer.Footer as Footer
 import Modules.NavigationHeader.NavigationHeader as Header
-import Modules.Focus.Focus as Focus
 import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
 import Modules.Tiles.ImageTile as ImageTile
@@ -90,13 +90,13 @@ header args =
 
 
 initProjectDescription : WidgetInstanceId -> ( ProjectDescription.Model, Cmd ProjectDescription.Msg )
-initProjectDescription wid =
-    ProjectDescription.init wid
+initProjectDescription widgetID =
+    ProjectDescription.init widgetID
 
 
 initAccordion : WidgetInstanceId -> ( Accordion.Model, Cmd Accordion.Msg )
-initAccordion wid =
-    Accordion.init wid
+initAccordion widgetID =
+    Accordion.init widgetID
 
 
 imageTileGrid : List ImageTile.Model -> Html.Html msg
