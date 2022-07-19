@@ -6,12 +6,11 @@ import Browser.Navigation as Nav
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Http
-import Projects.TestPage as NewTestPage
 import Projects.Project exposing (Project, ProjectId, idToString, projectDecoder)
 import RemoteData exposing (WebData)
 import Shared.SharedTypes exposing (WidgetInstanceId(..))
 import Util.Error exposing (buildErrorMessage)
-
+import BlueBoxes.PageStructureService as PageStructureService
 
 type alias Model =
     { project : WebData Project
@@ -38,7 +37,7 @@ init : ProjectId -> Nav.Key -> ( Model, Cmd Msg )
 init projectId navKey =
     let
         ( newModel, newCmd ) =
-            Executor.execute NewTestPage.testPage
+            Executor.execute (PageStructureService.getProjectByID 3)
     in
     ( initialModel newModel navKey, Cmd.batch [ fetchProject projectId, Cmd.map GuiElementMsg newCmd ] )
 
