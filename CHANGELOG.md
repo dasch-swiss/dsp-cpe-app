@@ -1,5 +1,35 @@
 # Changelog
 
+## [0.3.0](https://www.github.com/dasch-swiss/dsp-cpe-app/compare/v0.2.0...v0.3.0) (2022-07-19)
+
+
+### Bug Fixes
+
+* **config:** replace echo with printf ([#44](https://www.github.com/dasch-swiss/dsp-cpe-app/issues/44)) ([0d5b1ff](https://www.github.com/dasch-swiss/dsp-cpe-app/commit/0d5b1ffc026a81473bb54ebc79f82a2ee1b2d9fe))
+
+
+### Maintenance
+
+* **structure:** Refactore module structure (DEV-865) ([#53](https://www.github.com/dasch-swiss/dsp-cpe-app/issues/53)) ([2cd6d10](https://www.github.com/dasch-swiss/dsp-cpe-app/commit/2cd6d10f0cf5cffead0ff4a562b6b57456c0ee99))
+
+
+### Documentation
+
+* correct typo in elm-go installation command ([#61](https://www.github.com/dasch-swiss/dsp-cpe-app/issues/61)) ([0f066df](https://www.github.com/dasch-swiss/dsp-cpe-app/commit/0f066dfc75a78ac0bc382987bad44c3ca9918454))
+
+
+### Enhancements
+
+* **accordion:** accordion module (DEV-836) ([#46](https://www.github.com/dasch-swiss/dsp-cpe-app/issues/46)) ([30c041f](https://www.github.com/dasch-swiss/dsp-cpe-app/commit/30c041fced43833b8faa5e096158ed90fbb0d057))
+* **blueboxes:** set up executor and page structure (DEV-1078) ([#66](https://www.github.com/dasch-swiss/dsp-cpe-app/issues/66)) ([f95f320](https://www.github.com/dasch-swiss/dsp-cpe-app/commit/f95f3200cbafd74d314d4ffdb633c09cd134f76e))
+* **button:** implemented back button ([#59](https://www.github.com/dasch-swiss/dsp-cpe-app/issues/59)) ([fbc0399](https://www.github.com/dasch-swiss/dsp-cpe-app/commit/fbc0399d710f2831095186f3a61048e28d98b1bd))
+* **focus:** focus module (DEV-858) ([#49](https://www.github.com/dasch-swiss/dsp-cpe-app/issues/49)) ([2109e6e](https://www.github.com/dasch-swiss/dsp-cpe-app/commit/2109e6eaf2a422e69196ebe0d7ff3f6a8abacc9d))
+* gravsearch count viewer implemented ([#51](https://www.github.com/dasch-swiss/dsp-cpe-app/issues/51)) ([d3e0862](https://www.github.com/dasch-swiss/dsp-cpe-app/commit/d3e0862d27432b524ba686bb0757b7bf73bca801))
+* **header/footer:** make header and footer sticky (DEV-971) ([#62](https://www.github.com/dasch-swiss/dsp-cpe-app/issues/62)) ([56d60a8](https://www.github.com/dasch-swiss/dsp-cpe-app/commit/56d60a83f5d8bdf37332c4baaa7e4d2916bd1f79))
+* **PageStructureModel:** create model and executor (DEV-1060) ([#64](https://www.github.com/dasch-swiss/dsp-cpe-app/issues/64)) ([d23dd53](https://www.github.com/dasch-swiss/dsp-cpe-app/commit/d23dd53e622544999f8de4c024951a06807d1693))
+* **project-focus:** don't generate the html for the image if no image url is provided ([#55](https://www.github.com/dasch-swiss/dsp-cpe-app/issues/55)) ([73a15cf](https://www.github.com/dasch-swiss/dsp-cpe-app/commit/73a15cf7ccf95f84299691e2ebe4112ccadf0fba))
+* **project:** Create hardcoded BEOL-Page (DEV-549) ([#60](https://www.github.com/dasch-swiss/dsp-cpe-app/issues/60)) ([20d9289](https://www.github.com/dasch-swiss/dsp-cpe-app/commit/20d9289d7643efd719b3e043e1c2fb46530cf951))
+
 ## [0.2.0](https://www.github.com/dasch-swiss/dsp-cpe-app/compare/v0.1.0...v0.2.0) (2022-04-25)
 
 
