@@ -6,7 +6,7 @@
         },
     "accordion": { 
         "text": "accordion text",
-        "size": "Half"
+        "fullWidth": true
     }
 
 }

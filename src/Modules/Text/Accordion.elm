@@ -7,7 +7,7 @@ import Http
 import Json.Decode as Decode exposing (Decoder)
 import Json.Decode.Pipeline exposing (required)
 import RemoteData exposing (WebData)
-import Shared.SharedTypes exposing (AccordionSize(..), WidgetInstanceId(..))
+import Shared.SharedTypes exposing (WidgetInstanceId(..))
 import Util.CustomCss.CssColors exposing (CustomColor(..))
 import Util.CustomCss.DaschTailwind as Dtw
 import Util.Icon as Icon
@@ -22,7 +22,7 @@ type alias Model =
 
 type alias WidgetData =
     { text : String
-    , size : AccordionSize
+    , fullWidth : Bool
     }
 
 
@@ -51,35 +51,7 @@ dataDecoder : Decoder WidgetData
 dataDecoder =
     Decode.succeed WidgetData
         |> required "text" Decode.string
-        |> required "size" accordionSizeDecoder
-
-
-accordionSizeDecoder : Decoder AccordionSize
-accordionSizeDecoder =
-    Decode.string |> Decode.andThen (fromResult << parseSize)
-
-
-fromResult : Result String a -> Decoder a
-fromResult result =
-    case result of
-        Ok a ->
-            Decode.succeed a
-
-        Err errorMessage ->
-            Decode.fail errorMessage
-
-
-parseSize : String -> Result String AccordionSize
-parseSize string =
-    case string of
-        "Full" ->
-            Result.Ok FullWidth
-
-        "Half" ->
-            Result.Ok HalfWidth
-
-        _ ->
-            Result.Err ("Invalid width: " ++ string)
+        |> required "fullWidth" Decode.bool
 
 
 view : Model -> Html Msg
@@ -95,12 +67,11 @@ view model =
         RemoteData.Success data ->
             let
                 accordionSize =
-                    case data.size of
-                        HalfWidth ->
-                            Dtw.w_6_slash_12
-
-                        FullWidth ->
-                            Dtw.w_full
+                    if data.fullWidth == True then
+                        Dtw.w_full
+                    else
+                        Dtw.w_6_slash_12
+                            
 
                 accordionHeaderClasses =
                     if model.isOpen then

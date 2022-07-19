@@ -8,7 +8,7 @@ import Modules.Buttons.BackButton as BackButton
 import Modules.NavigationHeader.NavigationHeader as Header
 import Modules.Focus.Focus as ProjectFocus
 import Modules.Tiles.ImageTile as ImageTile
-import Shared.SharedTypes exposing (AccordionSize(..), BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..), WidgetInstanceId(..))
+import Shared.SharedTypes exposing (BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..), WidgetInstanceId(..))
 import Util.Icon as Icon
 
 

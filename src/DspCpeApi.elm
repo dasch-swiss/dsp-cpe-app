@@ -15,8 +15,7 @@ import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
 import Modules.Tiles.ImageTile as ImageTile
 import Modules.Tiles.ImageTileGrid as ImageTileGrid
-import RemoteData
-import Shared.SharedTypes exposing (AccordionSize(..), BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..), WidgetInstanceId(..))
+import Shared.SharedTypes exposing (BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), LeadingSize(..), TrailingSize(..), WidgetInstanceId(..))
 import Util.Icon as Icon
 
 

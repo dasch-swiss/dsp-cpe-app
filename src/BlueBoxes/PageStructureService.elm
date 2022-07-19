@@ -1,7 +1,7 @@
 module BlueBoxes.PageStructureService exposing (..)
 
 import BlueBoxes.PageStructureModel as Struct
-import Shared.SharedTypes exposing (AccordionSize(..), WidgetInstanceId(..))
+import Shared.SharedTypes exposing (WidgetInstanceId(..))
 
 
 -- beolHeader : Struct.Header
