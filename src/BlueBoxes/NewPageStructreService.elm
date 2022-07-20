@@ -1,4 +1,4 @@
-module BlueBoxes.PageStructureService exposing (..)
+module BlueBoxes.NewPageStructreService exposing (..)
 
 import BlueBoxes.PageStructureModel as Struct
 import Shared.SharedTypes exposing (WidgetContainerId(..), WidgetInstanceId(..))
@@ -40,16 +40,8 @@ mlsContent =
 --     Struct.Header [ Struct.AppHeader ]
 
 
-defaultContent : Struct.Content
+defaultContent : Struct.Content2
 defaultContent =
-    Struct.Content
-        [ Struct.ProjectDescription (WidgetInstanceId 3)
-        , Struct.Accordion (WidgetInstanceId 4)
-        ]
-
-
-defaultContent2 : Struct.Content2
-defaultContent2 =
     Struct.Content2
         [ Struct.WidgetContainer (WidgetContainerId 3) (Struct.ProjectDescription2 (WidgetInstanceId 3))
         , Struct.WidgetContainer (WidgetContainerId 3) (Struct.Accordion2 (WidgetInstanceId 4))
@@ -62,14 +54,14 @@ defaultContent2 =
 --     Struct.Footer [ Struct.AppFooter ]
 
 
-getProjectByID : Int -> Struct.Page
+getProjectByID : Int -> Struct.Page2
 getProjectByID projectID =
     case projectID of
         1 ->
-            Struct.Page [ Struct.PageContent beolContent ]
+            Struct.Page2 [ Struct.PageContent2 defaultContent ]
 
         2 ->
-            Struct.Page [ Struct.PageContent mlsContent ]
+            Struct.Page2 [ Struct.PageContent2 defaultContent ]
 
         _ ->
-            Struct.Page [ Struct.PageContent defaultContent ]
+            Struct.Page2 [ Struct.PageContent2 defaultContent ]

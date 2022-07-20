@@ -7,6 +7,10 @@ type WidgetInstanceId
     = WidgetInstanceId Int
 
 
+type WidgetContainerId
+    = WidgetContainerId Int
+
+
 type CircularAvatarSize
     = CircularAvatarExtraSmall
     | CircularAvatarSmall

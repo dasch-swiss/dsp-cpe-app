@@ -114,6 +114,31 @@ custom_height_px px =
     "h-[" ++ String.fromInt px ++ "px]"
 
 
+custom_grid_col_span : Int -> String
+custom_grid_col_span colSpan =
+    "col-span-" ++ String.fromInt colSpan
+
+
+custom_grid_row_span : Int -> String
+custom_grid_row_span rowSpan =
+    "row-span-" ++ String.fromInt rowSpan
+
+
+custom_grid_col_start : Int -> String
+custom_grid_col_start colStart =
+    "col-start-" ++ String.fromInt colStart
+
+
+custom_grid_col_end : Int -> String
+custom_grid_col_end colEnd =
+    "col-end-" ++ String.fromInt colEnd
+
+
+custom_grid_order : Int -> String
+custom_grid_order index =
+    "order-" ++ String.fromInt index
+
+
 
 -- Tailwind classes
 

@@ -1,5 +1,6 @@
-module BlueBoxes.GuiElement exposing (..)
+module BlueBoxes.NewGuiElement exposing (..)
 
+import BlueBoxes.WidgetContainer as WidgetContainer
 import Html exposing (Html)
 import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
@@ -7,12 +8,41 @@ import Modules.Text.ProjectDescription as ProjectDescription
 
 type alias Model =
     { variant : GuiElementVariant
+    , widgetContainer : WidgetContainer
     }
 
 
 type GuiElementVariant
     = ProjectDescriptionElement ProjectDescription.Model
     | AccordionElement Accordion.Model
+
+
+type alias WidgetContainer =
+    { position : GridPosition -- the position in the grid
+    , justifySelf : JustifySelf
+    , alignSelf : AlignSelf
+    }
+
+
+type AlignSelf
+    = AlignStart
+    | AlignEnd
+    | AlignCenter
+
+
+type JustifySelf
+    = JustifyStart
+    | JustifyEnd
+    | JustifyCenter
+
+
+type alias GridPosition =
+    { order : Int
+    , rowStart : Int
+    , rowEnd : Int
+    , colStart : Int
+    , colEnd : Int
+    }
 
 
 
@@ -44,7 +74,7 @@ update msg model =
                         ( newModel, newCmd ) =
                             ProjectDescription.update projDescMsg projDescModel
                     in
-                    ( { variant = ProjectDescriptionElement newModel }, Cmd.map ProjectDescriptionMsg newCmd )
+                    ( { variant = ProjectDescriptionElement newModel, widgetContainer = model.widgetContainer }, Cmd.map ProjectDescriptionMsg newCmd )
 
                 _ ->
                     ( model, Cmd.none )
@@ -56,7 +86,7 @@ update msg model =
                         ( newModel, newCmd ) =
                             Accordion.update accMsg accModel
                     in
-                    ( { variant = AccordionElement newModel }, Cmd.map AccordionMsg newCmd )
+                    ( { variant = AccordionElement newModel, widgetContainer = model.widgetContainer }, Cmd.map AccordionMsg newCmd )
 
                 _ ->
                     ( model, Cmd.none )

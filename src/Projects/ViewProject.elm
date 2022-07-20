@@ -1,22 +1,29 @@
 module Projects.ViewProject exposing (..)
 
-import BlueBoxes.GuiElement as GuiElement
-import BlueBoxes.Executor as Executor
+import BlueBoxes.NewExecutor as Executor
+import BlueBoxes.NewGuiElement as GuiElement
+import BlueBoxes.NewPageStructreService as PageStructureService
 import Browser.Navigation as Nav
 import Html exposing (Html, div, h3, text)
-import Html.Attributes exposing (class)
+import Html.Attributes exposing (class, id)
 import Http
 import Projects.Project exposing (Project, ProjectId, idToString, projectDecoder)
 import RemoteData exposing (WebData)
 import Shared.SharedTypes exposing (WidgetInstanceId(..))
+import Util.CustomCss.DaschTailwind as Dtw
 import Util.Error exposing (buildErrorMessage)
-import BlueBoxes.PageStructureService as PageStructureService
+
 
 type alias Model =
     { project : WebData Project
     , guiElements : List GuiElement.Model
     , navKey : Nav.Key
+    , pageCanvas : PageCanvas
     }
+
+
+type alias PageCanvas =
+    { rowSpanMax : Int, colSpanMax : Int }
 
 
 type Msg
@@ -30,6 +37,7 @@ initialModel guiElements navKey =
     { project = RemoteData.Loading
     , guiElements = guiElements
     , navKey = navKey
+    , pageCanvas = { rowSpanMax = 8, colSpanMax = 8 }
     }
 
 
@@ -89,8 +97,9 @@ viewProject model =
             h3 [] [ text "Loading Project..." ]
 
         RemoteData.Success currentProject ->
-            if idToString currentProject.id == "3" then -- This shouldn't be hardcoded
-                div [] (List.map GuiElement.view model.guiElements) |> Html.map GuiElementMsg
+            if idToString currentProject.id == "3" then
+                div [ class ("grid grid-cols-" ++ String.fromInt model.pageCanvas.colSpanMax ++ " gap-4") ]
+                    (renderWidgetContainers model.guiElements)
 
             else
                 div [ class "project" ]
@@ -105,6 +114,29 @@ viewProject model =
 
         RemoteData.Failure httpError ->
             viewFetchError (buildErrorMessage httpError)
+
+
+
+-- Todo: Rename renderGuiElements
+
+
+renderWidgetContainers : List GuiElement.Model -> List (Html Msg)
+renderWidgetContainers widgets =
+    widgets
+        |> List.map
+            (\n -> widgetContainer n)
+
+
+widgetContainer : GuiElement.Model -> Html Msg
+widgetContainer guiElement =
+    div
+        [ id "someContainerID"
+        , class (Dtw.custom_grid_col_start guiElement.widgetContainer.position.colStart)
+        , class (Dtw.custom_grid_col_end guiElement.widgetContainer.position.colEnd)
+        , class "rounded-lg border-2 cursor-pointer border-[#1D4ED8]"
+        ]
+        [ GuiElement.view guiElement ]
+        |> Html.map GuiElementMsg
 
 
 viewFetchError : String -> Html Msg
