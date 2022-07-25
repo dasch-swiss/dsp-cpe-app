@@ -1,10 +1,15 @@
 module BlueBoxes.WidgetContainer exposing (..)
 
+import DspCpeApi as Api
+import Html exposing (Html, div, h3, text)
+import Html.Attributes exposing (class, id)
+import Html.Events exposing (onClick)
 import Http
 import Json.Decode as Decode exposing (Decoder)
 import Json.Decode.Pipeline exposing (required)
 import RemoteData exposing (WebData)
 import Shared.SharedTypes as Shared exposing (AlignSelf(..), JustifySelf(..), WidgetContainerId(..))
+import Util.Icon as Icon
 
 
 type alias WebModel =
@@ -32,9 +37,27 @@ type alias GridPosition =
 
 
 type Msg
-    = AppendGrid
-    | FetchContainerData WidgetContainerId
+    = AppendGridCol Shared.WidgetContainerId
     | PositionDataReceived (WebData GridPosition)
+
+
+
+--increaseButton : Html (WidgetContainerId -> GuiElementVariant -> Msg)
+
+
+increaseButton widgetId =
+    Api.trailingIconButton { attrs = [ onClick (AppendGridCol widgetId) ], size = Shared.TrailingSmall, text = "increase me", icon = Icon.Plus }
+
+
+
+--| AppendGridRow
+--| AppendWidget
+--| FetchContainerData WidgetContainerId
+
+
+type GuiElementVariant
+    = ProjectDescriptionElement
+    | AccordionElement
 
 
 init : WidgetContainerId -> Model
@@ -51,6 +74,41 @@ init widgetContainerId =
             default
 
 
+update : Msg -> Model -> Model
+update msg model =
+    case msg of
+        AppendGridCol widgetContainerId ->
+            appendGridCol model widgetContainerId
+
+        PositionDataReceived data ->
+            model
+
+
+appendGridCol : Model -> Shared.WidgetContainerId -> Model
+appendGridCol model widgetContainerId =
+    if widgetContainerId == model.id then
+        let
+            oldPosition =
+                model.position
+
+            newPosition =
+                { oldPosition | colEnd = increaseColEnd oldPosition.colEnd 8 }
+        in
+        { model | position = newPosition }
+
+    else
+        model
+
+
+increaseColEnd : Int -> Int -> Int
+increaseColEnd end maxEnd =
+    if end < maxEnd && end < 8 then
+        end + 1
+
+    else
+        end
+
+
 fakeWidgets : List Model
 fakeWidgets =
     [ { id = WidgetContainerId 1
@@ -59,7 +117,7 @@ fakeWidgets =
             , rowStart = 1
             , rowEnd = 5
             , colStart = 1
-            , colEnd = 4
+            , colEnd = 5
             }
       , justifySelf = JustifyCenter
       , alignSelf = AlignCenter
@@ -78,6 +136,7 @@ fakeWidgets =
     ]
 
 
+default : Model
 default =
     { id = WidgetContainerId 999
     , position =

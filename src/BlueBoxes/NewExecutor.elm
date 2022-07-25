@@ -5,7 +5,6 @@ import BlueBoxes.PageStructureModel as Struct
 import BlueBoxes.WidgetContainer as WidgetContainer
 import DspCpeApi as Api
 import List
-import Shared.SharedTypes exposing (WidgetContainerId)
 
 
 type alias Model =
@@ -41,17 +40,12 @@ executeWidgetContainer widgetContainer =
                 ( newVariant, cmd ) =
                     executeWidgetContent widgetContent
             in
-            ( { variant = newVariant, widgetContainer = getWidgetContainer widgetContainerId }, cmd )
+            ( { variant = newVariant, widgetContainer = WidgetContainer.init widgetContainerId }, cmd )
 
 
 
 -- Todo: Api for widgetContainers Execution
 --getWidgetContainer : WidgetContainerId -> ( GuiElement.WidgetContainer
-
-
-getWidgetContainer : WidgetContainerId -> GuiElement.WidgetContainer
-getWidgetContainer widgetContainerId =
-    WidgetContainer.init widgetContainerId
 
 
 executeWidgetContent : Struct.WidgetContent -> ( GuiElement.GuiElementVariant, Cmd GuiElement.Msg )

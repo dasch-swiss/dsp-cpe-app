@@ -1,9 +1,12 @@
 module BlueBoxes.NewGuiElement exposing (..)
 
-import Html exposing (Html)
+import BlueBoxes.WidgetContainer as Cntr
+import Html exposing (Html, div)
+import Html.Attributes exposing (class, id)
 import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
-import Shared.SharedTypes exposing (AlignSelf(..), JustifySelf(..), WidgetContainerId)
+import Shared.SharedTypes as Shared exposing (AlignSelf(..), BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), JustifySelf(..), LeadingSize(..), TrailingSize(..), WidgetContainerId, WidgetInstanceId(..))
+import Util.CustomCss.DaschTailwind as Dtw
 
 
 type alias Model =
@@ -44,13 +47,33 @@ type Msg
 
 
 view : Model -> Html Msg
-view model =
-    case model.variant of
-        ProjectDescriptionElement projDescModel ->
-            ProjectDescription.view projDescModel |> Html.map ProjectDescriptionMsg
+view guiElement =
+    div
+        [ id "someContainerID"
+        , class (Dtw.custom_grid_col_start guiElement.widgetContainer.position.colStart)
+        , class (Dtw.custom_grid_col_end guiElement.widgetContainer.position.colEnd)
+        , class (Dtw.custom_grid_row_start guiElement.widgetContainer.position.rowStart)
+        , class (Dtw.custom_grid_row_end guiElement.widgetContainer.position.rowEnd)
+        , class "rounded-lg border-2 cursor-pointer border-[#1D4ED8]"
+        ]
+        [ --div [] [ Cntr.increaseButton guiElement.widgetContainer.id ] |> Html.map Cntr.AppendGridCol
+          guiElementView guiElement
+        ]
 
-        AccordionElement accModel ->
-            Accordion.view accModel |> Html.map AccordionMsg
+
+guiElementView : Model -> Html Msg
+guiElementView model =
+    let
+        content =
+            case model.variant of
+                ProjectDescriptionElement projDescModel ->
+                    ProjectDescription.view projDescModel |> Html.map ProjectDescriptionMsg
+
+                AccordionElement accModel ->
+                    Accordion.view accModel
+                        |> Html.map AccordionMsg
+    in
+    content
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
