@@ -8,14 +8,26 @@
         "text": "accordion text",
         "fullWidth": true
     },
-    "widgetContainer": {
-        "widgetContainerID": 1,
-        "position": {
-            "order": 0,
-            "rowStart": 1,
-            "rowEnd": 1,
-            "colStart": 1,
-            "colEnd": 5
+    "widgetContainers": [
+        {
+            "widgetContainerID": 1,
+            "position": {
+                "order": 0,
+                "rowStart": 1,
+                "rowEnd": 1,
+                "colStart": 1,
+                "colEnd": 8
+            }
+        },
+        {
+            "widgetContainerID": 2,
+            "position": {
+                "order": 1,
+                "rowStart": 2,
+                "rowEnd": 2,
+                "colStart": 1,
+                "colEnd": 5
+            }
         }
-    }
+    ]
 }

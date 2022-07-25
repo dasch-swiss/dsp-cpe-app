@@ -1,10 +1,9 @@
 module BlueBoxes.NewExecutor exposing (..)
 
-import BlueBoxes.NewGuiElement as GuiElement exposing (AlignSelf(..), JustifySelf(..))
+import BlueBoxes.NewGuiElement as GuiElement exposing (..)
 import BlueBoxes.PageStructureModel as Struct
 import BlueBoxes.WidgetContainer as WidgetContainer
 import DspCpeApi as Api
-import Html exposing (Html, div)
 import List
 import Shared.SharedTypes exposing (WidgetContainerId)
 
@@ -52,16 +51,7 @@ executeWidgetContainer widgetContainer =
 
 getWidgetContainer : WidgetContainerId -> GuiElement.WidgetContainer
 getWidgetContainer widgetContainerId =
-    { position =
-        { order = 1
-        , rowStart = 1
-        , rowEnd = 5
-        , colStart = 1
-        , colEnd = 8
-        }
-    , justifySelf = JustifyCenter
-    , alignSelf = AlignCenter
-    }
+    WidgetContainer.init widgetContainerId
 
 
 executeWidgetContent : Struct.WidgetContent -> ( GuiElement.GuiElementVariant, Cmd GuiElement.Msg )

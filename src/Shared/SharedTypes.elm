@@ -56,3 +56,15 @@ type alias NavItem msg =
     , cmd : Cmd msg
     , isActive : Bool
     }
+
+
+type AlignSelf
+    = AlignStart
+    | AlignEnd
+    | AlignCenter
+
+
+type JustifySelf
+    = JustifyStart
+    | JustifyEnd
+    | JustifyCenter

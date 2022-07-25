@@ -1,9 +1,9 @@
 module BlueBoxes.NewGuiElement exposing (..)
 
-import BlueBoxes.WidgetContainer as WidgetContainer
 import Html exposing (Html)
 import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
+import Shared.SharedTypes exposing (AlignSelf(..), JustifySelf(..), WidgetContainerId)
 
 
 type alias Model =
@@ -18,22 +18,11 @@ type GuiElementVariant
 
 
 type alias WidgetContainer =
-    { position : GridPosition -- the position in the grid
+    { id : WidgetContainerId
+    , position : GridPosition -- the position in the grid
     , justifySelf : JustifySelf
     , alignSelf : AlignSelf
     }
-
-
-type AlignSelf
-    = AlignStart
-    | AlignEnd
-    | AlignCenter
-
-
-type JustifySelf
-    = JustifyStart
-    | JustifyEnd
-    | JustifyCenter
 
 
 type alias GridPosition =

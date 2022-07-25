@@ -43,8 +43,8 @@ mlsContent =
 defaultContent : Struct.Content2
 defaultContent =
     Struct.Content2
-        [ Struct.WidgetContainer (WidgetContainerId 3) (Struct.ProjectDescription2 (WidgetInstanceId 3))
-        , Struct.WidgetContainer (WidgetContainerId 3) (Struct.Accordion2 (WidgetInstanceId 4))
+        [ Struct.WidgetContainer (WidgetContainerId 1) (Struct.ProjectDescription2 (WidgetInstanceId 3))
+        , Struct.WidgetContainer (WidgetContainerId 2) (Struct.Accordion2 (WidgetInstanceId 4))
         ]
 
 

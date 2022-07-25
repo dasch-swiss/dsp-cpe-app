@@ -4,26 +4,22 @@ import Http
 import Json.Decode as Decode exposing (Decoder)
 import Json.Decode.Pipeline exposing (required)
 import RemoteData exposing (WebData)
-import Shared.SharedTypes exposing (WidgetContainerId)
+import Shared.SharedTypes as Shared exposing (AlignSelf(..), JustifySelf(..), WidgetContainerId(..))
 
 
-type alias Model =
+type alias WebModel =
     { position : WebData GridPosition -- the position in the grid
     , justifySelf : JustifySelf
     , alignSelf : AlignSelf
     }
 
 
-type AlignSelf
-    = AlignStart
-    | AlignEnd
-    | AlignCenter
-
-
-type JustifySelf
-    = JustifyStart
-    | JustifyEnd
-    | JustifyCenter
+type alias Model =
+    { id : WidgetContainerId
+    , position : GridPosition -- the position in the grid
+    , justifySelf : JustifySelf
+    , alignSelf : AlignSelf
+    }
 
 
 type alias GridPosition =
@@ -41,14 +37,69 @@ type Msg
     | PositionDataReceived (WebData GridPosition)
 
 
-init : WidgetContainerId -> ( Model, Cmd Msg )
-init widgetID =
+init_from_data : WidgetContainerId -> ( WebModel, Cmd Msg )
+init_from_data widgetID =
     ( { position = RemoteData.Loading
       , justifySelf = JustifyCenter
       , alignSelf = AlignCenter
       }
     , fetchData widgetID
     )
+
+
+init : WidgetContainerId -> Model
+init widgetContainerId =
+    let
+        filtered =
+            List.filter (\w -> w.id == widgetContainerId) fakeWidgets
+    in
+    case List.head filtered of
+        Just widgetContainer ->
+            widgetContainer
+
+        Nothing ->
+            default
+
+
+fakeWidgets : List Model
+fakeWidgets =
+    [ { id = WidgetContainerId 1
+      , position =
+            { order = 2
+            , rowStart = 1
+            , rowEnd = 1
+            , colStart = 1
+            , colEnd = 5
+            }
+      , justifySelf = JustifyCenter
+      , alignSelf = AlignCenter
+      }
+    , { id = WidgetContainerId 2
+      , position =
+            { order = 1
+            , rowStart = 2
+            , rowEnd = 2
+            , colStart = 1
+            , colEnd = 8
+            }
+      , justifySelf = JustifyCenter
+      , alignSelf = AlignCenter
+      }
+    ]
+
+
+default =
+    { id = WidgetContainerId 999
+    , position =
+        { order = 0
+        , rowStart = 5
+        , rowEnd = 8
+        , colStart = 1
+        , colEnd = 3
+        }
+    , justifySelf = JustifyCenter
+    , alignSelf = AlignCenter
+    }
 
 
 fetchData : WidgetContainerId -> Cmd Msg
