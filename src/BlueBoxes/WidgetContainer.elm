@@ -37,16 +37,6 @@ type Msg
     | PositionDataReceived (WebData GridPosition)
 
 
-init_from_data : WidgetContainerId -> ( WebModel, Cmd Msg )
-init_from_data widgetID =
-    ( { position = RemoteData.Loading
-      , justifySelf = JustifyCenter
-      , alignSelf = AlignCenter
-      }
-    , fetchData widgetID
-    )
-
-
 init : WidgetContainerId -> Model
 init widgetContainerId =
     let
@@ -65,21 +55,21 @@ fakeWidgets : List Model
 fakeWidgets =
     [ { id = WidgetContainerId 1
       , position =
-            { order = 2
+            { order = 1
             , rowStart = 1
-            , rowEnd = 1
+            , rowEnd = 5
             , colStart = 1
-            , colEnd = 5
+            , colEnd = 4
             }
       , justifySelf = JustifyCenter
       , alignSelf = AlignCenter
       }
     , { id = WidgetContainerId 2
       , position =
-            { order = 1
-            , rowStart = 2
-            , rowEnd = 2
-            , colStart = 1
+            { order = 2
+            , rowStart = 1
+            , rowEnd = 1
+            , colStart = 5
             , colEnd = 8
             }
       , justifySelf = JustifyCenter
@@ -100,6 +90,16 @@ default =
     , justifySelf = JustifyCenter
     , alignSelf = AlignCenter
     }
+
+
+init_from_data : WidgetContainerId -> ( WebModel, Cmd Msg )
+init_from_data widgetID =
+    ( { position = RemoteData.Loading
+      , justifySelf = JustifyCenter
+      , alignSelf = AlignCenter
+      }
+    , fetchData widgetID
+    )
 
 
 fetchData : WidgetContainerId -> Cmd Msg

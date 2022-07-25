@@ -119,9 +119,14 @@ custom_grid_col_span colSpan =
     "col-span-" ++ String.fromInt colSpan
 
 
-custom_grid_row_span : Int -> String
-custom_grid_row_span rowSpan =
-    "row-span-" ++ String.fromInt rowSpan
+custom_grid_row_start : Int -> String
+custom_grid_row_start rowStart =
+    "row-start-" ++ String.fromInt rowStart
+
+
+custom_grid_row_end : Int -> String
+custom_grid_row_end rowEnd =
+    "row-end-" ++ String.fromInt rowEnd
 
 
 custom_grid_col_start : Int -> String

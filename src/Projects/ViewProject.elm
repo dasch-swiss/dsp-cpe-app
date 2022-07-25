@@ -133,6 +133,8 @@ widgetContainer guiElement =
         [ id "someContainerID"
         , class (Dtw.custom_grid_col_start guiElement.widgetContainer.position.colStart)
         , class (Dtw.custom_grid_col_end guiElement.widgetContainer.position.colEnd)
+        , class (Dtw.custom_grid_row_start guiElement.widgetContainer.position.rowStart)
+        , class (Dtw.custom_grid_row_end guiElement.widgetContainer.position.rowEnd)
         , class "rounded-lg border-2 cursor-pointer border-[#1D4ED8]"
         ]
         [ GuiElement.view guiElement ]
