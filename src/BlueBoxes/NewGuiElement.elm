@@ -1,12 +1,17 @@
 module BlueBoxes.NewGuiElement exposing (..)
 
-import BlueBoxes.WidgetContainer as Cntr
+import BlueBoxes.PageStructureModel as Struct
+import BlueBoxes.WidgetContainer as WidgetContainer
 import Html exposing (Html, div)
 import Html.Attributes exposing (class, id)
+import Html.Events exposing (onClick)
+import Modules.Dividers.IconButtonDivider as IconButton
 import Modules.Text.Accordion as Accordion
 import Modules.Text.ProjectDescription as ProjectDescription
-import Shared.SharedTypes as Shared exposing (AlignSelf(..), BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), JustifySelf(..), LeadingSize(..), TrailingSize(..), WidgetContainerId, WidgetInstanceId(..))
+import Shared.SharedTypes as Shared exposing (AlignSelf(..), BasicButtonSize(..), CircularAvatarSize(..), CircularButtonSize(..), JustifySelf(..), LeadingSize(..), TrailingSize(..), WidgetContainerId(..), WidgetInstanceId(..))
+import String exposing (fromInt)
 import Util.CustomCss.DaschTailwind as Dtw
+import Util.Icon as Icon
 
 
 type alias Model =
@@ -44,21 +49,47 @@ type alias GridPosition =
 type Msg
     = ProjectDescriptionMsg ProjectDescription.Msg
     | AccordionMsg Accordion.Msg
+    | WidgetContainerMsg WidgetContainer.Msg
 
 
-view : Model -> Html Msg
-view guiElement =
+renderGuiElements : List Model -> List (Html Msg)
+renderGuiElements widgets =
+    widgets
+        |> List.map
+            (\n ->
+                newView n
+            )
+
+
+newView : Model -> Html Msg
+newView model =
     div
-        [ id "someContainerID"
-        , class (Dtw.custom_grid_col_start guiElement.widgetContainer.position.colStart)
-        , class (Dtw.custom_grid_col_end guiElement.widgetContainer.position.colEnd)
-        , class (Dtw.custom_grid_row_start guiElement.widgetContainer.position.rowStart)
-        , class (Dtw.custom_grid_row_end guiElement.widgetContainer.position.rowEnd)
+        [ id (idToString model.widgetContainer.id)
+        , class (Dtw.custom_grid_col_start model.widgetContainer.position.colStart)
+        , class (Dtw.custom_grid_col_end model.widgetContainer.position.colEnd)
+        , class (Dtw.custom_grid_row_start model.widgetContainer.position.rowStart)
+        , class (Dtw.custom_grid_row_end model.widgetContainer.position.rowEnd)
         , class "rounded-lg border-2 cursor-pointer border-[#1D4ED8]"
         ]
-        [ --div [] [ Cntr.increaseButton guiElement.widgetContainer.id ] |> Html.map Cntr.AppendGridCol
-          guiElementView guiElement
+        [ div []
+            [ IconButton.view
+                { buttonAttrs =
+                    [ onClick (WidgetContainer.AppendGridColMsg model.widgetContainer.id)
+                    ]
+                , icon = Icon.PlusSm
+                , text = ""
+                }
+            ]
+            |> Html.map WidgetContainerMsg
+        , guiElementView model
         ]
+
+
+idToString : WidgetContainerId -> String
+idToString widgetContainerId =
+    case widgetContainerId of
+        WidgetContainerId id ->
+            fromInt id
 
 
 guiElementView : Model -> Html Msg
@@ -74,6 +105,106 @@ guiElementView model =
                         |> Html.map AccordionMsg
     in
     content
+
+
+updateWidgetContainers : List Model -> WidgetContainer.Msg -> List Model
+updateWidgetContainers guiElements containerMsg =
+    let
+        colSpaceLeft =
+            colSpanLeft guiElements containerMsg
+    in
+    case containerMsg of
+        WidgetContainer.AppendGridColMsg widgetContainerId ->
+            if colSpaceLeft > 0 then
+                guiElements
+                    |> List.map
+                        (\e -> { variant = e.variant, widgetContainer = WidgetContainer.update containerMsg e.widgetContainer })
+
+            else
+                guiElements
+
+        -- Todo fetch data ...
+        WidgetContainer.PositionDataReceivedMsg sth ->
+            guiElements
+
+
+colSpanLeft : List Model -> WidgetContainer.Msg -> Int
+colSpanLeft guiElements containerMsg =
+    Struct.pageCanvas.colSpanMax
+        + 1
+        - (case containerMsg of
+            WidgetContainer.AppendGridColMsg widgetContainerId ->
+                let
+                    container =
+                        getContainerOfWidgets guiElements widgetContainerId
+                in
+                case container of
+                    Just con ->
+                        getPositionsInRow guiElements con.position.rowStart
+                            |> colSpaceUsed
+
+                    Nothing ->
+                        0
+
+            WidgetContainer.PositionDataReceivedMsg positionMsg ->
+                0
+          )
+
+
+getContainerOfWidgets : List Model -> WidgetContainerId -> Maybe WidgetContainer.Model
+getContainerOfWidgets guiElements widgetContainerId =
+    let
+        containers =
+            guiElements
+                |> List.map .widgetContainer
+    in
+    getContainer containers widgetContainerId
+
+
+getContainer : List WidgetContainer.Model -> WidgetContainerId -> Maybe WidgetContainer.Model
+getContainer containers widgetContainerId =
+    let
+        filtered =
+            containers
+                |> List.filter (\c -> c.id == widgetContainerId)
+    in
+    List.head filtered
+
+
+
+-- Helper functions
+
+
+getPositionsInRow : List Model -> Int -> List GridPosition
+getPositionsInRow widgets row =
+    widgets
+        |> List.map .widgetContainer
+        |> List.map .position
+        |> List.filter (\p -> p.rowStart <= row && p.rowEnd >= row)
+
+
+colSpaceUsed : List GridPosition -> Int
+colSpaceUsed gridPositions =
+    gridPositions
+        |> List.map
+            (\p -> p.colEnd - p.colStart)
+        |> List.sum
+
+
+getPositionsInColumn : List Model -> Int -> List GridPosition
+getPositionsInColumn widgets col =
+    widgets
+        |> List.map .widgetContainer
+        |> List.map .position
+        |> List.filter (\p -> p.colStart <= col && p.colEnd >= col)
+
+
+rowSpaceUsed : List GridPosition -> Int
+rowSpaceUsed gridPositions =
+    gridPositions
+        |> List.map
+            (\p -> p.rowEnd - p.rowStart)
+        |> List.sum
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -102,3 +233,6 @@ update msg model =
 
                 _ ->
                     ( model, Cmd.none )
+
+        WidgetContainerMsg widgetContainerMsg ->
+            ( { variant = model.variant, widgetContainer = WidgetContainer.update widgetContainerMsg model.widgetContainer }, Cmd.none )

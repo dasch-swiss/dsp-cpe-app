@@ -51,3 +51,12 @@ type WidgetContainer
 type WidgetContent
     = ProjectDescription2 WidgetInstanceId
     | Accordion2 WidgetInstanceId
+
+
+type alias PageCanvas =
+    { rowSpanMax : Int, colSpanMax : Int }
+
+
+pageCanvas : PageCanvas
+pageCanvas =
+    { rowSpanMax = 8, colSpanMax = 8 }

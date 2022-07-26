@@ -3,14 +3,15 @@ module Projects.ViewProject exposing (..)
 import BlueBoxes.NewExecutor as Executor
 import BlueBoxes.NewGuiElement as GuiElement
 import BlueBoxes.NewPageStructreService as PageStructureService
+import BlueBoxes.PageStructureModel as Struct
 import BlueBoxes.WidgetContainer as WidgetContainer
 import Browser.Navigation as Nav
 import Html exposing (Html, div, h3, text)
-import Html.Attributes exposing (class, id)
+import Html.Attributes exposing (class)
 import Http
 import Projects.Project exposing (Project, ProjectId, idToString, projectDecoder)
 import RemoteData exposing (WebData)
-import Shared.SharedTypes exposing (WidgetInstanceId(..))
+import Shared.SharedTypes exposing (WidgetContainerId, WidgetInstanceId(..))
 import Util.Error exposing (buildErrorMessage)
 
 
@@ -18,19 +19,14 @@ type alias Model =
     { project : WebData Project
     , guiElements : List GuiElement.Model
     , navKey : Nav.Key
-    , pageCanvas : PageCanvas
+    , pageCanvas : Struct.PageCanvas
     }
-
-
-type alias PageCanvas =
-    { rowSpanMax : Int, colSpanMax : Int }
 
 
 type Msg
     = FetchProject ProjectId
     | ProjectReceived (WebData Project)
     | GuiElementMsg GuiElement.Msg
-    | WidgetContainerMsg WidgetContainer.Msg
 
 
 initialModel : List GuiElement.Model -> Nav.Key -> Model
@@ -77,25 +73,10 @@ update msg model =
             in
             ( { model | guiElements = newModel }, Cmd.map GuiElementMsg newCmd )
 
-        WidgetContainerMsg containerMsg ->
-            let
-                newModel =
-                    updateWidgetContainers model.guiElements containerMsg
-            in
-            ( { model | guiElements = newModel }, Cmd.map GuiElementMsg Cmd.none )
-
 
 deconstructGuiElementList : List ( GuiElement.Model, Cmd GuiElement.Msg ) -> ( List GuiElement.Model, Cmd GuiElement.Msg )
 deconstructGuiElementList list =
     ( List.map (\tuple -> Tuple.first tuple) list, Cmd.batch (List.map (\tuple -> Tuple.second tuple) list) )
-
-
-updateWidgetContainers : List GuiElement.Model -> WidgetContainer.Msg -> List GuiElement.Model
-updateWidgetContainers guiElements containerMsg =
-    -- simple list map -> update
-    guiElements
-        |> List.map
-            (\e -> { variant = e.variant, widgetContainer = WidgetContainer.update containerMsg e.widgetContainer })
 
 
 view : Model -> Html Msg
@@ -115,7 +96,8 @@ viewProject model =
         RemoteData.Success currentProject ->
             if idToString currentProject.id == "3" then
                 div [ class ("grid grid-cols-" ++ String.fromInt model.pageCanvas.colSpanMax ++ " gap-4") ]
-                    (renderWidgets model.guiElements)
+                    (GuiElement.renderGuiElements model.guiElements)
+                    |> Html.map GuiElementMsg
 
             else
                 div [ class "project" ]
@@ -130,16 +112,6 @@ viewProject model =
 
         RemoteData.Failure httpError ->
             viewFetchError (buildErrorMessage httpError)
-
-
-renderWidgets : List GuiElement.Model -> List (Html Msg)
-renderWidgets widgets =
-    widgets
-        |> List.map
-            (\n ->
-                GuiElement.view n
-                    |> Html.map GuiElementMsg
-            )
 
 
 viewFetchError : String -> Html Msg

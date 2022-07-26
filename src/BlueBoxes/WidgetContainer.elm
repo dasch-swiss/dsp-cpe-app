@@ -1,12 +1,12 @@
 module BlueBoxes.WidgetContainer exposing (..)
 
-import DspCpeApi as Api
-import Html exposing (Html, div, h3, text)
-import Html.Attributes exposing (class, id)
+import BlueBoxes.PageStructureModel as Struct
+import Html exposing (Html)
 import Html.Events exposing (onClick)
 import Http
 import Json.Decode as Decode exposing (Decoder)
 import Json.Decode.Pipeline exposing (required)
+import Modules.Dividers.IconButtonDivider as IconButton
 import RemoteData exposing (WebData)
 import Shared.SharedTypes as Shared exposing (AlignSelf(..), JustifySelf(..), WidgetContainerId(..))
 import Util.Icon as Icon
@@ -37,27 +37,31 @@ type alias GridPosition =
 
 
 type Msg
-    = AppendGridCol Shared.WidgetContainerId
-    | PositionDataReceived (WebData GridPosition)
+    = AppendGridColMsg Shared.WidgetContainerId
+    | PositionDataReceivedMsg (WebData GridPosition)
 
 
+type WidgetContainerMsg
+    = WidgetContainerMsg Msg
 
---increaseButton : Html (WidgetContainerId -> GuiElementVariant -> Msg)
 
-
+increaseButton : WidgetContainerId -> Html Msg
 increaseButton widgetId =
-    Api.trailingIconButton { attrs = [ onClick (AppendGridCol widgetId) ], size = Shared.TrailingSmall, text = "increase me", icon = Icon.Plus }
+    IconButton.view
+        { buttonAttrs =
+            [ onClick (AppendGridColMsg widgetId)
+            ]
+        , icon = Icon.PlusSm
+        , text = ""
+        }
 
 
 
+--Api.trailingIconButton { attrs = [ onClick (AppendGridColMsg widgetId) ], size = Shared.TrailingSmall, text = "increase me", icon = Icon.Plus }
+-- |> Html.map AppendGridColMsg
 --| AppendGridRow
 --| AppendWidget
 --| FetchContainerData WidgetContainerId
-
-
-type GuiElementVariant
-    = ProjectDescriptionElement
-    | AccordionElement
 
 
 init : WidgetContainerId -> Model
@@ -76,11 +80,15 @@ init widgetContainerId =
 
 update : Msg -> Model -> Model
 update msg model =
+    let
+        _ =
+            Debug.log "Value of a: " msg
+    in
     case msg of
-        AppendGridCol widgetContainerId ->
+        AppendGridColMsg widgetContainerId ->
             appendGridCol model widgetContainerId
 
-        PositionDataReceived data ->
+        PositionDataReceivedMsg data ->
             model
 
 
@@ -92,7 +100,7 @@ appendGridCol model widgetContainerId =
                 model.position
 
             newPosition =
-                { oldPosition | colEnd = increaseColEnd oldPosition.colEnd 8 }
+                { oldPosition | colEnd = increaseColEnd oldPosition.colEnd }
         in
         { model | position = newPosition }
 
@@ -100,9 +108,14 @@ appendGridCol model widgetContainerId =
         model
 
 
-increaseColEnd : Int -> Int -> Int
-increaseColEnd end maxEnd =
-    if end < maxEnd && end < 8 then
+appendable : Int -> Bool
+appendable colSpan =
+    colSpan < Struct.pageCanvas.colSpanMax
+
+
+increaseColEnd : Int -> Int
+increaseColEnd end =
+    if end < Struct.pageCanvas.colSpanMax + 1 && end < Struct.pageCanvas.colSpanMax + 1 then
         end + 1
 
     else
@@ -117,7 +130,7 @@ fakeWidgets =
             , rowStart = 1
             , rowEnd = 5
             , colStart = 1
-            , colEnd = 5
+            , colEnd = 4
             }
       , justifySelf = JustifyCenter
       , alignSelf = AlignCenter
@@ -128,7 +141,7 @@ fakeWidgets =
             , rowStart = 1
             , rowEnd = 1
             , colStart = 5
-            , colEnd = 8
+            , colEnd = 6
             }
       , justifySelf = JustifyCenter
       , alignSelf = AlignCenter
@@ -167,7 +180,7 @@ fetchData _ =
         { url = "http://localhost:2023/widgetContainer/position/"
         , expect =
             dataDecoder
-                |> Http.expectJson (RemoteData.fromResult >> PositionDataReceived)
+                |> Http.expectJson (RemoteData.fromResult >> PositionDataReceivedMsg)
         }
 
 
