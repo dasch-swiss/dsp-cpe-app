@@ -41,10 +41,6 @@ type Msg
     | PositionDataReceivedMsg (WebData GridPosition)
 
 
-type WidgetContainerMsg
-    = WidgetContainerMsg Msg
-
-
 increaseButton : WidgetContainerId -> Html Msg
 increaseButton widgetId =
     IconButton.view
@@ -56,19 +52,11 @@ increaseButton widgetId =
         }
 
 
-
---Api.trailingIconButton { attrs = [ onClick (AppendGridColMsg widgetId) ], size = Shared.TrailingSmall, text = "increase me", icon = Icon.Plus }
--- |> Html.map AppendGridColMsg
---| AppendGridRow
---| AppendWidget
---| FetchContainerData WidgetContainerId
-
-
 init : WidgetContainerId -> Model
 init widgetContainerId =
     let
         filtered =
-            List.filter (\w -> w.id == widgetContainerId) fakeWidgets
+            List.filter (\w -> w.id == widgetContainerId) widgetData
     in
     case List.head filtered of
         Just widgetContainer ->
@@ -108,8 +96,8 @@ appendGridCol model widgetContainerId =
         model
 
 
-appendable : Int -> Bool
-appendable colSpan =
+isAppendable : Int -> Bool
+isAppendable colSpan =
     colSpan < Struct.pageCanvas.colSpanMax
 
 
@@ -122,8 +110,8 @@ increaseColEnd end =
         end
 
 
-fakeWidgets : List Model
-fakeWidgets =
+widgetData : List Model
+widgetData =
     [ { id = WidgetContainerId 1
       , position =
             { order = 1

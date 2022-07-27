@@ -1,17 +1,18 @@
 module BlueBoxes.Executor exposing (..)
 
-import BlueBoxes.GuiElement as GuiElement
+import BlueBoxes.GuiElement as GuiElement exposing (..)
 import BlueBoxes.PageStructureModel as Struct
+import BlueBoxes.WidgetContainer as WidgetContainer
 import DspCpeApi as Api
 import List
 
 
 type alias Model =
-    { page : Struct.Page }
+    { page : Struct.Page2 }
 
 
-execute : Struct.Page -> ( List GuiElement.Model, Cmd GuiElement.Msg )
-execute (Struct.Page pageParts) =
+execute : Struct.Page2 -> ( List GuiElement.Model, Cmd GuiElement.Msg )
+execute (Struct.Page2 pageParts) =
     deconstructGuiElementList (List.map executePagePart pageParts)
 
 
@@ -20,30 +21,46 @@ deconstructGuiElementList list =
     ( List.concatMap (\tuple -> Tuple.first tuple) list, Cmd.batch (List.map (\tuple -> Tuple.second tuple) list) )
 
 
-executePagePart : Struct.PagePart -> ( List GuiElement.Model, Cmd GuiElement.Msg )
+executePagePart : Struct.PagePart2 -> ( List GuiElement.Model, Cmd GuiElement.Msg )
 executePagePart pagePart =
     case pagePart of
-        Struct.PageContent (Struct.Content contentPart) ->
+        Struct.PageContent2 (Struct.Content2 widgetContainer) ->
             let
                 list =
-                    List.map executeContentPart contentPart
+                    List.map executeWidgetContainer widgetContainer
             in
             ( List.map (\tuple -> Tuple.first tuple) list, Cmd.batch (List.map (\tuple -> Tuple.second tuple) list) )
 
 
-executeContentPart : Struct.ContentPart -> ( GuiElement.Model, Cmd GuiElement.Msg )
-executeContentPart contentPart =
-    case contentPart of
-        Struct.ProjectDescription widgetID ->
+executeWidgetContainer : Struct.WidgetContainer -> ( GuiElement.Model, Cmd GuiElement.Msg )
+executeWidgetContainer widgetContainer =
+    case widgetContainer of
+        Struct.WidgetContainer widgetContainerId widgetContent ->
+            let
+                ( newVariant, cmd ) =
+                    executeWidgetContent widgetContent
+            in
+            ( { content = newVariant, widgetContainer = WidgetContainer.init widgetContainerId }, cmd )
+
+
+
+-- Todo: Api for widgetContainers Execution
+--getWidgetContainer : WidgetContainerId -> ( GuiElement.WidgetContainer
+
+
+executeWidgetContent : Struct.WidgetContent -> ( GuiElement.GuiElementVariant, Cmd GuiElement.Msg )
+executeWidgetContent widgetContent =
+    case widgetContent of
+        Struct.ProjectDescription2 widgetID ->
             let
                 ( model, cmd ) =
                     Api.initProjectDescription widgetID
             in
-            ( { variant = GuiElement.ProjectDescriptionElement model }, Cmd.map GuiElement.ProjectDescriptionMsg cmd )
+            ( GuiElement.ProjectDescriptionElement model, Cmd.map GuiElement.ProjectDescriptionMsg cmd )
 
-        Struct.Accordion widgetID ->
+        Struct.Accordion2 widgetID ->
             let
                 ( model, cmd ) =
                     Api.initAccordion widgetID
             in
-            ( { variant = GuiElement.AccordionElement model }, Cmd.map GuiElement.AccordionMsg cmd )
+            ( GuiElement.AccordionElement model, Cmd.map GuiElement.AccordionMsg cmd )

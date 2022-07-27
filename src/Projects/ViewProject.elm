@@ -1,17 +1,16 @@
 module Projects.ViewProject exposing (..)
 
-import BlueBoxes.NewExecutor as Executor
-import BlueBoxes.NewGuiElement as GuiElement
-import BlueBoxes.NewPageStructreService as PageStructureService
+import BlueBoxes.Executor as Executor
+import BlueBoxes.GuiElement as GuiElement
+import BlueBoxes.PageStructreService as PageStructureService
 import BlueBoxes.PageStructureModel as Struct
-import BlueBoxes.WidgetContainer as WidgetContainer
 import Browser.Navigation as Nav
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
 import Http
 import Projects.Project exposing (Project, ProjectId, idToString, projectDecoder)
 import RemoteData exposing (WebData)
-import Shared.SharedTypes exposing (WidgetContainerId, WidgetInstanceId(..))
+import Shared.SharedTypes exposing (WidgetInstanceId(..))
 import Util.Error exposing (buildErrorMessage)
 
 
