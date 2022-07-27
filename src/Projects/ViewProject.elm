@@ -2,8 +2,8 @@ module Projects.ViewProject exposing (..)
 
 import BlueBoxes.Executor as Executor
 import BlueBoxes.GuiElement as GuiElement
-import BlueBoxes.PageStructreService as PageStructureService
 import BlueBoxes.PageStructureModel as Struct
+import BlueBoxes.PageStructureService as PageStructureService
 import Browser.Navigation as Nav
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
