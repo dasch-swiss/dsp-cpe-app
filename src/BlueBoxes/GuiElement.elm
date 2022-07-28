@@ -110,6 +110,13 @@ editorGrid model =
                     , size = CircularExtraSmall
                     , icon = Icon.PlusSm
                     }
+                , circularButton
+                    { attrs =
+                        [ onClick (WidgetContainer.SliceGridColMsg model.widgetContainer.id)
+                        ]
+                    , size = CircularExtraSmall
+                    , icon = Icon.MinusSm
+                    }
                 ]
                 |> Html.map WidgetContainerMsg
             ]
@@ -199,6 +206,15 @@ updateWidgetContainers containerMsg guiElements =
                         Debug.log "not expandable: " id
                 in
                 ( guiElements, Cmd.none )
+
+        WidgetContainer.SliceGridColMsg widgetContainerId ->
+            let
+                gElements =
+                    guiElements
+                        |> List.map
+                            (\e -> { content = e.content, widgetContainer = WidgetContainer.update containerMsg e.widgetContainer })
+            in
+            ( gElements, Cmd.none )
 
         -- Todo fetch data ...
         WidgetContainer.PositionDataReceivedMsg sth ->

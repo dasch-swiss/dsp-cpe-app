@@ -34,6 +34,7 @@ type alias GridPosition =
 
 type Msg
     = AppendGridColMsg Shared.WidgetContainerId
+    | SliceGridColMsg Shared.WidgetContainerId
     | PositionDataReceivedMsg (WebData GridPosition)
 
 
@@ -55,11 +56,10 @@ update : Msg -> Model -> Model
 update msg model =
     case msg of
         AppendGridColMsg widgetContainerId ->
-            let
-                _ =
-                    Debug.log "Appending grid column: " msg
-            in
             appendGridCol model widgetContainerId
+
+        SliceGridColMsg widgetContainerId ->
+            sliceGridCol model widgetContainerId
 
         PositionDataReceivedMsg data ->
             model
@@ -81,9 +81,20 @@ appendGridCol model widgetContainerId =
         model
 
 
-isAppendable : Int -> Int -> Bool
-isAppendable start end =
-    end < Struct.pageCanvas.colSpanMax + 1 + start && end < Struct.pageCanvas.colSpanMax + 1
+sliceGridCol : Model -> Shared.WidgetContainerId -> Model
+sliceGridCol model widgetContainerId =
+    if widgetContainerId == model.id && model.position.colStart < model.position.colEnd then
+        let
+            oldPosition =
+                model.position
+
+            newPosition =
+                { oldPosition | colEnd = oldPosition.colEnd - 1 }
+        in
+        { model | position = newPosition }
+
+    else
+        model
 
 
 increaseColEnd : Int -> Int -> Int
