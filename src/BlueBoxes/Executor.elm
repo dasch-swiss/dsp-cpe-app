@@ -4,6 +4,7 @@ import BlueBoxes.GuiElement as GuiElement exposing (..)
 import BlueBoxes.PageStructureModel as Struct
 import BlueBoxes.WidgetContainer as WidgetContainer
 import DspCpeApi as Api
+import Html.Attributes exposing (type_)
 import List
 
 

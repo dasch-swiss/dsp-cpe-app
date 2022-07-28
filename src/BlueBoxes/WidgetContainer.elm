@@ -1,15 +1,11 @@
 module BlueBoxes.WidgetContainer exposing (..)
 
 import BlueBoxes.PageStructureModel as Struct
-import Html exposing (Html)
-import Html.Events exposing (onClick)
 import Http
 import Json.Decode as Decode exposing (Decoder)
 import Json.Decode.Pipeline exposing (required)
-import Modules.Dividers.IconButtonDivider as IconButton
 import RemoteData exposing (WebData)
 import Shared.SharedTypes as Shared exposing (AlignSelf(..), JustifySelf(..), WidgetContainerId(..))
-import Util.Icon as Icon
 
 
 type alias WebModel =
@@ -41,17 +37,6 @@ type Msg
     | PositionDataReceivedMsg (WebData GridPosition)
 
 
-increaseButton : WidgetContainerId -> Html Msg
-increaseButton widgetId =
-    IconButton.view
-        { buttonAttrs =
-            [ onClick (AppendGridColMsg widgetId)
-            ]
-        , icon = Icon.PlusSm
-        , text = ""
-        }
-
-
 init : WidgetContainerId -> Model
 init widgetContainerId =
     let
@@ -68,12 +53,12 @@ init widgetContainerId =
 
 update : Msg -> Model -> Model
 update msg model =
-    let
-        _ =
-            Debug.log "Value of a: " msg
-    in
     case msg of
         AppendGridColMsg widgetContainerId ->
+            let
+                _ =
+                    Debug.log "Appending grid column: " msg
+            in
             appendGridCol model widgetContainerId
 
         PositionDataReceivedMsg data ->
@@ -88,7 +73,7 @@ appendGridCol model widgetContainerId =
                 model.position
 
             newPosition =
-                { oldPosition | colEnd = increaseColEnd oldPosition.colEnd }
+                { oldPosition | colEnd = increaseColEnd oldPosition.colStart oldPosition.colEnd }
         in
         { model | position = newPosition }
 
@@ -96,14 +81,14 @@ appendGridCol model widgetContainerId =
         model
 
 
-isAppendable : Int -> Bool
-isAppendable colSpan =
-    colSpan < Struct.pageCanvas.colSpanMax
+isAppendable : Int -> Int -> Bool
+isAppendable start end =
+    end < Struct.pageCanvas.colSpanMax + 1 + start && end < Struct.pageCanvas.colSpanMax + 1
 
 
-increaseColEnd : Int -> Int
-increaseColEnd end =
-    if end < Struct.pageCanvas.colSpanMax + 1 && end < Struct.pageCanvas.colSpanMax + 1 then
+increaseColEnd : Int -> Int -> Int
+increaseColEnd start end =
+    if end < Struct.pageCanvas.colSpanMax + 1 + start && end < Struct.pageCanvas.colSpanMax + 1 then
         end + 1
 
     else

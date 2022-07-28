@@ -5,13 +5,16 @@ import BlueBoxes.GuiElement as GuiElement
 import BlueBoxes.PageStructureModel as Struct
 import BlueBoxes.PageStructureService as PageStructureService
 import Browser.Navigation as Nav
+import DspCpeApi as Api
 import Html exposing (Html, div, h3, text)
 import Html.Attributes exposing (class)
+import Html.Events exposing (onClick)
 import Http
 import Projects.Project exposing (Project, ProjectId, idToString, projectDecoder)
 import RemoteData exposing (WebData)
 import Shared.SharedTypes exposing (WidgetInstanceId(..))
 import Util.Error exposing (buildErrorMessage)
+import Util.Icon as Icon
 
 
 type alias Model =
@@ -19,6 +22,7 @@ type alias Model =
     , guiElements : List GuiElement.Model
     , navKey : Nav.Key
     , pageCanvas : Struct.PageCanvas
+    , editMode : Bool
     }
 
 
@@ -26,6 +30,7 @@ type Msg
     = FetchProject ProjectId
     | ProjectReceived (WebData Project)
     | GuiElementMsg GuiElement.Msg
+    | ToggleEditModeMsg Bool
 
 
 initialModel : List GuiElement.Model -> Nav.Key -> Model
@@ -34,6 +39,7 @@ initialModel guiElements navKey =
     , guiElements = guiElements
     , navKey = navKey
     , pageCanvas = { rowSpanMax = 8, colSpanMax = 8 }
+    , editMode = False
     }
 
 
@@ -66,11 +72,23 @@ update msg model =
             ( { model | project = RemoteData.Loading }, fetchProject projectId )
 
         GuiElementMsg guiElemMsg ->
-            let
-                ( newModel, newCmd ) =
-                    deconstructGuiElementList (List.map (GuiElement.update guiElemMsg) model.guiElements)
-            in
-            ( { model | guiElements = newModel }, Cmd.map GuiElementMsg newCmd )
+            case guiElemMsg of
+                GuiElement.WidgetContainerMsg wMsg ->
+                    let
+                        ( newGuiElements, newCmd ) =
+                            GuiElement.updateWidgetContainers wMsg model.guiElements
+                    in
+                    ( { model | guiElements = newGuiElements }, Cmd.map GuiElementMsg newCmd )
+
+                _ ->
+                    let
+                        ( newModel, newCmd ) =
+                            deconstructGuiElementList (List.map (GuiElement.update guiElemMsg) model.guiElements)
+                    in
+                    ( { model | guiElements = newModel }, Cmd.map GuiElementMsg newCmd )
+
+        ToggleEditModeMsg editMode ->
+            ( { model | editMode = not editMode }, Cmd.none )
 
 
 deconstructGuiElementList : List ( GuiElement.Model, Cmd GuiElement.Msg ) -> ( List GuiElement.Model, Cmd GuiElement.Msg )
@@ -94,9 +112,22 @@ viewProject model =
 
         RemoteData.Success currentProject ->
             if idToString currentProject.id == "3" then
-                div [ class ("grid grid-cols-" ++ String.fromInt model.pageCanvas.colSpanMax ++ " gap-4") ]
-                    (GuiElement.renderGuiElements model.guiElements)
-                    |> Html.map GuiElementMsg
+                div []
+                    [ Api.circularButton
+                        { attrs =
+                            [ onClick (ToggleEditModeMsg model.editMode) ]
+                        , size = Shared.SharedTypes.CircularExtraSmall
+                        , icon =
+                            if model.editMode then
+                                Icon.Check
+
+                            else
+                                Icon.ViewGridAdd
+                        }
+                    , div [ class ("grid grid-cols-" ++ String.fromInt model.pageCanvas.colSpanMax ++ " gap-4") ]
+                        (GuiElement.renderGuiElements model.guiElements model.editMode)
+                        |> Html.map GuiElementMsg
+                    ]
 
             else
                 div [ class "project" ]
